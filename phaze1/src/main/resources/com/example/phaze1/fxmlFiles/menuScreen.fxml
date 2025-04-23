@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1019" prefWidth="1707" stylesheets="@../CssStyles/menuStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.menuController">
+
+    <Label fx:id="NameLabel" alignment="CENTER" layoutY="100.0" prefHeight="54.0" prefWidth="1709.0" styleClass="game-title" text="BluePrint hell" />
+    <VBox alignment="CENTER" spacing="20">
+        <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
+        <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
+        <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
+        <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
+
+        <children>
+            <Button fx:id="StartButton" styleClass="menu-button" text="Start" />
+            <Button fx:id="LevelsButton" styleClass="menu-button" text="Levels" />
+            <Button fx:id="SettingsButton" styleClass="menu-button" text="Settings" />
+            <Button fx:id="ExitButton" styleClass="menu-button" text="Exit" />
+        </children>
+    </VBox>
+</AnchorPane>
