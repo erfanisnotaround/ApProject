@@ -1,18 +1,25 @@
 package com.example.phaze1.model;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LevelsManager {
-    private static ArrayList<level> levels = new ArrayList<>();
-
-    public static ArrayList<level> getLevels() {
+    private List<level> levels;
+    public LevelsManager() throws IOException {
+        JsonManager jsonManager = new JsonManager("D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze1\\src\\main\\resources\\com\\example\\phaze1\\JsonFiles\\levels.json");
+        levels = jsonManager.readArray(new TypeReference<List<level>>() {});
+    }
+    public List<level> getLevels() {
         return levels;
     }
 
-    public static void setLevels(ArrayList<level> levels) {
-        LevelsManager.levels = levels;
+    public  void setLevels(ArrayList<level> levels) {
+        this.levels = levels;
     }
-    public static void addLevel(level level) {
+    public  void addLevel(level level) {
         levels.add(level);
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,7 +26,7 @@ public class bringingLevelToReality {
     public void setCurrentLevel(level currentLevel) {
         this.currentLevel = currentLevel;
     }
-    public ArrayList<Pane> makingEachSystems(int level){
+    public ArrayList<Pane> makingEachSystems(int level) throws IOException {
         LevelLoader levelLoader = new LevelLoader();
         levelLoader.setLevel(level);
         currentLevel = levelLoader.loadingCurrentLevel();
@@ -38,21 +39,24 @@ public class bringingLevelToReality {
 
     }
     public Pane makeASystem(Systems system){
-        Pane pane = new VBox();
-        double height = system.getNumberOfSubSystems()*15 + 10;
-        double width = 30;
+        Pane pane = new Pane();
+        double height = system.getNumberOfSubSystems()*40 + 30;
+        double width = 100;
         pane.setPrefSize(width, height);
+        pane.setLayoutX(system.getX());
+        pane.setLayoutY(system.getY());
         getEachSystem(pane ,system , height , width);
         return pane;
     }
     public void getEachSystem(Pane pane ,Systems system , double height , double width){
-        Rectangle rectangle = new Rectangle(width -6 , height);
+        Rectangle rectangle = new Rectangle(width -20 , height);
         rectangle.setArcWidth(5);
         rectangle.setArcHeight(5);
         rectangle.setFill(Color.GRAY);
+
         pane.getChildren().add(rectangle);
         for (int i = 0; i < system.getNumberOfSubSystems(); i++) {
-            Rectangle subSystem = new Rectangle(width - 8 , 15);
+            Rectangle subSystem = new Rectangle(width - 30 , 15);
             addingFinalThingsTOSubSystems(pane , system.getSubSystems().get(i) , i);
             pane.getChildren().add(subSystem);
         }

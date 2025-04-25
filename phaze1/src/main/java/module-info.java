@@ -6,5 +6,6 @@ module com.example.phaze1 {
 
     opens com.example.phaze1.controllers to javafx.fxml;
     opens com.example.phaze1        to javafx.fxml;
+    opens com.example.phaze1.model  to com.fasterxml.jackson.databind;
     exports com.example.phaze1;
 }

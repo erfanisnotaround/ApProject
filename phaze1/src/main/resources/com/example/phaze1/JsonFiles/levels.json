@@ -1,0 +1,42 @@
+[
+  {
+    "numberOfSystems": 2,
+    "levelPassed": false,
+    "systems": [
+      {
+        "x": 100.0,
+        "y": 200.0,
+        "numberOfSubSystems": 2,
+        "theLightOn": true,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": false,
+            "enterGate": "SQUARE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "SQUARE"
+          }
+        ]
+      },
+      {
+        "x": 300.0,
+        "y": 400.0,
+        "numberOfSubSystems": 1,
+        "theLightOn": false,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      }
+    ]
+  }
+]
