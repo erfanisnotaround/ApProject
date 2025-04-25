@@ -2,13 +2,14 @@ package com.example.phaze1.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class levelsManager {
+public class level {
     private int numberOfSystems;
     private boolean levelPassed;
-    @JsonProperty
+    @JsonProperty("systems")
     private List<Systems> systems = new ArrayList<>();
-
     public int getNumberOfSystems() { return numberOfSystems; }
     public void setNumberOfSystems(int n) { this.numberOfSystems = n; }
 

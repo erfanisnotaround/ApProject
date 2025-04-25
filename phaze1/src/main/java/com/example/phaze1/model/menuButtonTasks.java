@@ -12,14 +12,16 @@ import java.io.IOException;
 
 public class menuButtonTasks {
     FXMLLoader fxmlLoader;
+    GraphicAgent graphicAgent = GraphicAgent.getInstance();
     public void StartButton() throws IOException {
-        fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
-        Stage stage = constants.getPrimaryStage();
-        Parent root = fxmlLoader.load();
-        GameSceneController gameSceneController = fxmlLoader.getController();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+//        fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
+//        Stage stage = constants.getPrimaryStage();
+//        Parent root = fxmlLoader.load();
+//        GameSceneController gameSceneController = fxmlLoader.getController();
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+        graphicAgent.setState(GameStatus.START_GAME);
     }
     public void LevelsButton() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/LevelsScene.fxml"));

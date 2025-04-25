@@ -7,7 +7,9 @@ import java.util.Objects;
 
 public class PhotoAgent {
     public Image gettingImage(String address) {
-        File file = new File(Objects.requireNonNull(getClass().getResource(address)).getFile());
+//        File file = new File(Objects.requireNonNull(getClass().getResource(address)).getFile());
+        File file = new File(address);
+
         return new Image(file.toURI().toString());
     }
 }
