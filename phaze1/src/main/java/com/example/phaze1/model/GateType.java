@@ -6,25 +6,30 @@ import javafx.scene.shape.Shape;
 public enum GateType {
     SQUARE{
         @Override
-        public Shape createShape() {
+        public Shape createShape(boolean enterGate) {
             Rectangle r = new Rectangle(5,5);
-            r.setFill(Color.BLUE);
+            r.setFill(Color.LIGHTBLUE);
             return r;
         }
     },
     TRIANGLE {
         @Override
-        public Shape createShape() {
+        public Shape createShape(boolean enterGate) {
             Polygon p = new Polygon(
                     5 * 0.5, 0.0,   // top middle
                     5,      5,   // bottom right
                     0.0,       5    // bottom left
             );
+//            p.setRotate(-30);
+//            if (enterGate){
+//                p.setRotate(270);
+//            }
+            p.setFill(Color.ORANGERED);
             return p;
         }
     };
 
 
-    public abstract Shape createShape();
+    public abstract Shape createShape(boolean enterGate);
 
 }

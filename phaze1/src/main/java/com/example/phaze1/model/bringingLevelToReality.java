@@ -12,10 +12,11 @@ import java.util.HashMap;
 
 public class bringingLevelToReality {
     private Pane LineContainer;
+    GateConnectorManager gateConnectorManager;
     public bringingLevelToReality(Pane LineContainer) {
         this.LineContainer = LineContainer;
+        gateConnectorManager = new GateConnectorManager(LineContainer);
     }
-    GateConnectorManager gateConnectorManager = new GateConnectorManager(LineContainer);
 
     private level currentLevel;
     Pane eachSystem;
@@ -40,40 +41,55 @@ public class bringingLevelToReality {
     }
     public Pane makeASystem(Systems system){
         Pane pane = new Pane();
-        double height = system.getNumberOfSubSystems()*40 + 30;
+        double LightBar = 20;
+        double StrokeOfSubsystems = 40;
+        double height = system.getNumberOfSubSystems()*StrokeOfSubsystems + LightBar;
         double width = 100;
+        double distanceOfMainRectangle = 20;
+        double distanceOfSubRectangle = 30;
+
         pane.setPrefSize(width, height);
         pane.setLayoutX(system.getX());
         pane.setLayoutY(system.getY());
-        getEachSystem(pane ,system , height , width);
+        getEachSystem(pane ,system , height , width , distanceOfMainRectangle , distanceOfSubRectangle , StrokeOfSubsystems , LightBar);
         return pane;
     }
-    public void getEachSystem(Pane pane ,Systems system , double height , double width){
-        Rectangle rectangle = new Rectangle(width -20 , height);
-        rectangle.setArcWidth(5);
-        rectangle.setArcHeight(5);
+    public void getEachSystem(Pane pane ,Systems system , double height , double width , double distanceOfMainRectangle , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar){
+        Rectangle rectangle = new Rectangle(width -distanceOfMainRectangle , height);
+        rectangle.setLayoutX(distanceOfMainRectangle/2);
+        rectangle.setArcWidth(10);
+        rectangle.setArcHeight(10);
         rectangle.setFill(Color.GRAY);
 
         pane.getChildren().add(rectangle);
         for (int i = 0; i < system.getNumberOfSubSystems(); i++) {
-            Rectangle subSystem = new Rectangle(width - 30 , 15);
-            addingFinalThingsTOSubSystems(pane , system.getSubSystems().get(i) , i);
+            Rectangle subSystem = new Rectangle(width - distanceOfSubRectangle , StrokeOfSubSystems);
+            rectangle.setArcWidth(5);
+            rectangle.setArcHeight(5);
+            subSystem.setLayoutX(distanceOfSubRectangle/2);
+            subSystem.setLayoutY(LightBar -5  + StrokeOfSubSystems * i );
+            addingFinalThingsTOSubSystems(pane , system.getSubSystems().get(i) , i , distanceOfSubRectangle , StrokeOfSubSystems , LightBar);
             pane.getChildren().add(subSystem);
         }
 
     }
-    public void addingFinalThingsTOSubSystems(Pane pane , SubSystem subSystem , int i ){
+    public void addingFinalThingsTOSubSystems(Pane pane , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
         if (subSystem.DoesItHaveEnterGate()){
-            Shape EnterGate = subSystem.getEnterGate().createShape();
-            EnterGate.setLayoutX(5);
-            EnterGate.setLayoutY(10 + i * 15 + 7.5);
+            Shape EnterGate = subSystem.getEnterGate().createShape(true);
+            EnterGate.setLayoutX(distanceOfSubRectangle/2 - 5);
+            EnterGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
+            EnterGate.setScaleX(2);
+            EnterGate.setScaleY(2);
             gateConnectorManager.registerEnterGate(EnterGate);
             pane.getChildren().add(EnterGate);
+            EnterGate.toFront();
         }
         if (subSystem.DoesItHavaExitGate()){
-            Shape ExitGate = subSystem.getExitGate().createShape();
-            ExitGate.setLayoutX(25);
-            ExitGate.setLayoutY(15 + i * 15 + 7.5);
+            Shape ExitGate = subSystem.getExitGate().createShape(false);
+            ExitGate.setLayoutX(100 - distanceOfSubRectangle/2 );
+            ExitGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
+            ExitGate.setScaleX(2);
+            ExitGate.setScaleY(2);
             gateConnectorManager.registerExitGate(ExitGate);
             pane.getChildren().add(ExitGate);
         }
