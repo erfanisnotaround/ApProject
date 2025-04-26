@@ -1,8 +1,11 @@
 package com.example.phaze1.model;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -15,7 +18,7 @@ public class bringingLevelToReality {
     GateConnectorManager gateConnectorManager;
     public bringingLevelToReality(Pane LineContainer) {
         this.LineContainer = LineContainer;
-        gateConnectorManager = new GateConnectorManager(LineContainer);
+        gateConnectorManager = new GateConnectorManager(LineContainer , constants.getWireManager());
     }
 
     private level currentLevel;
@@ -57,11 +60,18 @@ public class bringingLevelToReality {
     public void getEachSystem(Pane pane ,Systems system , double height , double width , double distanceOfMainRectangle , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar){
         Rectangle rectangle = new Rectangle(width -distanceOfMainRectangle , height);
         rectangle.setLayoutX(distanceOfMainRectangle/2);
+        Rectangle lightRectangle = new Rectangle(width/4 , LightBar/4);
+        lightRectangle.setLayoutX(distanceOfSubRectangle/2 + LightBar/4);
+        lightRectangle.setLayoutY(6);
+        lightRectangle.setFill(Color.LIGHTBLUE);
+        lightRectangle.setArcWidth(10);
+        lightRectangle.setArcHeight(10);
         rectangle.setArcWidth(10);
         rectangle.setArcHeight(10);
         rectangle.setFill(Color.GRAY);
 
         pane.getChildren().add(rectangle);
+        pane.getChildren().add(lightRectangle);
         for (int i = 0; i < system.getNumberOfSubSystems(); i++) {
             Rectangle subSystem = new Rectangle(width - distanceOfSubRectangle , StrokeOfSubSystems);
             rectangle.setArcWidth(5);
@@ -75,7 +85,8 @@ public class bringingLevelToReality {
     }
     public void addingFinalThingsTOSubSystems(Pane pane , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
         if (subSystem.DoesItHaveEnterGate()){
-            Shape EnterGate = subSystem.getEnterGate().createShape(true);
+            Shape EnterGate = subSystem.getEnterGate().createShape();
+            EnterGate.setUserData(subSystem.getEnterGate());
             EnterGate.setLayoutX(distanceOfSubRectangle/2 - 5);
             EnterGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
             EnterGate.setScaleX(2);
@@ -85,7 +96,8 @@ public class bringingLevelToReality {
             EnterGate.toFront();
         }
         if (subSystem.DoesItHavaExitGate()){
-            Shape ExitGate = subSystem.getExitGate().createShape(false);
+            Shape ExitGate = subSystem.getExitGate().createShape();
+            ExitGate.setUserData(subSystem.getExitGate());
             ExitGate.setLayoutX(100 - distanceOfSubRectangle/2 );
             ExitGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
             ExitGate.setScaleX(2);

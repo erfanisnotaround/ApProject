@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Systems {
     private double x;
     private double y;
+    private boolean isItStartSystem;
+    private boolean isItFinisherSystem;
     private int numberOfSubSystems;
     private boolean isTheLightOn;
     private ArrayList<SubSystem> SubSystems = new ArrayList<>();
@@ -50,5 +52,21 @@ public class Systems {
 
     public void setTheLightOn(boolean theLightOn) {
         isTheLightOn = theLightOn;
+    }
+
+    public boolean isItStartSystem() {
+        return isItStartSystem;
+    }
+
+    public void setItStartSystem(boolean itStartSystem) {
+        isItStartSystem = itStartSystem;
+    }
+
+    public boolean isItFinisherSystem() {
+        return isItFinisherSystem;
+    }
+
+    public void setItFinisherSystem(boolean itFinisherSystem) {
+        isItFinisherSystem = itFinisherSystem;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class constants {
     private static Stage PrimaryStage;
-    private static WireManager wireManager = new WireManager(700);
+    private static WireManager wireManager = new WireManager(400);
     public static WireManager getWireManager() {
         return wireManager;
     }

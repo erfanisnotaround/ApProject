@@ -6,7 +6,7 @@ import javafx.scene.shape.Shape;
 public enum GateType {
     SQUARE{
         @Override
-        public Shape createShape(boolean enterGate) {
+        public Shape createShape() {
             Rectangle r = new Rectangle(5,5);
             r.setFill(Color.LIGHTBLUE);
             return r;
@@ -14,7 +14,7 @@ public enum GateType {
     },
     TRIANGLE {
         @Override
-        public Shape createShape(boolean enterGate) {
+        public Shape createShape() {
             Polygon p = new Polygon(
                     5 * 0.5, 0.0,   // top middle
                     5,      5,   // bottom right
@@ -30,6 +30,6 @@ public enum GateType {
     };
 
 
-    public abstract Shape createShape(boolean enterGate);
+    public abstract Shape createShape();
 
 }

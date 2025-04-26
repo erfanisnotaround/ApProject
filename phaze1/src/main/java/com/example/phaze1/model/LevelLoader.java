@@ -1,5 +1,9 @@
 package com.example.phaze1.model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +20,8 @@ public class LevelLoader {
         levelsManager = new LevelsManager();
         levels = levelsManager.getLevels();
         currentLevel = levels.get(level);
+        WireManager wireManager = new WireManager(currentLevel.getMaxWire());
+        constants.setWireManager(wireManager);
         return currentLevel;
     }
 

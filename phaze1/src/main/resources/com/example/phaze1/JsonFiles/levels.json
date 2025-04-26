@@ -1,17 +1,17 @@
 [
   {
-    "numberOfSystems": 2,
+    "numberOfSystems": 3,
     "levelPassed": false,
     "systems": [
       {
-        "x": 100.0,
-        "y": 200.0,
-        "numberOfSubSystems": 2,
+        "x": 50.0,
+        "y": 80.0,
+        "numberOfSubSystems": 3,
         "theLightOn": true,
         "subSystems": [
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": true,
+            "doesItHavaExitGate": false,
             "enterGate": "SQUARE",
             "exitGate": "TRIANGLE"
           },
@@ -20,20 +20,64 @@
             "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
             "exitGate": "SQUARE"
-          }
-        ]
-      },
-      {
-        "x": 300.0,
-        "y": 400.0,
-        "numberOfSubSystems": 1,
-        "theLightOn": false,
-        "subSystems": [
+          },
           {
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
             "exitGate": "TRIANGLE"
+          }
+        ]
+      },
+      {
+        "x": 200.0,
+        "y": 150.0,
+        "numberOfSubSystems": 2,
+        "theLightOn": false,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "SQUARE",
+            "exitGate": "SQUARE"
+          },
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      },
+      {
+        "x": 350.0,
+        "y": 300.0,
+        "numberOfSubSystems": 4,
+        "theLightOn": true,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "SQUARE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": false,
+            "enterGate": "SQUARE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "SQUARE",
+            "exitGate": "SQUARE"
           }
         ]
       }

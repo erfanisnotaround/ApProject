@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class level {
+    private double MaxWire;
     private int numberOfSystems;
     private boolean levelPassed;
     @JsonProperty("systems")
@@ -18,4 +19,7 @@ public class level {
 
     public List<Systems> getSystems() { return systems; }
     public void setSystems(List<Systems> list) { this.systems = list; }
+    public double getMaxWire() {return MaxWire;}
+
+    public void setMaxWire(double maxWire) {MaxWire = maxWire;}
 }
