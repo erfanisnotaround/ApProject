@@ -7,6 +7,7 @@ import java.util.Stack;
 
 public class constants {
     private static Stage PrimaryStage;
+    private static GateConnectorManager GateConnectorManager;
     private static WireManager wireManager = new WireManager(400);
     public static WireManager getWireManager() {
         return wireManager;
@@ -19,5 +20,13 @@ public class constants {
     }
     public static Stage getPrimaryStage() {
         return PrimaryStage;
+    }
+
+    public static GateConnectorManager getGateConnectorManager() {
+        return GateConnectorManager;
+    }
+
+    public static void setGateConnectorManager(GateConnectorManager gateConnectorManager) {
+        GateConnectorManager = gateConnectorManager;
     }
 }

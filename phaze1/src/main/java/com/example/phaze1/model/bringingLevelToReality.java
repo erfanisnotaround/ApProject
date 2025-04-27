@@ -19,6 +19,7 @@ public class bringingLevelToReality {
     public bringingLevelToReality(Pane LineContainer) {
         this.LineContainer = LineContainer;
         gateConnectorManager = new GateConnectorManager(LineContainer , constants.getWireManager());
+        constants.setGateConnectorManager(gateConnectorManager);
     }
 
     private level currentLevel;
@@ -78,14 +79,17 @@ public class bringingLevelToReality {
             rectangle.setArcHeight(5);
             subSystem.setLayoutX(distanceOfSubRectangle/2);
             subSystem.setLayoutY(LightBar -5  + StrokeOfSubSystems * i );
-            addingFinalThingsTOSubSystems(pane , system.getSubSystems().get(i) , i , distanceOfSubRectangle , StrokeOfSubSystems , LightBar);
+            addingFinalThingsTOSubSystems(pane ,system, system.getSubSystems().get(i) , i , distanceOfSubRectangle , StrokeOfSubSystems , LightBar);
             pane.getChildren().add(subSystem);
         }
 
+
+
     }
-    public void addingFinalThingsTOSubSystems(Pane pane , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
+    public void addingFinalThingsTOSubSystems(Pane pane,Systems systems , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
         if (subSystem.DoesItHaveEnterGate()){
             Shape EnterGate = subSystem.getEnterGate().createShape();
+            subSystem.getEnterGate().setParentID(systems.getSystemID());
             EnterGate.setUserData(subSystem.getEnterGate());
             EnterGate.setLayoutX(distanceOfSubRectangle/2 - 5);
             EnterGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
@@ -97,6 +101,7 @@ public class bringingLevelToReality {
         }
         if (subSystem.DoesItHavaExitGate()){
             Shape ExitGate = subSystem.getExitGate().createShape();
+            subSystem.getExitGate().setParentID(systems.getSystemID());
             ExitGate.setUserData(subSystem.getExitGate());
             ExitGate.setLayoutX(100 - distanceOfSubRectangle/2 );
             ExitGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
