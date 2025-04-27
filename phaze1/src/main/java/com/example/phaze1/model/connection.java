@@ -6,7 +6,11 @@ public class connection {
     private GateType startGate;
     private GateType endGate;
     private Polyline wire;
-
+    public connection(GateType startGate, GateType endGate , Polyline wire) {
+        this.startGate = startGate;
+        this.endGate = endGate;
+        this.wire = wire;
+    }
     public GateType getStartGate() {
         return startGate;
     }

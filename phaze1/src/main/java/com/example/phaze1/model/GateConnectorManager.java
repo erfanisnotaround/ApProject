@@ -12,7 +12,7 @@ import javafx.scene.shape.Polyline;
 import java.util.*;
 
 public class GateConnectorManager {
-
+    private List<connection> connections = new ArrayList<>();
     private final Pane    lineLayer;
     private final WireManager wires;
     private final Set<Node> exitGates  = new HashSet<>();
@@ -107,7 +107,7 @@ public class GateConnectorManager {
         for (Node enterGate : enterGates) {
             Bounds eb = enterGate.getBoundsInLocal();
             Point2D center = enterGate.localToScene(eb.getWidth()/2, eb.getHeight()/2);
-            if (center.distance(scenePt) < 10) {
+            if (center.distance(scenePt) < 5) {
                 GateType startType = (GateType)startGate.getUserData();
                 GateType endType = (GateType)enterGate.getUserData();
                 if (startType != endType){
@@ -119,6 +119,7 @@ public class GateConnectorManager {
                 if (wires.canUse(finalLen)) {
                     wires.addWire(finalLen);
                     currentCurve.setStroke(Color.GREEN);
+                    connections.add(new connection((GateType) startGate.getUserData(),(GateType) enterGate.getUserData(),currentCurve));
                 } else {
                     lineLayer.getChildren().remove(currentCurve);
                 }
@@ -148,7 +149,9 @@ public class GateConnectorManager {
         currentCurve = null;
         startGate    = null;
     }
-
+    public List<connection> getConnection() {
+        return connections;
+    }
     public List<Polyline> getConnections() {
         List<Polyline> list = new ArrayList<>();
         for (Node n : lineLayer.getChildren()) {

@@ -20,6 +20,7 @@ public class bringingLevelToReality {
         this.LineContainer = LineContainer;
         gateConnectorManager = new GateConnectorManager(LineContainer , constants.getWireManager());
         constants.setGateConnectorManager(gateConnectorManager);
+        constants.setConnections(gateConnectorManager.getConnection());
     }
 
     private level currentLevel;

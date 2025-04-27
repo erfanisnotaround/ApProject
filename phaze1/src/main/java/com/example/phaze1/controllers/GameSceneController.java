@@ -27,7 +27,7 @@ public class GameSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bringingLevelToReality LoadingSystems = new bringingLevelToReality(LinePane);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event -> {
-            System.out.println(constants.getGateConnectorManager().getConnections().size());
+            System.out.println(constants.getConnections().size());
         }));
         timeline.setCycleCount(-1);
         timeline.play();

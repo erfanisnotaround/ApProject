@@ -3,12 +3,14 @@ package com.example.phaze1.model;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.Stack;
 
 public class constants {
+    private static List<connection> connections;
     private static Stage PrimaryStage;
     private static GateConnectorManager GateConnectorManager;
-    private static WireManager wireManager = new WireManager(400);
+    private static WireManager wireManager = new WireManager(700);
     public static WireManager getWireManager() {
         return wireManager;
     }
@@ -28,5 +30,13 @@ public class constants {
 
     public static void setGateConnectorManager(GateConnectorManager gateConnectorManager) {
         GateConnectorManager = gateConnectorManager;
+    }
+
+    public static List<connection> getConnections() {
+        return connections;
+    }
+
+    public static void setConnections(List<connection> connectionsInput) {
+        connections = connectionsInput;
     }
 }
