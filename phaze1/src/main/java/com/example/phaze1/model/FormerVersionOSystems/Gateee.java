@@ -1,5 +1,7 @@
-package com.example.phaze1.model;
+package com.example.phaze1.model.FormerVersionOSystems;
 
+import com.example.phaze1.model.GateType;
+import com.example.phaze1.model.WireManager;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -11,7 +13,7 @@ import javafx.scene.shape.Polyline;
 
 import java.util.*;
 
-public class GateConnectorManager {
+public class Gateee {
     private List<connection> connections = new ArrayList<>();
     private final Pane    lineLayer;
     private final WireManager wires;
@@ -24,7 +26,7 @@ public class GateConnectorManager {
 
     private static final int STEPS = 40;
 
-    public GateConnectorManager(Pane lineLayer, WireManager wires) {
+    public Gateee(Pane lineLayer, WireManager wires) {
         this.lineLayer = lineLayer;
         this.wires     = wires;
     }

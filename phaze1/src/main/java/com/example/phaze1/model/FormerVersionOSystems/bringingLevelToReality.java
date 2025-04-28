@@ -1,26 +1,22 @@
-package com.example.phaze1.model;
+package com.example.phaze1.model.FormerVersionOSystems;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import com.example.phaze1.model.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class bringingLevelToReality {
     private Pane LineContainer;
-    GateConnectorManager gateConnectorManager;
+    Gateee gateConnectorManager;
     public bringingLevelToReality(Pane LineContainer) {
         this.LineContainer = LineContainer;
-        gateConnectorManager = new GateConnectorManager(LineContainer , constants.getWireManager());
+        gateConnectorManager = new Gateee(LineContainer , constants.getWireManager());
         constants.setGateConnectorManager(gateConnectorManager);
-        constants.setConnections(gateConnectorManager.getConnection());
+//        constants.setConnections(gateConnectorManager.getConnection());
     }
 
     private level currentLevel;
@@ -86,7 +82,7 @@ public class bringingLevelToReality {
 
 
     }
-    public void addingFinalThingsTOSubSystems(Pane pane,Systems systems , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
+    public void addingFinalThingsTOSubSystems(Pane pane, Systems systems , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
         if (subSystem.DoesItHaveEnterGate()){
             Shape EnterGate = subSystem.getEnterGate().createShape();
             subSystem.getEnterGate().setParentID(systems.getSystemID());

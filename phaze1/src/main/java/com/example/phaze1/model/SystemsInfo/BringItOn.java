@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BringItOn {
-    GateConnectorManager2 manager;
+    GateConnectorManager manager;
     private double lengthOfSubSystems = 40;
     private double width = 100;
     private double height = 0;
@@ -20,7 +20,9 @@ public class BringItOn {
     private double distanceOFRight = 8;
     private level currentLevel;
     public BringItOn(Pane LineContainer) {
-        manager = new GateConnectorManager2(LineContainer , constants.getWireManager());
+        manager = new GateConnectorManager(LineContainer , constants.getWireManager());
+        constants.setPortInfo(manager.GateInfo());
+        constants.setConnections(manager.getConnections());
     }
     public ArrayList<SystemView> makingEachSystems(int level) throws IOException {
         LevelLoader levelLoader = new LevelLoader();
@@ -84,7 +86,7 @@ public class BringItOn {
             Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
             Port.setUserData(newSubSystem.EnterGate);
             currentSystem.getChildren().add(Port);
-            manager.registerExitGate(Port ,currentSystem , i , newSubSystem.EnterGate);
+            manager.registerEnterGate(Port ,currentSystem , i , newSubSystem.EnterGate);
         }
     }
 }

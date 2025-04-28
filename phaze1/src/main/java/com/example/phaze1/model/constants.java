@@ -1,15 +1,20 @@
 package com.example.phaze1.model;
 
-import javafx.scene.Scene;
+import com.example.phaze1.model.FormerVersionOSystems.Gateee;
+import com.example.phaze1.model.FormerVersionOSystems.connection;
+import com.example.phaze1.model.SystemsInfo.Connection;
+import com.example.phaze1.model.SystemsInfo.GatePortInfo;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Stack;
+import java.util.Map;
 
 public class constants {
-    private static List<connection> connections;
+    private static Map<Node, GatePortInfo> portInfo;
+    private static List<Connection> connections;
     private static Stage PrimaryStage;
-    private static GateConnectorManager GateConnectorManager;
+    private static Gateee GateConnectorManager;
     private static WireManager wireManager = new WireManager(700);
     public static WireManager getWireManager() {
         return wireManager;
@@ -24,19 +29,27 @@ public class constants {
         return PrimaryStage;
     }
 
-    public static GateConnectorManager getGateConnectorManager() {
+    public static Gateee getGateConnectorManager() {
         return GateConnectorManager;
     }
 
-    public static void setGateConnectorManager(GateConnectorManager gateConnectorManager) {
+    public static void setGateConnectorManager(Gateee gateConnectorManager) {
         GateConnectorManager = gateConnectorManager;
     }
 
-    public static List<connection> getConnections() {
+    public static List<Connection> getConnections() {
         return connections;
     }
 
-    public static void setConnections(List<connection> connectionsInput) {
+    public static void setConnections(List<Connection> connectionsInput) {
         connections = connectionsInput;
+    }
+
+    public static Map<Node, GatePortInfo> getPortInfo() {
+        return portInfo;
+    }
+
+    public static void setPortInfo(Map<Node, GatePortInfo> Info) {
+        portInfo = Info;
     }
 }

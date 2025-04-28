@@ -13,49 +13,17 @@ import javafx.scene.shape.Polyline;
 
 import java.util.*;
 
-/**
- * Manages user-drawn connections (wires) between gates of your SystemView objects,
- * enforcing a total wire-length budget and matching gate types.
- */
-public class GateConnectorManager2 {
-    /**
-     * Holds metadata for each gate port.
-     */
-    public static class GatePortInfo {
-        public final SystemView system;     // which UI System
-        public final int        subIndex;   // which sub-system index
-        public final boolean    isExit;     // exit‐gate vs enter‐gate
-        public final GateType type;       // SQUARE or TRIANGLE
-
-        public GatePortInfo(SystemView system, int subIndex, boolean isExit, GateType type) {
-            this.system   = system;
-            this.subIndex = subIndex;
-            this.isExit    = isExit;
-            this.type      = type;
-        }
-    }
-
-    /**
-     * A recorded connection between two ports, plus its polyline shape.
-     */
-    public static class Connection {
-        public final GatePortInfo from;
-        public final GatePortInfo to;
-        public final Polyline     curve;
-        public Connection(GatePortInfo from, GatePortInfo to, Polyline curve) {
-            this.from  = from;
-            this.to    = to;
-            this.curve = curve;
-        }
-    }
+public class GateConnectorManager {
+    private GatePortInfo gatePortInfo;
+    private  Connection connection;
 
     private final Pane lineLayer;
     private final WireManager wires;
 
-    private final Map<Node,GatePortInfo> portInfo   = new HashMap<>();
-    private final Set<Node>             exitGates  = new HashSet<>();
-    private final Set<Node>             enterGates = new HashSet<>();
-    private final List<Connection>      connections = new ArrayList<>();
+    private final Map<Node,GatePortInfo> portInfo  = new HashMap<>();
+    private final Set<Node>  exitGates  = new HashSet<>();
+    private final Set<Node> enterGates = new HashSet<>();
+    private final List<Connection>  connections = new ArrayList<>();
 
     private Polyline currentCurve;
     private double   startX, startY;
@@ -63,18 +31,12 @@ public class GateConnectorManager2 {
 
     private static final int STEPS = 40;
 
-    public GateConnectorManager2(Pane lineLayer, WireManager wires) {
+    public GateConnectorManager(Pane lineLayer, WireManager wires) {
         this.lineLayer = lineLayer;
         this.wires     = wires;
     }
 
-    /**
-     * Register an exit‑gate, providing its UI node and metadata.
-     */
-    public void registerExitGate(Node gate,
-                                 SystemView system,
-                                 int subIndex,
-                                 GateType type) {
+    public void registerExitGate(Node gate, SystemView system, int subIndex, GateType type) {
         GatePortInfo info = new GatePortInfo(system, subIndex, true, type);
         portInfo.put(gate, info);
         exitGates.add(gate);
@@ -82,14 +44,7 @@ public class GateConnectorManager2 {
         gate.addEventHandler(MouseEvent.MOUSE_DRAGGED,  this::onDrag);
         gate.addEventHandler(MouseEvent.MOUSE_RELEASED, this::onRelease);
     }
-
-    /**
-     * Register an enter‑gate, providing its UI node and metadata.
-     */
-    public void registerEnterGate(Node gate,
-                                  SystemView system,
-                                  int subIndex,
-                                  GateType type) {
+    public void registerEnterGate(Node gate, SystemView system, int subIndex, GateType type) {
         GatePortInfo info = new GatePortInfo(system, subIndex, false, type);
         portInfo.put(gate, info);
         enterGates.add(gate);
@@ -159,7 +114,6 @@ public class GateConnectorManager2 {
             Point2D cen = gate.localToScene(eb.getWidth()/2, eb.getHeight()/2);
             if (cen.distance(scenePt) < 10) {
                 GatePortInfo toInfo = portInfo.get(gate);
-                // enforce matching types and budget
                 if (fromInfo.type == toInfo.type && wires.canUse(finalLen)) {
                     wires.addWire(finalLen);
                     currentCurve.setStroke(Color.GREEN);
@@ -170,7 +124,6 @@ public class GateConnectorManager2 {
                 cleanup(); e.consume(); return;
             }
         }
-        // didn't drop on a valid enter gate
         lineLayer.getChildren().remove(currentCurve);
         cleanup();
         e.consume();
@@ -190,13 +143,13 @@ public class GateConnectorManager2 {
         currentCurve = null;
         startGate    = null;
     }
-
-    /** Returns every GatePortInfo‑typed connection */
+    public Map<Node , GatePortInfo> GateInfo(){
+        return portInfo;
+    }
     public List<Connection> getConnections() {
         return Collections.unmodifiableList(connections);
     }
 
-    /** Returns raw Polylines on the lineLayer */
     public List<Polyline> getConnectionShapes() {
         List<Polyline> list = new ArrayList<>();
         for (Node n : lineLayer.getChildren()) if (n instanceof Polyline) list.add((Polyline)n);
