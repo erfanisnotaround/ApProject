@@ -1,10 +1,16 @@
 package com.example.phaze1.model;
+import com.example.phaze1.model.SystemsInfo.SystemView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 public enum GateType {
     SQUARE{
+        @Override
+        public void setParent(SystemView parent) {
+            Parent = parent;
+        }
+
         @Override
         public void setParentID(String parentID) {
             this.ParentID = parentID;
@@ -18,6 +24,11 @@ public enum GateType {
         }
     },
     TRIANGLE {
+        @Override
+        public void setParent(SystemView parent) {
+            Parent = parent;
+        }
+
         @Override
         public void setParentID(String parentID) {
             this.ParentID = parentID;
@@ -34,6 +45,8 @@ public enum GateType {
             return p;
         }
     };
+    SystemView Parent;
+    public abstract void setParent(SystemView parent);
     String ParentID;
     public abstract void setParentID(String parentID);
     public abstract Shape createShape();

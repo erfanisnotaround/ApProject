@@ -42,7 +42,6 @@ public class bringingLevelToReality {
             systems.add(eachSystem);
         }
         return systems;
-
     }
     public Pane makeASystem(Systems system){
         Pane pane = new Pane();

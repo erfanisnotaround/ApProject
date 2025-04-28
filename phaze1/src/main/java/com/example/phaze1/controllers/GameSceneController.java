@@ -1,4 +1,6 @@
 package com.example.phaze1.controllers;
+import com.example.phaze1.model.SystemsInfo.BringItOn;
+import com.example.phaze1.model.SystemsInfo.SystemView;
 import com.example.phaze1.model.bringingLevelToReality;
 import com.example.phaze1.model.constants;
 
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
-    private ArrayList<Pane>  systems =  new ArrayList<>();
+    private ArrayList<SystemView>  systems =  new ArrayList<>();
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -26,17 +28,18 @@ public class GameSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bringingLevelToReality LoadingSystems = new bringingLevelToReality(LinePane);
+        BringItOn dd = new BringItOn(LinePane);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event -> {
             System.out.println(constants.getConnections().size());
         }));
         timeline.setCycleCount(-1);
         timeline.play();
         try {
-            systems= LoadingSystems.makingEachSystems(0);
+            systems= dd.makingEachSystems(0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for (Pane system : systems){
+        for (SystemView system : systems){
             mainPane.getChildren().add(system);
         }
     }
