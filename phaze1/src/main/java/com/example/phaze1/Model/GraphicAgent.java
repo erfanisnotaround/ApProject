@@ -1,6 +1,5 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

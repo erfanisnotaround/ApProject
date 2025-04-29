@@ -1,4 +1,4 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
 import java.util.ArrayList;
 

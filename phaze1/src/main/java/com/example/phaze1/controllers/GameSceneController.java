@@ -1,9 +1,7 @@
 package com.example.phaze1.controllers;
 import com.example.phaze1.controllers.ControllingPocketMovement.MakingMovements;
-import com.example.phaze1.model.SystemsInfo.BringItOn;
-import com.example.phaze1.model.SystemsInfo.SystemView;
-import com.example.phaze1.model.FormerVersionOSystems.bringingLevelToReality;
-import com.example.phaze1.model.constants;
+import com.example.phaze1.Model.SystemsInfo.BringItOn;
+import com.example.phaze1.Model.SystemsInfo.SystemView;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -38,14 +36,14 @@ public class GameSceneController implements Initializable {
         for (SystemView system : systems){
             mainPane.getChildren().add(system);
         }
-                MakingMovements m = new MakingMovements(LinePane , systems);
+        MakingMovements m = new MakingMovements(LinePane , systems);
+        try {
+            m.goForPocketMovement();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4),event -> {
-            System.out.println(constants.getExitConnections().size());
-            try {
-                m.goForPocketMovement();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            m.StartMovement();
         }));
         timeline.setCycleCount(-1);
         timeline.play();

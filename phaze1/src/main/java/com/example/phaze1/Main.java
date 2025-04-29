@@ -1,16 +1,14 @@
 package com.example.phaze1;
-import com.example.phaze1.model.PhotoAgent;
-import com.example.phaze1.model.constants;
+import com.example.phaze1.Model.PhotoAgent;
+import com.example.phaze1.Model.constants;
 import com.example.phaze1.controllers.menuController;
-import com.example.phaze1.model.sideTasks;
+import com.example.phaze1.Model.sideTasks;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 

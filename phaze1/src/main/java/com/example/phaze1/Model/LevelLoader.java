@@ -1,11 +1,6 @@
-package com.example.phaze1.model;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
+package com.example.phaze1.Model;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LevelLoader {

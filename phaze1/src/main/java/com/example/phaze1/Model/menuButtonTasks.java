@@ -1,6 +1,5 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
-import com.example.phaze1.controllers.GameSceneController;
 import com.example.phaze1.controllers.LevelSceneController;
 import com.example.phaze1.controllers.SettingsController;
 import javafx.fxml.FXMLLoader;

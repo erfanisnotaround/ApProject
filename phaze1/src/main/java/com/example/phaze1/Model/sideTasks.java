@@ -1,8 +1,7 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class sideTasks {
     public static void minimizeOthersOnWindows() throws AWTException {

@@ -1,7 +1,6 @@
-package com.example.phaze1.model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfo;
 
-import com.example.phaze1.model.WireManager;
-import javafx.collections.ObservableList;
+import com.example.phaze1.Model.WireManager;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -17,12 +16,12 @@ public class GateConnectorManager {
     private  Connection connection;
 
     private final Pane lineLayer;
-    private final WireManager wires;
+    private final WireManager wires ;
 
     private final Map<Node,GatePortInfo> portInfo  = new HashMap<>();
     private final Set<Node>  exitGates  = new HashSet<>();
     private final Set<Node> enterGates = new HashSet<>();
-    private final Map<GateType , Connection> exitConnections = new HashMap<>();
+    private final Map<GatePortInfo , Connection> exitConnections = new HashMap<>();
     private final List<Connection>  connections = new ArrayList<>();
 
     private Curve currentCurve;
@@ -34,6 +33,7 @@ public class GateConnectorManager {
     public GateConnectorManager(Pane lineLayer, WireManager wires) {
         this.lineLayer = lineLayer;
         this.wires     = wires;
+        if (wires == null) System.out.println("wires is null");
     }
 
     public void registerExitGate(Node gate, SystemView system, int subIndex, GateType type) {
@@ -118,7 +118,7 @@ public class GateConnectorManager {
                     Connection newConnection = new Connection(fromInfo, toInfo, currentCurve);
                     wires.addWire(finalLen);
                     currentCurve.setStroke(Color.GREEN);
-                    exitConnections.put((GateType) startGate.getUserData() ,newConnection );
+                    exitConnections.put(portInfo.get(startGate),newConnection );
                     connections.add(newConnection);
                 } else {
                     lineLayer.getChildren().remove(currentCurve);
@@ -135,7 +135,7 @@ public class GateConnectorManager {
         currentCurve = null;
         startGate    = null;
     }
-    public  Map<GateType , Connection> getExitConnections() {
+    public  Map<GatePortInfo , Connection> getExitConnections() {
         return exitConnections;
     }
     public Map<Node , GatePortInfo> GateInfo(){

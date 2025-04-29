@@ -1,4 +1,4 @@
-package com.example.phaze1.model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfo;
 
 import javafx.scene.layout.Pane;
 

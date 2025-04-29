@@ -1,4 +1,4 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 public class WireManager {
     private double maxLength;
     private double usedLength = 0;

@@ -1,4 +1,4 @@
-package com.example.phaze1.model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfo;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -39,7 +39,6 @@ public enum GateType {
                     5,      5,   // bottom right
                     0.0,       5    // bottom left
             );
-
             p.setFill(Color.ORANGERED);
             return p;
         }

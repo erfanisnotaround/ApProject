@@ -1,10 +1,8 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
-import com.example.phaze1.model.FormerVersionOSystems.Gateee;
-import com.example.phaze1.model.FormerVersionOSystems.connection;
-import com.example.phaze1.model.SystemsInfo.Connection;
-import com.example.phaze1.model.SystemsInfo.GatePortInfo;
-import com.example.phaze1.model.SystemsInfo.GateType;
+import com.example.phaze1.Model.FormerVersionOSystems.Gateee;
+import com.example.phaze1.Model.SystemsInfo.Connection;
+import com.example.phaze1.Model.SystemsInfo.GatePortInfo;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -16,13 +14,13 @@ public class constants {
     private static List<Connection> connections;
     private static Stage PrimaryStage;
     private static Gateee GateConnectorManager;
-    private static Map<GateType, Connection> exitConnections;
-    private static WireManager wireManager = new WireManager(1500);
+    private static Map<GatePortInfo, Connection> exitConnections;
+    private static WireManager wireManager;
     public static WireManager getWireManager() {
         return wireManager;
     }
-    public static void setWireManager(WireManager wireManager) {
-        constants.wireManager = wireManager;
+    public static void setWireManager(WireManager wireManage) {
+        wireManager = wireManage;
     }
     public static  void setPrimaryStage(Stage primarystage) {
         PrimaryStage = primarystage;
@@ -55,11 +53,11 @@ public class constants {
         portInfo = Info;
     }
 
-    public static Map<GateType, Connection> getExitConnections() {
+    public static Map<GatePortInfo, Connection> getExitConnections() {
         return exitConnections;
     }
 
-    public static void setExitConnections(Map<GateType, Connection> exitConnections) {
+    public static void setExitConnections(Map<GatePortInfo, Connection> exitConnections) {
         constants.exitConnections = exitConnections;
     }
 }

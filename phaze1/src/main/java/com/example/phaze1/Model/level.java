@@ -1,8 +1,8 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class level {

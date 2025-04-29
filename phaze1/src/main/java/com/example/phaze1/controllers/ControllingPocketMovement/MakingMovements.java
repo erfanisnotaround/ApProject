@@ -1,24 +1,19 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
-import com.example.phaze1.model.LevelLoader;
-import com.example.phaze1.model.SystemsInfo.*;
-import com.example.phaze1.model.constants;
-import javafx.animation.PathTransition;
+import com.example.phaze1.Model.SystemsInfo.*;
+import com.example.phaze1.Model.constants;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MakingMovements {
     Pane LineContainer;
     Map<Node, GatePortInfo> portInfo;
-    Map<GateType , Connection> exitConnections;
+    Map<GatePortInfo , Connection> exitConnections;
     ArrayList<SystemView> systemViews;
     SystemView startSystem;
     public MakingMovements(Pane LineContainer , ArrayList<SystemView> systemViews) {
@@ -29,6 +24,7 @@ public class MakingMovements {
         portInfo = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
         startSystem = getStartSystem(systemViews);
+        System.out.println(startSystem.x + startSystem.y + " miew");
         StartMovement();
     }
     public void StartMovement(){
@@ -39,17 +35,17 @@ public class MakingMovements {
         }
     }
     public void sendPocket(ViewOfSubSystem subSystem){
-        Connection connection = exitConnections.get(subSystem.ExitGate);
+        Connection connection = exitConnections.get(portInfo.get(subSystem.ExitPort));
         if (connection != null) {
-            GatePortInfo destination = connection.to;
-            Rectangle rectangle = new Rectangle(5 , 5);
-            rectangle.setFill(Color.BLACK);
+            Shape rectangle = connection.from.type.createShape();
+            rectangle.setScaleX(2);
+            rectangle.setScaleY(2);
             LineContainer.getChildren().add(rectangle);
-            PathTransition pt = new PathTransition(Duration.seconds(5) , getPath(connection.curve) , rectangle);
-            pt.play();
+            connection.curve.makeMovementOnThis(rectangle , connection);
+
         }
         else {
-            System.out.println("dd");
+            System.out.println("There's no pocket connection");
         }
 
     }

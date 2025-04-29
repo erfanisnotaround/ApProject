@@ -1,5 +1,5 @@
 package com.example.phaze1.controllers;
-import com.example.phaze1.model.menuButtonTasks;
+import com.example.phaze1.Model.menuButtonTasks;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

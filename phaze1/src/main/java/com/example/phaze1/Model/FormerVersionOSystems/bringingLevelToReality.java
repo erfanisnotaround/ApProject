@@ -1,6 +1,6 @@
-package com.example.phaze1.model.FormerVersionOSystems;
+package com.example.phaze1.Model.FormerVersionOSystems;
 
-import com.example.phaze1.model.*;
+import com.example.phaze1.Model.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -85,7 +85,6 @@ public class bringingLevelToReality {
     public void addingFinalThingsTOSubSystems(Pane pane, Systems systems , SubSystem subSystem , int i  , double distanceOfSubRectangle , double StrokeOfSubSystems , double LightBar ){
         if (subSystem.DoesItHaveEnterGate()){
             Shape EnterGate = subSystem.getEnterGate().createShape();
-            subSystem.getEnterGate().setParentID(systems.getSystemID());
             EnterGate.setUserData(subSystem.getEnterGate());
             EnterGate.setLayoutX(distanceOfSubRectangle/2 - 5);
             EnterGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);
@@ -97,7 +96,6 @@ public class bringingLevelToReality {
         }
         if (subSystem.DoesItHavaExitGate()){
             Shape ExitGate = subSystem.getExitGate().createShape();
-            subSystem.getExitGate().setParentID(systems.getSystemID());
             ExitGate.setUserData(subSystem.getExitGate());
             ExitGate.setLayoutX(100 - distanceOfSubRectangle/2 );
             ExitGate.setLayoutY(LightBar-5 + i * StrokeOfSubSystems + StrokeOfSubSystems/2);

@@ -1,10 +1,10 @@
-package com.example.phaze1.model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfo;
 
-import com.example.phaze1.model.constants;
-import com.example.phaze1.model.LevelLoader;
-import com.example.phaze1.model.SubSystem;
-import com.example.phaze1.model.Systems;
-import com.example.phaze1.model.level;
+import com.example.phaze1.Model.constants;
+import com.example.phaze1.Model.LevelLoader;
+import com.example.phaze1.Model.SubSystem;
+import com.example.phaze1.Model.Systems;
+import com.example.phaze1.Model.level;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
@@ -41,7 +41,6 @@ public class BringItOn {
          newSystem.setLayoutY(system.getY());
          newSystem.x = system.getX();
          newSystem.y = system.getY();
-         newSystem.systemID = system.getSystemID();
          newSystem.isItFinisherSystem = system.isItFinisherSystem();
          newSystem.isItStartSystem = system.isItStartSystem();
          newSystem.numberOfSubSystems = system.getNumberOfSubSystems();
@@ -74,6 +73,7 @@ public class BringItOn {
             Port.setLayoutX(width - distanceOFRight);
             Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
             Port.setUserData(newSubSystem.ExitGate);
+            newSubSystem.ExitPort = Port;
             currentSystem.getChildren().add(Port);
             manager.registerExitGate(Port ,currentSystem , i , newSubSystem.ExitGate);
         }
@@ -86,6 +86,7 @@ public class BringItOn {
             Port.setLayoutX(distanceOFRight - 5);
             Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
             Port.setUserData(newSubSystem.EnterGate);
+            newSubSystem.EnterPort = Port;
             currentSystem.getChildren().add(Port);
             manager.registerEnterGate(Port ,currentSystem , i , newSubSystem.EnterGate);
         }

@@ -1,9 +1,8 @@
-package com.example.phaze1.model;
+package com.example.phaze1.Model;
 
 import javafx.scene.image.Image;
 
 import java.io.File;
-import java.util.Objects;
 
 public class PhotoAgent {
     public Image gettingImage(String address) {
