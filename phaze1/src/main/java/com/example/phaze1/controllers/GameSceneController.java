@@ -1,4 +1,5 @@
 package com.example.phaze1.controllers;
+import com.example.phaze1.controllers.ControllingPocketMovement.MakingMovements;
 import com.example.phaze1.model.SystemsInfo.BringItOn;
 import com.example.phaze1.model.SystemsInfo.SystemView;
 import com.example.phaze1.model.FormerVersionOSystems.bringingLevelToReality;
@@ -26,13 +27,9 @@ public class GameSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        bringingLevelToReality LoadingSystems = new bringingLevelToReality(LinePane);
+
         BringItOn dd = new BringItOn(LinePane);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event -> {
-            System.out.println(constants.getPortInfo().size());
-        }));
-        timeline.setCycleCount(-1);
-        timeline.play();
+
         try {
             systems= dd.makingEachSystems(0);
         } catch (IOException e) {
@@ -41,5 +38,16 @@ public class GameSceneController implements Initializable {
         for (SystemView system : systems){
             mainPane.getChildren().add(system);
         }
+                MakingMovements m = new MakingMovements(LinePane , systems);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4),event -> {
+            System.out.println(constants.getExitConnections().size());
+            try {
+                m.goForPocketMovement();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }));
+        timeline.setCycleCount(-1);
+        timeline.play();
     }
 }

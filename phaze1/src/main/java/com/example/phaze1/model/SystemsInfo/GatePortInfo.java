@@ -1,7 +1,5 @@
 package com.example.phaze1.model.SystemsInfo;
 
-import com.example.phaze1.model.GateType;
-
 public class GatePortInfo {
     public final SystemView system;
     public final int        subIndex;

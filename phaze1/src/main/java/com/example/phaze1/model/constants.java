@@ -4,6 +4,7 @@ import com.example.phaze1.model.FormerVersionOSystems.Gateee;
 import com.example.phaze1.model.FormerVersionOSystems.connection;
 import com.example.phaze1.model.SystemsInfo.Connection;
 import com.example.phaze1.model.SystemsInfo.GatePortInfo;
+import com.example.phaze1.model.SystemsInfo.GateType;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -15,7 +16,8 @@ public class constants {
     private static List<Connection> connections;
     private static Stage PrimaryStage;
     private static Gateee GateConnectorManager;
-    private static WireManager wireManager = new WireManager(700);
+    private static Map<GateType, Connection> exitConnections;
+    private static WireManager wireManager = new WireManager(1500);
     public static WireManager getWireManager() {
         return wireManager;
     }
@@ -51,5 +53,13 @@ public class constants {
 
     public static void setPortInfo(Map<Node, GatePortInfo> Info) {
         portInfo = Info;
+    }
+
+    public static Map<GateType, Connection> getExitConnections() {
+        return exitConnections;
+    }
+
+    public static void setExitConnections(Map<GateType, Connection> exitConnections) {
+        constants.exitConnections = exitConnections;
     }
 }

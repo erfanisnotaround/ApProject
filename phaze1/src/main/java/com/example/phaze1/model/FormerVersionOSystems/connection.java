@@ -1,6 +1,6 @@
 package com.example.phaze1.model.FormerVersionOSystems;
 
-import com.example.phaze1.model.GateType;
+import com.example.phaze1.model.SystemsInfo.GateType;
 import javafx.scene.shape.Polyline;
 
 public class connection {

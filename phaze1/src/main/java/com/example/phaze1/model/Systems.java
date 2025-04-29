@@ -3,7 +3,6 @@ package com.example.phaze1.model;
 import java.util.ArrayList;
 
 public class Systems {
-    private String systemID;
     private double x;
     private double y;
     private boolean isItStartSystem;
@@ -71,11 +70,4 @@ public class Systems {
         isItFinisherSystem = itFinisherSystem;
     }
 
-    public String getSystemID() {
-        return systemID;
-    }
-
-    public void setSystemID(String systemID) {
-        this.systemID = systemID;
-    }
 }

@@ -1,6 +1,5 @@
 package com.example.phaze1.model.SystemsInfo;
 
-import com.example.phaze1.model.GateType;
 import com.example.phaze1.model.WireManager;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
@@ -23,9 +22,10 @@ public class GateConnectorManager {
     private final Map<Node,GatePortInfo> portInfo  = new HashMap<>();
     private final Set<Node>  exitGates  = new HashSet<>();
     private final Set<Node> enterGates = new HashSet<>();
+    private final Map<GateType , Connection> exitConnections = new HashMap<>();
     private final List<Connection>  connections = new ArrayList<>();
 
-    private Polyline currentCurve;
+    private Curve currentCurve;
     private double   startX, startY;
     private Node     startGate;
 
@@ -62,7 +62,7 @@ public class GateConnectorManager {
         startY = start.getY();
         startGate = gate;
 
-        currentCurve = new Polyline();
+        currentCurve = new Curve();
         currentCurve.setStrokeWidth(3);
         currentCurve.setStroke(Color.BLACK);
         lineLayer.getChildren().add(currentCurve);
@@ -85,7 +85,7 @@ public class GateConnectorManager {
         }
         currentCurve.getPoints().setAll(pts);
 
-        double len = approximateLength(currentCurve.getPoints());
+        double len = currentCurve.ApproximateLength();
         currentCurve.setStroke(wires.canUse(len) ? Color.GREEN : Color.RED);
         e.consume();
     }
@@ -105,7 +105,7 @@ public class GateConnectorManager {
         }
         currentCurve.getPoints().setAll(pts);
 
-        double finalLen = approximateLength(currentCurve.getPoints());
+        double finalLen = currentCurve.ApproximateLength();
         Point2D scenePt = new Point2D(e.getSceneX(), e.getSceneY());
 
         GatePortInfo fromInfo = portInfo.get(startGate);
@@ -115,9 +115,11 @@ public class GateConnectorManager {
             if (cen.distance(scenePt) < 10) {
                 GatePortInfo toInfo = portInfo.get(gate);
                 if (fromInfo.type == toInfo.type && wires.canUse(finalLen)) {
+                    Connection newConnection = new Connection(fromInfo, toInfo, currentCurve);
                     wires.addWire(finalLen);
                     currentCurve.setStroke(Color.GREEN);
-                    connections.add(new Connection(fromInfo, toInfo, currentCurve));
+                    exitConnections.put((GateType) startGate.getUserData() ,newConnection );
+                    connections.add(newConnection);
                 } else {
                     lineLayer.getChildren().remove(currentCurve);
                 }
@@ -129,19 +131,12 @@ public class GateConnectorManager {
         e.consume();
     }
 
-    private double approximateLength(ObservableList<Double> pts) {
-        double sum = 0;
-        for (int i = 2; i < pts.size(); i+=2) {
-            double x0 = pts.get(i-2), y0 = pts.get(i-1);
-            double x1 = pts.get(i),   y1 = pts.get(i+1);
-            sum += Math.hypot(x1-x0, y1-y0);
-        }
-        return sum;
-    }
-
     private void cleanup() {
         currentCurve = null;
         startGate    = null;
+    }
+    public  Map<GateType , Connection> getExitConnections() {
+        return exitConnections;
     }
     public Map<Node , GatePortInfo> GateInfo(){
         return portInfo;

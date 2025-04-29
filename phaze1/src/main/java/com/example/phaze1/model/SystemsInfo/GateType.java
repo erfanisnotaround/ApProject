@@ -1,5 +1,4 @@
-package com.example.phaze1.model;
-import com.example.phaze1.model.SystemsInfo.SystemView;
+package com.example.phaze1.model.SystemsInfo;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -19,7 +18,7 @@ public enum GateType {
         @Override
         public Shape createShape() {
             Rectangle r = new Rectangle(5,5);
-            r.setFill(Color.LIGHTBLUE);
+            r.setFill(Color.BLUEVIOLET);
             return r;
         }
     },

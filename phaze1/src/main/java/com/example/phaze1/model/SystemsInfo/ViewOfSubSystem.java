@@ -1,14 +1,13 @@
 package com.example.phaze1.model.SystemsInfo;
 
-import com.example.phaze1.model.GateType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class ViewOfSubSystem extends Rectangle {
-    boolean doesItHaveEnterGate;
-    boolean doesItHavaExitGate;
-    GateType EnterGate;
-    GateType ExitGate;
+    public boolean doesItHaveEnterGate;
+    public boolean doesItHavaExitGate;
+    public GateType EnterGate;
+    public GateType ExitGate;
 
     public ViewOfSubSystem(double width, double height) {
         super(width, height);

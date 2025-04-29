@@ -23,6 +23,7 @@ public class BringItOn {
         manager = new GateConnectorManager(LineContainer , constants.getWireManager());
         constants.setPortInfo(manager.GateInfo());
         constants.setConnections(manager.getConnections());
+        constants.setExitConnections(manager.getExitConnections());
     }
     public ArrayList<SystemView> makingEachSystems(int level) throws IOException {
         LevelLoader levelLoader = new LevelLoader();
@@ -68,8 +69,8 @@ public class BringItOn {
             newSubSystem.ExitGate = subSystem.getExitGate();
             newSubSystem.ExitGate.setParent(currentSystem);
             Shape Port = newSubSystem.ExitGate.createShape();
-            Port.setScaleX(1.5);
-            Port.setScaleY(1.5);
+            Port.setScaleX(2);
+            Port.setScaleY(2);
             Port.setLayoutX(width - distanceOFRight);
             Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
             Port.setUserData(newSubSystem.ExitGate);
@@ -80,8 +81,8 @@ public class BringItOn {
             newSubSystem.EnterGate = subSystem.getEnterGate();
             newSubSystem.EnterGate.setParent(currentSystem);
             Shape Port = newSubSystem.EnterGate.createShape();
-            Port.setScaleX(1.5);
-            Port.setScaleY(1.5);
+            Port.setScaleX(2);
+            Port.setScaleY(2);
             Port.setLayoutX(distanceOFRight - 5);
             Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
             Port.setUserData(newSubSystem.EnterGate);
