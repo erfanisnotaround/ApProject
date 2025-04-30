@@ -19,16 +19,19 @@ public class BringItOn {
     private double lightBar = 30;
     private double distanceOFRight = 8;
     private level currentLevel;
+    Pane LineContainer;
     public BringItOn(Pane LineContainer) {
-        manager = new GateConnectorManager(LineContainer , constants.getWireManager());
-        constants.setPortInfo(manager.GateInfo());
-        constants.setConnections(manager.getConnections());
-        constants.setExitConnections(manager.getExitConnections());
+        this.LineContainer = LineContainer;
+
     }
     public ArrayList<SystemView> makingEachSystems(int level) throws IOException {
         LevelLoader levelLoader = new LevelLoader();
         levelLoader.setLevel(level);
         currentLevel = levelLoader.loadingCurrentLevel();
+        manager = new GateConnectorManager(LineContainer , constants.getWireManager());
+        constants.setPortInfo(manager.GateInfo());
+        constants.setConnections(manager.getConnections());
+        constants.setExitConnections(manager.getExitConnections());
         ArrayList<SystemView> systems = new ArrayList<>();
         for (Systems system : currentLevel.getSystems()){
             systems.add(makeASystem(system));

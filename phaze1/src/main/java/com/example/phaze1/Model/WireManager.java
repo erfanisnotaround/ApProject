@@ -6,7 +6,6 @@ public class WireManager {
     public WireManager(double maxLength) {
         this.maxLength = maxLength;
     }
-
     public boolean canUse(double length) {
         return usedLength + length <= maxLength;
     }

@@ -15,12 +15,16 @@ public class constants {
     private static Stage PrimaryStage;
     private static Gateee GateConnectorManager;
     private static Map<GatePortInfo, Connection> exitConnections;
-    private static WireManager wireManager;
+    private static WireManager wireManager ;
     public static WireManager getWireManager() {
+        if (wireManager == null) {
+            System.out.println("l=nfva");
+        }
         return wireManager;
     }
     public static void setWireManager(WireManager wireManage) {
         wireManager = wireManage;
+
     }
     public static  void setPrimaryStage(Stage primarystage) {
         PrimaryStage = primarystage;

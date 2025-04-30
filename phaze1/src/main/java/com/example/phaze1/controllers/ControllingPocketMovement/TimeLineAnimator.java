@@ -1,5 +1,6 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
 
+import com.example.phaze1.Model.SystemsInfo.GatePortInfo;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -12,7 +13,7 @@ import javafx.util.Duration;
 
 public class TimeLineAnimator {
 
-    public static void animateAlong(Polyline poly, Node node, Duration duration) {
+    public static void animateAlong(Polyline poly, Node node, Duration duration, GatePortInfo PortInfo) {
         ObservableList<Double> pts = poly.getPoints();
         int N = pts.size() / 2;
         if (N < 2) return;
@@ -56,6 +57,9 @@ public class TimeLineAnimator {
                 new KeyFrame(Duration.ZERO,   new KeyValue(t, 0)),
                 new KeyFrame(duration,        new KeyValue(t, 1))
         );
+        tl.setOnFinished(event -> {
+            PortInfo.isItReachedDestination.set(true);
+        });
         tl.setCycleCount(1);
         tl.play();
     }

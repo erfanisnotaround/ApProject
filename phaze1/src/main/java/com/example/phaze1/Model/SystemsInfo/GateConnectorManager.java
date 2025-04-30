@@ -33,7 +33,6 @@ public class GateConnectorManager {
     public GateConnectorManager(Pane lineLayer, WireManager wires) {
         this.lineLayer = lineLayer;
         this.wires     = wires;
-        if (wires == null) System.out.println("wires is null");
     }
 
     public void registerExitGate(Node gate, SystemView system, int subIndex, GateType type) {

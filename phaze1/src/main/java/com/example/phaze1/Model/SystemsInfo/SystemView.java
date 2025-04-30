@@ -16,10 +16,10 @@ public class SystemView extends Pane {
     public SystemView(){
         String style =
                 "-fx-background-color: lightgray;" +
-                        " -fx-background-radius: 20;" +
+                        " -fx-background-radius: 5;" +
                         " -fx-border-color: darkgray;" +
                         " -fx-border-width: 2;" +
-                        " -fx-border-radius: 10;";
+                        " -fx-border-radius: 5;";
         setStyle(style);
     }
 

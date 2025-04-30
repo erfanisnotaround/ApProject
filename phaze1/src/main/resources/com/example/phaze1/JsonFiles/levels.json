@@ -1,6 +1,6 @@
 [
   {
-    "maxWire": 900.0,
+    "maxWire": 2500.0,
     "numberOfSystems": 5,
     "levelPassed": false,
     "systems": [
@@ -16,7 +16,7 @@
             "doesItHaveEnterGate": false,
             "doesItHavaExitGate": true,
             "enterGate": "SQUARE",
-            "exitGate": "TRIANGLE"
+            "exitGate": "SQUARE"
           }
         ]
       },
@@ -35,7 +35,7 @@
             "exitGate": "SQUARE"
           },
           {
-            "doesItHaveEnterGate": true,
+            "doesItHaveEnterGate": false,
             "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
             "exitGate": "TRIANGLE"

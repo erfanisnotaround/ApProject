@@ -20,22 +20,9 @@ public class Curve extends Polyline {
         }
         return sum;
     }
-    public void makeMovementOnThis(Node pocket , Connection connection){
+    public void makeMovementOnThis(Node pocket , Connection connection , GatePortInfo PortInfo){
         GatePortInfo destination = connection.to;
-        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5));
-//        PathTransition pt = new PathTransition(Duration.seconds(5) , getPath(connection.curve), pocket);
-//        pt.play();
-    }
-    public Path getPath(Polyline poly){
-        ObservableList<Double> pts = poly.getPoints();
-        Path path = new Path();
-        if (pts.size() < 2) return path;
-        path.getElements().add(new MoveTo(pts.get(0), pts.get(1)));
-        for (int i = 2; i < pts.size(); i += 2) {
-            path.getElements().add(new LineTo(pts.get(i), pts.get(i+1)));
-        }
-        return path;
-
+        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),PortInfo);
     }
 
 }
