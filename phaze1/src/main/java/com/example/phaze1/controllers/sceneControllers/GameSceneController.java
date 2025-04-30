@@ -1,12 +1,13 @@
-package com.example.phaze1.controllers;
+package com.example.phaze1.controllers.sceneControllers;
 import com.example.phaze1.controllers.ControllingPocketMovement.MakingMovements;
-import com.example.phaze1.Model.SystemsInfo.BringItOn;
-import com.example.phaze1.Model.SystemsInfo.SystemView;
+import com.example.phaze1.Model.SystemsInfoAndManagers.BringItOn;
+import com.example.phaze1.Model.SystemsInfoAndManagers.SystemView;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -25,7 +26,8 @@ public class GameSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Button startButton = new Button("Start");
+        mainPane.getChildren().add(startButton);
         BringItOn dd = new BringItOn(LinePane);
 
         try {
@@ -37,15 +39,12 @@ public class GameSceneController implements Initializable {
             mainPane.getChildren().add(system);
         }
         MakingMovements m = new MakingMovements(LinePane , systems);
-        try {
-            m.goForPocketMovement();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4),event -> {
-            m.StartMovement();
-        }));
-        timeline.setCycleCount(-1);
-        timeline.play();
+        startButton.setOnAction(event -> {
+            try {
+                m.goForPocketMovement();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.JSonManager;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

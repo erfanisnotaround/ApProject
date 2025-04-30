@@ -1,6 +1,10 @@
 package com.example.phaze1.Model.FormerVersionOSystems;
 
-import com.example.phaze1.Model.*;
+import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.Model.levelLoadingStuff.LevelLoader;
+import com.example.phaze1.Model.levelLoadingStuff.SubSystem;
+import com.example.phaze1.Model.levelLoadingStuff.Systems;
+import com.example.phaze1.Model.levelLoadingStuff.level;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

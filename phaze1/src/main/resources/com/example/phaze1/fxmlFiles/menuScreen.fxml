@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1019" prefWidth="1707" stylesheets="@../CssStyles/menuStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.menuController">
+<AnchorPane prefHeight="1019" prefWidth="1707" stylesheets="@../CssStyles/menuStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.sceneControllers.menuController">
 
     <Label fx:id="NameLabel" alignment="CENTER" layoutY="100.0" prefHeight="54.0" prefWidth="1709.0" styleClass="game-title" text="BluePrint hell" />
     <VBox alignment="CENTER" spacing="20">

@@ -1,6 +1,6 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.levelLoadingStuff;
 
-import com.example.phaze1.Model.SystemsInfo.GateType;
+import com.example.phaze1.Model.SystemsInfoAndManagers.GateType;
 
 public class SubSystem {
     private boolean doesItHaveEnterGate;

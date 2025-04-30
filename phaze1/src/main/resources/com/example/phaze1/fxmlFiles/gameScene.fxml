@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<AnchorPane fx:id="mainPane" prefHeight="1019" prefWidth="1707" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.GameSceneController">
+<AnchorPane fx:id="mainPane" prefHeight="1019" prefWidth="1707" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.sceneControllers.GameSceneController">
    <children>
       <Pane fx:id="LinePane" prefHeight="1019.0" prefWidth="1707.0" />
    </children>

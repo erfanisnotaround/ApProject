@@ -1,4 +1,4 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.levelLoadingStuff;
 
 import java.util.ArrayList;
 import java.util.List;

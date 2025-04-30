@@ -1,4 +1,4 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.Agents;
 
 import javafx.scene.image.Image;
 

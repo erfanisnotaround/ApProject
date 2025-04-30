@@ -1,5 +1,7 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.Agents;
 
+import com.example.phaze1.Model.Constants.GameStatus;
+import com.example.phaze1.Model.Constants.constants;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

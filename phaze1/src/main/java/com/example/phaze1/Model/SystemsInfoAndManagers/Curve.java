@@ -1,4 +1,4 @@
-package com.example.phaze1.Model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfoAndManagers;
 
 import com.example.phaze1.controllers.ControllingPocketMovement.TimeLineAnimator;
 import javafx.collections.ObservableList;
@@ -20,9 +20,9 @@ public class Curve extends Polyline {
         }
         return sum;
     }
-    public void makeMovementOnThis(Node pocket , Connection connection , GatePortInfo PortInfo){
+    public void makeMovementOnThis(Node pocket , Connection connection ){
         GatePortInfo destination = connection.to;
-        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),PortInfo);
+        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),destination);
     }
 
 }

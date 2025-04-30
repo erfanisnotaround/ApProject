@@ -1,6 +1,5 @@
-package com.example.phaze1.Model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfoAndManagers;
 
-import com.example.phaze1.Model.WireManager;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;

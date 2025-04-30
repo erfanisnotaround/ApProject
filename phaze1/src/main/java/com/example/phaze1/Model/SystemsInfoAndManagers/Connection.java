@@ -1,4 +1,4 @@
-package com.example.phaze1.Model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfoAndManagers;
 
 public class Connection {
     public final GatePortInfo from;

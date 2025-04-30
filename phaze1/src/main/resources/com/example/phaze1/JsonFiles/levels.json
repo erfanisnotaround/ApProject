@@ -1,6 +1,6 @@
 [
   {
-    "maxWire": 2500.0,
+    "maxWire": 10000.0,
     "numberOfSystems": 5,
     "levelPassed": false,
     "systems": [
@@ -87,8 +87,8 @@
         ]
       },
       {
-        "x": 1600.0,
-        "y": 1000.0,
+        "x": 1000.0,
+        "y": 500.0,
         "itStartSystem": false,
         "itFinisherSystem": true,
         "numberOfSubSystems": 1,

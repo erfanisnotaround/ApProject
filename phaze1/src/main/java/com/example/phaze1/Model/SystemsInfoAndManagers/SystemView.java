@@ -1,10 +1,13 @@
-package com.example.phaze1.Model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfoAndManagers;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
 public class SystemView extends Pane {
+    public Button startButton;
+    public Light light;
     public double x;
     public double y;
     public String systemID;

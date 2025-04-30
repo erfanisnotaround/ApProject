@@ -1,10 +1,10 @@
-package com.example.phaze1.Model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfoAndManagers;
 
-import com.example.phaze1.Model.constants;
-import com.example.phaze1.Model.LevelLoader;
-import com.example.phaze1.Model.SubSystem;
-import com.example.phaze1.Model.Systems;
-import com.example.phaze1.Model.level;
+import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.Model.levelLoadingStuff.LevelLoader;
+import com.example.phaze1.Model.levelLoadingStuff.SubSystem;
+import com.example.phaze1.Model.levelLoadingStuff.Systems;
+import com.example.phaze1.Model.levelLoadingStuff.level;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
@@ -48,6 +48,11 @@ public class BringItOn {
          newSystem.isItStartSystem = system.isItStartSystem();
          newSystem.numberOfSubSystems = system.getNumberOfSubSystems();
          newSystem.isTheLightOn = system.isTheLightOn();
+         newSystem.light = new Light(10 , distanceOFRight*2 , lightBar/4);
+         newSystem.light.setLayoutX(distanceOFRight );
+         newSystem.light.setLayoutY(lightBar / 2);
+         newSystem.light.isItOn = false;
+         newSystem.getChildren().add(newSystem.light);
          height = system.getNumberOfSubSystems()*lengthOfSubSystems+ lightBar + lightBar/4;
          newSystem.setPrefSize(width, height);
          for (int i = 0 ; i < newSystem.numberOfSubSystems ; i++){

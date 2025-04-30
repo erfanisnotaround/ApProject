@@ -1,8 +1,8 @@
 package com.example.phaze1;
-import com.example.phaze1.Model.PhotoAgent;
-import com.example.phaze1.Model.constants;
-import com.example.phaze1.controllers.menuController;
-import com.example.phaze1.Model.sideTasks;
+import com.example.phaze1.Model.Agents.PhotoAgent;
+import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.controllers.sceneControllers.menuController;
+import com.example.phaze1.Model.Tasks.sideTasks;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

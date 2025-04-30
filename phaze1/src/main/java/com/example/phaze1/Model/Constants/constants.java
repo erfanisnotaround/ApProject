@@ -1,8 +1,9 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.Constants;
 
 import com.example.phaze1.Model.FormerVersionOSystems.Gateee;
-import com.example.phaze1.Model.SystemsInfo.Connection;
-import com.example.phaze1.Model.SystemsInfo.GatePortInfo;
+import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
+import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
+import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 

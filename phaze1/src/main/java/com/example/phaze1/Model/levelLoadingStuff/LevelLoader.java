@@ -1,10 +1,14 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.levelLoadingStuff;
+
+import com.example.phaze1.Model.Constants.GameStatus;
+import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
+import com.example.phaze1.Model.Constants.constants;
 
 import java.io.IOException;
 import java.util.List;
 
 public class LevelLoader {
-    LevelsManager levelsManager;
+    GameStatus.LevelsManager levelsManager;
     static List<level> levels;
     private int level = 0;
     private level currentLevel;
@@ -12,7 +16,7 @@ public class LevelLoader {
     public void setLevel(int level) {this.level = level;}
 
     public level loadingCurrentLevel() throws IOException {
-        levelsManager = new LevelsManager();
+        levelsManager = new GameStatus.LevelsManager();
         levels = levelsManager.getLevels();
         currentLevel = levels.get(level);
         WireManager wireManager = new WireManager(currentLevel.getMaxWire());

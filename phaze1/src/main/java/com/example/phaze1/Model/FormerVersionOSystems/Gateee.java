@@ -1,7 +1,7 @@
 package com.example.phaze1.Model.FormerVersionOSystems;
 
-import com.example.phaze1.Model.SystemsInfo.GateType;
-import com.example.phaze1.Model.WireManager;
+import com.example.phaze1.Model.SystemsInfoAndManagers.GateType;
+import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;

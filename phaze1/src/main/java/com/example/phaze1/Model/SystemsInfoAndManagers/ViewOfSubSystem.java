@@ -1,4 +1,4 @@
-package com.example.phaze1.Model.SystemsInfo;
+package com.example.phaze1.Model.SystemsInfoAndManagers;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

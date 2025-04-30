@@ -1,4 +1,4 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.Tasks;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

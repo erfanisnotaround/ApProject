@@ -1,7 +1,10 @@
-package com.example.phaze1.Model;
+package com.example.phaze1.Model.Tasks;
 
-import com.example.phaze1.controllers.LevelSceneController;
-import com.example.phaze1.controllers.SettingsController;
+import com.example.phaze1.Model.Agents.GraphicAgent;
+import com.example.phaze1.Model.Constants.GameStatus;
+import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.controllers.sceneControllers.LevelSceneController;
+import com.example.phaze1.controllers.sceneControllers.SettingsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
