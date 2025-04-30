@@ -20,7 +20,7 @@ public class Curve extends Polyline {
         }
         return sum;
     }
-    public void makeMovementOnThis(Node pocket , Connection connection ){
+    public void makeMovementOnThis(Port pocket , Connection connection ){
         GatePortInfo destination = connection.to;
         TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),destination);
     }

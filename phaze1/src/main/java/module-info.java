@@ -3,6 +3,8 @@ module com.example.phaze1 {
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
+    requires javafx.media;
+
 
 //    opens com.example.phaze1.controllers to javafx.fxml;
     opens com.example.phaze1        to javafx.fxml;

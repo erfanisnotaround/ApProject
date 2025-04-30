@@ -1,9 +1,6 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
 
-import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
-import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
-import com.example.phaze1.Model.SystemsInfoAndManagers.SystemView;
-import com.example.phaze1.Model.SystemsInfoAndManagers.ViewOfSubSystem;
+import com.example.phaze1.Model.SystemsInfoAndManagers.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ObservableValue;
@@ -43,8 +40,21 @@ public class movementResumeManager {
             if (newValue) {
                 CouldWeResume(ParentSystem);
                 ParentSystem.light.setFill(Color.LIGHTBLUE);
+                makingAllEnterFalse(ParentSystem);
             }
+//            if (oldValue){
+//                CouldWeResume(ParentSystem);
+//                ParentSystem.light.setFill(Color.LIGHTBLUE);
+//            }
         });
+    }
+    public void makingAllEnterFalse(SystemView ParentSystem) {
+        for (ViewOfSubSystem subsystem : ParentSystem.SubSystems) {
+            if (subsystem.doesItHaveEnterGate){
+                GatePortInfo EnterPort = PortInfo.get(subsystem.EnterPort);
+                EnterPort.isItReachedDestination.set(false);
+            }
+        }
     }
     public void CouldWeResume(SystemView ParentSystem) {
         if (!ParentSystem.isItFinisherSystem){
@@ -59,7 +69,7 @@ public class movementResumeManager {
             if (subsystem.doesItHavaExitGate){
                 Connection connection = exitConnections.get(PortInfo.get(subsystem.ExitPort));
                 if (connection != null) {
-                    Shape rectangle = connection.from.type.createShape();
+                    Port rectangle = connection.from.type.createShape();
                     rectangle.setScaleX(2);
                     rectangle.setScaleY(2);
                     LineContainer.getChildren().add(rectangle);
@@ -67,7 +77,7 @@ public class movementResumeManager {
                     resume(connection.to.system);
                 }
                 else {
-                    System.out.println("There's no pocket connection");
+                    System.out.println(":d");
                 }
             }
         }

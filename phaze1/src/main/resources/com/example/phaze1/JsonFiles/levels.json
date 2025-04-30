@@ -52,7 +52,7 @@
         "subSystems": [
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": true,
+            "doesItHavaExitGate": false,
             "enterGate": "TRIANGLE",
             "exitGate": "SQUARE"
           },

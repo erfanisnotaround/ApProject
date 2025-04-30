@@ -6,6 +6,7 @@ import com.example.phaze1.Model.levelLoadingStuff.SubSystem;
 import com.example.phaze1.Model.levelLoadingStuff.Systems;
 import com.example.phaze1.Model.levelLoadingStuff.level;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -75,28 +76,28 @@ public class BringItOn {
         if (newSubSystem.doesItHavaExitGate){
             newSubSystem.ExitGate = subSystem.getExitGate();
             newSubSystem.ExitGate.setParent(currentSystem);
-            Shape Port = newSubSystem.ExitGate.createShape();
-            Port.setScaleX(2);
-            Port.setScaleY(2);
-            Port.setLayoutX(width - distanceOFRight);
-            Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
-            Port.setUserData(newSubSystem.ExitGate);
-            newSubSystem.ExitPort = Port;
-            currentSystem.getChildren().add(Port);
-            manager.registerExitGate(Port ,currentSystem , i , newSubSystem.ExitGate);
+            Port port = newSubSystem.ExitGate.createShape();
+            port.setScaleX(2);
+            port.setScaleY(2);
+            port.setLayoutX(width - distanceOFRight);
+            port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
+            port.setUserData(newSubSystem.ExitGate);
+            newSubSystem.ExitPort = port;
+            currentSystem.getChildren().add(port);
+            manager.registerExitGate(port ,currentSystem , i , newSubSystem.ExitGate);
         }
         if (newSubSystem.doesItHaveEnterGate){
             newSubSystem.EnterGate = subSystem.getEnterGate();
             newSubSystem.EnterGate.setParent(currentSystem);
-            Shape Port = newSubSystem.EnterGate.createShape();
-            Port.setScaleX(2);
-            Port.setScaleY(2);
-            Port.setLayoutX(distanceOFRight - 5);
-            Port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
-            Port.setUserData(newSubSystem.EnterGate);
-            newSubSystem.EnterPort = Port;
-            currentSystem.getChildren().add(Port);
-            manager.registerEnterGate(Port ,currentSystem , i , newSubSystem.EnterGate);
+            Port port = newSubSystem.EnterGate.createShape();
+            port.setScaleX(2);
+            port.setScaleY(2);
+            port.setLayoutX(distanceOFRight - 5);
+            port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
+            port.setUserData(newSubSystem.EnterGate);
+            newSubSystem.EnterPort = port;
+            currentSystem.getChildren().add(port);
+            manager.registerEnterGate(port ,currentSystem , i , newSubSystem.EnterGate);
         }
     }
 }

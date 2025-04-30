@@ -30,7 +30,6 @@ public class MakingMovements {
         movementResumeManager = new movementResumeManager(portInfo, exitConnections , LineContainer);
         startSystem = getStartSystem(systemViews);
         StartMovement();
-        startSystem.light.setFill(Color.LIGHTBLUE);
     }
     public void StartMovement(){
         for (ViewOfSubSystem subSystem : startSystem.SubSystems) {
@@ -42,7 +41,8 @@ public class MakingMovements {
     public void sendPocket(ViewOfSubSystem subSystem){
         Connection connection = exitConnections.get(portInfo.get(subSystem.ExitPort));
         if (connection != null) {
-            Shape rectangle = connection.from.type.createShape();
+            startSystem.light.setFill(Color.LIGHTBLUE);
+            Port rectangle = connection.from.type.createShape();
             rectangle.setScaleX(2);
             rectangle.setScaleY(2);
             LineContainer.getChildren().add(rectangle);

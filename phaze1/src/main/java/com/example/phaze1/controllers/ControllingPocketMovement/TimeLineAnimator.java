@@ -1,6 +1,7 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
 
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
+import com.example.phaze1.Model.SystemsInfoAndManagers.Port;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,7 +14,7 @@ import javafx.util.Duration;
 
 public class TimeLineAnimator {
 
-    public static void animateAlong(Polyline poly, Node node, Duration duration, GatePortInfo PortInfo) {
+    public static void animateAlong(Polyline poly, Port node, Duration duration, GatePortInfo PortInfo) {
         ObservableList<Double> pts = poly.getPoints();
         int N = pts.size() / 2;
         if (N < 2) return;
@@ -49,8 +50,8 @@ public class TimeLineAnimator {
             double x0 = pts.get(2 * idx),     y0 = pts.get(2 * idx + 1);
             double x1 = pts.get(2 * (idx+1)), y1 = pts.get(2 * (idx+1) + 1);
 
-            node.setTranslateX(x0 + (x1 - x0) * localT);
-            node.setTranslateY(y0 - 3 + (y1 - y0) * localT);
+            node.setTranslateX(x0 - (node.getDistanceFromTheLine()+2) + (x1 - x0) * localT);
+            node.setTranslateY(y0 - (node.getDistanceFromTheLine()+3) + (y1 - y0) * localT);
         });
 
         Timeline tl = new Timeline(

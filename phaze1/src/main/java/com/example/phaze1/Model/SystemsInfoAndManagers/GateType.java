@@ -16,10 +16,16 @@ public enum GateType {
         }
 
         @Override
-        public Shape createShape() {
-            Rectangle r = new Rectangle(5,5);
-            r.setFill(Color.BLUEVIOLET);
-            return r;
+        public Port createShape() {
+            double size = 5.0;
+            Port square = new Port(
+                    0.0, 0.0,      // top-left
+                    5.0, 0.0,     // top-right
+                    5.0, 5.0,    // bottom-right
+                    0.0, 5.0      // bottom-left
+            );
+            square.setFill(Color.BLUEVIOLET);
+            return square;
         }
     },
     TRIANGLE {
@@ -33,8 +39,8 @@ public enum GateType {
             this.ParentID = parentID;
         }
         @Override
-        public Shape createShape() {
-            Polygon p = new Polygon(
+        public Port createShape() {
+            Port p = new Port(
                     5 * 0.5, 0.0,   // top middle
                     5,      5,   // bottom right
                     0.0,       5    // bottom left
@@ -47,6 +53,6 @@ public enum GateType {
     public abstract void setParent(SystemView parent);
     String ParentID;
     public abstract void setParentID(String parentID);
-    public abstract Shape createShape();
+    public abstract Port createShape();
 
 }
