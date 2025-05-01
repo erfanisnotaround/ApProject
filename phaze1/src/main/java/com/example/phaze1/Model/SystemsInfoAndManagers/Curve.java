@@ -1,14 +1,17 @@
 package com.example.phaze1.Model.SystemsInfoAndManagers;
 
 import com.example.phaze1.controllers.ControllingPocketMovement.TimeLineAnimator;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
 public class Curve extends Polyline {
-    Color color ;
-    double StrokeWidth;
+    public BooleanProperty isItUsed = new SimpleBooleanProperty(false);
+    public Color color ;
+    public double StrokeWidth;
     public double ApproximateLength() {
         ObservableList<Double> points = getPoints();
         double sum = 0;
@@ -19,9 +22,9 @@ public class Curve extends Polyline {
         }
         return sum;
     }
-    public void makeMovementOnThis(Pocket pocket , Connection connection ){
+    public void makeMovementOnThis(Pocket pocket , Connection connection){
         GatePortInfo destination = connection.to;
-        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),destination);
+        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),destination ,connection);
     }
 
 }

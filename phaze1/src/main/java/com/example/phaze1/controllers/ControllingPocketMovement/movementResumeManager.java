@@ -56,7 +56,7 @@ public class movementResumeManager {
         }
     }
     public void CouldWeResume(SystemView ParentSystem) {
-        if (!ParentSystem.isItFinisherSystem){
+        if (!ParentSystem.isItStartSystem){
             sendingPockets(ParentSystem);
         }
         else {

@@ -12,9 +12,9 @@ public class SystemView extends Pane {
     public double y;
     public String systemID;
     public boolean isItStartSystem;
-    public boolean isItFinisherSystem;
     public int numberOfSubSystems;
     public boolean isTheLightOn;
+    public Pocket[] capacity = new Pocket[5];
     public ArrayList<ViewOfSubSystem> SubSystems = new ArrayList<>();
     public SystemView(){
         String style =

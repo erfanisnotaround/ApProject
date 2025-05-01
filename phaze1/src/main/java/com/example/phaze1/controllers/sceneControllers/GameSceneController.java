@@ -58,14 +58,14 @@ public class GameSceneController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5) , event -> {
-            try {
-                m.goForPocketMovement();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5) , event -> {
+//            try {
+//                m.goForPocketMovement();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
     }
 }
