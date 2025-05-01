@@ -1,35 +1,35 @@
 [
   {
-    "maxWire": 1000.0,
-    "numberOfSystems": 2,
+    "maxWire": 25000.0,
+    "numberOfSystems": 4,
     "levelPassed": false,
     "systems": [
       {
-        "x": 150.0,
-        "y": 100.0,
+        "x": 100.0,
+        "y":  50.0,
         "itStartSystem": true,
         "numberOfSubSystems": 2,
         "theLightOn": true,
         "subSystems": [
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": false,
+            "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
-            "exitGate": null
+            "exitGate": "TRIANGLE"
           },
           {
-            "doesItHaveEnterGate": false,
+            "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
-            "enterGate": null,
+            "enterGate": "TRIANGLE",
             "exitGate": "TRIANGLE"
           }
         ]
       },
       {
-        "x": 400.0,
-        "y": 300.0,
+        "x": 300.0,
+        "y": 100.0,
         "itStartSystem": false,
-        "numberOfSubSystems": 1,
+        "numberOfSubSystems": 2,
         "theLightOn": false,
         "subSystems": [
           {
@@ -37,20 +37,72 @@
             "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
             "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "SQUARE"
+          }
+        ]
+      },
+      {
+        "x": 500.0,
+        "y": 700.0,
+        "itStartSystem": false,
+        "numberOfSubSystems": 1,
+        "theLightOn": true,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      },
+      {
+        "x": 700.0,
+        "y":  50.0,
+        "itStartSystem": false,
+        "numberOfSubSystems": 2,
+        "theLightOn": false,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "SQUARE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "SQUARE"
           }
         ]
       }
     ],
     "pockets": [
       {
+        "type": "SQUARE",
+        "delay": 1.0,
+        "whichSubSystem": 0
+      },
+      {
         "type": "TRIANGLE",
         "delay": 2.0,
         "whichSubSystem": 1
       },
       {
+        "type": "TRIANGLE",
+        "delay": 15.0,
+        "whichSubSystem": 2
+      },
+      {
         "type": "SQUARE",
-        "delay": 0.7,
-        "whichSubSystem": 0
+        "delay": 1.5,
+        "whichSubSystem": 3
       }
     ]
   }

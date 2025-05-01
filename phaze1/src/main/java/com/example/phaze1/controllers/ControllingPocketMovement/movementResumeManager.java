@@ -72,7 +72,7 @@ public class movementResumeManager {
                     rectangle.setScaleX(2);
                     rectangle.setScaleY(2);
                     LineContainer.getChildren().add(rectangle);
-                    connection.curve.makeMovementOnThis(rectangle , connection);
+                    connection.curve.makeMovementOnThis(rectangle , connection , 6);
                     resume(connection.to.system);
                 }
                 else {

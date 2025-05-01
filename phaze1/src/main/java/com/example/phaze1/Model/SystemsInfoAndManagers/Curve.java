@@ -22,7 +22,7 @@ public class Curve extends Polyline {
         }
         return sum;
     }
-    public void makeMovementOnThis(Pocket pocket , Connection connection){
+    public void makeMovementOnThis(Pocket pocket , Connection connection , double duration) {
         GatePortInfo destination = connection.to;
         TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),destination ,connection);
     }

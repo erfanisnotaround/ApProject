@@ -38,6 +38,7 @@ public class MakingMovements {
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
         ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
+        System.out.println(PossibleChoices.size());
         if (!PossibleChoices.isEmpty()) {
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
             timeline.setCycleCount(1);
@@ -110,7 +111,7 @@ public class MakingMovements {
         Connection connection = exitConnections.get(gate);
         if (connection != null) {
             connection.curve.isItUsed.set(true);
-            connection.curve.makeMovementOnThis(pocket , connection);
+            connection.curve.makeMovementOnThis(pocket , connection , 5);
             resume(pocket, connection);
         }
     }
@@ -118,7 +119,7 @@ public class MakingMovements {
         if (!connection.to.system.isItStartSystem){
             connection.curve.isItUsed.addListener((obs, wasUsed, isNowUsed) -> {
                 if (!isNowUsed) {
-                    pocket.setDelay(0);
+                    pocket.setDelay(0.002);
                     SendAPocket(pocket , connection.to.system);
                 }
             });
