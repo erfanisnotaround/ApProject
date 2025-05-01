@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class MakingMovements {
         Connection connection = exitConnections.get(portInfo.get(subSystem.ExitPort));
         if (connection != null) {
             startSystem.light.setFill(Color.LIGHTBLUE);
-            Port rectangle = connection.from.type.createShape();
+            Pocket rectangle = connection.from.type.createShape();
             rectangle.setScaleX(2);
             rectangle.setScaleY(2);
             LineContainer.getChildren().add(rectangle);

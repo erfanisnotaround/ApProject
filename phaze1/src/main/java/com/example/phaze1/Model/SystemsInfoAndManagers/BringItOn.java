@@ -5,8 +5,8 @@ import com.example.phaze1.Model.levelLoadingStuff.LevelLoader;
 import com.example.phaze1.Model.levelLoadingStuff.SubSystem;
 import com.example.phaze1.Model.levelLoadingStuff.Systems;
 import com.example.phaze1.Model.levelLoadingStuff.level;
+import com.example.phaze1.Model.levelLoadingStuff.pockets;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -20,6 +20,8 @@ public class BringItOn {
     private double lightBar = 30;
     private double distanceOFRight = 8;
     private level currentLevel;
+    private ArrayList<Pocket> Pockets;
+    private ArrayList<pockets> pocketsInformation;
     Pane LineContainer;
     public BringItOn(Pane LineContainer) {
         this.LineContainer = LineContainer;
@@ -29,6 +31,7 @@ public class BringItOn {
         LevelLoader levelLoader = new LevelLoader();
         levelLoader.setLevel(level);
         currentLevel = levelLoader.loadingCurrentLevel();
+        pocketsInformation = currentLevel.getPockets();
         manager = new GateConnectorManager(LineContainer , constants.getWireManager());
         constants.setPortInfo(manager.GateInfo());
         constants.setConnections(manager.getConnections());
@@ -63,6 +66,16 @@ public class BringItOn {
          }
          return newSystem;
     }
+    public void settingPockets() {
+        for (pockets p : pocketsInformation){
+            Pocket newPocket = p.getType().createShape();
+            newPocket.setDelay(p.getDelay());
+            newPocket.setType(p.getType());
+            newPocket.setWhichSubSystem(p.getWhichSubSystem());
+            Pockets.add(newPocket);
+        }
+        constants.setPockets(Pockets);
+    }
     public ViewOfSubSystem makeViewOfSubSystem( SystemView newSystem,Systems system , SubSystem subSystem , int i) {
         ViewOfSubSystem newSubSystem = new ViewOfSubSystem(width - distanceOFRight*2 , lengthOfSubSystems);
         newSubSystem.doesItHaveEnterGate = subSystem.DoesItHaveEnterGate();
@@ -76,12 +89,11 @@ public class BringItOn {
         if (newSubSystem.doesItHavaExitGate){
             newSubSystem.ExitGate = subSystem.getExitGate();
             newSubSystem.ExitGate.setParent(currentSystem);
-            Port port = newSubSystem.ExitGate.createShape();
+            Shape port = newSubSystem.ExitGate.createShape();
             port.setScaleX(2);
             port.setScaleY(2);
             port.setLayoutX(width - distanceOFRight);
             port.setLayoutY(lightBar + i * lengthOfSubSystems + lengthOfSubSystems/2);
-            port.setUserData(newSubSystem.ExitGate);
             newSubSystem.ExitPort = port;
             currentSystem.getChildren().add(port);
             manager.registerExitGate(port ,currentSystem , i , newSubSystem.ExitGate);
@@ -89,7 +101,7 @@ public class BringItOn {
         if (newSubSystem.doesItHaveEnterGate){
             newSubSystem.EnterGate = subSystem.getEnterGate();
             newSubSystem.EnterGate.setParent(currentSystem);
-            Port port = newSubSystem.EnterGate.createShape();
+            Shape port = newSubSystem.EnterGate.createShape();
             port.setScaleX(2);
             port.setScaleY(2);
             port.setLayoutX(distanceOFRight - 5);

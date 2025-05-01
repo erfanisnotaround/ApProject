@@ -33,7 +33,6 @@ public class GateConnectorManager {
         this.lineLayer = lineLayer;
         this.wires     = wires;
     }
-
     public void registerExitGate(Node gate, SystemView system, int subIndex, GateType type) {
         GatePortInfo info = new GatePortInfo(system, subIndex, true, type);
         portInfo.put(gate, info);

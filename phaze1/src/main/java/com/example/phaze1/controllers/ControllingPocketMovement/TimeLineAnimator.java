@@ -1,20 +1,19 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
 
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
-import com.example.phaze1.Model.SystemsInfoAndManagers.Port;
+import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 public class TimeLineAnimator {
 
-    public static void animateAlong(Polyline poly, Port node, Duration duration, GatePortInfo PortInfo) {
+    public static void animateAlong(Polyline poly, Pocket node, Duration duration, GatePortInfo PortInfo) {
         ObservableList<Double> pts = poly.getPoints();
         int N = pts.size() / 2;
         if (N < 2) return;

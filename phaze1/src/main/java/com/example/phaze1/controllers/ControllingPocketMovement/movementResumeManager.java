@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +68,7 @@ public class movementResumeManager {
             if (subsystem.doesItHavaExitGate){
                 Connection connection = exitConnections.get(PortInfo.get(subsystem.ExitPort));
                 if (connection != null) {
-                    Port rectangle = connection.from.type.createShape();
+                    Pocket rectangle = connection.from.type.createShape();
                     rectangle.setScaleX(2);
                     rectangle.setScaleY(2);
                     LineContainer.getChildren().add(rectangle);

@@ -1,8 +1,6 @@
 package com.example.phaze1.Model.SystemsInfoAndManagers;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+
 public enum GateType {
     SQUARE{
         @Override
@@ -16,9 +14,9 @@ public enum GateType {
         }
 
         @Override
-        public Port createShape() {
+        public Pocket createShape() {
             double size = 5.0;
-            Port square = new Port(
+            Pocket square = new Pocket(
                     0.0, 0.0,      // top-left
                     5.0, 0.0,     // top-right
                     5.0, 5.0,    // bottom-right
@@ -39,8 +37,8 @@ public enum GateType {
             this.ParentID = parentID;
         }
         @Override
-        public Port createShape() {
-            Port p = new Port(
+        public Pocket createShape() {
+            Pocket p = new Pocket(
                     5 * 0.5, 0.0,   // top middle
                     5,      5,   // bottom right
                     0.0,       5    // bottom left
@@ -53,6 +51,6 @@ public enum GateType {
     public abstract void setParent(SystemView parent);
     String ParentID;
     public abstract void setParentID(String parentID);
-    public abstract Port createShape();
+    public abstract Pocket createShape();
 
 }
