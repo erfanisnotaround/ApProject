@@ -5,6 +5,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -38,7 +41,6 @@ public class MakingMovements {
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
         ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
-        System.out.println(PossibleChoices.size());
         if (!PossibleChoices.isEmpty()) {
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
             timeline.setCycleCount(1);
@@ -65,6 +67,7 @@ public class MakingMovements {
             }
         }
 
+
     }
     public boolean containsPocket(Pocket pocket , SystemView systemView) {
         for (Pocket p : systemView.capacity) {
@@ -81,25 +84,28 @@ public class MakingMovements {
                 GatePortInfo gp   = portInfo.get(sub.ExitPort);
                 Connection   conn = exitConnections.get(gp);
                 if (conn != null) {
-                    conn.curve.isItUsed.addListener((obs, wasUsed, isNowUsed) -> {
-                        if (!isNowUsed) {
-                            conn.curve.isItUsed.set(trySendFromCapacity(sys , gp));
+                    conn.curve.isItUsed.addListener((obs, was, isNow) -> {
+                        if (!isNow) {
+                            trySendFromCapacity(sys, gp , sub);
+//                            conn.curve.isItUsed.set(res);
                         }
                     });
-                }
-                else {
-                    System.out.println("didi kir shodi2");
                 }
             }
         }
     }
 
-    private boolean trySendFromCapacity(SystemView sys, GatePortInfo gate) {
+
+    private boolean trySendFromCapacity(SystemView sys, GatePortInfo gate , ViewOfSubSystem sub) {
+
         for (int i = 0 ; i < sys.capacity.length; i++) {
+            if (sys.capacity[i] == null){
+                System.out.println("dd" + i);
+            }
             Pocket p = sys.capacity[i];
             if (p!=null && p.getType() == gate.type) {
+                SendAPocket(p , sys);
                 sys.capacity[i] = null;
-                nowWeSendPockets(p , gate);
                 return true;
             }
         }
@@ -107,27 +113,34 @@ public class MakingMovements {
     }
 
 
-    public void nowWeSendPockets(Pocket pocket , GatePortInfo gate) {
+    public void nowWeSendPockets(Pocket pocket, GatePortInfo gate) {
         Connection connection = exitConnections.get(gate);
-        if (connection != null) {
-            connection.curve.isItUsed.set(true);
-            connection.curve.makeMovementOnThis(pocket , connection , 5);
-            resume(pocket, connection);
-        }
+        if (connection == null) return;
+        connection.curve.isItUsed.set(true);
+        connection.curve.makeMovementOnThis(pocket, connection, 5);
+        resume(pocket, connection);
     }
-    public void resume(Pocket pocket , Connection connection) {
-        if (!connection.to.system.isItStartSystem){
-            connection.curve.isItUsed.addListener((obs, wasUsed, isNowUsed) -> {
-                if (!isNowUsed) {
-                    pocket.setDelay(0.002);
-                    SendAPocket(pocket , connection.to.system);
-                }
-            });
-        }
-        else {
+
+    public void resume(Pocket pocket, Connection connection) {
+        if (connection.to.system.isItStartSystem) {
             System.out.println("you win");
+            return;
         }
+        BooleanProperty used = connection.curve.isItUsed;
+        ChangeListener<Boolean> oneShot = new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs,
+                                Boolean wasUsed, Boolean isNowUsed) {
+                if (!isNowUsed) {
+                    used.removeListener(this);
+                    pocket.setDelay(0.002);
+                    SendAPocket(pocket, connection.to.system);
+                }
+            }
+        };
+        used.addListener(oneShot);
     }
+
 
     public ArrayList<ViewOfSubSystem> givingPossibleChoices(SystemView ParentSystem , Pocket pocket){
         ArrayList<ViewOfSubSystem> possibleChoices = new ArrayList<>();
