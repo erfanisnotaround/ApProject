@@ -2,12 +2,14 @@ package com.example.phaze1.controllers.sceneControllers;
 import com.example.phaze1.Model.Agents.mediaAgent;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.ViewOfSubSystem;
+import com.example.phaze1.controllers.ControllingPocketMovement.CollisionsDetection;
 import com.example.phaze1.controllers.ControllingPocketMovement.MakingMovements;
 import com.example.phaze1.Model.SystemsInfoAndManagers.BringItOn;
 import com.example.phaze1.Model.SystemsInfoAndManagers.SystemView;
 import com.example.phaze1.Model.Constants.constants;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    private CollisionsDetection collisionsDetector;
     private ArrayList<SystemView>  systems =  new ArrayList<>();
     @FXML
     private AnchorPane mainPane;
@@ -58,14 +61,18 @@ public class GameSceneController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5) , event -> {
-//            try {
-//                m.goForPocketMovement();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }));
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.play();
+//        collisionsDetector = new CollisionsDetection(constants.getPockets());
+//        PauseTransition pause = new PauseTransition(Duration.millis(1000));
+//        pause.setOnFinished(event -> {
+//            detectCollisions();
+//        });
+//        pause.play();
+    }
+    public void detectCollisions() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {
+            collisionsDetector.checkCollisions();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 }

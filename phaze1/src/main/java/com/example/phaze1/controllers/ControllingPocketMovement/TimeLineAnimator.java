@@ -50,7 +50,7 @@ public class TimeLineAnimator {
             double x0 = pts.get(2 * idx),     y0 = pts.get(2 * idx + 1);
             double x1 = pts.get(2 * (idx+1)), y1 = pts.get(2 * (idx+1) + 1);
 
-            node.setTranslateX(x0 - (node.getDistanceFromTheLine()+2) + (x1 - x0) * localT);
+            node.setTranslateX(x0 - (node.getDistanceFromTheLine()-4) + (x1 - x0) * localT);
             node.setTranslateY(y0 - (node.getDistanceFromTheLine()+3) + (y1 - y0) * localT);
         });
 

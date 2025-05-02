@@ -4,6 +4,11 @@ import javafx.scene.paint.Color;
 public enum GateType {
     SQUARE{
         @Override
+        public double getPocketHp() {
+            return 4;
+        }
+
+        @Override
         public Pocket createShape() {
             double size = 5.0;
             Pocket square = new Pocket(
@@ -18,6 +23,11 @@ public enum GateType {
     },
     TRIANGLE {
         @Override
+        public double getPocketHp() {
+            return 3;
+        }
+
+        @Override
         public Pocket createShape() {
             Pocket p = new Pocket(
                     5 * 0.5, 0.0,   // top middle
@@ -28,7 +38,7 @@ public enum GateType {
             return p;
         }
     };
-
+    public abstract double getPocketHp();
     public abstract Pocket createShape();
 
 }

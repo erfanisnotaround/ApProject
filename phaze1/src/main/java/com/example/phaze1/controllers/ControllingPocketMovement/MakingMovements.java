@@ -2,6 +2,7 @@ package com.example.phaze1.controllers.ControllingPocketMovement;
 import com.example.phaze1.Model.SystemsInfoAndManagers.*;
 import com.example.phaze1.Model.Constants.constants;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class MakingMovements {
+    private CollisionsDetection collisionsDetector;
     Pane LineContainer;
     ArrayList<Pocket> Pockets = constants.getPockets();
     Map<Node, GatePortInfo> portInfo;
@@ -29,6 +31,7 @@ public class MakingMovements {
     public MakingMovements(Pane LineContainer , ArrayList<SystemView> systemViews) {
         this.LineContainer = LineContainer;
         this.systemViews = systemViews;
+        collisionsDetector = new CollisionsDetection(Pockets);
     }
     public void goForPocketMovement() throws IOException {
         portInfo = constants.getPortInfo();
@@ -38,6 +41,14 @@ public class MakingMovements {
         for (Pocket pocket : Pockets) {
             SendAPocket(pocket , startSystem);
         }
+
+    }
+    public void detectCollisions() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {
+            collisionsDetector.checkCollisions();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
@@ -46,6 +57,7 @@ public class MakingMovements {
         timeline.setOnFinished(event -> {
             ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
             if (!PossibleChoices.isEmpty()) {
+                pocket.setInTheGame(true);
                 Random rand = new Random();
                 int choiceIndex = rand.nextInt(PossibleChoices.size());
                 ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
@@ -89,7 +101,6 @@ public class MakingMovements {
                     conn.curve.isItUsed.addListener((obs, was, isNow) -> {
                         if (!isNow) {
                             trySendFromCapacity(sys, gp , sub);
-//                            conn.curve.isItUsed.set(res);
                         }
                     });
                 }
@@ -98,7 +109,7 @@ public class MakingMovements {
     }
 
 
-    private boolean trySendFromCapacity(SystemView sys, GatePortInfo gate , ViewOfSubSystem sub) {
+    private void trySendFromCapacity(SystemView sys, GatePortInfo gate , ViewOfSubSystem sub) {
 
         for (int i = 0 ; i < sys.capacity.length; i++) {
             if (sys.capacity[i] == null){
@@ -108,14 +119,18 @@ public class MakingMovements {
             if (p!=null && p.getType() == gate.type) {
                 SendAPocket(p , sys);
                 sys.capacity[i] = null;
-                return true;
+                return;
             }
         }
-        return false;
     }
 
 
     public void nowWeSendPockets(Pocket pocket, GatePortInfo gate) {
+        PauseTransition pause = new PauseTransition(Duration.millis(1000));
+        pause.setOnFinished(event -> {
+            detectCollisions();
+        });
+        pause.play();
         Connection connection = exitConnections.get(gate);
         if (connection == null) return;
         connection.curve.isItUsed.set(true);

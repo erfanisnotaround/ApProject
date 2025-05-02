@@ -26,8 +26,8 @@
         ]
       },
       {
-        "x": 300.0,
-        "y": 100.0,
+        "x": 900.0,
+        "y": 50.0,
         "itStartSystem": false,
         "numberOfSubSystems": 2,
         "theLightOn": false,
@@ -42,7 +42,7 @@
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
-            "exitGate": "SQUARE"
+            "exitGate": "TRIANGLE"
           }
         ]
       },
@@ -78,7 +78,7 @@
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
             "enterGate": "TRIANGLE",
-            "exitGate": "SQUARE"
+            "exitGate": "TRIANGLE"
           }
         ]
       }
@@ -91,12 +91,12 @@
       },
       {
         "type": "TRIANGLE",
-        "delay": 2.0,
+        "delay": 1.0,
         "whichSubSystem": 1
       },
       {
         "type": "TRIANGLE",
-        "delay": 5.0,
+        "delay": 1.0,
         "whichSubSystem": 2
       },
       {
