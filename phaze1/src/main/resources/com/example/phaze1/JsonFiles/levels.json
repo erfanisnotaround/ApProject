@@ -71,7 +71,7 @@
           {
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
-            "enterGate": "SQUARE",
+            "enterGate": "TRIANGLE" ,
             "exitGate": "TRIANGLE"
           },
           {
@@ -96,7 +96,7 @@
       },
       {
         "type": "TRIANGLE",
-        "delay": 9.0,
+        "delay": 5.0,
         "whichSubSystem": 2
       },
       {

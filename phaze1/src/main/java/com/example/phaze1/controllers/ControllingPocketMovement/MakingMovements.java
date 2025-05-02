@@ -34,38 +34,40 @@ public class MakingMovements {
         portInfo = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
         startSystem = getStartSystem(systemViews);
+        initCurveListeners();
         for (Pocket pocket : Pockets) {
             SendAPocket(pocket , startSystem);
         }
-        initCurveListeners();
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
-        ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
-        if (!PossibleChoices.isEmpty()) {
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
-            timeline.setCycleCount(1);
-            timeline.play();
-            timeline.setOnFinished(event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
+        timeline.setCycleCount(1);
+        timeline.play();
+        timeline.setOnFinished(event -> {
+            ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
+            if (!PossibleChoices.isEmpty()) {
                 Random rand = new Random();
                 int choiceIndex = rand.nextInt(PossibleChoices.size());
                 ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
                 GatePortInfo ChoiceGate = portInfo.get(FinalChoice.ExitPort);
                 nowWeSendPockets(pocket , ChoiceGate);
-            });
-        } else {
-            int emptyIndex = -1;
-            for (int i = 0; i < systemView.capacity.length; i++) {
-                if (systemView.capacity[i] == null && !containsPocket(pocket , systemView)) {
-                    emptyIndex = i;
-                    break;
+            } else {
+                pocket.setDelay(0.002);
+                int emptyIndex = -1;
+                for (int i = 0; i < systemView.capacity.length; i++) {
+                    if (systemView.capacity[i] == null && !containsPocket(pocket , systemView)) {
+                        emptyIndex = i;
+                        break;
+                    }
+                }
+                if (emptyIndex != -1) {
+                    systemView.capacity[emptyIndex] = pocket;
+                } else {
+                    System.out.println("didi kir shodi");
                 }
             }
-            if (emptyIndex != -1) {
-                systemView.capacity[emptyIndex] = pocket;
-            } else {
-                System.out.println("didi kir shodi");
-            }
-        }
+
+        });
 
 
     }
