@@ -8,6 +8,7 @@ import com.example.phaze1.Model.SystemsInfoAndManagers.BringItOn;
 import com.example.phaze1.Model.SystemsInfoAndManagers.SystemView;
 import com.example.phaze1.Model.Constants.constants;
 
+import com.example.phaze1.controllers.ControllingPocketMovement.PocketLoss;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
@@ -61,12 +62,8 @@ public class GameSceneController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-//        collisionsDetector = new CollisionsDetection(constants.getPockets());
-//        PauseTransition pause = new PauseTransition(Duration.millis(1000));
-//        pause.setOnFinished(event -> {
-//            detectCollisions();
-//        });
-//        pause.play();
+        PocketLoss tt = new PocketLoss(LinePane);
+        tt.removeWastedPockets();
     }
     public void detectCollisions() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {

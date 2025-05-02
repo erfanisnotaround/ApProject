@@ -112,11 +112,14 @@ public class GateConnectorManager {
             if (cen.distance(scenePt) < 10) {
                 GatePortInfo toInfo = portInfo.get(gate);
                 if (fromInfo.type == toInfo.type && wires.canUse(finalLen)) {
+                    Node enterGate = gate;
                     Connection newConnection = new Connection(fromInfo, toInfo, currentCurve);
                     wires.addWire(finalLen);
                     currentCurve.setStroke(Color.GREEN);
                     exitConnections.put(portInfo.get(startGate),newConnection );
                     connections.add(newConnection);
+                    enterGates.remove(enterGate);
+                    exitGates.remove(startGate);
                 } else {
                     lineLayer.getChildren().remove(currentCurve);
                 }

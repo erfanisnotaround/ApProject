@@ -47,12 +47,18 @@
         ]
       },
       {
-        "x": 500.0,
-        "y": 700.0,
+        "x": 1200.0,
+        "y": 50.0,
         "itStartSystem": false,
-        "numberOfSubSystems": 1,
+        "numberOfSubSystems": 2,
         "theLightOn": true,
         "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          },
           {
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,

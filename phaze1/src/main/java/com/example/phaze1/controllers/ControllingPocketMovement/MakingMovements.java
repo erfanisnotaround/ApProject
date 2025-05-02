@@ -112,9 +112,6 @@ public class MakingMovements {
     private void trySendFromCapacity(SystemView sys, GatePortInfo gate , ViewOfSubSystem sub) {
 
         for (int i = 0 ; i < sys.capacity.length; i++) {
-            if (sys.capacity[i] == null){
-                System.out.println("dd" + i);
-            }
             Pocket p = sys.capacity[i];
             if (p!=null && p.getType() == gate.type) {
                 SendAPocket(p , sys);

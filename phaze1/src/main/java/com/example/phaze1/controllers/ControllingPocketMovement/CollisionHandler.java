@@ -17,7 +17,7 @@ public class CollisionHandler {
 
         secondPocket.setHP(secondPocket.getHP() - 1);
         secondPocket.setDistanceFromTheLine(secondPocket.getDistanceFromTheLine() + secondPocket.getMaxDistanceFromTheLine()/secondPocket.getMaxHP());
-        System.out.println(firstPocket.getDistanceFromTheLine() + " " + secondPocket.getDistanceFromTheLine());
+        System.out.println(firstPocket.getHP() + " " + secondPocket.getHP());
         SpreadWave(firstPocket, secondPocket);
     }
     public void SpreadWave(Pocket firstPocket, Pocket secondPocket) {
