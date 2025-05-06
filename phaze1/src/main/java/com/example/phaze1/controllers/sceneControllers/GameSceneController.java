@@ -9,6 +9,7 @@ import com.example.phaze1.Model.SystemsInfoAndManagers.SystemView;
 import com.example.phaze1.Model.Constants.constants;
 
 import com.example.phaze1.controllers.ControllingPocketMovement.PocketLoss;
+import com.example.phaze1.controllers.ControllingPocketMovement.TemporalProgressManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
@@ -16,6 +17,8 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -30,8 +33,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    TemporalProgressManager temporalProgressManager;
     private CollisionsDetection collisionsDetector;
     private ArrayList<SystemView>  systems =  new ArrayList<>();
+    @FXML
+    private Slider PrograssSlider;
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -57,13 +63,21 @@ public class GameSceneController implements Initializable {
         MakingMovements m = new MakingMovements(LinePane , systems);
         startButton.setOnAction(event -> {
             try {
-                m.goForPocketMovement();
+                m.goForPocketMovement(1 , constants.getAvailableTime());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
         PocketLoss tt = new PocketLoss(LinePane);
         tt.removeWastedPockets();
+        temporalProgressManager = new TemporalProgressManager(m);
+        PrograssSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                temporalProgressManager.basicsOfSending( 100, newValue.doubleValue());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
     public void detectCollisions() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {

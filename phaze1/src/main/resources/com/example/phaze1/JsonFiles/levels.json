@@ -48,7 +48,7 @@
       },
       {
         "x": 1200.0,
-        "y": 50.0,
+        "y": 800.0,
         "itStartSystem": false,
         "numberOfSubSystems": 2,
         "theLightOn": true,

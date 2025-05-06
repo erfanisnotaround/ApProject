@@ -109,7 +109,7 @@ public class GateConnectorManager {
         for (Node gate : enterGates) {
             Bounds eb = gate.getBoundsInLocal();
             Point2D cen = gate.localToScene(eb.getWidth()/2, eb.getHeight()/2);
-            if (cen.distance(scenePt) < 10) {
+            if (cen.distance(scenePt) < 5) {
                 GatePortInfo toInfo = portInfo.get(gate);
                 if (fromInfo.type == toInfo.type && wires.canUse(finalLen)) {
                     Node enterGate = gate;

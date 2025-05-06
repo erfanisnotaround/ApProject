@@ -14,7 +14,7 @@ import javafx.util.Duration;
 
 public class TimeLineAnimator {
 
-    public static void animateAlong(Polyline poly, Pocket node, Duration duration, GatePortInfo PortInfo , Connection connection) {
+    public static void animateAlong(Polyline poly, Pocket node, Duration duration, GatePortInfo PortInfo , Connection connection , double realDuration) {
         ObservableList<Double> pts = poly.getPoints();
         int N = pts.size() / 2;
         if (N < 2) return;
@@ -58,10 +58,23 @@ public class TimeLineAnimator {
                 new KeyFrame(Duration.ZERO,   new KeyValue(t, 0)),
                 new KeyFrame(duration,        new KeyValue(t, 1))
         );
+        node.availableTimeProperty().addListener((obs, old, frac) -> {
+            if (frac.doubleValue() <= 0) {
+                tl.stop();
+            }
+        });
+        Timeline reducingAvailableTime = new Timeline(new KeyFrame(Duration.millis(1) , actionEvent -> {
+            node.setAvailableTime(node.getAvailableTime() - 0.001 * node.getSpeed());
+
+        }));
+        reducingAvailableTime.setCycleCount(Timeline.INDEFINITE);
         tl.setOnFinished(event -> {
+            reducingAvailableTime.stop();
             connection.curve.isItUsed.set(false);
+            node.setAvailableTime(node.getAvailableTime()-5);
         });
         tl.setCycleCount(1);
         tl.play();
+        reducingAvailableTime.play();
     }
 }

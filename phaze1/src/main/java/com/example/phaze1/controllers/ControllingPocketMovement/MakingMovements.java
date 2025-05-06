@@ -5,18 +5,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -33,18 +29,24 @@ public class MakingMovements {
         this.systemViews = systemViews;
         collisionsDetector = new CollisionsDetection(Pockets);
     }
-    public void goForPocketMovement() throws IOException {
+    public void PocketInitialize(Pocket pocket) {
+        pocket.setHP(pocket.getMaxHP());
+        pocket.setDistanceFromTheLine(pocket.getMaxDistanceFromTheLine());
+    }
+    public void goForPocketMovement(double speed , double availableTime) throws IOException {
         portInfo = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
         startSystem = getStartSystem(systemViews);
         initCurveListeners();
         for (Pocket pocket : Pockets) {
+            pocket.setAvailableTime(availableTime);
+            pocket.setSpeed(speed);
             SendAPocket(pocket , startSystem);
         }
 
     }
     public void detectCollisions() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5) , event -> {
             collisionsDetector.checkCollisions();
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -75,7 +77,7 @@ public class MakingMovements {
                 if (emptyIndex != -1) {
                     systemView.capacity[emptyIndex] = pocket;
                 } else {
-                    System.out.println("didi kir shodi");
+                    System.out.println("");
                 }
             }
 

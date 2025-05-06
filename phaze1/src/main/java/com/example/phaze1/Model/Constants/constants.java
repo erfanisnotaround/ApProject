@@ -20,6 +20,7 @@ public class constants {
     private static Gateee GateConnectorManager;
     private static Map<GatePortInfo, Connection> exitConnections;
     private static WireManager wireManager ;
+    private static double availableTime = 120;
     public static WireManager getWireManager() {
         return wireManager;
     }
@@ -72,5 +73,13 @@ public class constants {
 
     public static void setPockets(ArrayList<Pocket> pockets) {
         Pockets = pockets;
+    }
+
+    public static double getAvailableTime() {
+        return availableTime;
+    }
+
+    public static void setAvailableTime(double availableTime) {
+        constants.availableTime = availableTime;
     }
 }

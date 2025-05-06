@@ -10,6 +10,8 @@ public class Pocket extends Polygon{
     private int whichSubSystem;
     private double distanceFromTheLine = 0;
     private  double MaxDistanceFromTheLine = 9;
+    private DoubleProperty availableTime = new SimpleDoubleProperty(120);
+    private double speed = 1;
     private DoubleProperty HP = new SimpleDoubleProperty(0);
     private double MaxHP;
     public Pocket(double v, double v1, double v2, double v3, double v4, double v5, double v6, double v7) {
@@ -92,5 +94,25 @@ public class Pocket extends Polygon{
 
     public void setMaxHP(double maxHP) {
         MaxHP = maxHP;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public double getAvailableTime() {
+        return availableTime.get();
+    }
+
+    public DoubleProperty availableTimeProperty() {
+        return availableTime;
+    }
+
+    public void setAvailableTime(double availableTime) {
+        this.availableTime.set(availableTime);
     }
 }

@@ -24,7 +24,7 @@ public class Curve extends Polyline {
     }
     public void makeMovementOnThis(Pocket pocket , Connection connection , double duration) {
         GatePortInfo destination = connection.to;
-        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5),destination ,connection);
+        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5 / pocket.getSpeed()),destination ,connection , 5);
     }
 
 }
