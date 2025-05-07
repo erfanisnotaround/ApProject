@@ -10,7 +10,7 @@ public class Pocket extends Polygon{
     private int whichSubSystem;
     private double distanceFromTheLine = 0;
     private  double MaxDistanceFromTheLine = 9;
-    private DoubleProperty availableTime = new SimpleDoubleProperty(120);
+    private DoubleProperty availableTime = new SimpleDoubleProperty(30);
     private double speed = 1;
     private DoubleProperty HP = new SimpleDoubleProperty(0);
     private double MaxHP;

@@ -53,7 +53,10 @@ public class CollisionsDetection {
         previous.clear();
         previous.addAll(current);
     }
-
+    public void reset() {
+        previous.clear();
+        handler.reset();
+    }
     private boolean preciseIntersect(Pocket a, Pocket b) {
         Shape overlap = Shape.intersect(a, b);
         return overlap.getBoundsInLocal().getWidth() > 0

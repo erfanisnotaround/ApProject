@@ -13,10 +13,12 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
 public class MakingMovements {
+    private Timeline Collisiontimeline;
     private CollisionsDetection collisionsDetector;
     Pane LineContainer;
     ArrayList<Pocket> Pockets = constants.getPockets();
@@ -29,59 +31,66 @@ public class MakingMovements {
         this.systemViews = systemViews;
         collisionsDetector = new CollisionsDetection(Pockets);
     }
-    public void PocketInitialize(Pocket pocket) {
-        pocket.setHP(pocket.getMaxHP());
-        pocket.setDistanceFromTheLine(pocket.getMaxDistanceFromTheLine());
+    public void reset(Map<GatePortInfo, Connection> exitConnections , double availableTime) {
+        for (Pocket p : Pockets) {
+            p.setHP(p.getMaxHP());
+            p.setDistanceFromTheLine(0);
+            p.setInTheGame(false);
+            p.setAvailableTime(availableTime);
+        }
+        if (Collisiontimeline != null) Collisiontimeline.stop();
+        for(SystemView sv : systemViews) {
+            Arrays.fill(sv.capacity , null);
+        }
+        collisionsDetector.reset();
+        for (Connection c : exitConnections.values()) {
+            c.curve.isItUsed.set(false);
+        }
     }
     public void goForPocketMovement(double speed , double availableTime) throws IOException {
         portInfo = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
         startSystem = getStartSystem(systemViews);
         initCurveListeners();
+        reset(exitConnections, availableTime);
         for (Pocket pocket : Pockets) {
-            pocket.setAvailableTime(availableTime);
+            System.out.println(pocket.getAvailableTime());
             pocket.setSpeed(speed);
             SendAPocket(pocket , startSystem);
         }
 
     }
     public void detectCollisions() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5) , event -> {
+         Collisiontimeline = new Timeline(new KeyFrame(Duration.millis(5) , event -> {
             collisionsDetector.checkCollisions();
         }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        Collisiontimeline.setCycleCount(Timeline.INDEFINITE);
+        Collisiontimeline.play();
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
-        timeline.setCycleCount(1);
-        timeline.play();
-        timeline.setOnFinished(event -> {
-            ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
-            if (!PossibleChoices.isEmpty()) {
-                pocket.setInTheGame(true);
-                Random rand = new Random();
-                int choiceIndex = rand.nextInt(PossibleChoices.size());
-                ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
-                GatePortInfo ChoiceGate = portInfo.get(FinalChoice.ExitPort);
-                nowWeSendPockets(pocket , ChoiceGate);
-            } else {
-                pocket.setDelay(0.002);
-                int emptyIndex = -1;
-                for (int i = 0; i < systemView.capacity.length; i++) {
-                    if (systemView.capacity[i] == null && !containsPocket(pocket , systemView)) {
-                        emptyIndex = i;
-                        break;
-                    }
-                }
-                if (emptyIndex != -1) {
-                    systemView.capacity[emptyIndex] = pocket;
-                } else {
-                    System.out.println("");
+        ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
+        if (!PossibleChoices.isEmpty()) {
+            pocket.setInTheGame(true);
+            Random rand = new Random();
+            int choiceIndex = rand.nextInt(PossibleChoices.size());
+            ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
+            GatePortInfo ChoiceGate = portInfo.get(FinalChoice.ExitPort);
+            nowWeSendPockets(pocket , ChoiceGate);
+        } else {
+            pocket.setDelay(0.002);
+            int emptyIndex = -1;
+            for (int i = 0; i < systemView.capacity.length; i++) {
+                if (systemView.capacity[i] == null && !containsPocket(pocket , systemView)) {
+                    emptyIndex = i;
+                    break;
                 }
             }
-
-        });
+            if (emptyIndex != -1) {
+                systemView.capacity[emptyIndex] = pocket;
+            } else {
+                System.out.println("");
+            }
+        }
 
 
     }

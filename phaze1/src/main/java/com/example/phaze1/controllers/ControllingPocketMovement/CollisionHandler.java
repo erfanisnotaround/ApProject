@@ -34,4 +34,10 @@ public class CollisionHandler {
         pocket.setHP(pocket.getHP() - distance/waveRangeEffect);
         pocket.setDistanceFromTheLine(pocket.getDistanceFromTheLine() + distance/waveRangeEffect * pocket.getMaxDistanceFromTheLine());
     }
+    public void reset() {
+        for (Pocket pocket : pockets) {
+            pocket.setHP(pocket.getMaxHP());
+            pocket.setDistanceFromTheLine(0);
+        }
+    }
 }

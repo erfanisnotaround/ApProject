@@ -58,8 +58,8 @@ public class TimeLineAnimator {
                 new KeyFrame(Duration.ZERO,   new KeyValue(t, 0)),
                 new KeyFrame(duration,        new KeyValue(t, 1))
         );
-        node.availableTimeProperty().addListener((obs, old, frac) -> {
-            if (frac.doubleValue() <= 0) {
+        node.availableTimeProperty().addListener((obs, old, newTime) -> {
+            if (newTime.doubleValue() <= 0) {
                 tl.stop();
             }
         });
