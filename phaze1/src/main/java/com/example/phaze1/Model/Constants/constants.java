@@ -5,7 +5,6 @@ import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
 import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
-import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -21,8 +20,7 @@ public class constants {
     private static Gateee GateConnectorManager;
     private static Map<GatePortInfo, Connection> exitConnections;
     private static WireManager wireManager ;
-    private static double availableTime = 120;
-    private Timeline reducingAvailableTime;
+    private static double availableTime = 40;
     public static WireManager getWireManager() {
         return wireManager;
     }
@@ -83,13 +81,5 @@ public class constants {
 
     public static void setAvailableTime(double availableTime) {
         constants.availableTime = availableTime;
-    }
-
-    public Timeline getReducingAvailableTime() {
-        return reducingAvailableTime;
-    }
-
-    public void setReducingAvailableTime(Timeline reducingAvailableTime) {
-        this.reducingAvailableTime = reducingAvailableTime;
     }
 }

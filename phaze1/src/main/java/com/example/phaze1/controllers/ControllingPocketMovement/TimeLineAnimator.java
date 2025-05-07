@@ -58,15 +58,18 @@ public class TimeLineAnimator {
                 new KeyFrame(Duration.ZERO,   new KeyValue(t, 0)),
                 new KeyFrame(duration,        new KeyValue(t, 1))
         );
-        node.availableTimeProperty().addListener((obs, old, newTime) -> {
-            if (newTime.doubleValue() <= 0) {
+
+        Timeline reducingAvailableTime = new Timeline(new KeyFrame(Duration.millis(1) , actionEvent -> {
+            node.setAvailableTime(node.getAvailableTime() - (0.001 * node.getSpeed()));
+
+        }));
+        node.availableTimeProperty().addListener((obs, old, frac) -> {
+            if (frac.doubleValue() <= 0) {
+                System.out.println(node.getAvailableTime() + " hey " );
+                reducingAvailableTime.stop();
                 tl.stop();
             }
         });
-        Timeline reducingAvailableTime = new Timeline(new KeyFrame(Duration.millis(1) , actionEvent -> {
-            node.setAvailableTime(node.getAvailableTime() - 0.001 * node.getSpeed());
-
-        }));
         reducingAvailableTime.setCycleCount(Timeline.INDEFINITE);
         tl.setOnFinished(event -> {
             reducingAvailableTime.stop();
