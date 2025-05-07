@@ -3,6 +3,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.shape.*;
 public class Pocket extends Polygon{
+    private Pocket defaultPocket;
     private boolean inTheGame = false;
     private final double RadiusOFDetection = 40;
     private GateType type;
@@ -114,5 +115,13 @@ public class Pocket extends Polygon{
 
     public void setAvailableTime(double availableTime) {
         this.availableTime.set(availableTime);
+    }
+
+    public Pocket getDefaultPocket() {
+        return defaultPocket;
+    }
+
+    public void setDefaultPocket(Pocket defaultPocket) {
+        this.defaultPocket = defaultPocket;
     }
 }

@@ -3,11 +3,15 @@ package com.example.phaze1.controllers.ControllingPocketMovement;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
+import  com.example.phaze1.Model.Constants.constants;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
@@ -63,11 +67,15 @@ public class TimeLineAnimator {
             node.setAvailableTime(node.getAvailableTime() - (0.001 * node.getSpeed()));
 
         }));
-        node.availableTimeProperty().addListener((obs, old, frac) -> {
-            if (frac.doubleValue() <= 0) {
-                System.out.println(node.getAvailableTime() + " hey " );
-                reducingAvailableTime.stop();
-                tl.stop();
+        node.availableTimeProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                if (t1.doubleValue() <= 0) {
+                    System.out.println(node.getAvailableTime() + " hey " );
+                    reducingAvailableTime.stop();
+                    node.availableTimeProperty().removeListener(this);
+                    tl.stop();
+                }
             }
         });
         reducingAvailableTime.setCycleCount(Timeline.INDEFINITE);
@@ -76,6 +84,8 @@ public class TimeLineAnimator {
             connection.curve.isItUsed.set(false);
             node.setAvailableTime(node.getAvailableTime()-5);
         });
+        constants.addTimeLine(tl);
+        constants.addTimeLine(reducingAvailableTime);
         tl.setCycleCount(1);
         tl.play();
         reducingAvailableTime.play();

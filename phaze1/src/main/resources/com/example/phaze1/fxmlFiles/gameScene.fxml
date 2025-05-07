@@ -8,7 +8,7 @@
    <children>
       <Pane fx:id="LinePane" prefHeight="1019.0" prefWidth="1707.0">
          <children>
-            <Slider fx:id="PrograssSlider" layoutX="43.0" layoutY="967.0" max="30.0" prefHeight="14.0" prefWidth="449.0" />
+            <Slider fx:id="PrograssSlider" layoutX="43.0" layoutY="967.0" max="40.0" prefHeight="14.0" prefWidth="449.0" />
          </children></Pane>
    </children>
 </AnchorPane>

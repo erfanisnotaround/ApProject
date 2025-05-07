@@ -5,6 +5,7 @@ import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
 import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class constants {
+    private static ArrayList<Timeline> timeLines = new ArrayList<>();
     private static ArrayList<Pocket> Pockets;
     private static Map<Node, GatePortInfo> portInfo;
     private static List<Connection> connections;
@@ -81,5 +83,18 @@ public class constants {
 
     public static void setAvailableTime(double availableTime) {
         constants.availableTime = availableTime;
+    }
+
+    public static ArrayList<Timeline> getTimeLines() {
+        return timeLines;
+    }
+    public static void addTimeLine(Timeline timeline) {
+        timeLines.add(timeline);
+    }
+    public static void ClearTimeLines() {
+        timeLines.clear();
+    }
+    public static void setTimeLines(ArrayList<Timeline> timeLines) {
+        constants.timeLines = timeLines;
     }
 }

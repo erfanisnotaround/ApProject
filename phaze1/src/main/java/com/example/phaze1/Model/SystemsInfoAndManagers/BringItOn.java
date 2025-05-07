@@ -76,6 +76,7 @@ public class BringItOn {
             newPocket.setDelay(p.getDelay());
             newPocket.setType(p.getType());
             newPocket.setWhichSubSystem(p.getWhichSubSystem());
+            newPocket.setDefaultPocket(newPocket);
             Pockets.add(newPocket);
             LineContainer.getChildren().add(newPocket);
             newPocket.toFront();

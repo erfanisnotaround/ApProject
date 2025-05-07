@@ -13,10 +13,12 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
 public class MakingMovements {
+    ArrayList<Timeline> timelines = constants.getTimeLines();
     private CollisionsDetection collisionsDetector;
     Pane LineContainer;
     ArrayList<Pocket> Pockets = constants.getPockets();
@@ -29,30 +31,41 @@ public class MakingMovements {
         this.systemViews = systemViews;
         collisionsDetector = new CollisionsDetection(Pockets);
     }
-    public void PocketReset(Pocket pocket , double speed , double availableTime) {
-        pocket.setHP(pocket.getMaxHP());
-        pocket.setDistanceFromTheLine(0);
-        pocket.setAvailableTime(availableTime);
-        pocket.setInTheGame(false);
+    public void terminateAllThings(){
+
+    }
+    public void test(){
+        portInfo = constants.getPortInfo();
+        exitConnections = constants.getExitConnections();
+        initCurveListeners();
+    }
+    public Pocket PocketReset(Pocket pocket , double speed , double availableTime) {
+        pocket = pocket.getDefaultPocket();
         pocket.setSpeed(speed);
-//        pocket.setDelay(1);
+        pocket.setAvailableTime(availableTime);
+        return pocket;
     }
     public void  wholeReset(Map<GatePortInfo , Connection> exitConnections) {
         for (Connection c : exitConnections.values()) {
             c.curve.isItUsed.set(false);
         }
+        for (SystemView sv : systemViews) {
+            Arrays.fill(sv.capacity , null);
+        }
+        for (Timeline timeline : constants.getTimeLines()) {
+            timeline.stop();
+        }
+        constants.getTimeLines().clear();
         collisionsDetector.reset();
     }
     public void goForPocketMovement(double speed , double availableTime) throws IOException {
-        portInfo = constants.getPortInfo();
-        exitConnections = constants.getExitConnections();
         startSystem = getStartSystem(systemViews);
         wholeReset(exitConnections);
-        initCurveListeners();
-        for (Pocket pocket : Pockets) {
-            PocketReset(pocket, speed , availableTime);
-            System.out.println(pocket.getAvailableTime());
-            SendAPocket(pocket , startSystem);
+        for (int i = 0 ; i < Pockets.size() ; i++) {
+            Pockets.set(i , PocketReset(Pockets.get(i), speed , availableTime));
+            Pocket p = Pockets.get(i);
+            System.out.println(p.getAvailableTime());
+            SendAPocket(p , startSystem);
         }
 
     }
@@ -61,12 +74,14 @@ public class MakingMovements {
             collisionsDetector.checkCollisions();
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
+        timelines.add(timeline);
         timeline.play();
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
         timeline.setCycleCount(1);
         timeline.play();
+        timelines.add(timeline);
         timeline.setOnFinished(event -> {
             pocket.setAvailableTime(pocket.getAvailableTime() - pocket.getDelay());
             ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
@@ -137,11 +152,13 @@ public class MakingMovements {
 
 
     public void nowWeSendPockets(Pocket pocket, GatePortInfo gate) {
-        PauseTransition pause = new PauseTransition(Duration.millis(1000));
+        Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000)));
         pause.setOnFinished(event -> {
             detectCollisions();
         });
+        pause.setCycleCount(1);
         pause.play();
+        timelines.add(pause);
         Connection connection = exitConnections.get(gate);
         if (connection == null) return;
         connection.curve.isItUsed.set(true);

@@ -63,6 +63,7 @@ public class GameSceneController implements Initializable {
         MakingMovements m = new MakingMovements(LinePane , systems);
         startButton.setOnAction(event -> {
             try {
+                m.test();
                 m.goForPocketMovement(1 , constants.getAvailableTime());
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -70,7 +71,9 @@ public class GameSceneController implements Initializable {
         });
         PocketLoss tt = new PocketLoss(LinePane);
         tt.removeWastedPockets();
-        temporalProgressManager = new TemporalProgressManager(m);
+        MakingMovements mm = new MakingMovements(LinePane , systems);
+        mm.test();
+        temporalProgressManager = new TemporalProgressManager(mm);
         PrograssSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 temporalProgressManager.basicsOfSending( 100, newValue.doubleValue());
