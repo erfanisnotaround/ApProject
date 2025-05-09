@@ -34,7 +34,7 @@ public enum GateType {
                     5,      5,   // bottom right
                     0.0,       5    // bottom left
             );
-            p.setFill(Color.ORANGERED);
+            p.setFill(Color.DARKORCHID);
             return p;
         }
     };

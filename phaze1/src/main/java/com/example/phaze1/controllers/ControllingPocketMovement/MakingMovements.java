@@ -78,7 +78,11 @@ public class MakingMovements {
         timeline.play();
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(pocket.getDelay())));
+        double delay = pocket.getDelay();
+        if (pocket.getDelay() >=0.1){
+            delay = delay/pocket.getSpeed();
+        }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(delay)));
         timeline.setCycleCount(1);
         timeline.play();
         timelines.add(timeline);

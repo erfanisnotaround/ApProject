@@ -1,4 +1,5 @@
 package com.example.phaze1.controllers.sceneControllers;
+import com.example.phaze1.Model.Agents.PhotoAgent;
 import com.example.phaze1.Model.Agents.mediaAgent;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.ViewOfSubSystem;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -37,6 +39,16 @@ public class GameSceneController implements Initializable {
     private CollisionsDetection collisionsDetector;
     private ArrayList<SystemView>  systems =  new ArrayList<>();
     @FXML
+    private Label LevelShower;
+    @FXML
+    private Label WireLeftShower;
+    @FXML
+    private Label pocketShower;
+    @FXML
+    private Label PocketLossShower ;
+    @FXML
+    private ImageView backGround;
+    @FXML
     private Slider PrograssSlider;
     @FXML
     private AnchorPane mainPane;
@@ -47,7 +59,7 @@ public class GameSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MediaView mediaView = new MediaView();
         mediaAgent player = new mediaAgent("D:/music/11 The Beatles - Yesterday (Remastered 2015).mp3" ,mediaView);
-        player.Play();
+//        player.Play();
         mainPane.getChildren().add(mediaView);
         Button startButton = new Button("Start");
         mainPane.getChildren().add(startButton);
@@ -60,26 +72,36 @@ public class GameSceneController implements Initializable {
         for (SystemView system : systems){
             mainPane.getChildren().add(system);
         }
+        PocketLoss tt = new PocketLoss(LinePane);
+        tt.removeWastedPockets();
+        tt.pocketLossProperty().addListener((observable, oldValue, newValue) -> {
+            PocketLossShower.setText(newValue.toString());
+        });
         MakingMovements m = new MakingMovements(LinePane , systems);
         startButton.setOnAction(event -> {
             try {
+                tt.resetPocketLoss();
                 m.test();
                 m.goForPocketMovement(1 , constants.getAvailableTime());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        PocketLoss tt = new PocketLoss(LinePane);
-        tt.removeWastedPockets();
+
         MakingMovements mm = new MakingMovements(LinePane , systems);
         mm.test();
         temporalProgressManager = new TemporalProgressManager(mm);
         PrograssSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                temporalProgressManager.basicsOfSending( 100, newValue.doubleValue());
+                tt.resetPocketLoss();
+                temporalProgressManager.basicsOfSending( 10, newValue.doubleValue());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        });
+        WireLeftShower.setText(String.valueOf(constants.getWireManager().usedLengthPropertyProperty().get()));
+        constants.getWireManager().usedLengthPropertyProperty().addListener((observable, oldValue, newValue) -> {
+            WireLeftShower.setText(String.valueOf(newValue.intValue())+".0");
         });
     }
     public void detectCollisions() {

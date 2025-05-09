@@ -32,9 +32,10 @@ public class GraphicAgent {
 
     private void switchSceneForState(GameStatus state) {
         String fxml;
+        String StyleSheet = null;
         switch (state) {
             case MENU:      fxml = "/com/example/phaze1/fxmlFiles/menuScreen.fxml"; break;
-            case START_GAME:   fxml = "/com/example/phaze1/fxmlFiles/gameScene.fxml"; break;
+            case START_GAME: fxml = "/com/example/phaze1/fxmlFiles/gameScene.fxml"; break;
             case SETTINGS:    fxml = "/com/example/phaze1/fxmlFiles/settingsScene.fxml"; break;
             case LEVELS: fxml = "/com/example/phaze1/fxmlFiles/LevelsScene.fxml"; break;
             default:        throw new IllegalArgumentException("Unknown state: " + state);
@@ -44,6 +45,9 @@ public class GraphicAgent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             Scene scene = new Scene(root);
+            if (StyleSheet != null) {
+                scene.getStylesheets().add(getClass().getResource(StyleSheet).toExternalForm());
+            }
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

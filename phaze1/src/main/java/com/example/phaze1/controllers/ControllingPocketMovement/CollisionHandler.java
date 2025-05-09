@@ -14,7 +14,6 @@ public class CollisionHandler {
     public void SpreadImpact(Pocket firstPocket, Pocket secondPocket) {
         firstPocket.setHP(firstPocket.getHP() - 1);
         firstPocket.setDistanceFromTheLine(firstPocket.getDistanceFromTheLine() + firstPocket.getMaxDistanceFromTheLine()/firstPocket.getMaxHP());
-
         secondPocket.setHP(secondPocket.getHP() - 1);
         secondPocket.setDistanceFromTheLine(secondPocket.getDistanceFromTheLine() + secondPocket.getMaxDistanceFromTheLine()/secondPocket.getMaxHP());
         System.out.println(firstPocket.getHP() + " " + secondPocket.getHP());

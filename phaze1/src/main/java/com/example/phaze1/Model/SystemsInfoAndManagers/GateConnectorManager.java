@@ -62,7 +62,7 @@ public class GateConnectorManager {
         currentCurve = new Curve();
         currentCurve.setStrokeWidth(3);
         currentCurve.setStroke(Color.BLACK);
-        lineLayer.getChildren().add(currentCurve);
+        lineLayer.getChildren().addFirst(currentCurve);
         e.consume();
     }
 
