@@ -156,7 +156,7 @@ public class MakingMovements {
 
 
     public void nowWeSendPockets(Pocket pocket, GatePortInfo gate) {
-        Timeline pause = new Timeline(new KeyFrame(Duration.millis(1000)));
+        Timeline pause = new Timeline(new KeyFrame(Duration.millis(1)));
         pause.setOnFinished(event -> {
             detectCollisions();
         });

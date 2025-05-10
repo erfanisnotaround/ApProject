@@ -16,6 +16,6 @@ public class ViewOfSubSystem extends Rectangle {
         super(width, height);
         setArcWidth(5);
         setArcHeight(5);
-        setFill(Color.GRAY);
+        setFill(Color.DARKORCHID);
     }
 }

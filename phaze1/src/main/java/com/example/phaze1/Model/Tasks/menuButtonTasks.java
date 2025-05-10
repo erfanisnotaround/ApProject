@@ -3,6 +3,7 @@ package com.example.phaze1.Model.Tasks;
 import com.example.phaze1.Model.Agents.GraphicAgent;
 import com.example.phaze1.Model.Constants.GameStatus;
 import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.controllers.sceneControllers.GameSceneController;
 import com.example.phaze1.controllers.sceneControllers.LevelSceneController;
 import com.example.phaze1.controllers.sceneControllers.SettingsController;
 import javafx.fxml.FXMLLoader;
@@ -16,15 +17,25 @@ public class menuButtonTasks {
     FXMLLoader fxmlLoader;
     GraphicAgent graphicAgent = GraphicAgent.getInstance();
     public void StartButton() throws IOException {
-//        fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
-//        Stage stage = constants.getPrimaryStage();
-//        Parent root = fxmlLoader.load();
-//        GameSceneController gameSceneController = fxmlLoader.getController();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-        graphicAgent.setState(GameStatus.START_GAME);
+        fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
+        Stage stage = constants.getPrimaryStage();
+        Parent root = fxmlLoader.load();
+        GameSceneController gameSceneController = fxmlLoader.getController();
+        gameSceneController.setCurrentLevel(lastLevel());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+//        graphicAgent.setState(GameStatus.START_GAME);
     }
+    public int lastLevel() {
+        for (int i = 0 ; i < constants.getLevels().size(); i++) {
+            if (!constants.getLevels().get(i).isLevelPassed()){
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public void LevelsButton() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/LevelsScene.fxml"));
         Stage stage = constants.getPrimaryStage();

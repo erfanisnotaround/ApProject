@@ -18,9 +18,9 @@ public class SystemView extends Pane {
     public ArrayList<ViewOfSubSystem> SubSystems = new ArrayList<>();
     public SystemView(){
         String style =
-                "-fx-background-color: lightgray;" +
+                "-fx-background-color: #781305;" +
                         " -fx-background-radius: 5;" +
-                        " -fx-border-color: darkgray;" +
+                        " -fx-border-color: #5f0f04;" +
                         " -fx-border-width: 2;" +
                         " -fx-border-radius: 5;";
         setStyle(style);

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class LevelLoader {
-    GameStatus.LevelsManager levelsManager;
+    levelsManager levelsManager;
     static List<level> levels;
     private int level = 0;
     private level currentLevel;
@@ -16,7 +16,7 @@ public class LevelLoader {
     public void setLevel(int level) {this.level = level;}
 
     public level loadingCurrentLevel() throws IOException {
-        levelsManager = new GameStatus.LevelsManager();
+        levelsManager = new levelsManager();
         levels = levelsManager.getLevels();
         currentLevel = levels.get(level);
         WireManager wireManager = new WireManager(currentLevel.getMaxWire());

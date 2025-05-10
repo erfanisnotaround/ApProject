@@ -1,5 +1,6 @@
 package com.example.phaze1.Model.Constants;
-
+import com.example.phaze1.Model.levelLoadingStuff.levelsManager;
+import com.example.phaze1.Model.levelLoadingStuff.level;
 import com.example.phaze1.Model.FormerVersionOSystems.Gateee;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
@@ -9,11 +10,21 @@ import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class constants {
+    private static levelsManager levelManagers;
+    static {
+        try {
+            levelManagers = new levelsManager();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static ArrayList<level> levels = (ArrayList<level>) levelManagers.getLevels();
     private static ArrayList<Timeline> timeLines = new ArrayList<>();
     private static ArrayList<Pocket> Pockets;
     private static Map<Node, GatePortInfo> portInfo;
@@ -23,6 +34,10 @@ public class constants {
     private static Map<GatePortInfo, Connection> exitConnections;
     private static WireManager wireManager ;
     private static double availableTime = 40;
+
+    public constants() throws IOException {
+    }
+
     public static WireManager getWireManager() {
         return wireManager;
     }
@@ -96,5 +111,13 @@ public class constants {
     }
     public static void setTimeLines(ArrayList<Timeline> timeLines) {
         constants.timeLines = timeLines;
+    }
+
+    public static ArrayList<level> getLevels() {
+        return levels;
+    }
+
+    public void setLevels(ArrayList<level> level) {
+        levels = level;
     }
 }

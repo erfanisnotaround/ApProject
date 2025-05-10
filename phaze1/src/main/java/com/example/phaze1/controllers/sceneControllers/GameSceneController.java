@@ -54,7 +54,10 @@ public class GameSceneController implements Initializable {
     private AnchorPane mainPane;
     @FXML
     private Pane LinePane;
-
+    private int currentLevel;
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MediaView mediaView = new MediaView();
@@ -65,7 +68,7 @@ public class GameSceneController implements Initializable {
         mainPane.getChildren().add(startButton);
         BringItOn dd = new BringItOn(LinePane);
         try {
-            systems= dd.makingEachSystems(0);
+            systems= dd.makingEachSystems(currentLevel);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +97,8 @@ public class GameSceneController implements Initializable {
         PrograssSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 tt.resetPocketLoss();
-                temporalProgressManager.basicsOfSending( 10, newValue.doubleValue());
+                temporalProgressManager.basicsOfSending( 50
+                        , newValue.doubleValue());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -111,4 +115,5 @@ public class GameSceneController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
+
 }

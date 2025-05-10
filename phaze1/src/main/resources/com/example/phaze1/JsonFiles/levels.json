@@ -1,6 +1,6 @@
 [
   {
-    "maxWire": 3000.0,
+    "maxWire": 5000.0,
     "numberOfSystems": 4,
     "levelPassed": false,
     "systems": [

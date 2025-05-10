@@ -36,23 +36,7 @@ public enum GameStatus {
     },
     ;
 
-    public static class LevelsManager {
-        private List<level> levels;
-        public LevelsManager() throws IOException {
-            JsonManager jsonManager = new JsonManager("D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze1\\src\\main\\resources\\com\\example\\phaze1\\JsonFiles\\levels.json");
-            levels = jsonManager.readArray(new TypeReference<List<level>>() {});
-        }
-        public List<level> getLevels() {
-            return levels;
-        }
 
-        public  void setLevels(ArrayList<level> levels) {
-            this.levels = levels;
-        }
-        public  void addLevel(level level) {
-            levels.add(level);
-        }
-    }
     public abstract String GetStyleSheets();
 
 }
