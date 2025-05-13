@@ -20,10 +20,10 @@ public class PocketLoss {
         for (Pocket p : pockets) {
             p.HPProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue.doubleValue() == 0.0){
+                    p.setIsLost(true);
                     pockets.remove(p);
                     pocketLost.add(p);
                     pocketLoss.set(pocketLoss.get() + 1);
-                    System.out.println("Pocket lost");
                 }
             });
         }
@@ -31,6 +31,9 @@ public class PocketLoss {
     public void resetPocketLoss() {
         pockets.addAll(pocketLost);
         pocketLoss.set(0);
+        for (Pocket p : pockets) {
+            p.setIsLost(false);
+        }
     }
 
     public int getPocketLoss() {

@@ -1,12 +1,9 @@
 package com.example.phaze1.controllers.sceneControllers;
 import com.example.phaze1.Model.Agents.PhotoAgent;
 import com.example.phaze1.Model.Agents.mediaAgent;
-import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
-import com.example.phaze1.Model.SystemsInfoAndManagers.ViewOfSubSystem;
+import com.example.phaze1.Model.SystemsInfoAndManagers.*;
 import com.example.phaze1.controllers.ControllingPocketMovement.CollisionsDetection;
 import com.example.phaze1.controllers.ControllingPocketMovement.MakingMovements;
-import com.example.phaze1.Model.SystemsInfoAndManagers.BringItOn;
-import com.example.phaze1.Model.SystemsInfoAndManagers.SystemView;
 import com.example.phaze1.Model.Constants.constants;
 
 import com.example.phaze1.controllers.ControllingPocketMovement.PocketLoss;
@@ -21,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -35,6 +34,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    private double timeChosen = 0;
     TemporalProgressManager temporalProgressManager;
     private CollisionsDetection collisionsDetector;
     private ArrayList<SystemView>  systems =  new ArrayList<>();
@@ -43,7 +43,7 @@ public class GameSceneController implements Initializable {
     @FXML
     private Label WireLeftShower;
     @FXML
-    private Label pocketShower;
+    private Label coinsShower;
     @FXML
     private Label PocketLossShower ;
     @FXML
@@ -83,6 +83,7 @@ public class GameSceneController implements Initializable {
         MakingMovements m = new MakingMovements(LinePane , systems);
         startButton.setOnAction(event -> {
             try {
+                coinsShower.setText("0");
                 tt.resetPocketLoss();
                 m.test();
                 m.goForPocketMovement(1 , constants.getAvailableTime());
@@ -95,18 +96,39 @@ public class GameSceneController implements Initializable {
         mm.test();
         temporalProgressManager = new TemporalProgressManager(mm);
         PrograssSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                tt.resetPocketLoss();
-                temporalProgressManager.basicsOfSending( 50
-                        , newValue.doubleValue());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            timeChosen = newValue.doubleValue();
+        });
+        mainPane.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    coinsShower.setText("0");
+                    tt.resetPocketLoss();
+                    temporalProgressManager.basicsOfSending( 50
+                            , timeChosen);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else if (event.getCode() == KeyCode.RIGHT) {
+                PrograssSlider.setValue(PrograssSlider.getValue() + 0.005);
+            }
+            else if (event.getCode() == KeyCode.LEFT) {
+                PrograssSlider.setValue(PrograssSlider.getValue() - 0.005);
             }
         });
         WireLeftShower.setText(String.valueOf(constants.getWireManager().usedLengthPropertyProperty().get()));
         constants.getWireManager().usedLengthPropertyProperty().addListener((observable, oldValue, newValue) -> {
             WireLeftShower.setText(String.valueOf(newValue.intValue())+".0");
         });
+        for (Pocket p : constants.getPockets()){
+            p.coinsProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.intValue()!=0){
+                    int coins = Integer.parseInt(coinsShower.getText());
+                    coins++;
+                    coinsShower.setText(String.valueOf(coins));
+                }
+            });
+        }
     }
     public void detectCollisions() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {

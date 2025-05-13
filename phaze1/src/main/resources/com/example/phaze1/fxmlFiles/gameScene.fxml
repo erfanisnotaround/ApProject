@@ -39,12 +39,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="Lavel4" alignment="CENTER" layoutX="776.0" layoutY="64.0" prefHeight="31.0" prefWidth="231.0" text="NUMBER OF POCKETS :" textFill="RED">
+            <Label fx:id="Lavel4" alignment="CENTER" layoutX="776.0" layoutY="64.0" prefHeight="31.0" prefWidth="231.0" text="Coins :" textFill="RED">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="pocketShower" alignment="CENTER" layoutX="1002.0" layoutY="64.0" prefHeight="31.0" prefWidth="166.0" textFill="RED">
+            <Label fx:id="coinsShower" alignment="CENTER" layoutX="1002.0" layoutY="64.0" prefHeight="31.0" prefWidth="166.0" text="0" textFill="RED">
                <font>
                   <Font size="20.0" />
                </font>

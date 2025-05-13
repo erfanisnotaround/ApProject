@@ -83,6 +83,11 @@ public class TimeLineAnimator {
             reducingAvailableTime.stop();
             connection.curve.isItUsed.set(false);
             node.setAvailableTime(node.getAvailableTime()-5);
+            if (!node.isIsLost()){
+                int coinsAdded = node.getCoins();
+                coinsAdded++;
+                node.setCoins(coinsAdded);
+            }
         });
         constants.addTimeLine(tl);
         constants.addTimeLine(reducingAvailableTime);

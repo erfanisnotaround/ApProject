@@ -40,6 +40,7 @@ public class MakingMovements {
         initCurveListeners();
     }
     public Pocket PocketReset(Pocket pocket , double speed , double availableTime) {
+        pocket.setCoins(0);
         pocket = pocket.getDefaultPocket();
         pocket.setSpeed(speed);
         pocket.setAvailableTime(availableTime);
