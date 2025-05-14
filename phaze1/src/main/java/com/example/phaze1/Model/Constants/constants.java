@@ -7,6 +7,8 @@ import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
 import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
 import javafx.animation.Timeline;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class constants {
+    private static  int numberOfPockets;
     private static levelsManager levelManagers;
     static {
         try {
@@ -24,6 +27,7 @@ public class constants {
             throw new RuntimeException(e);
         }
     }
+    private static BooleanProperty CouldWeUseGameOver = new SimpleBooleanProperty(false);
     private static ArrayList<level> levels = (ArrayList<level>) levelManagers.getLevels();
     private static ArrayList<Timeline> timeLines = new ArrayList<>();
     private static ArrayList<Pocket> Pockets;
@@ -117,7 +121,27 @@ public class constants {
         return levels;
     }
 
+    public static int getNumberOfPockets() {
+        return numberOfPockets;
+    }
+
+    public static void setNumberOfPockets(int numberOfPockets) {
+        constants.numberOfPockets = numberOfPockets;
+    }
+
     public void setLevels(ArrayList<level> level) {
         levels = level;
+    }
+
+    public static boolean isCouldWeUseGameOver() {
+        return CouldWeUseGameOver.get();
+    }
+
+    public static BooleanProperty couldWeUseGameOverProperty() {
+        return CouldWeUseGameOver;
+    }
+
+    public static void setCouldWeUseGameOver(boolean couldWeUseGameOver) {
+        CouldWeUseGameOver.set(couldWeUseGameOver);
     }
 }

@@ -173,8 +173,7 @@ public class MakingMovements {
 
     public void resume(Pocket pocket, Connection connection) {
         if (connection.to.system.isItStartSystem) {
-            System.out.println("you win");
-            return;
+            pocket.isWinningProperty().set(true);
         }
         BooleanProperty used = connection.curve.isItUsed;
         ChangeListener<Boolean> oneShot = new ChangeListener<>() {

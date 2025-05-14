@@ -2,8 +2,10 @@ package com.example.phaze1.Model.SystemsInfoAndManagers;
 import javafx.beans.property.*;
 import javafx.scene.shape.*;
 public class Pocket extends Polygon{
+    private BooleanProperty lastRound = new SimpleBooleanProperty(false);
     private IntegerProperty Coins = new SimpleIntegerProperty(0);
     private BooleanProperty isLost = new SimpleBooleanProperty(false);
+    private BooleanProperty isWinning = new SimpleBooleanProperty(false);
     private Pocket defaultPocket;
     private boolean inTheGame = false;
     private final double RadiusOFDetection = 40;
@@ -148,5 +150,29 @@ public class Pocket extends Polygon{
 
     public void setCoins(int coins) {
         this.Coins.set(coins);
+    }
+
+    public boolean isIsWinning() {
+        return isWinning.get();
+    }
+
+    public BooleanProperty isWinningProperty() {
+        return isWinning;
+    }
+
+    public void setIsWinning(boolean isWinning) {
+        this.isWinning.set(isWinning);
+    }
+
+    public boolean isLastRound() {
+        return lastRound.get();
+    }
+
+    public BooleanProperty lastRoundProperty() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean lastRound) {
+        this.lastRound.set(lastRound);
     }
 }

@@ -87,7 +87,11 @@ public class TimeLineAnimator {
                 int coinsAdded = node.getCoins();
                 coinsAdded++;
                 node.setCoins(coinsAdded);
+                if (node.isLastRound()){
+                    node.setIsWinning(true);
+                }
             }
+
         });
         constants.addTimeLine(tl);
         constants.addTimeLine(reducingAvailableTime);

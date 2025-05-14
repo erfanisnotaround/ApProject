@@ -2,12 +2,9 @@ package com.example.phaze1.controllers.sceneControllers;
 import com.example.phaze1.Model.Agents.PhotoAgent;
 import com.example.phaze1.Model.Agents.mediaAgent;
 import com.example.phaze1.Model.SystemsInfoAndManagers.*;
-import com.example.phaze1.controllers.ControllingPocketMovement.CollisionsDetection;
-import com.example.phaze1.controllers.ControllingPocketMovement.MakingMovements;
+import com.example.phaze1.controllers.ControllingPocketMovement.*;
 import com.example.phaze1.Model.Constants.constants;
 
-import com.example.phaze1.controllers.ControllingPocketMovement.PocketLoss;
-import com.example.phaze1.controllers.ControllingPocketMovement.TemporalProgressManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
@@ -75,6 +72,8 @@ public class GameSceneController implements Initializable {
         for (SystemView system : systems){
             mainPane.getChildren().add(system);
         }
+        WinnerMethod winnerMethod = new WinnerMethod();
+        winnerMethod.ListeningToWinningPockets();
         PocketLoss tt = new PocketLoss(LinePane);
         tt.removeWastedPockets();
         tt.pocketLossProperty().addListener((observable, oldValue, newValue) -> {
@@ -86,6 +85,7 @@ public class GameSceneController implements Initializable {
                 coinsShower.setText("0");
                 tt.resetPocketLoss();
                 m.test();
+                constants.setCouldWeUseGameOver(true);
                 m.goForPocketMovement(1 , constants.getAvailableTime());
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -103,6 +103,7 @@ public class GameSceneController implements Initializable {
                 try {
                     coinsShower.setText("0");
                     tt.resetPocketLoss();
+                    constants.setCouldWeUseGameOver(false);
                     temporalProgressManager.basicsOfSending( 50
                             , timeChosen);
                 } catch (IOException e) {

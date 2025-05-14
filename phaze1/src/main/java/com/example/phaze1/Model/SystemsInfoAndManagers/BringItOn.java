@@ -81,6 +81,7 @@ public class BringItOn {
             LineContainer.getChildren().add(newPocket);
             newPocket.toFront();
         }
+        constants.setNumberOfPockets(pocketsInformation.size());
         constants.setPockets(Pockets);
     }
     public ViewOfSubSystem makeViewOfSubSystem( SystemView newSystem,Systems system , SubSystem subSystem , int i) {

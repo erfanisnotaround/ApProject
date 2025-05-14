@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1019.0" prefWidth="1707.0" styleClass="root-pane" stylesheets="@../CssStyles/level_menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.sceneControllers.LevelSceneController">
+<AnchorPane fx:id="MainPane" prefHeight="1019.0" prefWidth="1707.0" styleClass="root-pane" stylesheets="@../CssStyles/level_menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phaze1.controllers.sceneControllers.LevelSceneController">
     <children>
         <Label alignment="CENTER" prefHeight="87.0" prefWidth="1707.0" styleClass="menu-title" text="Select a Level" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="40">
          <font>
