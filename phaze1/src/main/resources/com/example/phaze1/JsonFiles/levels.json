@@ -91,11 +91,6 @@
     ],
     "pockets": [
       {
-        "type": "SQUARE",
-        "delay": 1.0,
-        "whichSubSystem": 0
-      },
-      {
         "type": "TRIANGLE",
         "delay": 1.0,
         "whichSubSystem": 1
@@ -104,11 +99,6 @@
         "type": "TRIANGLE",
         "delay": 1.0,
         "whichSubSystem": 2
-      },
-      {
-        "type": "SQUARE",
-        "delay": 1.5,
-        "whichSubSystem": 3
       }
     ]
   }

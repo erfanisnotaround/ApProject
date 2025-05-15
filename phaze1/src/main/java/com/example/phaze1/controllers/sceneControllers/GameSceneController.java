@@ -54,6 +54,7 @@ public class GameSceneController implements Initializable {
     private int currentLevel;
     public void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;
+        LevelShower.setText(String.valueOf(currentLevel));
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,7 +87,7 @@ public class GameSceneController implements Initializable {
                 tt.resetPocketLoss();
                 m.test();
                 constants.setCouldWeUseGameOver(true);
-                m.goForPocketMovement(1 , constants.getAvailableTime());
+                m.goForPocketMovement(3 , constants.getAvailableTime());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -1,5 +1,5 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
-
+import com.example.phaze1.controllers.sceneControllers.gameOverSceneManager;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
 import com.example.phaze1.Model.Constants.constants;
 import javafx.animation.KeyFrame;
@@ -9,9 +9,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PocketLoss {
+    private gameOverSceneManager gameOverSceneManager;
     private Timeline losingTimeline;
     private Pane LineContainer;
     private ArrayList<Pocket> pockets = constants.getPockets();
@@ -38,8 +40,14 @@ public class PocketLoss {
         int halfOfPockets = constants.getNumberOfPockets()/ 2;
         losingTimeline = new Timeline(new KeyFrame(Duration.millis(1) , event -> {
             if (pocketLost.size() >= halfOfPockets){
-                System.out.println("you lose");
                 losingTimeline.stop();
+                System.out.println("Loseeeee");
+                gameOverSceneManager = new gameOverSceneManager(pocketLost.size() , constants.getNumberOfPockets() - pocketLost.size() , false);
+                try {
+                    gameOverSceneManager.goToAfterGame();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }));
         losingTimeline.setCycleCount(Timeline.INDEFINITE);

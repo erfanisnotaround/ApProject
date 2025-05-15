@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="1019.0" prefWidth="1707.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="WinOrLose" fitHeight="1019.0" fitWidth="1715.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Images/Win.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
