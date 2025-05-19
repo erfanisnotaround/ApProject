@@ -9,6 +9,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    abilityManager shopManager;
     private double timeChosen = 0;
     TemporalProgressManager temporalProgressManager;
     private CollisionsDetection collisionsDetector;
@@ -87,7 +90,7 @@ public class GameSceneController implements Initializable {
                 tt.resetPocketLoss();
                 m.test();
                 constants.setCouldWeUseGameOver(true);
-                m.goForPocketMovement(3 , constants.getAvailableTime());
+                m.goForPocketMovement(250, constants.getAvailableTime());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -105,8 +108,8 @@ public class GameSceneController implements Initializable {
                     coinsShower.setText("0");
                     tt.resetPocketLoss();
                     constants.setCouldWeUseGameOver(false);
-                    temporalProgressManager.basicsOfSending( 50
-                            , timeChosen);
+                    temporalProgressManager.basicsOfSending( 1500
+                            , (timeChosen/PrograssSlider.getMax()*constants.getAvailableTime()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -124,12 +127,38 @@ public class GameSceneController implements Initializable {
         });
         for (Pocket p : constants.getPockets()){
             p.coinsProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue.intValue()!=0){
+                if (newValue.intValue()>oldValue.intValue()){
                     int coins = Integer.parseInt(coinsShower.getText());
                     coins++;
                     coinsShower.setText(String.valueOf(coins));
                 }
             });
+        }
+        Button shop = new Button("Shop");
+        mainPane.getChildren().add(shop);
+        shop.setLayoutX(800);
+        shopManager = new abilityManager(Integer.parseInt(coinsShower.getText()) , coinsShower , constants.getPockets());
+        mainPane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.O) {
+                shopManager.OpenShop();
+                constants.setStopped(true);
+            }
+        });
+
+        constants.makeEveryPocketNoiseZeroProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue){
+                makeEveryPocketNOiseZero();
+                constants.setMakeEveryPocketNoiseZero(false);
+            }
+        });
+
+
+    }
+    public void makeEveryPocketNOiseZero() {
+        for (Pocket p : constants.getPockets()){
+            if (!p.isIsLost()){
+                p.setHP(p.getMaxHP());
+            }
         }
     }
     public void detectCollisions() {

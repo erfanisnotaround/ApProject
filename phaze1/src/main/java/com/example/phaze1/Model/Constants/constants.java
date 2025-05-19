@@ -9,15 +9,30 @@ import com.example.phaze1.Model.SystemsInfoAndManagers.WireManager;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class constants {
+    private static ArrayList<Timeline> stopTimelines = new ArrayList<>();
+    private static BooleanProperty stopped = new SimpleBooleanProperty(false);
+    static {
+        stopped.addListener((obs, wasStopped, isStopped) -> {
+            for (Timeline tl : stopTimelines) {
+                if (isStopped)   tl.pause();
+                else             tl.play();
+            }
+        });
+    }
+    private static boolean cancellingWaveForTenSeconds = false;
+    private static boolean cancellingCollision = false;
+    private static BooleanProperty makeEveryPocketNoiseZero = new SimpleBooleanProperty(false);
     private static  int numberOfPockets;
     private static levelsManager levelManagers;
     static {
@@ -37,7 +52,7 @@ public class constants {
     private static Gateee GateConnectorManager;
     private static Map<GatePortInfo, Connection> exitConnections;
     private static WireManager wireManager ;
-    private static double availableTime = 40;
+    private static double availableTime = 5000;
 
     public constants() throws IOException {
     }
@@ -127,6 +142,57 @@ public class constants {
 
     public static void setNumberOfPockets(int numberOfPockets) {
         constants.numberOfPockets = numberOfPockets;
+    }
+
+    public static boolean isCancellingWaveForTenSeconds() {
+        return cancellingWaveForTenSeconds;
+    }
+
+    public static void setCancellingWaveForTenSeconds(boolean cancellingWaveForTenSeconds) {
+        constants.cancellingWaveForTenSeconds = cancellingWaveForTenSeconds;
+    }
+
+    public static boolean isCancellingCollision() {
+        return cancellingCollision;
+    }
+
+    public static void setCancellingCollision(boolean cancellingCollision) {
+        constants.cancellingCollision = cancellingCollision;
+    }
+
+    public static boolean isMakeEveryPocketNoiseZero() {
+        return makeEveryPocketNoiseZero.get();
+    }
+
+    public static BooleanProperty makeEveryPocketNoiseZeroProperty() {
+        return makeEveryPocketNoiseZero;
+    }
+
+    public static void setMakeEveryPocketNoiseZero(boolean b) {
+        makeEveryPocketNoiseZero.set(b);
+    }
+
+    public static boolean isStopped() {
+        return stopped.get();
+    }
+
+    public static BooleanProperty stoppedProperty() {
+        return stopped;
+    }
+
+    public static void setStopped(boolean stop) {
+        stopped.set(stop);
+    }
+
+    public static ArrayList<Timeline> getStopTimelines() {
+        return stopTimelines;
+    }
+
+    public static void setStopTimelines(ArrayList<Timeline> stopTimelines) {
+        constants.stopTimelines = stopTimelines;
+    }
+    public static void addStopTimelines(Timeline timeline) {
+        constants.stopTimelines.add(timeline);
     }
 
     public void setLevels(ArrayList<level> level) {

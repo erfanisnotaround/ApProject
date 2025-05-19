@@ -23,6 +23,7 @@ public class WireManager {
 
     public void removeWire(double length) {
         usedLength -= length;
+        usedLengthProperty.set(usedLengthProperty.get() + length);
     }
 
     public double remaining() {

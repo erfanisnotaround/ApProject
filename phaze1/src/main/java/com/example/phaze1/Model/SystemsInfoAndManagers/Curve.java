@@ -9,6 +9,7 @@ import javafx.scene.shape.*;
 import javafx.util.Duration;
 
 public class Curve extends Polyline {
+    public Connection connection;
     public BooleanProperty isItUsed = new SimpleBooleanProperty(false);
     public Color color ;
     public double StrokeWidth;
@@ -24,7 +25,7 @@ public class Curve extends Polyline {
     }
     public void makeMovementOnThis(Pocket pocket , Connection connection , double duration) {
         GatePortInfo destination = connection.to;
-        TimeLineAnimator.animateAlong(this , pocket , Duration.seconds(5 / pocket.getSpeed()),destination ,connection , 5);
+        TimeLineAnimator.animateAlong(this , pocket,destination ,connection);
     }
 
 }

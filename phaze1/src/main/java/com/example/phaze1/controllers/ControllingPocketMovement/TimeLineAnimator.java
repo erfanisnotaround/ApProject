@@ -3,100 +3,116 @@ package com.example.phaze1.controllers.ControllingPocketMovement;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Connection;
 import com.example.phaze1.Model.SystemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
-import  com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.Model.Constants.constants;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 public class TimeLineAnimator {
 
-    public static void animateAlong(Polyline poly, Pocket node, Duration duration, GatePortInfo PortInfo , Connection connection , double realDuration) {
+    /**
+     * @param poly      the curve to follow
+     * @param node      the Pocket
+     * @param portInfo  unused here, but you probably need it downstream
+     * @param connection the Connection (so we can un‐mark it at the end)
+     */
+    public static void animateAlong(Polyline poly,
+                                    Pocket node,
+                                    GatePortInfo portInfo,
+                                    Connection connection)
+    {
         ObservableList<Double> pts = poly.getPoints();
-        int N = pts.size() / 2;
+        int N = pts.size()/2;
         if (N < 2) return;
 
-        double[] segLen = new double[N - 1];
+        double[] segLen = new double[N-1];
         double totalLen = 0;
-        for (int i = 0; i < N - 1; i++) {
-            double x0 = pts.get(2 * i),     y0 = pts.get(2 * i + 1);
-            double x1 = pts.get(2 * (i+1)), y1 = pts.get(2 * (i+1) + 1);
-            double d  = Math.hypot(x1 - x0, y1 - y0);
+        for(int i=0; i<N-1; i++){
+            double x0 = pts.get(2*i),     y0 = pts.get(2*i+1);
+            double x1 = pts.get(2*(i+1)), y1 = pts.get(2*(i+1)+1);
+            double d = Math.hypot(x1-x0, y1-y0);
             segLen[i] = d;
             totalLen += d;
         }
 
-
         DoubleProperty t = new SimpleDoubleProperty(0);
-
         double finalTotalLen = totalLen;
-        t.addListener((obs, old, frac) -> {
+        t.addListener((obs, oldV, frac) -> {
             double target = frac.doubleValue() * finalTotalLen;
             double acc = 0;
-            int   idx = 0;
-
-            while (idx < segLen.length && acc + segLen[idx] < target) {
+            int idx = 0;
+            while(idx < segLen.length && acc + segLen[idx] < target){
                 acc += segLen[idx++];
             }
             if (idx >= segLen.length) {
                 idx = segLen.length - 1;
                 acc = finalTotalLen - segLen[idx];
             }
+            double localT = (target - acc)/segLen[idx];
+            double x0 = pts.get(2*idx),     y0 = pts.get(2*idx+1);
+            double x1 = pts.get(2*(idx+1)), y1 = pts.get(2*(idx+1)+1);
 
-            double localT = (target - acc) / segLen[idx];
-            double x0 = pts.get(2 * idx),     y0 = pts.get(2 * idx + 1);
-            double x1 = pts.get(2 * (idx+1)), y1 = pts.get(2 * (idx+1) + 1);
+            node.setTranslateX(
+                    x0 - (node.getDistanceFromTheLine()-4)
+                            + (x1-x0)*localT
+            );
+            node.setTranslateY(
+                    y0 - (node.getDistanceFromTheLine()+3)
+                            + (y1-y0)*localT
+            );
+        });
+        Duration movementDuration = Duration.seconds(totalLen / node.getSpeed());
 
-            node.setTranslateX(x0 - (node.getDistanceFromTheLine()-4) + (x1 - x0) * localT);
-            node.setTranslateY(y0 - (node.getDistanceFromTheLine()+3) + (y1 - y0) * localT);
+        Timeline mover = new Timeline(
+                new KeyFrame(Duration.ZERO,                new KeyValue(t, 0)),
+                new KeyFrame(movementDuration,            new KeyValue(t, 1))
+        );
+        mover.setCycleCount(1);
+
+        Timeline clock = new Timeline(
+                new KeyFrame(Duration.millis(1), e -> {
+                    node.setAvailableTime(node.getAvailableTime() - (0.001 * node.getSpeed()));
+                })
+        );
+        clock.setCycleCount(Timeline.INDEFINITE);
+
+        node.availableTimeProperty().addListener((obs, oldV, newV) -> {
+            if (newV.doubleValue() <= 0) {
+                mover.stop();
+                clock.stop();
+            }
         });
 
-        Timeline tl = new Timeline(
-                new KeyFrame(Duration.ZERO,   new KeyValue(t, 0)),
-                new KeyFrame(duration,        new KeyValue(t, 1))
+        mover.rateProperty().bind(
+                Bindings.when(constants.stoppedProperty())
+                        .then(0.0)
+                        .otherwise(1.0)
+        );
+        clock.rateProperty().bind(
+                Bindings.when(constants.stoppedProperty())
+                        .then(0.0)
+                        .otherwise(1.0)
         );
 
-        Timeline reducingAvailableTime = new Timeline(new KeyFrame(Duration.millis(1) , actionEvent -> {
-            node.setAvailableTime(node.getAvailableTime() - (0.001 * node.getSpeed()));
-
-        }));
-        node.availableTimeProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                if (t1.doubleValue() <= 0) {
-                    System.out.println(node.getAvailableTime() + " hey " );
-                    reducingAvailableTime.stop();
-                    node.availableTimeProperty().removeListener(this);
-                    tl.stop();
-                }
-            }
-        });
-        reducingAvailableTime.setCycleCount(Timeline.INDEFINITE);
-        tl.setOnFinished(event -> {
-            reducingAvailableTime.stop();
+        mover.setOnFinished(ev -> {
+            clock.stop();
             connection.curve.isItUsed.set(false);
-            node.setAvailableTime(node.getAvailableTime()-5);
-            if (!node.isIsLost()){
-                int coinsAdded = node.getCoins();
-                coinsAdded++;
-                node.setCoins(coinsAdded);
-                if (node.isLastRound()){
-                    node.setIsWinning(true);
-                }
+            node.setAvailableTime(node.getAvailableTime() - 5);
+            if (!node.isIsLost()) {
+                node.setCoins(node.getCoins() + 1);
+                if (node.isLastRound()) node.setIsWinning(true);
             }
-
         });
-        constants.addTimeLine(tl);
-        constants.addTimeLine(reducingAvailableTime);
-        tl.setCycleCount(1);
-        tl.play();
-        reducingAvailableTime.play();
+
+        mover.play();
+        clock.play();
     }
+
 }

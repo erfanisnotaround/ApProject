@@ -1,6 +1,10 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
 
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
+import com.example.phaze1.Model.Constants.constants;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,9 @@ public class CollisionHandler {
         SpreadWave(firstPocket, secondPocket);
     }
     public void SpreadWave(Pocket firstPocket, Pocket secondPocket) {
+        if (constants.isCancellingWaveForTenSeconds()){
+            return;
+        }
         for (Pocket pocket : pockets) {
             if(pocket == firstPocket||pocket == secondPocket) continue;
             double X1 = pocket.getLayoutX() , Y1 = pocket.getLayoutY();

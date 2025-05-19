@@ -1,6 +1,8 @@
 package com.example.phaze1.controllers.ControllingPocketMovement;
 
 import com.example.phaze1.Model.SystemsInfoAndManagers.Pocket;
+import com.example.phaze1.Model.Constants.constants;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.shape.Shape;
@@ -43,7 +45,9 @@ public class CollisionsDetection {
             }
         }
 
-
+        if (constants.isCancellingCollision()){
+            return;
+        }
         for (CollisionPair pair : previous) {
             if (!current.contains(pair)) {
                 handler.SpreadImpact(pair.a, pair.b);

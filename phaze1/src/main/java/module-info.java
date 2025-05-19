@@ -4,6 +4,7 @@ module com.example.phaze1 {
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
     requires javafx.media;
+    requires java.sql;
 
 
 //    opens com.example.phaze1.controllers to javafx.fxml;
