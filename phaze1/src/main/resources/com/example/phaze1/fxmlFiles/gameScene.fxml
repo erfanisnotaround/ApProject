@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="backGround" fitHeight="1019.0" fitWidth="1707.0" pickOnBounds="true">
          <image>
-            <Image url="@../Images/eclipse_femto_blur.png" />
+            <Image url="@../images/eclipse_femto_blur.png" />
          </image>
       </ImageView>
       <Pane fx:id="LinePane" prefHeight="1019.0" prefWidth="1707.0">

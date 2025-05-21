@@ -1,6 +1,6 @@
 package com.example.phaze1.controllers.sceneControllers;
 import com.example.phaze1.controllers.someLevelControlling.levelBringerInLevelScene;
-import com.example.phaze1.Model.SystemsInfoAndManagers.OneLevelInLevelScene;
+import com.example.phaze1.model.systemsInfoAndManagers.OneLevelInLevelScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;

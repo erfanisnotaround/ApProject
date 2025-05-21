@@ -1,16 +1,11 @@
 package com.example.phaze1.controllers.sceneControllers;
-import com.example.phaze1.Model.Agents.PhotoAgent;
-import com.example.phaze1.Model.Agents.mediaAgent;
-import com.example.phaze1.Model.SystemsInfoAndManagers.*;
-import com.example.phaze1.controllers.ControllingPocketMovement.*;
-import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.model.agents.mediaAgent;
+import com.example.phaze1.model.systemsInfoAndManagers.*;
+import com.example.phaze1.controllers.controllingPocketMovement.*;
+import com.example.phaze1.model.constants.constants;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -22,12 +17,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,6 +52,7 @@ public class GameSceneController implements Initializable {
     private int currentLevel;
     public void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;
+        constants.setLevel(currentLevel);
         LevelShower.setText(String.valueOf(currentLevel));
     }
     @Override
@@ -114,6 +107,7 @@ public class GameSceneController implements Initializable {
                 try {
                     coinsShower.setText("0");
                     tt.resetPocketLoss();
+                    m.test();
                     constants.setCouldWeUseGameOver(false);
                     temporalProgressManager.basicsOfSending( 1500
                             , (timeChosen/PrograssSlider.getMax()*constants.getAvailableTime()));
@@ -174,13 +168,6 @@ public class GameSceneController implements Initializable {
                 p.setHP(p.getMaxHP());
             }
         }
-    }
-    public void detectCollisions() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10) , event -> {
-            collisionsDetector.checkCollisions();
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
     }
     public void CheckingSystemsForLight(){
         for (SystemView system : systems){

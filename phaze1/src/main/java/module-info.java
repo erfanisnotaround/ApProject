@@ -9,14 +9,14 @@ module com.example.phaze1 {
 
 //    opens com.example.phaze1.controllers to javafx.fxml;
     opens com.example.phaze1        to javafx.fxml;
-//    opens com.example.phaze1.Model to com.fasterxml.jackson.databind;
+//    opens com.example.phaze1.model to com.fasterxml.jackson.databind;
     exports com.example.phaze1;
-    opens com.example.phaze1.Model.SystemsInfoAndManagers to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.Model.FormerVersionOSystems to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.Model.JSonManager to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.Model.levelLoadingStuff to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.Model.Agents to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.Model.Constants to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.Model.Tasks to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.systemsInfoAndManagers to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.formerVersionOSystems to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.jsonManager to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.levelLoadingStuff to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.agents to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.constants to com.fasterxml.jackson.databind;
+    opens com.example.phaze1.model.tasks to com.fasterxml.jackson.databind;
     opens com.example.phaze1.controllers.sceneControllers to javafx.fxml;
 }

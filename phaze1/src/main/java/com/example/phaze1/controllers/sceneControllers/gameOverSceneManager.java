@@ -1,7 +1,6 @@
 package com.example.phaze1.controllers.sceneControllers;
-import com.example.phaze1.Model.Constants.constants;
+import com.example.phaze1.model.constants.constants;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class gameOverSceneManager {
+    int level;
     int badPockets;
     int goodPockets;
     boolean WinOrLose;
@@ -23,9 +23,8 @@ public class gameOverSceneManager {
         );
         Parent root = Loader.load();
 
-        GameOverScreenController controller = new GameOverScreenController();
+        GameOverScreenController controller = Loader.getController();
         controller.setGoodPocketsAndBadPockets(goodPockets , badPockets , WinOrLose);
-        Loader.setController(controller);
         Scene scene = new Scene(root);
         Stage stage = constants.getPrimaryStage();
         stage.setScene(scene);

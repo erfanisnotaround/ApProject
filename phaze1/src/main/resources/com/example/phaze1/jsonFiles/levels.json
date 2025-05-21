@@ -1,0 +1,105 @@
+[
+  {
+    "maxWire": 6000.0,
+    "numberOfSystems": 4,
+    "levelPassed": false,
+    "systems": [
+      {
+        "x": 100.0,
+        "y":  200.0,
+        "itStartSystem": true,
+        "numberOfSubSystems": 2,
+        "theLightOn": true,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      },
+      {
+        "x": 900.0,
+        "y": 200.0,
+        "itStartSystem": false,
+        "numberOfSubSystems": 2,
+        "theLightOn": false,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      },
+      {
+        "x": 1200.0,
+        "y": 800.0,
+        "itStartSystem": false,
+        "numberOfSubSystems": 2,
+        "theLightOn": true,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      },
+      {
+        "x": 700.0,
+        "y":  200.0,
+        "itStartSystem": false,
+        "numberOfSubSystems": 2,
+        "theLightOn": false,
+        "subSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE" ,
+            "exitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "enterGate": "TRIANGLE",
+            "exitGate": "TRIANGLE"
+          }
+        ]
+      }
+    ],
+    "pockets": [
+      {
+        "type": "TRIANGLE",
+        "delay": 1.0,
+        "whichSubSystem": 1
+      },
+      {
+        "type": "TRIANGLE",
+        "delay": 1.0,
+        "whichSubSystem": 2
+      }
+    ]
+  }
+]

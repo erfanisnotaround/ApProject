@@ -1,8 +1,8 @@
 package com.example.phaze1.controllers.someLevelControlling;
-import com.example.phaze1.Model.SystemsInfoAndManagers.OneLevelInLevelScene;
-import com.example.phaze1.Model.levelLoadingStuff.LevelLoader;
-import com.example.phaze1.Model.Constants.constants;
-import com.example.phaze1.Model.levelLoadingStuff.level;
+import com.example.phaze1.model.systemsInfoAndManagers.OneLevelInLevelScene;
+import com.example.phaze1.model.levelLoadingStuff.LevelLoader;
+import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.levelLoadingStuff.level;
 import com.example.phaze1.controllers.sceneControllers.GameSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
