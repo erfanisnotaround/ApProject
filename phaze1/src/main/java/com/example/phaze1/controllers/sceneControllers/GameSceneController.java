@@ -13,6 +13,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -30,9 +31,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+
     abilityManager shopManager;
     private double timeChosen = 0;
     TemporalProgressManager temporalProgressManager;
@@ -76,6 +79,7 @@ public class GameSceneController implements Initializable {
         for (SystemView system : systems){
             mainPane.getChildren().add(system);
         }
+
         WinnerMethod winnerMethod = new WinnerMethod();
         winnerMethod.ListeningToWinningPockets();
         PocketLoss tt = new PocketLoss(LinePane);
@@ -86,11 +90,14 @@ public class GameSceneController implements Initializable {
         MakingMovements m = new MakingMovements(LinePane , systems);
         startButton.setOnAction(event -> {
             try {
+
                 coinsShower.setText("0");
                 tt.resetPocketLoss();
                 m.test();
                 constants.setCouldWeUseGameOver(true);
-                m.goForPocketMovement(250, constants.getAvailableTime());
+                if (canWeStart()){
+                    m.goForPocketMovement(250, constants.getAvailableTime());
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -153,6 +160,13 @@ public class GameSceneController implements Initializable {
         });
 
 
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
+            CheckingSystemsForLight();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+
     }
     public void makeEveryPocketNOiseZero() {
         for (Pocket p : constants.getPockets()){
@@ -167,6 +181,43 @@ public class GameSceneController implements Initializable {
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+    }
+    public void CheckingSystemsForLight(){
+        for (SystemView system : systems){
+            if (eachSystemCheckLight(system)){
+                system.lightBoolean.set(true);
+            }
+            else {
+                system.lightBoolean.set(false);
+            }
+        }
+    }
+    public boolean eachSystemCheckLight(SystemView system){
+        Map<Node , GatePortInfo> portInfoMap = constants.getPortInfo();
+        Map<GatePortInfo , Connection> connectionMap = constants.getExitConnections();
+        Node ExitGate = null;
+        Node EnterGate = null;
+        for (ViewOfSubSystem subSystem : system.SubSystems){
+            if (subSystem.doesItHavaExitGate){
+                ExitGate = subSystem.ExitPort;
+                if (!connectionMap.containsKey(portInfoMap.get(ExitGate))){
+                    return false;
+                }
+            }
+            if (subSystem.doesItHaveEnterGate){
+                EnterGate = subSystem.EnterPort;
+                if (!connectionMap.containsKey(portInfoMap.get(EnterGate))){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public boolean canWeStart(){
+        for (SystemView system : systems){
+            if (!system.lightBoolean.get())return false;
+        }
+        return true;
     }
 
 }

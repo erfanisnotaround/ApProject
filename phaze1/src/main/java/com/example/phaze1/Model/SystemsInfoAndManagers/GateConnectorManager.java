@@ -144,6 +144,7 @@ public class GateConnectorManager {
                     myCurve.setStroke(Color.GREEN);
 
                     exitConnections.put(fromInfo, conn);
+                    exitConnections.put(toInfo, conn);
                     connections.add(conn);
 
                     myCurve.setOnMouseClicked(evt -> {
