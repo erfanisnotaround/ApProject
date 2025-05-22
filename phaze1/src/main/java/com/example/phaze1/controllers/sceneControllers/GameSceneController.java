@@ -1,5 +1,8 @@
 package com.example.phaze1.controllers.sceneControllers;
+import com.example.phaze1.model.agents.GraphicAgent;
 import com.example.phaze1.model.agents.mediaAgent;
+import com.example.phaze1.model.constants.GameStatus;
+import com.example.phaze1.model.constants.SceneActions;
 import com.example.phaze1.model.systemsInfoAndManagers.*;
 import com.example.phaze1.controllers.controllingPocketMovement.*;
 import com.example.phaze1.model.constants.constants;
@@ -26,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class GameSceneController implements Initializable {
+public class GameSceneController  {
 
     abilityManager shopManager;
     private double timeChosen = 0;
@@ -49,18 +52,19 @@ public class GameSceneController implements Initializable {
     private AnchorPane mainPane;
     @FXML
     private Pane LinePane;
+    @FXML
+    private Pane gamePane;
     private int currentLevel;
     public void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;
         constants.setLevel(currentLevel);
         LevelShower.setText(String.valueOf(currentLevel));
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         MediaView mediaView = new MediaView();
         mediaAgent player = new mediaAgent("D:/music/11 The Beatles - Yesterday (Remastered 2015).mp3" ,mediaView);
-//        player.Play();
-        mainPane.getChildren().add(mediaView);
+        player.setAudioVolume();
+        player.Play();
         Button startButton = new Button("Start");
         mainPane.getChildren().add(startButton);
         BringItOn dd = new BringItOn(LinePane);
@@ -69,13 +73,14 @@ public class GameSceneController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        gamePane.getChildren().clear();
         for (SystemView system : systems){
-            mainPane.getChildren().add(system);
+            gamePane.getChildren().add(system);
         }
-
+        mainPane.getChildren().add(mediaView);
         WinnerMethod winnerMethod = new WinnerMethod();
-        winnerMethod.ListeningToWinningPockets();
-        PocketLoss tt = new PocketLoss(LinePane);
+        winnerMethod.ListeningToWinningPockets(player);
+        PocketLoss tt = new PocketLoss(LinePane , player);
         tt.removeWastedPockets();
         tt.pocketLossProperty().addListener((observable, oldValue, newValue) -> {
             PocketLossShower.setText(newValue.toString());
@@ -103,7 +108,7 @@ public class GameSceneController implements Initializable {
             timeChosen = newValue.doubleValue();
         });
         mainPane.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
+            if (event.getCode() == SceneActions.StartTempo.getKeyCode()) {
                 try {
                     coinsShower.setText("0");
                     tt.resetPocketLoss();
@@ -115,10 +120,10 @@ public class GameSceneController implements Initializable {
                     throw new RuntimeException(e);
                 }
             }
-            else if (event.getCode() == KeyCode.RIGHT) {
+            else if (event.getCode() == SceneActions.MoveSliderToRight.getKeyCode()) {
                 PrograssSlider.setValue(PrograssSlider.getValue() + 0.005);
             }
-            else if (event.getCode() == KeyCode.LEFT) {
+            else if (event.getCode() == SceneActions.MoveSliderToLeft.getKeyCode()) {
                 PrograssSlider.setValue(PrograssSlider.getValue() - 0.005);
             }
         });
@@ -135,12 +140,17 @@ public class GameSceneController implements Initializable {
                 }
             });
         }
-        Button shop = new Button("Shop");
+        Button shop = new Button("Menu");
         mainPane.getChildren().add(shop);
+        shop.setOnAction(event -> {
+            GraphicAgent ff = GraphicAgent.getInstance();
+            ff.switchSceneForState(GameStatus.MENU);
+        });
         shop.setLayoutX(800);
         shopManager = new abilityManager(Integer.parseInt(coinsShower.getText()) , coinsShower , constants.getPockets());
         mainPane.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.O) {
+            if (event.getCode() == SceneActions.OpenShop.getKeyCode()) {
+                player.Stop();
                 shopManager.OpenShop();
                 constants.setStopped(true);
             }
@@ -166,6 +176,7 @@ public class GameSceneController implements Initializable {
         for (Pocket p : constants.getPockets()){
             if (!p.isIsLost()){
                 p.setHP(p.getMaxHP());
+                p.setDistanceFromTheLine(0);
             }
         }
     }

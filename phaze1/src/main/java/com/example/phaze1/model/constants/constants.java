@@ -220,4 +220,7 @@ public class constants {
     public static void setCouldWeUseGameOver(boolean couldWeUseGameOver) {
         CouldWeUseGameOver.set(couldWeUseGameOver);
     }
+    public static void removeStopTimelines(Timeline timeline) {
+        stopTimelines.remove(timeline);
+    }
 }

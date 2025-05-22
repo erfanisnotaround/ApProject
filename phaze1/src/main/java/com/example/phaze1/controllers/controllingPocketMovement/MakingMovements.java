@@ -30,9 +30,7 @@ public class MakingMovements {
         this.systemViews = systemViews;
         collisionsDetector = new CollisionsDetection(Pockets);
     }
-    public void terminateAllThings(){
 
-    }
     public void test(){
         portInfo = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
@@ -89,6 +87,7 @@ public class MakingMovements {
         timeline.setOnFinished(event -> {
             pocket.setAvailableTime(pocket.getAvailableTime() - pocket.getDelay());
             ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
+            ArrayList<ViewOfSubSystem> secondPossibleChoices = secondChoices(systemView , pocket);
             if (!PossibleChoices.isEmpty()) {
                 pocket.setInTheGame(true);
                 Random rand = new Random();
@@ -96,7 +95,16 @@ public class MakingMovements {
                 ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
                 GatePortInfo ChoiceGate = portInfo.get(FinalChoice.ExitPort);
                 nowWeSendPockets(pocket , ChoiceGate);
-            } else {
+            }
+            else if (!secondPossibleChoices.isEmpty()) {
+                pocket.setInTheGame(true);
+                Random rand = new Random();
+                int choiceIndex = rand.nextInt(PossibleChoices.size());
+                ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
+                GatePortInfo ChoiceGate = portInfo.get(FinalChoice.ExitPort);
+                nowWeSendPockets(pocket , ChoiceGate);
+            }
+            else {
                 pocket.setDelay(0.002);
                 int emptyIndex = -1;
                 for (int i = 0; i < systemView.capacity.length; i++) {
@@ -151,6 +159,11 @@ public class MakingMovements {
                 sys.capacity[i] = null;
                 return;
             }
+            else if (p!=null) {
+                SendAPocket(p , sys);
+                sys.capacity[i] = null;
+                return;
+            }
         }
     }
 
@@ -194,6 +207,18 @@ public class MakingMovements {
         ArrayList<ViewOfSubSystem> possibleChoices = new ArrayList<>();
         for (ViewOfSubSystem subSystem : ParentSystem.SubSystems) {
             if (subSystem.doesItHavaExitGate && subSystem.ExitGate == pocket.getType()){
+                Connection connection = exitConnections.get(portInfo.get(subSystem.ExitPort));
+                if (connection!=null&&!connection.curve.isItUsed.get()){
+                    possibleChoices.add(subSystem);
+                }
+            }
+        }
+        return possibleChoices;
+    }
+    public ArrayList<ViewOfSubSystem> secondChoices(SystemView ParentSystem , Pocket pocket){
+        ArrayList<ViewOfSubSystem> possibleChoices = new ArrayList<>();
+        for (ViewOfSubSystem subSystem : ParentSystem.SubSystems) {
+            if (subSystem.doesItHavaExitGate){
                 Connection connection = exitConnections.get(portInfo.get(subSystem.ExitPort));
                 if (connection!=null&&!connection.curve.isItUsed.get()){
                     possibleChoices.add(subSystem);

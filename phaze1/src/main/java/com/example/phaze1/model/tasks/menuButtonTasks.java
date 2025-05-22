@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ public class menuButtonTasks {
         Parent root = fxmlLoader.load();
         GameSceneController gameSceneController = fxmlLoader.getController();
         gameSceneController.setCurrentLevel(lastLevel());
+        gameSceneController.initialize();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -46,9 +48,13 @@ public class menuButtonTasks {
     }
     public void SettingButton() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/settingsScene.fxml"));
-        Stage stage = constants.getPrimaryStage();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setMaxWidth(500);
+        stage.setMaxHeight(500);
         Parent root = fxmlLoader.load();
         SettingsController settingsController = fxmlLoader.getController();
+        settingsController.setStage(stage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -1,4 +1,5 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
+import com.example.phaze1.model.constants.SceneActions;
 import com.example.phaze1.model.constants.constants;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,10 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class shopStage extends Stage {
 
     public shopStage(Label coinsLabel) {
+        initStyle(StageStyle.UNDECORATED);
         initOwner(constants.getPrimaryStage());
         initModality(Modality.NONE);
         setTitle("Shop");
@@ -49,7 +52,7 @@ public class shopStage extends Stage {
 
         Scene scene = new Scene(root, 280, 180);
         scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.C) {
+            if (event.getCode() == SceneActions.CloseShop.getKeyCode()) {
                 close();
                 constants.setStopped(false);
             }

@@ -7,6 +7,7 @@ import javafx.scene.media.MediaView;
 import java.io.File;
 
 public class mediaAgent {
+    private static double volumeLevel = 1.0;
     private String path;
     private final MediaPlayer player;
     public mediaAgent(String path , MediaView mediaView) {
@@ -15,6 +16,18 @@ public class mediaAgent {
         player = new MediaPlayer(media);
         mediaView.setMediaPlayer(player);
     }
+    public void setAudioVolume() {
+        player.setVolume(volumeLevel);
+    }
+    public static double getVolumeLevel() {
+        return volumeLevel;
+    }
+
+    public static void setVolumeLevel(double v) {
+        volumeLevel = v;
+
+    }
+
     public MediaPlayer getMediaPlayer() {
         return player;
     }

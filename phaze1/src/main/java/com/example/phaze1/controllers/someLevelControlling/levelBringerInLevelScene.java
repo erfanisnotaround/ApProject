@@ -33,12 +33,12 @@ public class levelBringerInLevelScene {
                 newButton.setLayoutX(CenterX + distanceFromCenter);
                 newButton.setLayoutY(FirstCenterY + i*distanceOFEachList);
             }
-            setOnAction(newButton);
+            setOnAction(newButton , i);
             buttons.add(newButton);
         }
         return buttons;
     }
-    public void setOnAction(OneLevelInLevelScene button){
+    public void setOnAction(OneLevelInLevelScene button  , int i ){
         LevelLoader levelLoader = new LevelLoader();
         button.setOnAction(event -> {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
@@ -50,7 +50,8 @@ public class levelBringerInLevelScene {
                 throw new RuntimeException(e);
             }
             GameSceneController gameSceneController = fxmlLoader.getController();
-            gameSceneController.setCurrentLevel(button.getLevel());
+            gameSceneController.setCurrentLevel(i);
+            gameSceneController.initialize();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

@@ -8,19 +8,22 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import com.example.phaze1.model.agents.mediaAgent;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class PocketLoss {
+    private mediaAgent agent;
     private gameOverSceneManager gameOverSceneManager;
     private Timeline losingTimeline;
     private Pane LineContainer;
     private ArrayList<Pocket> pockets = constants.getPockets();
     private ArrayList<Pocket> pocketLost = new ArrayList<>();
     private IntegerProperty pocketLoss = new SimpleIntegerProperty(0);
-    public PocketLoss(Pane LineContainer) {
+    public PocketLoss(Pane LineContainer , mediaAgent agent) {
         this.LineContainer = LineContainer;
+        this.agent = agent;
     }
     public void removeWastedPockets() {
         for (Pocket p : pockets) {
@@ -44,6 +47,7 @@ public class PocketLoss {
                 System.out.println("Loseeeee");
                 gameOverSceneManager = new gameOverSceneManager(pocketLost.size() , constants.getNumberOfPockets() - pocketLost.size() , false);
                 try {
+                    agent.Stop();
                     gameOverSceneManager.goToAfterGame();
                 } catch (IOException e) {
                     throw new RuntimeException(e);

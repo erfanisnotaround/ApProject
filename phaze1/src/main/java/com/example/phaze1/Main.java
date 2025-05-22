@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.awt.*;
@@ -26,6 +27,7 @@ public class Main extends Application {
         stage.setTitle("BluePrint hell");
         Image image = photoAgent.gettingImage("src/main/resources/com/example/phaze1/Images/horns.png");
         stage.getIcons().add(image);
+        stage.initStyle(StageStyle.UNDECORATED);
         constants.setPrimaryStage(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/menuScreen.fxml"));
         Parent root = fxmlLoader.load();

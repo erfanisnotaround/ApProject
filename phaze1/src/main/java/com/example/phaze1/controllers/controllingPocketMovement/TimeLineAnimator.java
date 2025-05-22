@@ -82,23 +82,27 @@ public class TimeLineAnimator {
                 clock.stop();
             }
         });
+
+        constants.addStopTimelines(mover);
+        constants.addStopTimelines(clock);
         mover.setOnFinished(ev -> {
+            constants.removeStopTimelines(mover);
+            constants.removeStopTimelines(clock);
             if (node.isLastRound()){
                 System.out.println("we dont do drugs");
             }
             if (!node.isIsLost()) {
                 node.setCoins(node.getCoins() + 1);
-                if (node.isLastRound()) node.setIsWinning(true);
             }
             clock.stop();
             connection.curve.isItUsed.set(false);
             node.setAvailableTime(node.getAvailableTime() - 5);
-
+            if (node.isLastRound()) {
+                node.setIsWinning(true);
+            }
         });
 
 
-        constants.addStopTimelines(mover);
-        constants.addStopTimelines(clock);
 
         mover.play();
         clock.play();

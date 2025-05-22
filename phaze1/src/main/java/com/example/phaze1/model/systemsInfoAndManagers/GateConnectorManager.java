@@ -77,6 +77,7 @@ public class GateConnectorManager {
         if (!exitGates.contains(gate)) return;
         audioAgent.Stop();
         audioAgent.getMediaPlayer().seek(Duration.ZERO);
+        audioAgent.setAudioVolume();
         audioAgent.Play();
         Bounds b = gate.getBoundsInLocal();
         Point2D c = gate.localToScene(b.getWidth()/2, b.getHeight()/2);

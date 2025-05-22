@@ -22,7 +22,6 @@ public class gameOverSceneManager {
                 getClass().getResource("/com/example/phaze1/fxmlFiles/GameOverScene.fxml")
         );
         Parent root = Loader.load();
-
         GameOverScreenController controller = Loader.getController();
         controller.setGoodPocketsAndBadPockets(goodPockets , badPockets , WinOrLose);
         Scene scene = new Scene(root);

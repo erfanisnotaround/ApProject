@@ -6,6 +6,7 @@ import com.example.phaze1.model.levelLoadingStuff.SubSystem;
 import com.example.phaze1.model.levelLoadingStuff.Systems;
 import com.example.phaze1.model.levelLoadingStuff.level;
 import com.example.phaze1.model.levelLoadingStuff.pockets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
@@ -57,6 +58,15 @@ public class BringItOn {
          newSystem.light.setLayoutY(lightBar / 2);
          newSystem.light.isItOn = false;
          newSystem.getChildren().add(newSystem.light);
+         if (system.isItStartSystem()){
+             Label label = new Label("Starter");
+             label.setLayoutX(distanceOFRight + 15 );
+             label.setLayoutY(lightBar / 4 -5);
+             label.setScaleX(0.5);
+             label.setScaleY(0.5);
+             newSystem.light.setLayoutY(lightBar / 2);
+             newSystem.getChildren().add(label);
+         }
          height = system.getNumberOfSubSystems()*lengthOfSubSystems+ lightBar + lightBar/4;
          newSystem.setPrefSize(width, height);
          for (int i = 0 ; i < newSystem.numberOfSubSystems ; i++){
