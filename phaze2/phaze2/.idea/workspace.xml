@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectId" id="2yUzJf42iGr7JlMh0RvebbeEgxD" />
+  <component name="RunManager">
+    <configuration name="Bankai" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.example.phaze2.Main" />
+      <module name="phaze2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+</project>
