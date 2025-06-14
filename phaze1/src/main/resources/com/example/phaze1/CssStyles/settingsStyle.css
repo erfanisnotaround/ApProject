@@ -1,0 +1,73 @@
+/* settingsStyle.css */
+/* A truly horrific, horror-themed stylesheet */
+
+/* Root pane: deep black to charcoal gradient */
+.root {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #000000 0%, #1a1a1a 100%);
+}
+
+/* All labels: blood-red text with a soft red glow (via shadow) */
+.label {
+    -fx-text-fill: #c0392b;
+    -fx-font-size: 16px;
+    -fx-font-family: "Serif";
+    -fx-effect: dropshadow(gaussian, rgba(192,57,43,0.8), 8, 0.5, 0, 0);
+}
+
+/* Slider track: dark, scratched metal look */
+.slider .track {
+    -fx-background-color: #2c3e50;
+    -fx-background-radius: 4;
+    -fx-padding: 2 0 2 0;
+}
+
+/* Slider thumb: dripping blood red */
+.slider .thumb {
+    -fx-background-color: #e74c3c;
+    -fx-background-radius: 50%;
+    -fx-border-color: #c0392b;
+    -fx-border-width: 2;
+    -fx-pref-width: 16;
+    -fx-pref-height: 16;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.6), 4, 0.7, 0, 0);
+}
+
+/* Buttons: dark tombstone grey with red borders */
+.button {
+    -fx-background-color: #34495e;
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 14px;
+    -fx-font-family: "Serif";
+    -fx-background-radius: 6;
+    -fx-border-color: #e74c3c;
+    -fx-border-width: 2;
+    -fx-padding: 8 16 8 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 5, 0.5, 0, 1);
+}
+
+/* Button hover: glow like red embers (via shadow) */
+.button:hover {
+    -fx-background-color: #2c3e50;
+    -fx-border-color: #c0392b;
+    -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.9), 10, 0.5, 0, 0);
+}
+
+/* Button pressed: darker, as if crushed into flesh */
+.button:pressed {
+    -fx-background-color: #2c3e50;
+    -fx-border-color: #922b21;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.9), 8, 0.7, 0, 0);
+}
+
+/* Back button placed in corner: slightly smaller */
+#back {
+    -fx-font-size: 12px;
+    -fx-padding: 4 10 4 10;
+}
+
+/* “Press any key…” state highlight: gold text + subtle drop-shadow */
+.label.prompt {
+    -fx-text-fill: #f1c40f;
+    -fx-font-style: italic;
+    -fx-effect: dropshadow(gaussian, rgba(241,196,15,0.6), 6, 0.4, 0, 0);
+}
