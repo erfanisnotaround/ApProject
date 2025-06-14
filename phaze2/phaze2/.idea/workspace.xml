@@ -1,13 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectId" id="2yV6oyrIDdLjBm6GvEKNnbbmzLg" />
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../demo/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../demo/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../demo/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../demo/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../phaze1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/mediaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/mediaAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/module-info.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="CSS File" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2w5MuuhkwmZOAaSC8g7fTWrWUx3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Run.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Maven.Run.executor": "Run",
+    "Maven.phaze1 [compile].executor": "Run",
+    "Maven.phaze1 [install,--non-recursive].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "phaze2-dev",
+    "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/programming/project of Ap/faz 1/Phazes/phaze2/phaze2",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.phaze1.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\com\example\phaze1\fxmlFiles" />
+      <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\com\example\phaze1" />
+      <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\com.example.phaze1" />
+      <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\com\example\phaze1\view" />
+      <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\view" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Bankai" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="org.example.phaze2.Main" />
+      <option name="MAIN_CLASS_NAME" value="com.example.phaze1.Main" />
       <module name="phaze2" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="" />
+      <created>1745327208908</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745327208908</updated>
+      <workItem from="1745327210230" duration="315000" />
+      <workItem from="1745405878462" duration="21330000" />
+      <workItem from="1745438897505" duration="400000" />
+      <workItem from="1745496791951" duration="3116000" />
+      <workItem from="1745500149674" duration="637000" />
+      <workItem from="1745500797996" duration="570000" />
+      <workItem from="1745501386364" duration="540000" />
+      <workItem from="1745501938865" duration="27000" />
+      <workItem from="1745502528590" duration="34429000" />
+      <workItem from="1745708403070" duration="50010000" />
+      <workItem from="1745994538454" duration="28635000" />
+      <workItem from="1746124652390" duration="16331000" />
+      <workItem from="1746177085394" duration="21767000" />
+      <workItem from="1746267989236" duration="39671000" />
+      <workItem from="1746784206100" duration="22402000" />
+      <workItem from="1746887679582" duration="687000" />
+      <workItem from="1747127042649" duration="25982000" />
+      <workItem from="1747555681309" duration="33782000" />
+      <workItem from="1747870044128" duration="6790000" />
+      <workItem from="1747916102137" duration="706000" />
+      <workItem from="1747916894675" duration="85000" />
+      <workItem from="1747950509535" duration="103000" />
+      <workItem from="1748126080552" duration="3087000" />
+      <workItem from="1748327029602" duration="673000" />
+      <workItem from="1748330027580" duration="696000" />
+      <workItem from="1748331242593" duration="733000" />
+      <workItem from="1749904029727" duration="2010000" />
+      <workItem from="1749907399521" duration="978000" />
+      <workItem from="1749910424222" duration="39000" />
+      <workItem from="1749911034342" duration="4390000" />
+      <workItem from="1749917010855" duration="1036000" />
+      <workItem from="1749918334379" duration="151000" />
+      <workItem from="1749918942639" duration="760000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
