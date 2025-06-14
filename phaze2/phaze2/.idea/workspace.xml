@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d1e6f6eb-12a9-45a1-9570-ed4d804de84a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../phase1_githubLink.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/CssStyles/GameScene.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/CssStyles/level_menu.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/CssStyles/menuStyles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/CssStyles/settingsStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/GameOverScene.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/LevelsScene.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/gameScene.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/menuScreen.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/settingsScene.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/images/Game Over.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/images/Win.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/images/d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/images/eclipse_femto_blur.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/images/horns.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/images/lose.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/levels.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/music/game-bonus-2-294436.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/Abilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/Abilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionPair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/resources/com/example/phaze1/fxmlFiles/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/resources/com/example/phaze1/fxmlFiles/gameScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaFXApplication" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
   <component name="ProjectId" id="2yUzJf42iGr7JlMh0RvebbeEgxD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Bankai.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "phaze1-dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="Bankai" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.phaze2.Main" />
@@ -9,5 +94,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d1e6f6eb-12a9-45a1-9570-ed4d804de84a" name="Changes" comment="" />
+      <created>1749903872171</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749903872171</updated>
+      <workItem from="1749903873278" duration="1637000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
