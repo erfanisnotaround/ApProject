@@ -1,6 +1,6 @@
 package com.example.phaze1.model.systemsInfoAndManagers;
 
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import com.example.phaze1.model.levelLoadingStuff.LevelLoader;
 import com.example.phaze1.model.levelLoadingStuff.SubSystem;
 import com.example.phaze1.model.levelLoadingStuff.Systems;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BringItOn {
+    Constants constants = Constants.getInstance();
     GateConnectorManager manager;
     private final double lengthOfSubSystems = 40;
     private final double width = 100;

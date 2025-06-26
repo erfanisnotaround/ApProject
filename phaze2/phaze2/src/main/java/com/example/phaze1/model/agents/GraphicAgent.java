@@ -1,7 +1,7 @@
 package com.example.phaze1.model.agents;
 
 import com.example.phaze1.model.constants.GameStatus;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class GraphicAgent {
     private static final GraphicAgent instance = new GraphicAgent();
-    private final Stage primaryStage = constants.getPrimaryStage();
+    private final Stage primaryStage = Constants.getInstance().getPrimaryStage();
     private GameStatus currentState;
 
     private GraphicAgent() {}

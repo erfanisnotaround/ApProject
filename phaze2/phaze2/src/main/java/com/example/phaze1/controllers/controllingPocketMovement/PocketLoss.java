@@ -1,7 +1,7 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
 import com.example.phaze1.controllers.sceneControllers.gameOverSceneManager;
 import com.example.phaze1.model.systemsInfoAndManagers.Pocket;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -12,13 +12,15 @@ import com.example.phaze1.model.agents.mediaAgent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PocketLoss {
+    private Constants constants = Constants.getInstance();
     private mediaAgent agent;
     private gameOverSceneManager gameOverSceneManager;
     private Timeline losingTimeline;
     private Pane LineContainer;
-    private ArrayList<Pocket> pockets = constants.getPockets();
+    private List<Pocket> pockets = constants.getPockets();
     private ArrayList<Pocket> pocketLost = new ArrayList<>();
     private IntegerProperty pocketLoss = new SimpleIntegerProperty(0);
     public PocketLoss(Pane LineContainer , mediaAgent agent) {

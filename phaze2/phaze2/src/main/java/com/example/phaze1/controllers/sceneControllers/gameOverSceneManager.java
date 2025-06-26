@@ -1,5 +1,5 @@
 package com.example.phaze1.controllers.sceneControllers;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class gameOverSceneManager {
         GameOverScreenController controller = Loader.getController();
         controller.setGoodPocketsAndBadPockets(goodPockets , badPockets , WinOrLose);
         Scene scene = new Scene(root);
-        Stage stage = constants.getPrimaryStage();
+        Stage stage = Constants.getInstance().getPrimaryStage();
         stage.setScene(scene);
         stage.show();
     }

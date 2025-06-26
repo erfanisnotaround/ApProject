@@ -1,6 +1,6 @@
 package com.example.phaze1.model.formerVersionOSystems;
 
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import com.example.phaze1.model.levelLoadingStuff.LevelLoader;
 import com.example.phaze1.model.levelLoadingStuff.SubSystem;
 import com.example.phaze1.model.levelLoadingStuff.Systems;
@@ -18,8 +18,8 @@ public class bringingLevelToReality {
     Gateee gateConnectorManager;
     public bringingLevelToReality(Pane LineContainer) {
         this.LineContainer = LineContainer;
-        gateConnectorManager = new Gateee(LineContainer , constants.getWireManager());
-        constants.setGateConnectorManager(gateConnectorManager);
+        gateConnectorManager = new Gateee(LineContainer , Constants.getInstance().getWireManager());
+        Constants.getInstance().setGateConnectorManager(gateConnectorManager);
 //        constants.setConnections(gateConnectorManager.getConnection());
     }
 

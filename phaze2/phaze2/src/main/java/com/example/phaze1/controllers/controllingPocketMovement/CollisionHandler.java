@@ -1,11 +1,12 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
 
 import com.example.phaze1.model.systemsInfoAndManagers.Pocket;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 
 import java.util.List;
 
 public class CollisionHandler {
+    Constants constants = Constants.getInstance();
     private double waveRangeEffect = 100;
     List<Pocket> pockets;
     public CollisionHandler(List<Pocket> pockets) {

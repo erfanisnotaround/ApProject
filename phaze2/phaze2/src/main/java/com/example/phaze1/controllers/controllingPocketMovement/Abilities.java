@@ -1,5 +1,5 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
@@ -12,12 +12,12 @@ public enum Abilities {
             coinsNeeded = 3;
             if (coins - coinsNeeded>=0){
                 coinsShower.setText(String.valueOf(coins - coinsNeeded));
-                constants.setCancellingWaveForTenSeconds(true);
+                Constants.getInstance().setCancellingWaveForTenSeconds(true);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10)));
                 timeline.setCycleCount(1);
                 timeline.play();
                 timeline.setOnFinished(e -> {
-                    constants.setCancellingWaveForTenSeconds(false);
+                    Constants.getInstance().setCancellingWaveForTenSeconds(false);
                 });
             }
 
@@ -30,12 +30,12 @@ public enum Abilities {
             coinsNeeded = 4;
             if (coinsHolding - coinsNeeded>=0){
                 coins.setText(String.valueOf(coinsHolding - coinsNeeded));
-                constants.setCancellingCollision(true);
+                Constants.getInstance().setCancellingCollision(true);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
                 timeline.setCycleCount(1);
                 timeline.play();
                 timeline.setOnFinished(e -> {
-                    constants.setCancellingWaveForTenSeconds(false);
+                    Constants.getInstance().setCancellingWaveForTenSeconds(false);
                 });
             }
         }
@@ -48,7 +48,7 @@ public enum Abilities {
             coinsNeeded = 5;
             if (coinsHolding - coinsNeeded>=0){
                 coins.setText(String.valueOf(coinsHolding - coinsNeeded));
-                constants.setMakeEveryPocketNoiseZero(true);
+                Constants.getInstance().setMakeEveryPocketNoiseZero(true);
             }
         }
 

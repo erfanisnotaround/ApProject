@@ -1,12 +1,11 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
 import com.example.phaze1.model.constants.SceneActions;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class shopStage extends Stage {
+    private Constants constants = Constants.getInstance();
 
     public shopStage(Label coinsLabel) {
         initStyle(StageStyle.UNDECORATED);

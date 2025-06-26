@@ -3,7 +3,7 @@ package com.example.phaze1.controllers.controllingPocketMovement;
 import com.example.phaze1.model.systemsInfoAndManagers.Connection;
 import com.example.phaze1.model.systemsInfoAndManagers.GatePortInfo;
 import com.example.phaze1.model.systemsInfoAndManagers.Pocket;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -15,6 +15,7 @@ import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 public class TimeLineAnimator {
+    private static Constants constants = Constants.getInstance();
     public static void animateAlong(Polyline poly,
                                     Pocket node,
                                     GatePortInfo portInfo,

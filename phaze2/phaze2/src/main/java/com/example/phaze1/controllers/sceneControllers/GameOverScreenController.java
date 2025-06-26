@@ -3,7 +3,7 @@ package com.example.phaze1.controllers.sceneControllers;
 import com.example.phaze1.model.agents.GraphicAgent;
 import com.example.phaze1.model.agents.PhotoAgent;
 import com.example.phaze1.model.constants.GameStatus;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,7 +36,7 @@ public class GameOverScreenController implements Initializable {
     private ImageView WinOrLose;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        level = constants.getLevel();
+        level = Constants.getInstance().getLevel();
 
         playAgain.setOnAction(event -> {
             try {
@@ -52,7 +52,7 @@ public class GameOverScreenController implements Initializable {
     }
     public void playAgainAction() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
-        Stage stage = constants.getPrimaryStage();
+        Stage stage = Constants.getInstance().getPrimaryStage();
         Parent root = fxmlLoader.load();
         GameSceneController gameSceneController = fxmlLoader.getController();
         gameSceneController.setCurrentLevel(level);

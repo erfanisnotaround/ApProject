@@ -1,6 +1,6 @@
 package com.example.phaze1;
 import com.example.phaze1.model.agents.PhotoAgent;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import com.example.phaze1.controllers.sceneControllers.menuController;
 import com.example.phaze1.model.tasks.sideTasks;
 import javafx.application.Application;
@@ -28,7 +28,7 @@ public class Main extends Application {
         Image image = photoAgent.gettingImage("src/main/resources/com/example/phaze1/Images/horns.png");
         stage.getIcons().add(image);
         stage.initStyle(StageStyle.UNDECORATED);
-        constants.setPrimaryStage(stage);
+        Constants.getInstance().setPrimaryStage(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/menuScreen.fxml"));
         Parent root = fxmlLoader.load();
         menuController menuController = fxmlLoader.getController();

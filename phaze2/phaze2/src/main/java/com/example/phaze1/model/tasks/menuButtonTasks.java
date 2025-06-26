@@ -1,7 +1,7 @@
 package com.example.phaze1.model.tasks;
 
 import com.example.phaze1.model.agents.GraphicAgent;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import com.example.phaze1.controllers.sceneControllers.GameSceneController;
 import com.example.phaze1.controllers.sceneControllers.LevelSceneController;
 import com.example.phaze1.controllers.sceneControllers.SettingsController;
@@ -13,7 +13,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class menuButtonTasks {
+public class MenuButtonTasks {
+    private Constants constants = Constants.getInstance();
     FXMLLoader fxmlLoader;
     GraphicAgent graphicAgent = GraphicAgent.getInstance();
     public void StartButton() throws IOException {
@@ -29,7 +30,7 @@ public class menuButtonTasks {
 //        graphicAgent.setState(GameStatus.START_GAME);
     }
     public int lastLevel() {
-        for (int i = 0 ; i < constants.getLevels().size(); i++) {
+        for (int i = 0; i < constants.getLevels().size(); i++) {
             if (!constants.getLevels().get(i).isLevelPassed()){
                 return i;
             }

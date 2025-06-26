@@ -1,6 +1,6 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
 import com.example.phaze1.model.systemsInfoAndManagers.*;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -11,16 +11,15 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class MakingMovements {
-    ArrayList<Timeline> timelines = constants.getTimeLines();
+    private Constants constants = Constants.getInstance();
+
+    List<Timeline> timelines = constants.getTimeLines();
     private CollisionsDetection collisionsDetector;
     Pane LineContainer;
-    ArrayList<Pocket> Pockets = constants.getPockets();
+    List<Pocket> Pockets = constants.getPockets();
     Map<Node, GatePortInfo> portInfo;
     Map<GatePortInfo , Connection> exitConnections;
     ArrayList<SystemView> systemViews;
@@ -62,7 +61,6 @@ public class MakingMovements {
         for (int i = 0 ; i < Pockets.size() ; i++) {
             Pockets.set(i , PocketReset(Pockets.get(i), speed , availableTime));
             Pocket p = Pockets.get(i);
-            System.out.println(p.getAvailableTime());
             SendAPocket(p , startSystem);
         }
 
@@ -87,7 +85,7 @@ public class MakingMovements {
         timeline.setOnFinished(event -> {
             pocket.setAvailableTime(pocket.getAvailableTime() - pocket.getDelay());
             ArrayList<ViewOfSubSystem> PossibleChoices = givingPossibleChoices(systemView, pocket);
-            ArrayList<ViewOfSubSystem> secondPossibleChoices = secondChoices(systemView , pocket);
+            ArrayList<ViewOfSubSystem> secondPossibleChoices = secondChoices(systemView);
             if (!PossibleChoices.isEmpty()) {
                 pocket.setInTheGame(true);
                 Random rand = new Random();
@@ -215,7 +213,7 @@ public class MakingMovements {
         }
         return possibleChoices;
     }
-    public ArrayList<ViewOfSubSystem> secondChoices(SystemView ParentSystem , Pocket pocket){
+    public ArrayList<ViewOfSubSystem> secondChoices(SystemView ParentSystem){
         ArrayList<ViewOfSubSystem> possibleChoices = new ArrayList<>();
         for (ViewOfSubSystem subSystem : ParentSystem.SubSystems) {
             if (subSystem.doesItHavaExitGate){

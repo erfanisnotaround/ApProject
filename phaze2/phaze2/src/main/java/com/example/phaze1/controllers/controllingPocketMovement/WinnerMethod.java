@@ -1,21 +1,22 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
 
 import com.example.phaze1.model.systemsInfoAndManagers.Pocket;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import com.example.phaze1.controllers.sceneControllers.gameOverSceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import com.example.phaze1.model.agents.mediaAgent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WinnerMethod {
+    private Constants constants = Constants.getInstance();
     private mediaAgent agent;
     private gameOverSceneManager gameOverSceneManager;
     private Timeline winnerTimeline;
-    private ArrayList<Pocket> pockets = constants.getPockets();
+    private List<Pocket> pockets = constants.getPockets();
     private ArrayList<Pocket> winnerPockets = new ArrayList<>();
     private int numberOfPockets = constants.getNumberOfPockets();
     public void ListeningToWinningPockets(mediaAgent agent) {
@@ -54,7 +55,7 @@ public class WinnerMethod {
         }
         System.out.println("this is game ");
         int badPockets = gettingBadPockets();
-        gameOverSceneManager = new gameOverSceneManager(badPockets,constants.getNumberOfPockets() - badPockets , true);
+        gameOverSceneManager = new gameOverSceneManager(badPockets, constants.getNumberOfPockets() - badPockets , true);
         gameOverSceneManager.goToAfterGame();
     }
     public int gettingBadPockets(){

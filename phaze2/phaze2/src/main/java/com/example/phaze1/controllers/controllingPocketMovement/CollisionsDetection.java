@@ -1,7 +1,7 @@
 package com.example.phaze1.controllers.controllingPocketMovement;
 
 import com.example.phaze1.model.systemsInfoAndManagers.Pocket;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 
 import javafx.scene.shape.Shape;
 
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CollisionsDetection {
+    private Constants constants = Constants.getInstance();
     private CollisionHandler handler ;
     private final List<Pocket> pockets;
     private final double threshold;

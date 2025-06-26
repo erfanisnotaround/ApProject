@@ -1,5 +1,6 @@
 package com.example.phaze1.controllers.sceneControllers;
-import com.example.phaze1.model.tasks.menuButtonTasks;
+import com.example.phaze1.model.MenuModel;
+import com.example.phaze1.model.tasks.MenuButtonTasks;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class menuController implements Initializable {
-    menuButtonTasks menuButtonTasks = new menuButtonTasks();
+    MenuModel menuModel;
     @FXML
     private Button StartButton;
     @FXML
@@ -57,15 +58,15 @@ public class menuController implements Initializable {
         });
     }
     public void StartButtonClicked() throws IOException {
-        menuButtonTasks.StartButton();
+        menuModel.StartButtonClicked();
     }
     public void ExitButtonClicked() throws IOException {
-        menuButtonTasks.ExitButton();
+        menuModel.ExitButtonClicked();
     }
     public void SettingsButtonClicked() throws IOException {
-        menuButtonTasks.SettingButton();
+        menuModel.SettingsButtonClicked();
     }
     public void LevelsButtonClicked() throws IOException {
-        menuButtonTasks.LevelsButton();
+        menuModel.LevelsButtonClicked();
     }
 }

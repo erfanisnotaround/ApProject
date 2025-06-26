@@ -1,4 +1,5 @@
 package com.example.phaze1.model.constants;
+
 import com.example.phaze1.model.levelLoadingStuff.levelsManager;
 import com.example.phaze1.model.levelLoadingStuff.level;
 import com.example.phaze1.model.formerVersionOSystems.Gateee;
@@ -14,213 +15,240 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class constants {
-    private static int level = 0;
-    private static ArrayList<Timeline> stopTimelines = new ArrayList<>();
-    private static BooleanProperty stopped = new SimpleBooleanProperty(false);
-    static {
-        stopped.addListener((obs, wasStopped, isStopped) -> {
-            for (Timeline tl : stopTimelines) {
-                if (isStopped)   tl.pause();
-                else             tl.play();
-            }
-        });
-    }
-    private static boolean cancellingWaveForTenSeconds = false;
-    private static boolean cancellingCollision = false;
-    private static BooleanProperty makeEveryPocketNoiseZero = new SimpleBooleanProperty(false);
-    private static  int numberOfPockets;
-    private static levelsManager levelManagers;
+
+public final class Constants {
+
+    private static final Constants INSTANCE;
+
     static {
         try {
-            levelManagers = new levelsManager();
+            INSTANCE = new Constants();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    private static BooleanProperty CouldWeUseGameOver = new SimpleBooleanProperty(false);
-    private static ArrayList<level> levels = (ArrayList<level>) levelManagers.getLevels();
-    private static ArrayList<Timeline> timeLines = new ArrayList<>();
-    private static ArrayList<Pocket> Pockets;
-    private static Map<Node, GatePortInfo> portInfo;
-    private static List<Connection> connections;
-    private static Stage PrimaryStage;
-    private static Gateee GateConnectorManager;
-    private static Map<GatePortInfo, Connection> exitConnections;
-    private static WireManager wireManager ;
-    private static double availableTime = 5000;
 
-    public constants() throws IOException {
+    private  int level = 0;
+    private  List<Timeline> stopTimelines = new ArrayList<>();
+    private  BooleanProperty stopped = new SimpleBooleanProperty(false);
+    private  boolean cancellingWaveForTenSeconds = false;
+    private  boolean cancellingCollision = false;
+    private  BooleanProperty makeEveryPocketNoiseZero = new SimpleBooleanProperty(false);
+    private   int numberOfPockets;
+    private  levelsManager levelManagers = new levelsManager();
+    private  BooleanProperty CouldWeUseGameOver = new SimpleBooleanProperty(false);
+    private  List<level> levels = (ArrayList<level>) levelManagers.getLevels();
+    private  List<Timeline> timeLines = new ArrayList<>();
+    private  List<Pocket> pockets;
+    private  Map<Node, GatePortInfo> portInfo;
+    private  List<Connection> connections;
+    private  Stage primaryStage;
+    private  Gateee gateConnectorManager;
+    private  Map<GatePortInfo, Connection> exitConnections;
+    private  WireManager wireManager;
+    private  double availableTime = 5000;
+
+
+    private Constants() throws IOException {
+        stopped.addListener((obs, wasStopped, isStopped) -> {
+            synchronized (stopTimelines) {
+                for (Timeline tl : stopTimelines) {
+                    if (isStopped) tl.pause();
+                    else tl.play();
+                }
+            }
+        });
+
+
+        try {
+            this.levelManagers = new levelsManager();
+            this.levels = (ArrayList<level>) levelManagers.getLevels();
+        } catch (IOException e) {
+
+            throw new RuntimeException("Failed to initialize levelsManager", e);
+        }
     }
 
-    public static WireManager getWireManager() {
+    public static Constants getInstance() {
+        return INSTANCE;
+    }
+
+
+
+    public WireManager getWireManager() {
         return wireManager;
     }
-    public static void setWireManager(WireManager wireManage) {
-        wireManager = wireManage;
 
-    }
-    public static  void setPrimaryStage(Stage primarystage) {
-        PrimaryStage = primarystage;
-    }
-    public static Stage getPrimaryStage() {
-        return PrimaryStage;
+    public void setWireManager(WireManager wireManage) {
+        this.wireManager = wireManage;
     }
 
-    public static Gateee getGateConnectorManager() {
-        return GateConnectorManager;
+    public void setPrimaryStage(Stage primarystage) {
+        this.primaryStage = primarystage;
     }
 
-    public static void setGateConnectorManager(Gateee gateConnectorManager) {
-        GateConnectorManager = gateConnectorManager;
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
-    public static List<Connection> getConnections() {
+    public Gateee getGateConnectorManager() {
+        return gateConnectorManager;
+    }
+
+    public void setGateConnectorManager(Gateee gateConnectorManager) {
+        this.gateConnectorManager = gateConnectorManager;
+    }
+
+    public List<Connection> getConnections() {
         return connections;
     }
 
-    public static void setConnections(List<Connection> connectionsInput) {
-        connections = connectionsInput;
+    public void setConnections(List<Connection> connectionsInput) {
+        this.connections = connectionsInput;
     }
 
-    public static Map<Node, GatePortInfo> getPortInfo() {
+    public Map<Node, GatePortInfo> getPortInfo() {
         return portInfo;
     }
 
-    public static void setPortInfo(Map<Node, GatePortInfo> Info) {
-        portInfo = Info;
+    public void setPortInfo(Map<Node, GatePortInfo> Info) {
+        this.portInfo = Info;
     }
 
-    public static Map<GatePortInfo, Connection> getExitConnections() {
+    public Map<GatePortInfo, Connection> getExitConnections() {
         return exitConnections;
     }
 
-    public static void setExitConnections(Map<GatePortInfo, Connection> exitConnections) {
-        constants.exitConnections = exitConnections;
+    public void setExitConnections(Map<GatePortInfo, Connection> exitConnections) {
+        this.exitConnections = exitConnections;
     }
 
-    public static ArrayList<Pocket> getPockets() {
-        return Pockets;
+    public List<Pocket> getPockets() {
+        return pockets;
     }
 
-    public static void setPockets(ArrayList<Pocket> pockets) {
-        Pockets = pockets;
+    public void setPockets(ArrayList<Pocket> pockets) {
+        this.pockets = pockets;
     }
 
-    public static double getAvailableTime() {
+    public double getAvailableTime() {
         return availableTime;
     }
 
-    public static void setAvailableTime(double availableTime) {
-        constants.availableTime = availableTime;
+    public void setAvailableTime(double availableTime) {
+        this.availableTime = availableTime;
     }
 
-    public static ArrayList<Timeline> getTimeLines() {
+    public List<Timeline> getTimeLines() {
         return timeLines;
     }
-    public static void addTimeLine(Timeline timeline) {
+
+    public void addTimeLine(Timeline timeline) {
         timeLines.add(timeline);
     }
-    public static void ClearTimeLines() {
+
+    public void clearTimeLines() {
         timeLines.clear();
     }
-    public static void setTimeLines(ArrayList<Timeline> timeLines) {
-        constants.timeLines = timeLines;
+
+    public void setTimeLines(ArrayList<Timeline> timeLines) {
+        this.timeLines.clear();
+        this.timeLines.addAll(timeLines);
     }
 
-    public static ArrayList<level> getLevels() {
+    public List<level> getLevels() {
         return levels;
     }
 
-    public static int getNumberOfPockets() {
+    public int getNumberOfPockets() {
         return numberOfPockets;
     }
 
-    public static void setNumberOfPockets(int numberOfPockets) {
-        constants.numberOfPockets = numberOfPockets;
+    public void setNumberOfPockets(int numberOfPockets) {
+        this.numberOfPockets = numberOfPockets;
     }
 
-    public static boolean isCancellingWaveForTenSeconds() {
+    public boolean isCancellingWaveForTenSeconds() {
         return cancellingWaveForTenSeconds;
     }
 
-    public static void setCancellingWaveForTenSeconds(boolean cancellingWaveForTenSeconds) {
-        constants.cancellingWaveForTenSeconds = cancellingWaveForTenSeconds;
+    public void setCancellingWaveForTenSeconds(boolean cancellingWaveForTenSeconds) {
+        this.cancellingWaveForTenSeconds = cancellingWaveForTenSeconds;
     }
 
-    public static boolean isCancellingCollision() {
+    public boolean isCancellingCollision() {
         return cancellingCollision;
     }
 
-    public static void setCancellingCollision(boolean cancellingCollision) {
-        constants.cancellingCollision = cancellingCollision;
+    public void setCancellingCollision(boolean cancellingCollision) {
+        this.cancellingCollision = cancellingCollision;
     }
 
-    public static boolean isMakeEveryPocketNoiseZero() {
+    public boolean isMakeEveryPocketNoiseZero() {
         return makeEveryPocketNoiseZero.get();
     }
 
-    public static BooleanProperty makeEveryPocketNoiseZeroProperty() {
+    public BooleanProperty makeEveryPocketNoiseZeroProperty() {
         return makeEveryPocketNoiseZero;
     }
 
-    public static void setMakeEveryPocketNoiseZero(boolean b) {
+    public void setMakeEveryPocketNoiseZero(boolean b) {
         makeEveryPocketNoiseZero.set(b);
     }
 
-    public static boolean isStopped() {
+    public boolean isStopped() {
         return stopped.get();
     }
 
-    public static BooleanProperty stoppedProperty() {
+    public BooleanProperty stoppedProperty() {
         return stopped;
     }
 
-    public static void setStopped(boolean stop) {
+    public void setStopped(boolean stop) {
         stopped.set(stop);
     }
 
-    public static ArrayList<Timeline> getStopTimelines() {
+    public List<Timeline> getStopTimelines() {
         return stopTimelines;
     }
 
-    public static void setStopTimelines(ArrayList<Timeline> stopTimelines) {
-        constants.stopTimelines = stopTimelines;
-    }
-    public static void addStopTimelines(Timeline timeline) {
-        constants.stopTimelines.add(timeline);
-        if (stopped.get()){
+    public void addStopTimelines(Timeline timeline) {
+        this.stopTimelines.add(timeline);
+        if (stopped.get()) {
             timeline.pause();
         }
     }
 
-    public static int getLevel() {
+    public void removeStopTimelines(Timeline timeline) {
+        stopTimelines.remove(timeline);
+    }
+
+    public int getLevel() {
         return level;
     }
 
-    public static void setLevel(int level) {
-        constants.level = level;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
-    public void setLevels(ArrayList<level> level) {
-        levels = level;
+    public void setLevels(ArrayList<level> levels) {
+        this.levels = levels;
     }
 
-    public static boolean isCouldWeUseGameOver() {
+    public boolean isCouldWeUseGameOver() {
         return CouldWeUseGameOver.get();
     }
 
-    public static BooleanProperty couldWeUseGameOverProperty() {
+    public BooleanProperty couldWeUseGameOverProperty() {
         return CouldWeUseGameOver;
     }
 
-    public static void setCouldWeUseGameOver(boolean couldWeUseGameOver) {
+    public void setCouldWeUseGameOver(boolean couldWeUseGameOver) {
         CouldWeUseGameOver.set(couldWeUseGameOver);
-    }
-    public static void removeStopTimelines(Timeline timeline) {
-        stopTimelines.remove(timeline);
     }
 }

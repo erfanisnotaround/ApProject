@@ -50,7 +50,7 @@ public class constants {
     private static Stage PrimaryStage;
     private static Gateee GateConnectorManager;
     private static Map<GatePortInfo, Connection> exitConnections;
-    private static WireManager wireManager ;
+    private static WireManager wireManager;
     private static double availableTime = 5000;
 
     public constants() throws IOException {

@@ -4,13 +4,14 @@ import com.example.phaze1.model.systemsInfoAndManagers.Pocket;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class abilityManager {
     shopStage ShopStage;
-    ArrayList<Pocket> pockets;
+    List<Pocket> pockets;
     int coins;
     Label coinsShower;
-    public abilityManager(int coins , Label coinsShower , ArrayList<Pocket> pockets) {
+    public abilityManager(int coins , Label coinsShower , List<Pocket> pockets) {
         this.coins = coins;
         this.coinsShower = coinsShower;
         this.pockets = pockets;

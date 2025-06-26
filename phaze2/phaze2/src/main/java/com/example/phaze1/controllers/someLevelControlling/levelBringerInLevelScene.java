@@ -1,7 +1,7 @@
 package com.example.phaze1.controllers.someLevelControlling;
 import com.example.phaze1.model.systemsInfoAndManagers.OneLevelInLevelScene;
 import com.example.phaze1.model.levelLoadingStuff.LevelLoader;
-import com.example.phaze1.model.constants.constants;
+import com.example.phaze1.model.constants.Constants;
 import com.example.phaze1.model.levelLoadingStuff.level;
 import com.example.phaze1.controllers.sceneControllers.GameSceneController;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class levelBringerInLevelScene {
-    private ArrayList<level> levels = constants.getLevels();
+    private List<level> levels = Constants.getInstance().getLevels();
     private double CenterX = 1707/2;
     private double FirstCenterY = 300;
     private double distanceOFEachList = 150;
@@ -42,7 +43,7 @@ public class levelBringerInLevelScene {
         LevelLoader levelLoader = new LevelLoader();
         button.setOnAction(event -> {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/phaze1/fxmlFiles/gameScene.fxml"));
-            Stage stage = constants.getPrimaryStage();
+            Stage stage = Constants.getInstance().getPrimaryStage();
             Parent root = null;
             try {
                 root = fxmlLoader.load();
