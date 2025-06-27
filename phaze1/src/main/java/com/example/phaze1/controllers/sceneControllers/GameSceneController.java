@@ -67,7 +67,7 @@ public class GameSceneController  {
         player.Play();
         Button startButton = new Button("Start");
         mainPane.getChildren().add(startButton);
-        BringItOn dd = new BringItOn(LinePane);
+        BringItOn dd = new BringItOn(gamePane);
         try {
             systems= dd.makingEachSystems(currentLevel);
         } catch (IOException e) {
@@ -93,6 +93,7 @@ public class GameSceneController  {
                 tt.resetPocketLoss();
                 m.test();
                 constants.setCouldWeUseGameOver(true);
+                m.goForPocketMovement(250, constants.getAvailableTime());
                 if (canWeStart()){
                     m.goForPocketMovement(250, constants.getAvailableTime());
                 }

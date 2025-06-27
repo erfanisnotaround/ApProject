@@ -1,22 +1,14 @@
-module com.example.phaze1 {
+module org.example.phaze2 {
     requires javafx.controls;
     requires javafx.fxml;
-    requires com.fasterxml.jackson.databind;
-    requires java.desktop;
-    requires javafx.media;
-    requires javafx.graphics;
-    requires java.sql;
 
 
-    opens com.example.phaze1        to javafx.fxml;
-    exports com.example.phaze1;
-    exports com.example.phaze1.model.agents;
-    opens com.example.phaze1.model.systemsInfoAndManagers to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.model.formerVersionOSystems to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.model.jsonManager to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.model.levelLoadingStuff to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.model.agents to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.model.constants to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.model.tasks to com.fasterxml.jackson.databind;
-    opens com.example.phaze1.controllers.sceneControllers to javafx.fxml;
+    opens org.example.phaze2 to javafx.fxml;
+    exports org.example.phaze2;
+    exports org.example.phaze2.controllers.sceneControllers;
+    exports org.example.phaze2.model.constants;
+    opens org.example.phaze2.model.constants to javafx.fxml;
+    opens org.example.phaze2.controllers.sceneControllers to javafx.fxml;
+    exports org.example.phaze2.model.agentsAndManagers;
+    opens org.example.phaze2.model.agentsAndManagers to javafx.fxml;
 }

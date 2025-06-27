@@ -3,7 +3,7 @@ package com.example.phaze1.model.agents;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.Node;
+
 import java.io.File;
 
 public class mediaAgent {
