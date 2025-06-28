@@ -16,7 +16,6 @@ import javafx.util.Duration;
 import java.util.*;
 
 public class GateConnectorManager {
-
     private final Pane lineLayer;
     private final WireManager wires;
     private MediaView mediaView = new MediaView();

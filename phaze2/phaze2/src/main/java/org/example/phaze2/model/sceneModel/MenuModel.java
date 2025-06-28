@@ -1,14 +1,17 @@
 package org.example.phaze2.model.sceneModel;
 
 import javafx.stage.Stage;
+import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.constants.PositionStatus;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.LevelLoader;
 
 public class MenuModel {
     private SceneManager sceneManager;
 
     public void startButtonClicked() {
-        sceneManager.switchScreen(PositionStatus.GAME);
+        GoingToGamaInformation information = new GoingToGamaInformation(-1);
+        sceneManager.switchScreen(PositionStatus.GAME , information);
     }
     public void levelsButtonClicked() {
         sceneManager.switchScreen(PositionStatus.LEVELS);

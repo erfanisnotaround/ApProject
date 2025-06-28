@@ -1,6 +1,7 @@
 package org.example.phaze2.model.constants;
 
 import javafx.stage.Stage;
+import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 
 public class Constants {
@@ -8,6 +9,7 @@ public class Constants {
 
     private  Stage primaryStage;
     private SceneManager sceneManager;
+    private WireManager wireManager;
     private Constants() {}
     public static Constants getInstance() {
         return INSTANCE;
@@ -27,5 +29,13 @@ public class Constants {
 
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
+    }
+
+    public WireManager getWireManager() {
+        return wireManager;
+    }
+
+    public void setWireManager(WireManager wireManager) {
+        this.wireManager = wireManager;
     }
 }

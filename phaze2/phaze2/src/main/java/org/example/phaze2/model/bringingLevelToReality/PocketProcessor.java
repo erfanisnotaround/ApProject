@@ -1,0 +1,31 @@
+package org.example.phaze2.model.bringingLevelToReality;
+
+import org.example.phaze2.model.jsonRefrencesAndLOadings.PocketLoading;
+import org.example.phaze2.model.levelDetails.Pocket;
+
+import java.util.List;
+
+public class PocketProcessor implements Runnable {
+    private List<Pocket> pockets;
+    private List<PocketLoading> pocketLoadings;
+
+    public PocketProcessor(List<PocketLoading> pocketLoadings) {
+        this.pocketLoadings = pocketLoadings;
+    }
+    @Override
+    public void run() {
+        for (PocketLoading pocketLoading : pocketLoadings) {
+            pockets.add(processPocket(pocketLoading));
+        }
+    }
+    private Pocket processPocket(PocketLoading pocketLoading) {
+        Pocket pocket = new Pocket();
+
+
+        return pocket;
+    }
+
+    public List<Pocket> getPockets() {
+        return pockets;
+    }
+}

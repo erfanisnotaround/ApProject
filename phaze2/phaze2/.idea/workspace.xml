@@ -5,155 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/f.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/LevelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/MenuSceneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/SettingsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/ScreenBundle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/agentsAndManagers/SceneManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/PositionStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/SceneActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/controllersInterfaces/ControlledScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/controllersInterfaces/DataReceivingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/controllersInterfaces/Initializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/GameModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/LevelsModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/MenuModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/SettingsModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/cssStyles/LevelsStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/cssStyles/MenuSyles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/cssStyles/SettingsStyles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/GameOVerScene.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/GameScene.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/LevelsScene.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/MenuScene.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/SettingsScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/Abilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/Abilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionPair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionsDetection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionsDetection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/MakingMovements.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/MakingMovements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/PocketLoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/PocketLoss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/TemporalProgressManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/TemporalProgressManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/TimeLineAnimator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/TimeLineAnimator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/WinnerMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/WinnerMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/abilityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/abilityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/shopStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/shopStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/GameOverScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/GameOverScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/GameSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/LevelSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/LevelSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/gameOverSceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/gameOverSceneManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/menuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/sceneControllers/menuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/someLevelControlling/levelBringerInLevelScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/controllers/someLevelControlling/levelBringerInLevelScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/GraphicAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/GraphicAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/PhotoAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/PhotoAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/mediaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/agents/mediaAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/constants/GameStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/constants/GameStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/constants/SceneActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/constants/SceneActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/constants/constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/constants/constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/formerVersionOSystems/Gateee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/formerVersionOSystems/Gateee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/formerVersionOSystems/bringingLevelToReality.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/formerVersionOSystems/bringingLevelToReality.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/formerVersionOSystems/connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/formerVersionOSystems/connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/jsonManager/JsonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/jsonManager/JsonManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/LevelLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/LevelLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/SubSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/SubSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/Systems.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/Systems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/level.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/levelsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/levelsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/pockets.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/levelLoadingStuff/pockets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/BringItOn.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/BringItOn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Curve.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Curve.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/CurveLayerManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/WireRendererManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/GoingToGamaInformation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/WireManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/agentsAndManagers/JsonManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/PocketProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemVisualizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/PortTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/Level.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/LevelLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/LevelManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/PocketLoading.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/SubSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/System.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/PortInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/Connection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionValidJudge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/CurveBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/WireRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GateConnectorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GateConnectorManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GatePortInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GatePortInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GateType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GateType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Light.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/OneLevelInLevelScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/OneLevelInLevelScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Pocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Pocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/SystemView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/ViewOfSubSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/ViewOfSubSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/WireManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/WireManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/tasks/menuButtonTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/tasks/menuButtonTasks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/tasks/sideTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/tasks/sideTasks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/resources/com/example/phaze1/fxmlFiles/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/resources/com/example/phaze1/fxmlFiles/gameScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/Abilities.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionPair.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/CollisionsDetection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/MakingMovements.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/PocketLoss.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/TemporalProgressManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/TimeLineAnimator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/WinnerMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/abilityManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/controllingPocketMovement/shopStage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/sceneControllers/GameOverScreenController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/sceneControllers/GameSceneController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/sceneControllers/LevelSceneController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/sceneControllers/SettingsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/sceneControllers/gameOverSceneManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/sceneControllers/menuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/controllers/someLevelControlling/levelBringerInLevelScene.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/GameModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/MenuModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/agents/GraphicAgent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/agents/PhotoAgent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/agents/mediaAgent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/constants/GameStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/constants/SceneActions.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/constants/constants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/formerVersionOSystems/Gateee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/formerVersionOSystems/bringingLevelToReality.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/formerVersionOSystems/connection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/jsonManager/JsonManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/levelLoadingStuff/LevelLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/levelLoadingStuff/SubSystem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/levelLoadingStuff/Systems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/levelLoadingStuff/level.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/levelLoadingStuff/levelsManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/levelLoadingStuff/pockets.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/BringItOn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Connection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Curve.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GateConnectorManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GatePortInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/GateType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Light.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/OneLevelInLevelScene.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Pocket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/SystemView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/ViewOfSubSystem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/WireManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/tasks/menuButtonTasks.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/phaze1/model/tasks/sideTasks.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/CssStyles/GameScene.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/CssStyles/level_menu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/CssStyles/menuStyles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/CssStyles/settingsStyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/fxmlFiles/GameOverScene.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/fxmlFiles/LevelsScene.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/fxmlFiles/gameScene.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/fxmlFiles/menuScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/fxmlFiles/settingsScene.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/images/Game Over.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/images/Win.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/images/d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/images/eclipse_femto_blur.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/images/horns.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/images/lose.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/jsonFiles/levels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/phaze1/music/game-bonus-2-294436.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/PositionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/PositionStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/GameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/MenuModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/MenuModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/GameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/fxmlFiles/GameScene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,11 +55,11 @@
       <list>
         <option value="AnnotationType" />
         <option value="JavaFXApplication" />
-        <option value="Interface" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="CSS File" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -232,6 +122,9 @@
       <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\com.example.phaze1" />
       <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\com\example\phaze1\view" />
       <recent name="D:\programming\project of Ap\faz 1\Phazes\phaze1\src\main\resources\view" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.phaze2" />
     </key>
   </component>
   <component name="RunManager">
@@ -299,7 +192,8 @@
       <workItem from="1751014320620" duration="3832000" />
       <workItem from="1751020617783" duration="1455000" />
       <workItem from="1751022282298" duration="759000" />
-      <workItem from="1751023074726" duration="8008000" />
+      <workItem from="1751023074726" duration="10996000" />
+      <workItem from="1751119701614" duration="22724000" />
     </task>
     <servers />
   </component>
