@@ -10,6 +10,7 @@ public class CurrentLevelConstants {
     private final double lightBarHeight = 10;
     private final double HeightOfSubSystems = 40;
     private final double distanceOFRightForSubSystems = 8;
+    private final double gapOFBottom = 5;
 
 
     private CurrentLevelConstants() {}
@@ -43,5 +44,9 @@ public class CurrentLevelConstants {
 
     public double getDistanceOFRightForSubSystems() {
         return distanceOFRightForSubSystems;
+    }
+
+    public double getGapOFBottom() {
+        return gapOFBottom;
     }
 }

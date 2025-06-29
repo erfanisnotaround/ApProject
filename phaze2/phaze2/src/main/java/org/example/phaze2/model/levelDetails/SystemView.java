@@ -14,24 +14,23 @@ import java.util.ArrayList;
 public class SystemView extends Pane {
     private final SystemTypes systemType;
     private final SystemBehavior behavior;
-
     private final double systemHeight;
-    private final double systemWidth = 100;
-    public BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
-    public Button startButton;
-    public Light light;
-    public double x;
-    public double y;
-    public String systemID;
-    public boolean isItStartSystem;
-    public int numberOfSubSystems;
-    public boolean isTheLightOn;
-    public Pocket[] capacity = new Pocket[5];
-    public ArrayList<SubSystemView> SubSystems = new ArrayList<>();
+    private final double systemWidth = CurrentLevelConstants.getInstance().getWidth();
+    private BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
+    private Light light;
+    private double x;
+    private double y;
+    private String systemID;
+    private boolean isItStartSystem;
+    private int numberOfSubSystems;
+    private boolean isTheLightOn;
+    private Pocket[] capacity = new Pocket[5];
+    private ArrayList<SubSystemView> SubSystems = new ArrayList<>();
 
     public SystemView(SystemTypes systemType , int numberOfSubSystems) {
         this.numberOfSubSystems = numberOfSubSystems;
-        systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight();
+        systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
+        setPrefSize(systemWidth, systemHeight);
         this.systemType = systemType;
         this.behavior = SystemBehaviorFactory.create(systemType);
     }
@@ -50,5 +49,91 @@ public class SystemView extends Pane {
 
     public double getSystemWidth() {
         return systemWidth;
+    }
+
+    public ArrayList<SubSystemView> getSubSystems() {
+        return SubSystems;
+    }
+
+    public void setSubSystems(ArrayList<SubSystemView> subSystems) {
+        SubSystems = subSystems;
+    }
+
+    public Pocket[] getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Pocket[] capacity) {
+        this.capacity = capacity;
+    }
+
+    public boolean isTheLightOn() {
+        return isTheLightOn;
+    }
+
+    public void setTheLightOn(boolean theLightOn) {
+        isTheLightOn = theLightOn;
+    }
+
+    public int getNumberOfSubSystems() {
+        return numberOfSubSystems;
+    }
+
+    public void setNumberOfSubSystems(int numberOfSubSystems) {
+        this.numberOfSubSystems = numberOfSubSystems;
+    }
+
+    public boolean isItStartSystem() {
+        return isItStartSystem;
+    }
+
+    public void setItStartSystem(boolean itStartSystem) {
+        isItStartSystem = itStartSystem;
+    }
+
+    public String getSystemID() {
+        return systemID;
+    }
+
+    public void setSystemID(String systemID) {
+        this.systemID = systemID;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public Light getLight() {
+        return light;
+    }
+
+    public void setLight(Light light) {
+        this.light = light;
+    }
+
+
+
+    public boolean isLightBoolean() {
+        return lightBoolean.get();
+    }
+
+    public BooleanProperty lightBooleanProperty() {
+        return lightBoolean;
+    }
+
+    public void setLightBoolean(boolean lightBoolean) {
+        this.lightBoolean.set(lightBoolean);
     }
 }
