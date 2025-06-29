@@ -1,5 +1,6 @@
 package org.example.phaze2.model;
 
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.LevelManager;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoingToGamaInformation {
+    private WireManager wireManager;
     private LevelManager levelManager;
     private int ChosenLevel;
     private List<Level> levels;
@@ -32,9 +34,13 @@ public class GoingToGamaInformation {
         if (!levels.isEmpty()) {
             if (ChosenLevel != -1){
                 this.level = levels.get(ChosenLevel);
-                return;
             }
-            level = getFirstUnAvaialbleLevel();
+            else {
+                level = getFirstUnAvaialbleLevel();
+            }
+            this.wireManager = new WireManager(level.getMaxWire());
+            Constants.getInstance().setWireManager(wireManager);
+
         }
 
 
@@ -48,7 +54,9 @@ public class GoingToGamaInformation {
         return levels.getLast();
     }
 
-
+    public WireManager getWireManager() {
+        return wireManager;
+    }
     public List<Level> getLevels() {
         return levels;
     }

@@ -157,6 +157,10 @@ public class ConnectionHandler implements CurveBuilder {
             selectedCurve = null;
         }
     }
+    public void resetSelection() {
+        if (selectedCurve == null) return;
+        selectedCurve.setStroke(Color.GREEN);
+    }
 
 
     @Override

@@ -1,8 +1,11 @@
 package org.example.phaze2.model.jsonRefrencesAndLOadings;
 
+import org.example.phaze2.model.constants.SystemTypes;
+
 import java.util.ArrayList;
 
 public class System {
+    private SystemTypes systemType;
     private String systemName;
     private double x;
     private double y;
@@ -69,5 +72,13 @@ public class System {
 
     public void setSystemName(String systemName) {
         this.systemName = systemName;
+    }
+
+    public SystemTypes getSystemType() {
+        return systemType;
+    }
+
+    public void setSystemType(SystemTypes systemType) {
+        this.systemType = systemType;
     }
 }

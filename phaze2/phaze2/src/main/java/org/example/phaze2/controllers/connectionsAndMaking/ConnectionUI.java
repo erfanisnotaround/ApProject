@@ -42,5 +42,7 @@ public class ConnectionUI {
             evt.consume();
         });
     }
-    public void resetSelection(){}
+    public void resetSelection(){
+        connectionHandler.resetSelection();
+    }
 }

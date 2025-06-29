@@ -4,7 +4,6 @@ import javafx.stage.Stage;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.constants.PositionStatus;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
-import org.example.phaze2.model.jsonRefrencesAndLOadings.LevelLoader;
 
 public class MenuModel {
     private SceneManager sceneManager;

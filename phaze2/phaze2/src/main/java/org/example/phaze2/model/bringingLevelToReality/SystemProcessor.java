@@ -1,5 +1,6 @@
 package org.example.phaze2.model.bringingLevelToReality;
 
+import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.SystemView;
 
@@ -9,8 +10,10 @@ import java.util.List;
 public class SystemProcessor implements Runnable{
     private final List<System> systemInfos;
     private List<SystemView> systemViews = new ArrayList<>();
-    public SystemProcessor(List<System> systemInfos) {
+    private ConnectionUI connectionUI;
+    public SystemProcessor(List<System> systemInfos , ConnectionUI connectionUI) {
         this.systemInfos = systemInfos;
+        this.connectionUI = connectionUI;
     }
     @Override
     public void run() {
@@ -20,6 +23,7 @@ public class SystemProcessor implements Runnable{
     }
     public SystemView processSystem(System system) {
         SystemView systemView = new SystemView();
+
 
 
         return systemView;
