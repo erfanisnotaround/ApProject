@@ -5,19 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/CurrentLevelConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/SystemTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Light.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SubSystemView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/AntiVirusBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/DestructiveBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/DistributeBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/MergerBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/SpyBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/SystemBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/SystemBehaviorFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/VpnBehavior.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/GoingToGamaInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/GoingToGamaInformation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemVisualizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/LevelLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/System.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/System.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/MenuModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/sceneModel/MenuModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +33,9 @@
         <option value="JavaFXApplication" />
         <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -168,7 +170,7 @@
       <workItem from="1751022282298" duration="759000" />
       <workItem from="1751023074726" duration="10996000" />
       <workItem from="1751119701614" duration="23842000" />
-      <workItem from="1751205126453" duration="4243000" />
+      <workItem from="1751205126453" duration="8263000" />
     </task>
     <servers />
   </component>

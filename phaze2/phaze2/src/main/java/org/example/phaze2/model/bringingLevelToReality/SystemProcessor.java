@@ -22,8 +22,7 @@ public class SystemProcessor implements Runnable{
         }
     }
     public SystemView processSystem(System system) {
-        SystemView systemView = new SystemView();
-
+        SystemView systemView = new SystemView(system.getSystemType() ,system.getNumberOfSubSystems());
 
 
         return systemView;

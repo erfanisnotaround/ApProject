@@ -7,6 +7,7 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.bringingLevelToReality.SystemVisualizer;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
 import org.example.phaze2.model.levelDetails.Pocket;
@@ -49,8 +50,9 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
         List<Pocket> pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
+        Constants.getInstance().setSystemViews(systemViews);
+        Constants.getInstance().setPockets(pockets);
         addingShapes(systemViews , pockets);
-
 
 
 
