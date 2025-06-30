@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Level {
+    @JsonProperty("MaxWire")
     private double MaxWire;
+    @JsonProperty("numberOfSystems")
     private int numberOfSystems;
+    @JsonProperty("levelPassed")
     private boolean levelPassed;
     @JsonProperty("systems")
     private List<System> systems = new ArrayList<>();
@@ -20,7 +23,7 @@ public class Level {
     public List<System> getSystems() { return systems; }
     public void setSystems(List<System> list) { this.systems = list; }
     public double getMaxWire() {return MaxWire;}
-    public void setMaxWire(double maxWire) {MaxWire = maxWire;}
+    public void setMaxWire(double MaxWire) {this.MaxWire = MaxWire;}
     public ArrayList<PocketLoading> getPockets() {return pockets;}
     public void setPockets(ArrayList<PocketLoading> pockets) {this.pockets = pockets;}
 }

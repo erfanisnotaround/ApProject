@@ -56,6 +56,10 @@ public class SystemProcessor implements Runnable{
         subSystemView.setDoesItHaveEnterGate(subSystem.DoesItHaveEnterGate());
         subSystemView.setEnterGate(subSystem.getEnterGate());
         subSystemView.setExitGate(subSystem.getExitGate());
+        subSystemView.setLayoutX(CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems());
+        subSystemView.setLayoutY(CurrentLevelConstants.getInstance().getHeightOfSubSystems() * index +
+                CurrentLevelConstants.getInstance().getUpperHeight());
+        systemView.getChildren().add(subSystemView);
 
         putPorts(systemView , subSystemView , index);
 

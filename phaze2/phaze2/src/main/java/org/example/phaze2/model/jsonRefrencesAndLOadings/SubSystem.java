@@ -1,11 +1,14 @@
 package org.example.phaze2.model.jsonRefrencesAndLOadings;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.example.phaze2.model.constants.PortTypes;
 
 public class SubSystem{
     private boolean doesItHaveEnterGate;
     private boolean doesItHavaExitGate;
+    @JsonProperty("EnterGate")
     private PortTypes EnterGate;
+    @JsonProperty("ExitGate")
     private PortTypes ExitGate;
 
     public boolean DoesItHaveEnterGate() {

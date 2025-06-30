@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/PocketTypeGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/PocketTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDuties/Movable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/agentsAndManagers/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/agentsAndManagers/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/PocketProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/PocketProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/bringingLevelToReality/SystemProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/CurrentLevelConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/CurrentLevelConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/PortTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/PortTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SubSystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SubSystemView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/PocketLoading.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/PocketLoading.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/SubSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/SubSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/System.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/jsonRefrencesAndLOadings/System.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +34,9 @@
         <option value="JavaFXApplication" />
         <option value="FxmlFile" />
         <option value="CSS File" />
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -65,7 +75,7 @@
     &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/programming/java fx/openjfx-24_windows-x64_bin-sdk/javafx-sdk-24/lib/javafx.fxml.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/programming/project of Ap/faz 1/Phazes/phaze2/phaze2&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -161,7 +171,10 @@
       <workItem from="1751022282298" duration="759000" />
       <workItem from="1751023074726" duration="10996000" />
       <workItem from="1751119701614" duration="23842000" />
-      <workItem from="1751205126453" duration="14506000" />
+      <workItem from="1751205126453" duration="15489000" />
+      <workItem from="1751288747357" duration="4241000" />
+      <workItem from="1751293033824" duration="304000" />
+      <workItem from="1751293363187" duration="880000" />
     </task>
     <servers />
   </component>

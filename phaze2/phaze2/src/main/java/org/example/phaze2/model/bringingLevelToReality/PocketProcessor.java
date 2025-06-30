@@ -21,6 +21,8 @@ public class PocketProcessor implements Runnable {
     private Pocket processPocket(PocketLoading pocketLoading) {
         Pocket pocket = new Pocket();
 
+        pocket.setType(pocketLoading.getType());
+        pocket.setDelay(pocketLoading.getDelay());
 
         return pocket;
     }

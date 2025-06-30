@@ -1,5 +1,6 @@
 package org.example.phaze2.model.jsonRefrencesAndLOadings;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.example.phaze2.model.constants.SystemTypes;
 
 import java.util.ArrayList;
@@ -9,9 +10,12 @@ public class System {
     private String systemName;
     private double x;
     private double y;
+    @JsonProperty("isItStartSystem")
     private boolean isItStartSystem;
     private int numberOfSubSystems;
+    @JsonProperty("isTheLightOn")
     private boolean isTheLightOn;
+    @JsonProperty("SubSystems")
     private ArrayList<SubSystem> SubSystems = new ArrayList<>();
 
     public ArrayList<SubSystem> getSubSystems() {

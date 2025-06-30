@@ -1,4 +1,22 @@
 package org.example.phaze2.model.jsonRefrencesAndLOadings;
 
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+
 public class PocketLoading {
+    private PocketTypes type;
+    private double delay;
+
+
+    public double getDelay() {return delay;}
+
+    public void setDelay(double delay) {this.delay = delay;}
+
+
+    public PocketTypes getType() {
+        return type;
+    }
+
+    public void setType(PocketTypes type) {
+        this.type = type;
+    }
 }

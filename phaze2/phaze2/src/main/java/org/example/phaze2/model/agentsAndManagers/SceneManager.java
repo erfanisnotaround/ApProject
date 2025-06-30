@@ -36,13 +36,17 @@ public class SceneManager {
     @SuppressWarnings("unchecked")
     public <T> void switchScreen(PositionStatus screen, T data) {
         ScreenBundle bundle = cache.computeIfAbsent(screen, this::loadScreenBundle);
-
+        if (bundle == null) {
+            System.out.println("ss");
+        }
         if (bundle != null) {
             if (data != null && bundle.getController() instanceof DataReceivingController) {
                 ((DataReceivingController<T>) bundle.getController()).initData(data);
+//                ((Initializer) bundle.getController()).initialize();
             }
             animateAndSetScreen(bundle.getRoot());
         }
+
     }
 
     private ScreenBundle loadScreenBundle(PositionStatus screen) {
@@ -54,7 +58,7 @@ public class SceneManager {
             if (controller instanceof ControlledScreen) {
                 ((ControlledScreen) controller).setSceneManager(this);
             }
-            controller.initialize();
+
 
 
             return new ScreenBundle(root, controller);

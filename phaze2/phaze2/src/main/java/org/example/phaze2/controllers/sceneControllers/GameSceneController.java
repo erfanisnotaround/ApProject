@@ -38,6 +38,7 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
 
     @Override
     public void initialize() {
+        System.out.println(21);
         MenuButton.setOnAction(event -> {
             menuButtonClicked();
         });
@@ -50,6 +51,8 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
         List<Pocket> pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
+
+
         Constants.getInstance().setSystemViews(systemViews);
         Constants.getInstance().setPockets(pockets);
         addingShapes(systemViews , pockets);
@@ -66,6 +69,7 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
 
     @Override
     public void initData(GoingToGamaInformation data) {
+        System.out.println(1);
         gameModel.setLevelInformation(data);
 
     }
@@ -76,7 +80,7 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
             ContainerPane.getChildren().add(pocket);
         }
         for (SystemView systemView : systemViews) {
-            ContainerPane.getChildren().add(systemView);
+            ContainerPane.getChildren().addFirst(systemView);
         }
     }
 }

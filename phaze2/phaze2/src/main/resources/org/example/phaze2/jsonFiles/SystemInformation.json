@@ -1,1 +1,103 @@
-[]
+[
+  {
+    "MaxWire" : 100.0,
+    "numberOfSystems": 2,
+    "levelPassed": false,
+    "systems": [
+      {
+        "systemType": "VPN",
+        "systemName": "MainLogic",
+        "x": 100.0,
+        "y": 200.0,
+        "isItStartSystem": true,
+        "numberOfSubSystems": 2,
+        "isTheLightOn": false,
+        "SubSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "TRIANGLE",
+            "ExitGate": "SQUARE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": false,
+            "EnterGate": "INFINITY"
+          }
+        ]
+      },
+      {
+        "systemType": "SPY",
+        "systemName": "BackupStorage",
+        "x": 400.0,
+        "y": 300.0,
+        "isItStartSystem": false,
+        "numberOfSubSystems": 1,
+        "isTheLightOn": true,
+        "SubSystems": [
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "ExitGate": "SQUARE"
+          }
+        ]
+      }
+    ],
+    "pockets": [
+      {
+        "type": "Messenger_1",
+        "delay": 1.5
+      },
+      {
+        "type": "SECRET_MESSENGER",
+        "delay": 2.0
+      }
+    ]
+  },
+
+  {
+    "MaxWire": 150.0,
+    "numberOfSystems": 1,
+    "levelPassed": false,
+    "systems": [
+      {
+        "systemType": "SPY",
+        "systemName": "NetBridge",
+        "x": 300.0,
+        "y": 400.0,
+        "isItStartSystem": true,
+        "numberOfSubSystems": 3,
+        "isTheLightOn": false,
+        "SubSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "INFINITY"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "INFINITY",
+            "ExitGate": "TRIANGLE"
+          },
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "ExitGate": "SQUARE"
+          }
+        ]
+      }
+    ],
+    "pockets": [
+      {
+        "type": "BIG_1",
+        "delay": 3.5
+      },
+      {
+        "type": "BIG_2",
+        "delay": 4.0
+      }
+    ]
+  }
+]
