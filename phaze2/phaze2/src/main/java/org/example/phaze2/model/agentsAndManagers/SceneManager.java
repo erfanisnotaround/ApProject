@@ -10,7 +10,7 @@ import org.example.phaze2.model.constants.PositionStatus;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
 import org.example.phaze2.model.ScreenBundle;
-import org.example.phaze2.model.controllersInterfaces.Initializer;
+import org.example.phaze2.model.controllersInterfaces.Maker;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,8 +42,8 @@ public class SceneManager {
         if (bundle != null) {
             if (data != null && bundle.getController() instanceof DataReceivingController) {
                 ((DataReceivingController<T>) bundle.getController()).initData(data);
-//                ((Initializer) bundle.getController()).initialize();
             }
+            ((Maker) bundle.getController()).MakeFirst();
             animateAndSetScreen(bundle.getRoot());
         }
 
@@ -53,7 +53,7 @@ public class SceneManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(screen.getPath()));
             Parent root = loader.load();
-            Initializer controller = loader.getController();
+            Maker controller = loader.getController();
 
             if (controller instanceof ControlledScreen) {
                 ((ControlledScreen) controller).setSceneManager(this);

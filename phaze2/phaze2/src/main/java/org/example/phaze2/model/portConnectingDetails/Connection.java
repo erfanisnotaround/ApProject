@@ -10,7 +10,13 @@ public class Connection {
     private Node toNode;
     private Node fromNode;
     private Curve curve;
-    public Connection(PortInfo toInfo, PortInfo fromInfo, Curve curve , Node fromNode, Node toNode) {}
+    public Connection(PortInfo toInfo, PortInfo fromInfo, Curve curve , Node fromNode, Node toNode) {
+        this.to = toInfo;
+        this.from = fromInfo;
+        this.curve = curve;
+        this.fromNode = fromNode;
+        this.toNode = toNode;
+    }
     public PortInfo getTo() {
         return to;
     }

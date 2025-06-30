@@ -1,6 +1,6 @@
 [
   {
-    "MaxWire" : 100.0,
+    "MaxWire" : 900.0,
     "numberOfSystems": 2,
     "levelPassed": false,
     "systems": [
@@ -36,8 +36,9 @@
         "isTheLightOn": true,
         "SubSystems": [
           {
-            "doesItHaveEnterGate": false,
+            "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"
           }
         ]

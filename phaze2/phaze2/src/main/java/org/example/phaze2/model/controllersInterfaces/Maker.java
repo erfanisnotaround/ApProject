@@ -1,5 +1,5 @@
 package org.example.phaze2.model.controllersInterfaces;
 
-public interface Initializer {
-    void initialize();
+public interface Maker {
+    void MakeFirst();
 }

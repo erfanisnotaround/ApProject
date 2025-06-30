@@ -12,13 +12,12 @@ import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.portConnectingDetails.ConnectionHandler;
 import org.example.phaze2.model.sceneModel.GameModel;
-import org.example.phaze2.model.controllersInterfaces.Initializer;
+import org.example.phaze2.model.controllersInterfaces.Maker;
 
 import java.util.List;
 
-public class GameSceneController implements Initializer, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
+public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
     private SceneManager sceneManager;
     private GameModel gameModel = new GameModel();
     private SystemVisualizer systemVisualizer;
@@ -37,7 +36,7 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
 
 
     @Override
-    public void initialize() {
+    public void MakeFirst() {
         System.out.println(21);
         MenuButton.setOnAction(event -> {
             menuButtonClicked();
@@ -45,7 +44,6 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
         StartButton.setOnAction(event -> {
             startButtonClicked();
         });
-
 
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
@@ -56,6 +54,7 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
         Constants.getInstance().setSystemViews(systemViews);
         Constants.getInstance().setPockets(pockets);
         addingShapes(systemViews , pockets);
+
 
 
 
@@ -70,7 +69,11 @@ public class GameSceneController implements Initializer, ControlledScreen , Data
     @Override
     public void initData(GoingToGamaInformation data) {
         System.out.println(1);
+
+        ContainerPane.getChildren().clear();
         gameModel.setLevelInformation(data);
+
+
 
     }
 

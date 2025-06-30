@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
-import org.example.phaze2.model.controllersInterfaces.Initializer;
+import org.example.phaze2.model.controllersInterfaces.Maker;
 import org.example.phaze2.model.sceneModel.LevelsModel;
 
-public class LevelController implements Initializer , ControlledScreen {
+public class LevelController implements Maker, ControlledScreen {
     private SceneManager sceneManager;
     private LevelsModel levelsModel = new LevelsModel();
     @FXML
@@ -21,7 +21,7 @@ public class LevelController implements Initializer , ControlledScreen {
     }
 
     @Override
-    public void initialize() {
+    public void MakeFirst() {
         BackButton.setOnAction((event) -> {
             BackButtonOnAction();
         });

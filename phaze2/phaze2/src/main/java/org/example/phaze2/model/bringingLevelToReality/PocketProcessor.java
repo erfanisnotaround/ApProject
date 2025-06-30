@@ -3,10 +3,11 @@ package org.example.phaze2.model.bringingLevelToReality;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.PocketLoading;
 import org.example.phaze2.model.levelDetails.Pocket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PocketProcessor implements Runnable {
-    private List<Pocket> pockets;
+    private List<Pocket> pockets = new ArrayList<>();
     private List<PocketLoading> pocketLoadings;
 
     public PocketProcessor(List<PocketLoading> pocketLoadings) {

@@ -1,5 +1,6 @@
 package org.example.phaze2.model.constants;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
@@ -9,10 +10,14 @@ public enum PortTypes {
         public Shape createShape() {
             Polygon triangle = new Polygon();
             triangle.getPoints().addAll(
-                    0.0, 0.0,   // Point 1
-                    50.0, 100.0, // Point 2
-                    100.0, 0.0   // Point 3
+                    5.0, 5.0,
+                    5.0, 0.0,
+                    0.0, 0.0
             );
+            triangle.setRotate(315);
+            triangle.setScaleX(2);
+            triangle.setScaleY(2);
+            triangle.setFill(Color.RED);
             return triangle;
         }
     },
@@ -22,20 +27,23 @@ public enum PortTypes {
             Polygon square = new Polygon();
             square.getPoints().addAll(
                     0.0, 0.0,
-                    100.0, 0.0,
-                    100.0, 100.0,
-                    0.0, 100.0
+                    5.0, 0.0,
+                    5.0, 5.0,
+                    0.0, 5.0
             );
+            square.setScaleX(2);
+            square.setScaleY(2);
+            square.setFill(Color.BLUE);
             return square;
         }
     },
     INFINITY {
         @Override
         public Shape createShape() {
-            double centerX = 50;
-            double centerY = 50;
-            double radius = 50;
-            double verticalGap = 20;
+            double centerX = 0;
+            double centerY = 0;
+            double radius = 5;
+            double verticalGap = 5;
             Polygon shape = new Polygon();
 
             for (int i = 0; i < 6; i++) {
@@ -54,7 +62,9 @@ public enum PortTypes {
                 double y = centerY + verticalGap + radius * Math.sin(angle);
                 shape.getPoints().addAll(x, y);
             }
-
+            shape.setScaleX(1);
+            shape.setScaleY(1);
+            shape.setFill(Color.GREEN);
             return shape;
         }
     };

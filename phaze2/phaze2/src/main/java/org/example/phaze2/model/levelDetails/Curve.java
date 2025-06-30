@@ -3,12 +3,18 @@ package org.example.phaze2.model.levelDetails;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import org.example.phaze2.model.portConnectingDetails.Connection;
+import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
 
-public class Curve extends Polyline {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Curve extends Polyline implements CurveBuilder {
+    private final int STEPS = 40;
     public Connection connection;
     public BooleanProperty isItUsed = new SimpleBooleanProperty(false);
     public Color color ;
@@ -22,5 +28,21 @@ public class Curve extends Polyline {
             sum += Math.hypot(x1-x0, y1-y0);
         }
         return sum;
+    }
+
+    @Override
+    public void build(Point2D StartPoint, Point2D EndPoint) {
+        double dx = EndPoint.getX() - StartPoint.getX();
+        double dy = EndPoint.getY() - StartPoint.getY();
+
+        List<Double> points = new ArrayList<>();
+        for (int i = 0; i <= STEPS; i++) {
+            double t = (double) i / STEPS;
+            points.add(StartPoint.getX() + dx * t);
+            points.add(StartPoint.getY() + dy * Math.pow(t, 3));
+        }
+
+
+        this.getPoints().setAll(points);
     }
 }

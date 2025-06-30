@@ -33,6 +33,15 @@ public class SystemView extends Pane {
         setPrefSize(systemWidth, systemHeight);
         this.systemType = systemType;
         this.behavior = SystemBehaviorFactory.create(systemType);
+
+
+        String style =
+                "-fx-background-color: #781305;" +
+                        " -fx-background-radius: 5;" +
+                        " -fx-border-color: #5f0f04;" +
+                        " -fx-border-width: 2;" +
+                        " -fx-border-radius: 5;";
+        setStyle(style);
     }
 
     public SystemTypes getSystemType() {

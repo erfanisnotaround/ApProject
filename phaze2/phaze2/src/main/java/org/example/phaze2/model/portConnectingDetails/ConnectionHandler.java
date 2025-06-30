@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.connectionsAndMaking.WireRendererManager;
@@ -17,7 +18,8 @@ import org.example.phaze2.model.levelDetails.SystemView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConnectionHandler implements CurveBuilder {
+public class ConnectionHandler {
+    private final Pane Container;
     private final ConnectionUI connectionUI;
     private final ConnectionChecker ruleEngine;
     private final WireManager wireManager;
@@ -38,27 +40,28 @@ public class ConnectionHandler implements CurveBuilder {
 
     public ConnectionHandler(WireManager wireManager,
                               WireRendererManager wireRenderer
-    ,ConnectionUI connectionUI) {
+    ,ConnectionUI connectionUI , Pane container) {
 
         this.wireManager = wireManager;
         this.ruleEngine = new ConnectionChecker(wireManager);
         this.registry = new ConnectionRegistry();
         this.wireRenderer = wireRenderer;
         this.connectionUI = connectionUI;
+        this.Container = container;
     }
     public void onPress(MouseEvent mouseEvent) {
         Node ExitNode = (Node) mouseEvent.getSource();
-        if (registry.getExitGates().contains(ExitNode)) return;
+        if (!registry.getExitGates().contains(ExitNode)) return;
         Point2D center = getCenterInScene(ExitNode);
-        StartPoint = ExitNode.sceneToLocal(center);
+        StartPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(center);
         startX = StartPoint.getX();
         startY = StartPoint.getY();
         startGate = ExitNode;
 
         currentCurve = new Curve();
-        currentCurve.setStrokeWidth(3);
+        currentCurve.setStrokeWidth(5);
         currentCurve.setStroke(Color.GREEN);
-        wireRenderer.getLayerManager().addCurve(currentCurve);
+        wireRenderer.render(currentCurve);
         mouseEvent.consume();
     }
 
@@ -66,7 +69,7 @@ public class ConnectionHandler implements CurveBuilder {
         if (currentCurve == null) return;
 
         EndPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(dragEvent.getSceneX(), dragEvent.getSceneY());
-        build(StartPoint, EndPoint);
+        currentCurve.build(StartPoint, EndPoint);
 
         double length = currentCurve.ApproximateLength();
         currentCurve.setStroke(wireManager.canUse(length) ? Color.GREEN : Color.RED);
@@ -79,7 +82,7 @@ public class ConnectionHandler implements CurveBuilder {
         if (currentCurve == null) return;
 
         EndPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(e.getSceneX(), e.getSceneY());
-        build(StartPoint , EndPoint);
+        currentCurve.build(StartPoint , EndPoint);
 
         double finalLen = currentCurve.ApproximateLength();
         Point2D scenePt = new Point2D(e.getSceneX(), e.getSceneY());
@@ -94,7 +97,6 @@ public class ConnectionHandler implements CurveBuilder {
                     Curve myCurve = currentCurve;
                     Connection conn = new Connection(fromInfo, toInfo, myCurve, startGate, gate);
                     myCurve.setStroke(Color.GREEN);
-
                     addConnection(conn);
 
                     if (myCurve!=null){
@@ -135,6 +137,7 @@ public class ConnectionHandler implements CurveBuilder {
         registry.removeConnection(conn);
         wireManager.removeWire(conn.getCurve().ApproximateLength());
         wireRenderer.remove(conn.getCurve());
+        Container.getChildren().remove(conn.getCurve());
     }
 
     public void RegisterEnter(Node gate , SystemView system, int subIndex, PortTypes type) {
@@ -163,18 +166,5 @@ public class ConnectionHandler implements CurveBuilder {
     }
 
 
-    @Override
-    public void build(Point2D StartPoint, Point2D EndPoint) {
-        double dx = EndPoint.getX() - StartPoint.getX();
-        double dy = EndPoint.getY() - StartPoint.getY();
 
-        List<Double> points = new ArrayList<>();
-        for (int i = 0; i <= STEPS; i++) {
-            double t = (double) i / STEPS;
-            points.add(StartPoint.getX() + dx * t);
-            points.add(StartPoint.getY() + dy * Math.pow(t, 3)); // one-bend cubic
-        }
-
-        currentCurve.getPoints().setAll(points);
-    }
 }

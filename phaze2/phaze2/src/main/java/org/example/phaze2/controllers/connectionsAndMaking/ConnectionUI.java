@@ -24,7 +24,7 @@ public class ConnectionUI {
         this.Container = Container;
         this.wireManager = wireManager;
         curveLayerManager = new CurveLayerManager(Container);
-        connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(curveLayerManager) , this);
+        connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(curveLayerManager) , this , Container);
     }
     public void registerExitGate(Node gate, SystemView system, int subIndex, PortTypes type) {
         connectionHandler.RegisterExitGate(gate, system, subIndex, type);

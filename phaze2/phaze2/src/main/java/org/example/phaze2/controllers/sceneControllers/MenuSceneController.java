@@ -5,10 +5,10 @@ import javafx.scene.control.Button;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.constants.Constants;
-import org.example.phaze2.model.controllersInterfaces.Initializer;
+import org.example.phaze2.model.controllersInterfaces.Maker;
 import org.example.phaze2.model.sceneModel.MenuModel;
 
-public class MenuSceneController implements Initializer, ControlledScreen {
+public class MenuSceneController implements Maker, ControlledScreen {
     private SceneManager sceneManager;
     private MenuModel menuModel = new MenuModel();
 
@@ -29,7 +29,7 @@ public class MenuSceneController implements Initializer, ControlledScreen {
     }
 
     @Override
-    public void initialize() {
+    public void MakeFirst() {
         StartButton.setOnAction(event -> {
             startButtonClicked();
         });

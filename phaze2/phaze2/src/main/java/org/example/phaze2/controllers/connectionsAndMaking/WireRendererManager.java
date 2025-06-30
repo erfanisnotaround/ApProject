@@ -14,6 +14,7 @@ public class WireRendererManager implements WireRenderer {
     }
     @Override
     public void render(Curve curve) {
+
         layerManager.addCurve(curve);
     }
 

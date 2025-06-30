@@ -59,7 +59,6 @@ public class SystemProcessor implements Runnable{
         subSystemView.setLayoutX(CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems());
         subSystemView.setLayoutY(CurrentLevelConstants.getInstance().getHeightOfSubSystems() * index +
                 CurrentLevelConstants.getInstance().getUpperHeight());
-        systemView.getChildren().add(subSystemView);
 
         putPorts(systemView , subSystemView , index);
 
@@ -69,21 +68,21 @@ public class SystemProcessor implements Runnable{
             Shape EnterGate = subSystemView.getEnterGate().createShape();
 
 
-            EnterGate.setLayoutX(CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/2);
+            EnterGate.setLayoutX(CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/4);
             EnterGate.setLayoutY(CurrentLevelConstants.getInstance().getUpperHeight()  +
                     index * CurrentLevelConstants.getInstance().getHeightOfSubSystems() +
                     CurrentLevelConstants.getInstance().getHeightOfSubSystems()/2);
 
 
             connectionUI.registerEnterGate(EnterGate , systemView , index , subSystemView.getEnterGate());
-            systemView.getChildren().add(EnterGate);
+            systemView.getChildren().add( EnterGate);
         }
 
         if (subSystemView.isDoesItHavaExitGate()){
             Shape ExitGate = subSystemView.getExitGate().createShape();
 
 
-            ExitGate.setLayoutX(systemView.getWidth() - CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/2);
+            ExitGate.setLayoutX(CurrentLevelConstants.getInstance().getWidth() - CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/2);
             ExitGate.setLayoutY(CurrentLevelConstants.getInstance().getUpperHeight()  +
                     index * CurrentLevelConstants.getInstance().getHeightOfSubSystems() +
                     CurrentLevelConstants.getInstance().getHeightOfSubSystems()/2);
