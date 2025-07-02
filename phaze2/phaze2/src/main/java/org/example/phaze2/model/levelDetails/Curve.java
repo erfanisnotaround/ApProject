@@ -13,7 +13,7 @@ import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Curve extends Polyline implements CurveBuilder {
+public class Curve extends Polyline implements CurveBuilder , Runnable {
     private final int STEPS = 40;
     public Connection connection;
     public BooleanProperty isItUsed = new SimpleBooleanProperty(false);
@@ -44,5 +44,10 @@ public class Curve extends Polyline implements CurveBuilder {
 
 
         this.getPoints().setAll(points);
+    }
+
+    @Override
+    public void run() {
+
     }
 }

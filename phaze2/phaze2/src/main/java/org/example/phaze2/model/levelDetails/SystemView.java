@@ -12,6 +12,7 @@ import org.example.phaze2.model.levelDetails.systemDuties.SystemBehaviorFactory;
 import java.util.ArrayList;
 
 public class SystemView extends Pane {
+    private boolean isItDown = false;
     private final SystemTypes systemType;
     private final SystemBehavior behavior;
     private final double systemHeight;
@@ -144,5 +145,13 @@ public class SystemView extends Pane {
 
     public void setLightBoolean(boolean lightBoolean) {
         this.lightBoolean.set(lightBoolean);
+    }
+
+    public boolean isItDown() {
+        return isItDown;
+    }
+
+    public void setItDown(boolean itDown) {
+        isItDown = itDown;
     }
 }

@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 public class SystemView extends Pane {
+
     public BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
     public Button startButton;
     public Light light;

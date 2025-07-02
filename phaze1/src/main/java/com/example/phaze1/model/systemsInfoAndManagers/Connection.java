@@ -20,7 +20,6 @@ public class Connection {
         this.fromNode = fromNode;
         this.toNode   = toNode;
 
-        // make absolutely sure the curve points back at this connection:
         this.curve.connection = this;
     }
 
