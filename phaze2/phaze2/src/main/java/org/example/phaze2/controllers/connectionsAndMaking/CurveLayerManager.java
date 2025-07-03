@@ -13,7 +13,7 @@ public class CurveLayerManager  {
     }
 
     public void addCurve(Curve curve) {
-        layer.getChildren().addFirst(curve);
+        layer.getChildren().addLast(curve);
     }
 
     public void removeCurve(Curve curve) {

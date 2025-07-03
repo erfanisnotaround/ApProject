@@ -59,8 +59,8 @@ public class ConnectionHandler {
         startGate = ExitNode;
 
         currentCurve = new Curve();
-        currentCurve.setStrokeWidth(5);
-        currentCurve.setStroke(Color.GREEN);
+//        currentCurve.setStrokeWidth(5);
+        currentCurve.setFill(Color.GREEN);
         wireRenderer.render(currentCurve);
         mouseEvent.consume();
     }
@@ -71,8 +71,8 @@ public class ConnectionHandler {
         EndPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(dragEvent.getSceneX(), dragEvent.getSceneY());
         currentCurve.build(StartPoint, EndPoint);
 
-        double length = currentCurve.ApproximateLength();
-        currentCurve.setStroke(wireManager.canUse(length) ? Color.GREEN : Color.RED);
+        double length = currentCurve.ApproximateLength(90);
+        currentCurve.setFill(wireManager.canUse(length) ? Color.GREEN : Color.RED);
         dragEvent.consume();
     }
 
@@ -84,7 +84,7 @@ public class ConnectionHandler {
         EndPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(e.getSceneX(), e.getSceneY());
         currentCurve.build(StartPoint , EndPoint);
 
-        double finalLen = currentCurve.ApproximateLength();
+        double finalLen = currentCurve.ApproximateLength(100);
         Point2D scenePt = new Point2D(e.getSceneX(), e.getSceneY());
         PortInfo fromInfo = registry.getPortMap().get(startGate);
 
@@ -96,11 +96,11 @@ public class ConnectionHandler {
                 if (ruleEngine.isConnectionValid(fromInfo , toInfo , finalLen)) {
                     Curve myCurve = currentCurve;
                     Connection conn = new Connection(fromInfo, toInfo, myCurve, startGate, gate);
-                    myCurve.setStroke(Color.GREEN);
+                    myCurve.setFill(Color.GREEN);
                     addConnection(conn);
 
                     if (myCurve!=null){
-                        myCurve.setStroke(Color.GREEN);
+                        myCurve.setFill(Color.GREEN);
                         connectionUI.RegisterCurve(myCurve);
                     }
                     registry.removeGates(startGate , gate);
@@ -130,12 +130,12 @@ public class ConnectionHandler {
     }
     public void addConnection(Connection connection) {
         registry.addConnection(connection);
-        wireManager.addWire(connection.getCurve().ApproximateLength());
+        wireManager.addWire(connection.getCurve().ApproximateLength(100));
     }
 
     public void removeConnection(Connection conn) {
         registry.removeConnection(conn);
-        wireManager.removeWire(conn.getCurve().ApproximateLength());
+        wireManager.removeWire(conn.getCurve().ApproximateLength(100));
         wireRenderer.remove(conn.getCurve());
         Container.getChildren().remove(conn.getCurve());
     }
@@ -151,18 +151,19 @@ public class ConnectionHandler {
     public void selectCurve(Curve c) {
         clearSelection();
         selectedCurve = c;
-        c.setStroke(Color.BLUE);
+        c.setFill(Color.BLUE);
+
         wireRenderer.getLayerManager().requestFocus();
     }
     private void clearSelection() {
         if (selectedCurve != null) {
-            selectedCurve.setStroke(Color.BLACK);
+            selectedCurve.setFill(Color.BLACK);
             selectedCurve = null;
         }
     }
     public void resetSelection() {
         if (selectedCurve == null) return;
-        selectedCurve.setStroke(Color.GREEN);
+        selectedCurve.setFill(Color.GREEN);
     }
 
 

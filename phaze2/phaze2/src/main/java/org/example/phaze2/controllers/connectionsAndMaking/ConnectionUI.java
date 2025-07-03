@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurve;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Curve;
@@ -37,10 +38,19 @@ public class ConnectionUI {
         connectionHandler.RegisterEnter(gate, system, subIndex, type);
     }
     public void RegisterCurve(Curve curve){
-        curve.setOnMouseClicked(evt -> {
-            connectionHandler.selectCurve(curve);
-            evt.consume();
-        });
+        for (CubicCurve cubicCurve : curve.getSegments()){
+            cubicCurve.setOnMouseClicked(evt -> {
+
+                if (evt.getClickCount() == 2) {
+                    double t = curve.closestT(cubicCurve, evt.getX(), evt.getY(), 40);   // helper below
+                    curve.insertAnchor(cubicCurve, t);
+                    evt.consume();
+                }
+                connectionHandler.selectCurve(curve);
+                evt.consume();
+                RegisterCurve(curve);
+            });
+        }
     }
     public void resetSelection(){
         connectionHandler.resetSelection();

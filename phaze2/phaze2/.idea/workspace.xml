@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../phaze1/src/main/java/com/example/phaze1/model/systemsInfoAndManagers/SystemView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Anchor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Geometry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Split.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/CurveLayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/CurveLayerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +27,9 @@
         <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -165,7 +169,8 @@
       <workItem from="1751293033824" duration="304000" />
       <workItem from="1751293363187" duration="1169000" />
       <workItem from="1751294545219" duration="8902000" />
-      <workItem from="1751440910043" duration="895000" />
+      <workItem from="1751440910043" duration="9104000" />
+      <workItem from="1751483999803" duration="5887000" />
     </task>
     <servers />
   </component>
