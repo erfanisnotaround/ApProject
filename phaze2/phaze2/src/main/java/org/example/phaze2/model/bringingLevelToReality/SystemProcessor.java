@@ -7,6 +7,7 @@ import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,8 @@ public class SystemProcessor implements Runnable{
         }
     }
     public SystemView processSystem(System system) {
-        SystemView systemView = new SystemView(system.getSystemType() ,system.getNumberOfSubSystems());
+        SystemView systemView = SystemBehaviorFactory.create(system);
         MakeOnlySystem(systemView , system);
-
 
         return systemView;
     }

@@ -13,12 +13,22 @@ public class WireRendererManager implements WireRenderer {
         return layerManager;
     }
     @Override
-    public void render(Node object) {
+    public void renderNode(Node object) {
         layerManager.addNode(object);
     }
 
     @Override
-    public void remove(Node object) {
+    public void removeNode(Node object) {
         layerManager.removeNode(object);
+    }
+
+    @Override
+    public void renderCurve(Curve curve) {
+        layerManager.addCurve(curve);
+    }
+
+    @Override
+    public void removeCurve(Curve curve) {
+        layerManager.removeCurve(curve);
     }
 }

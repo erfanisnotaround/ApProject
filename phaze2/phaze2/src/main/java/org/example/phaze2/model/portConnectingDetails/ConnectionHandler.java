@@ -58,7 +58,7 @@ public class ConnectionHandler {
         currentCurve = new Curve();
 //        currentCurve.setStrokeWidth(5);
         currentCurve.setFill(Color.GREEN);
-        wireRenderer.render(currentCurve);
+        wireRenderer.renderCurve(currentCurve);
         mouseEvent.consume();
     }
 
@@ -105,7 +105,7 @@ public class ConnectionHandler {
 
                     cleanup();
                 } else {
-                    wireRenderer.remove(currentCurve);
+                    wireRenderer.removeNode(currentCurve);
                 }
                 cleanup();
                 e.consume();
@@ -113,7 +113,7 @@ public class ConnectionHandler {
             }
         }
 
-        wireRenderer.remove(currentCurve);
+        wireRenderer.removeNode(currentCurve);
         cleanup();
         e.consume();
     }
@@ -123,7 +123,7 @@ public class ConnectionHandler {
         curve.build(curve.getFirstPoint(), curve.getLastPoint());
         if (!wireManager.canUse(curve.ApproximateLength())) {
             curve.setFill(Color.RED);
-            System.out.println("bio bio ");
+
         }
         System.out.println(curve.ApproximateLength());
 
@@ -149,8 +149,7 @@ public class ConnectionHandler {
             curve.setLatestAcceptableLength(curve.ApproximateLength());
         }
         curve.setFill(Color.GREEN);
-        System.out.println(curve.ApproximateLength()+ " length");
-        System.out.println(wireManager.remaining() + " remaining");
+
     }
     private void cleanup() {
         currentCurve = null;
@@ -169,7 +168,7 @@ public class ConnectionHandler {
     public void removeConnection(Connection conn) {
         registry.removeConnection(conn);
         wireManager.removeWire(conn.getCurve().ApproximateLength());
-        wireRenderer.remove(conn.getCurve());
+        wireRenderer.removeNode(conn.getCurve());
         Container.getChildren().remove(conn.getCurve());
     }
 

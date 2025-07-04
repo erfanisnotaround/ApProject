@@ -2,6 +2,7 @@ package org.example.phaze2.model.bringingLevelToReality;
 
 import org.example.phaze2.model.jsonRefrencesAndLOadings.PocketLoading;
 import org.example.phaze2.model.levelDetails.Pocket;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,7 @@ public class PocketProcessor implements Runnable {
         }
     }
     private Pocket processPocket(PocketLoading pocketLoading) {
-        Pocket pocket = new Pocket();
-
-        pocket.setType(pocketLoading.getType());
+        Pocket pocket = PocketMoveFactory.giveType(pocketLoading.getType());
         pocket.setDelay(pocketLoading.getDelay());
 
         return pocket;

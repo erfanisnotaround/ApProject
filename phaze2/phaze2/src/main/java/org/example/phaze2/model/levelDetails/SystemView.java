@@ -13,7 +13,11 @@ import java.util.ArrayList;
 public class SystemView extends Pane {
     private boolean isItDown = false;
     private final SystemTypes systemType;
-    private final SystemBehavior behavior;
+
+
+    private  SystemBehavior behavior;  // nakaramad fellan
+
+
     private final double systemHeight;
     private final double systemWidth = CurrentLevelConstants.getInstance().getWidth();
     private BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
@@ -32,7 +36,7 @@ public class SystemView extends Pane {
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
         setPrefSize(systemWidth, systemHeight);
         this.systemType = systemType;
-        this.behavior = SystemBehaviorFactory.create(systemType);
+
 
 
         String style =

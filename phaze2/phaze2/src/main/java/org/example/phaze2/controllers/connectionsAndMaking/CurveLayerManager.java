@@ -11,8 +11,8 @@ public class CurveLayerManager  {
         this.layer = layer;
     }
 
-    public void addShape(Node curve) {
-        layer.getChildren().addLast(curve);
+    public void addCurve(Node curve) {
+        layer.getChildren().addFirst(curve);
     }
 
     public void removeCurve(Curve curve) {

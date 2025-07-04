@@ -1,4 +1,4 @@
-package org.example.phaze2.model.levelDetails.systemDutiesAndTypes;
+package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior;
 
 import org.example.phaze2.model.levelDetails.Curve;
 
