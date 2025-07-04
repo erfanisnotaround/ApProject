@@ -2,12 +2,11 @@ package org.example.phaze2.model.levelDetails;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.SystemTypes;
-import org.example.phaze2.model.levelDetails.systemDuties.SystemBehavior;
-import org.example.phaze2.model.levelDetails.systemDuties.SystemBehaviorFactory;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
 
 import java.util.ArrayList;
 

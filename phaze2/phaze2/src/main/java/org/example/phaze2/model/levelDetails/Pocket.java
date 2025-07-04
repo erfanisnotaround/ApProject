@@ -1,10 +1,8 @@
 package org.example.phaze2.model.levelDetails;
 
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.systemDuties.Movable;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.Movable;
 
 public class Pocket extends Polygon implements Movable {
     private PocketTypes type;

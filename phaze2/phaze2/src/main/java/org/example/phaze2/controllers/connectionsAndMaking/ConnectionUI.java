@@ -1,19 +1,16 @@
 package org.example.phaze2.controllers.connectionsAndMaking;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurve;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.constants.PortTypes;
+import org.example.phaze2.model.levelDetails.Anchor;
 import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.portConnectingDetails.ConnectionChecker;
 import org.example.phaze2.model.portConnectingDetails.ConnectionHandler;
-
-import javax.swing.plaf.ColorUIResource;
 
 public class ConnectionUI {
     Pane Container;
@@ -38,19 +35,46 @@ public class ConnectionUI {
         connectionHandler.RegisterEnter(gate, system, subIndex, type);
     }
     public void RegisterCurve(Curve curve){
-        for (CubicCurve cubicCurve : curve.getSegments()){
-            cubicCurve.setOnMouseClicked(evt -> {
+        curve.setOnMouseClicked(evt -> {
 
-                if (evt.getClickCount() == 2) {
-                    double t = curve.closestT(cubicCurve, evt.getX(), evt.getY(), 40);   // helper below
-                    curve.insertAnchor(cubicCurve, t);
-                    evt.consume();
-                }
+            if (evt.getClickCount() == 2) {
+                Anchor anchor = new Anchor(new Point2D(evt.getSceneX() , evt.getSceneY()));
+                anchor.setFill(Color.GREEN);
+                connectionHandler.addAnchor(curve, anchor);
+                curve.setLatestAcceptableLength(curve.ApproximateLength());
+                Container.getChildren().addLast(anchor);
                 connectionHandler.selectCurve(curve);
+                connectionHandler.DraggingAnchor(curve, anchor);
+                anchor.commit();
+                RegisterAnchor(anchor, curve);
+
+
                 evt.consume();
-                RegisterCurve(curve);
-            });
-        }
+            }
+            else if (evt.getClickCount() == 1) {
+                connectionHandler.selectCurve(curve);
+            }
+            evt.consume();
+            RegisterCurve(curve);
+        });
+    }
+    public void RegisterAnchor(Anchor anchor , Curve curve){
+        anchor.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getClickCount() == 2) {
+                curveLayerManager.removeNode(anchor);
+                curve.RemoveAnchor(anchor);
+                curve.build(curve.getFirstPoint() , curve.getLastPoint());
+            }
+        });
+        anchor.setOnMouseDragged(mouseEvent -> {
+//            curve.RemoveAnchor(anchor);
+            anchor.setCenter(new Point2D(mouseEvent.getSceneX() , mouseEvent.getSceneY()));
+//            curve.AddAnchor(anchor);
+            connectionHandler.DraggingAnchor(curve, anchor);
+        });
+        anchor.setOnMouseReleased(mouseEvent -> {
+            connectionHandler.onAnchorReleased(anchor, curve);
+        });
     }
     public void resetSelection(){
         connectionHandler.resetSelection();

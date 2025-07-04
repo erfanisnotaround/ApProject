@@ -1,145 +1,155 @@
 package org.example.phaze2.model.levelDetails;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
+import javafx.scene.shape.Polyline;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class Curve extends Group implements CurveBuilder, Runnable {
+public class Curve extends Polyline implements CurveBuilder , Runnable {
 
-    private final List<CubicCurve> segments = new ArrayList<>();
-    private final List<Anchor>     anchors  = new ArrayList<>();
 
-    private Color  stroke       = Color.DODGERBLUE;   // note: now mutable
-    private double strokeWidth  = 4;
+    private double latestAcceptableLength;
+    private List<Anchor> middlePoints = new ArrayList<>();
+    private Point2D firstPoint;
+    private Point2D lastPoint;
+    private final double strokeWidth = 4;
+    private Connection connection;
+    private BooleanProperty isItUsed = new SimpleBooleanProperty(false);
 
-    public Connection connection;
-    public BooleanProperty isItUsed = new SimpleBooleanProperty(false);
+    private double StrokeWidth = 4;
+    public Curve() {
+//        middlePoints.add(new Anchor(new Point2D(300 , 200)));
+    }
 
-    /* ───────────────────────── build straight draft ───────────────────────── */
+
+    public void AddAnchor(Anchor a) {
+        middlePoints.add(a);
+    }
+    public void RemoveAnchor(Anchor a) {
+        middlePoints.remove(a);
+    }
+
+    public Point2D getFirstPoint() {
+        return firstPoint;
+    }
+
+    public void setFirstPoint(Point2D firstPoint) {
+        this.firstPoint = firstPoint;
+    }
+
+    public Point2D getLastPoint() {
+        return lastPoint;
+    }
+
+    public void setLastPoint(Point2D lastPoint) {
+        this.lastPoint = lastPoint;
+    }
+
+    @Override
+    public void run() {
+
+    }
+
     @Override
     public void build(Point2D start, Point2D end) {
 
-        getChildren().clear();        // wipe any previous draft
-        segments.clear();
-        anchors .clear();
+        firstPoint = start;
+        lastPoint  = end;
 
-        CubicCurve c = new CubicCurve(
-                start.getX(), start.getY(),
-                start.getX(), start.getY(),     // ctrl1 on start
-                end  .getX(), end  .getY(),     // ctrl2 on end
-                end  .getX(), end  .getY());
-        style(c);
+        List<Point2D> knots = new ArrayList<>();
+        knots.add(start);
+        middlePoints.forEach(a -> knots.add(a.getCenter()));
+        knots.add(end);
 
-        Anchor a0 = createAnchor(start, c.startXProperty(), c.startYProperty());
-        Anchor a1 = createAnchor(end,   c.endXProperty(),   c.endYProperty());
+        ObservableList<Double> poly = getPoints();
+        poly.clear();
+        if (knots.size() < 2) return;
 
-        c.controlX1Property().bindBidirectional(a0.centerXProperty());
-        c.controlY1Property().bindBidirectional(a0.centerYProperty());
-        c.controlX2Property().bindBidirectional(a1.centerXProperty());
-        c.controlY2Property().bindBidirectional(a1.centerYProperty());
+        final double STEP = 0.05;   // smaller → smoother, larger → faster
+        for (int i = 0; i < knots.size() - 1; i++) {
+            Point2D p0 = (i == 0)               ? knots.get(i)     : knots.get(i - 1);
+            Point2D p1 =                         knots.get(i);
+            Point2D p2 =                         knots.get(i + 1);
+            Point2D p3 = (i + 2 < knots.size()) ? knots.get(i + 2) : p2;
 
-        anchors.add(a0); anchors.add(a1);
-        segments.add(c);
-
-        getChildren().addAll(c, a0, a1);
+            for (double t = 0; t <= 1.0; t += STEP) {
+                Point2D pt = catmullRom(p0, p1, p2, p3, t);
+                poly.addAll(pt.getX(), pt.getY());
+            }
+        }
+        poly.addAll(end.getX(), end.getY());
+        setStrokeWidth(strokeWidth);
     }
-
-    public void insertAnchor(CubicCurve seg, double t) {
-
-        Split split = Split.from(seg, t);
-        int idx = segments.indexOf(seg);
-
-        segments.remove(idx);
-        segments.add(idx,     split.left());
-        segments.add(idx + 1, split.right());
-
-        getChildren().remove(seg);
-        getChildren().addAll(split.left(), split.right());
-
-        Anchor a = createAnchor(split.shared(),
-                split.right().startXProperty(),
-                split.right().startYProperty());
-        segmentsBindings(split, a);
-
-        anchors.add(idx + 1, a);
-        getChildren().add(a);
-
-        retuneNeighbours(a);
+    private static Point2D catmullRom(Point2D p0, Point2D p1,
+                                      Point2D p2, Point2D p3, double t) {
+        double t2 = t * t;
+        double t3 = t2 * t;
+        double x = 0.5 * ((2 * p1.getX())
+                + (-p0.getX() + p2.getX()) * t
+                + (2 * p0.getX() - 5 * p1.getX() + 4 * p2.getX() - p3.getX()) * t2
+                + (-p0.getX() + 3 * p1.getX() - 3 * p2.getX() + p3.getX()) * t3);
+        double y = 0.5 * ((2 * p1.getY())
+                + (-p0.getY() + p2.getY()) * t
+                + (2 * p0.getY() - 5 * p1.getY() + 4 * p2.getY() - p3.getY()) * t2
+                + (-p0.getY() + 3 * p1.getY() - 3 * p2.getY() + p3.getY()) * t3);
+        return new Point2D(x, y);
     }
-
-    public double ApproximateLength(int samplesPerSegment) {
+    public double ApproximateLength() {
+        ObservableList<Double> p = getPoints();
         double len = 0;
-        for (CubicCurve s : segments) len += Geometry.approxCubicLen(s, samplesPerSegment);
+        for (int i = 2; i < p.size(); i += 2) {
+            double x0 = p.get(i - 2), y0 = p.get(i - 1);
+            double x1 = p.get(i    ), y1 = p.get(i + 1);
+            len += Math.hypot(x1 - x0, y1 - y0);
+        }
         return len;
     }
-    public List<CubicCurve> getSegments() { return segments; }
-    public List<Anchor>     getAnchors()  { return anchors;  }
-
-    public void setFill(Color c) {
-        stroke = c;
-        for (CubicCurve s : segments) s.setStroke(c);
-    }
-
-    public double closestT(CubicCurve span, double mx, double my, int samples) {
-        double bestT = 0, bestD = Double.MAX_VALUE;
-        for (int i = 0; i <= samples; i++) {
-            double t = (double) i / samples;
-            Point2D p = Geometry.bezier(span, t);
-            double d = p.distance(mx, my);
-            if (d < bestD) { bestD = d; bestT = t; }
-        }
-        return bestT;
+    public void setFill(Color color) {
+        setStroke(color);
     }
 
 
-
-    private Anchor createAnchor(Point2D p,
-                                javafx.beans.property.DoubleProperty x,
-                                javafx.beans.property.DoubleProperty y) {
-        x.set(p.getX());  y.set(p.getY());
-        Anchor a = new Anchor(Color.ORANGE, x, y ,() -> retuneNeighbours(a));
-        return a;
-    }
-    private void style(CubicCurve c) {
-        c.setStroke(stroke); c.setStrokeWidth(strokeWidth); c.setFill(null);
-    }
-    private void segmentsBindings(Split s, Anchor a) {
-        s.left() .endXProperty().bindBidirectional(a.centerXProperty());
-        s.left() .endYProperty().bindBidirectional(a.centerYProperty());
+    public Connection getConnection() {
+        return connection;
     }
 
-    private void retuneNeighbours(Anchor moved) {
-        int i = anchors.indexOf(moved);
-        if (i < 0) return;
-
-        if (i > 0) retuneSpan(i - 1);           // span on the left
-        if (i < segments.size() - 1) retuneSpan(i);     // span on the right
-    }
-    private void retuneSpan(int spanIndex) {
-        Anchor p0 = (spanIndex == 0)               ? anchors.get(0) : anchors.get(spanIndex - 1);
-        Anchor p1 = anchors.get(spanIndex);
-        Anchor p2 = anchors.get(spanIndex + 1);
-        Anchor p3 = (spanIndex + 2 < anchors.size()) ? anchors.get(spanIndex + 2) : anchors.get(spanIndex + 1);
-
-        final double t = 0.5;           // Catmull-Rom tension 0.5
-
-        double c1x = p1.getCenterX() + (p2.getCenterX() - p0.getCenterX()) * t / 3;
-        double c1y = p1.getCenterY() + (p2.getCenterY() - p0.getCenterY()) * t / 3;
-        double c2x = p2.getCenterX() - (p3.getCenterX() - p1.getCenterX()) * t / 3;
-        double c2y = p2.getCenterY() - (p3.getCenterY() - p1.getCenterY()) * t / 3;
-
-        CubicCurve span = segments.get(spanIndex);
-        span.setControlX1(c1x); span.setControlY1(c1y);
-        span.setControlX2(c2x); span.setControlY2(c2y);
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
-    @Override public void run() { }
+    public boolean isIsItUsed() {
+        return isItUsed.get();
+    }
+
+    public BooleanProperty isItUsedProperty() {
+        return isItUsed;
+    }
+
+    public void setIsItUsed(boolean isItUsed) {
+        this.isItUsed.set(isItUsed);
+    }
+
+
+    public double getLatestAcceptableLength() {
+        return latestAcceptableLength;
+    }
+
+    public void setLatestAcceptableLength(double latestAcceptableLength) {
+        this.latestAcceptableLength = latestAcceptableLength;
+    }
 }

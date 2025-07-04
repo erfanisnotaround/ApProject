@@ -1,38 +1,35 @@
 package org.example.phaze2.model.levelDetails;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Anchor extends Circle {
-    private final Runnable onDragExtras;
-    private static final double R = 6;          // handle radius
+    private Point2D center;
+    private Point2D latestCord;
 
-    public Anchor(Color fill,
-                  DoubleProperty x, DoubleProperty y , Runnable extras) {
+    public Anchor(Point2D center) {
+        super(center.getX() , center.getY() , 6);
+        this.center = center;
 
-        super(x.get(), y.get(), R);
-        this.onDragExtras = extras;
-        setFill(fill.deriveColor(1, 1, 1, 0.9));
-        setStroke(Color.BLACK);
-        setStrokeWidth(1);
-
-        centerXProperty().bindBidirectional(x);
-        centerYProperty().bindBidirectional(y);
-
-        enableDrag(x, y);
+        this.setFill(Color.RED);
     }
 
-    private void enableDrag(DoubleProperty x, DoubleProperty y) {
-        setOnMousePressed(e -> getScene().setCursor(Cursor.MOVE));
-        setOnMouseReleased(e -> getScene().setCursor(Cursor.DEFAULT));
+    public Point2D getCenter() {
+        return center;
+    }
+    public void setCenter(Point2D center) {
+        setCenterX( center.getX());
+        setCenterY( center.getY());
+        this.center = center;
+    }
 
-        setOnMouseDragged(e -> {
-            x.set(e.getX());
-            y.set(e.getY());
-            if (onDragExtras != null) onDragExtras.run();
-        });
-
+    public Point2D getLatestCord() {
+        return latestCord;
+    }
+    public void commit(){
+        latestCord = center;
     }
 }

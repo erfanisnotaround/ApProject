@@ -3,7 +3,6 @@ package org.example.phaze2.controllers.connectionsAndMaking;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.portConnectingDetails.WireRenderer;
 
 public class CurveLayerManager  {
     private final Pane layer;
@@ -12,7 +11,7 @@ public class CurveLayerManager  {
         this.layer = layer;
     }
 
-    public void addCurve(Curve curve) {
+    public void addShape(Node curve) {
         layer.getChildren().addLast(curve);
     }
 
@@ -23,6 +22,7 @@ public class CurveLayerManager  {
     public void addNode(Node node) {
         layer.getChildren().add(node);
     }
+    public void removeNode(Node node) {layer.getChildren().remove(node);}
 
     public void requestFocus() {
         layer.requestFocus();

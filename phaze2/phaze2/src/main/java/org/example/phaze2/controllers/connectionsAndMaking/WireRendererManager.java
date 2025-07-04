@@ -1,6 +1,6 @@
 package org.example.phaze2.controllers.connectionsAndMaking;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.Node;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.portConnectingDetails.WireRenderer;
 
@@ -13,13 +13,12 @@ public class WireRendererManager implements WireRenderer {
         return layerManager;
     }
     @Override
-    public void render(Curve curve) {
-
-        layerManager.addCurve(curve);
+    public void render(Node object) {
+        layerManager.addNode(object);
     }
 
     @Override
-    public void remove(Curve curve) {
-        layerManager.removeCurve(curve);
+    public void remove(Node object) {
+        layerManager.removeNode(object);
     }
 }

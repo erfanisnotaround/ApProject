@@ -3,7 +3,6 @@ package org.example.phaze2.model.portConnectingDetails;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -11,12 +10,10 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.connectionsAndMaking.WireRendererManager;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.constants.PortTypes;
+import org.example.phaze2.model.levelDetails.Anchor;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConnectionHandler {
     private final Pane Container;
@@ -71,7 +68,7 @@ public class ConnectionHandler {
         EndPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(dragEvent.getSceneX(), dragEvent.getSceneY());
         currentCurve.build(StartPoint, EndPoint);
 
-        double length = currentCurve.ApproximateLength(90);
+        double length = currentCurve.ApproximateLength();
         currentCurve.setFill(wireManager.canUse(length) ? Color.GREEN : Color.RED);
         dragEvent.consume();
     }
@@ -84,7 +81,7 @@ public class ConnectionHandler {
         EndPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(e.getSceneX(), e.getSceneY());
         currentCurve.build(StartPoint , EndPoint);
 
-        double finalLen = currentCurve.ApproximateLength(100);
+        double finalLen = currentCurve.ApproximateLength();
         Point2D scenePt = new Point2D(e.getSceneX(), e.getSceneY());
         PortInfo fromInfo = registry.getPortMap().get(startGate);
 
@@ -96,6 +93,7 @@ public class ConnectionHandler {
                 if (ruleEngine.isConnectionValid(fromInfo , toInfo , finalLen)) {
                     Curve myCurve = currentCurve;
                     Connection conn = new Connection(fromInfo, toInfo, myCurve, startGate, gate);
+                    myCurve.setConnection(conn);
                     myCurve.setFill(Color.GREEN);
                     addConnection(conn);
 
@@ -119,6 +117,41 @@ public class ConnectionHandler {
         cleanup();
         e.consume();
     }
+
+    public void addAnchor(Curve curve , Anchor anchor) {
+        curve.AddAnchor(anchor);
+        curve.build(curve.getFirstPoint(), curve.getLastPoint());
+        if (!wireManager.canUse(curve.ApproximateLength())) {
+            curve.setFill(Color.RED);
+            System.out.println("bio bio ");
+        }
+        System.out.println(curve.ApproximateLength());
+
+    }
+    public void DraggingAnchor(Curve curve , Anchor anchor) {
+
+        curve.build(curve.getFirstPoint() , curve.getLastPoint());
+
+        curve.setFill(wireManager.canUse(curve.ApproximateLength()) ? Color.GREEN : Color.RED);
+
+
+    }
+    public void onAnchorReleased(Anchor anchor , Curve curve) {
+        if (!wireManager.canUse(curve.ApproximateLength())) {
+            anchor.setCenter(anchor.getLatestCord());
+            curve.build(curve.getFirstPoint() , curve.getLastPoint());
+
+        }
+        else {
+            wireManager.removeWire(curve.getLatestAcceptableLength());
+            wireManager.addWire(curve.ApproximateLength());
+            anchor.commit();
+            curve.setLatestAcceptableLength(curve.ApproximateLength());
+        }
+        curve.setFill(Color.GREEN);
+        System.out.println(curve.ApproximateLength()+ " length");
+        System.out.println(wireManager.remaining() + " remaining");
+    }
     private void cleanup() {
         currentCurve = null;
         startGate    = null;
@@ -130,12 +163,12 @@ public class ConnectionHandler {
     }
     public void addConnection(Connection connection) {
         registry.addConnection(connection);
-        wireManager.addWire(connection.getCurve().ApproximateLength(100));
+        wireManager.addWire(connection.getCurve().ApproximateLength());
     }
 
     public void removeConnection(Connection conn) {
         registry.removeConnection(conn);
-        wireManager.removeWire(conn.getCurve().ApproximateLength(100));
+        wireManager.removeWire(conn.getCurve().ApproximateLength());
         wireRenderer.remove(conn.getCurve());
         Container.getChildren().remove(conn.getCurve());
     }

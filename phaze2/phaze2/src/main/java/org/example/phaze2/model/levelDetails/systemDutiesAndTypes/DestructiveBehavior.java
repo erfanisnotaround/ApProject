@@ -1,4 +1,4 @@
-package org.example.phaze2.model.levelDetails.systemDuties;
+package org.example.phaze2.model.levelDetails.systemDutiesAndTypes;
 
 public class DestructiveBehavior implements SystemBehavior {
     @Override
