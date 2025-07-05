@@ -1,5 +1,6 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
@@ -12,7 +13,6 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFa
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypeGroup;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.portConnectingDetails.Connection;
-import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Map;

@@ -35,17 +35,16 @@ public class WholeMovement {
         exitConnections = constants.getExitConnections();
         pockets = constants.getPockets();
         systemViews = constants.getSystemViews();
-
-
         startAvailableChecker = new StartAvailableChecker(systemViews);
 
     }
     public void StartSending(){
-        if (!startAvailableChecker.canWeStartConnections()) return;
         getStartSystemView();
 
         for (Pocket pocket : pockets) {
-
+            if (pocket.ReleaseAct(startingSystemView , portInfoMap , exitConnections) == null){
+                
+            }
         }
 
 

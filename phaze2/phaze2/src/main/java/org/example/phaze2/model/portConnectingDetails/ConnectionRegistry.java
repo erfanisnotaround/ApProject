@@ -7,18 +7,16 @@ import org.example.phaze2.model.levelDetails.PortInfo;
 import java.util.*;
 
 public class ConnectionRegistry {
-    private final Map<Node, PortInfo> portInfo = new HashMap<>();
+    Constants constants = Constants.getInstance();
+    private final Map<Node, PortInfo> portInfo = constants.getPortInfo();
     private final Set<Node> exitGates = new HashSet<>();
     private final Set<Node> enterGates = new HashSet<>();
-    private final List<Connection> connections = new ArrayList<>();
-    private final Map<PortInfo, Connection> exitConnections = new HashMap<>();
+    private final List<Connection> connections = constants.getConnections();
+    private final Map<PortInfo, Connection> exitConnections = constants.getExitConnections();
 
     public void registerExit(Node gate, PortInfo info) {
         portInfo.put(gate, info);
         exitGates.add(gate);
-        Constants.getInstance().setExitConnections(exitConnections);
-        Constants.getInstance().setPortInfo(portInfo);
-        Constants.getInstance().setConnections(connections);
     }
 
     public void registerEnter(Node gate, PortInfo info) {

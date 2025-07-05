@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 import org.example.phaze2.controllers.moverController.PathMover;
@@ -12,7 +13,6 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
 import org.example.phaze2.model.portConnectingDetails.Connection;
-import org.w3c.dom.Node;
 
 import java.util.Map;
 import java.util.Random;

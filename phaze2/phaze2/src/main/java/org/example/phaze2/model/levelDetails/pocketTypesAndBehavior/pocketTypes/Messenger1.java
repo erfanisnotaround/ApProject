@@ -1,5 +1,6 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.controllers.moverController.PathPrioritizing;
@@ -8,7 +9,6 @@ import org.example.phaze2.model.levelDetails.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.portConnectingDetails.Connection;
-import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Map;
@@ -42,12 +42,17 @@ public class Messenger1 extends Pocket implements Movable {
 
             int randomFirstConnection = random.nextInt(firstConnections.size());
             Connection connection = firstConnections.get(randomFirstConnection);
+
+            move(connection.getCurve());
+
             return connection;
 
         } else if (!secondConnections.isEmpty()) {
 
             int randomSecondConnection = random.nextInt(secondConnections.size());
             Connection connection = secondConnections.get(randomSecondConnection);
+
+            move(connection.getCurve());
             return connection;
 
         }

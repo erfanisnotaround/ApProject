@@ -37,7 +37,7 @@ public class PathPrioritizing {
             if (subSystemView.DoesItHavaExitGate()){
                 PortInfo portInfo = portInfoMap.get(subSystemView.getExitPort());
                 Connection exitConnection = exitConnections.get(portInfo);
-                if (exitConnection == null){continue;}
+                if (exitConnection == null){ continue;}
                 if (subSystemView.getExitGate() == portType && !exitConnection.getCurve().isIsItUsed()){
                     FirstConnection.add(exitConnection);
                 }

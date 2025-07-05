@@ -46,11 +46,11 @@
     ],
     "pockets": [
       {
-        "type": "BIG_1",
+        "type": "Messenger_1",
         "delay": 1.5
       },
       {
-        "type": "BIG_2",
+        "type": "Messenger_2",
         "delay": 2.0
       }
     ]

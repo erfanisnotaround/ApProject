@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
+import org.example.phaze2.controllers.moverController.WholeMovement;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
@@ -21,6 +22,7 @@ import org.example.phaze2.model.controllersInterfaces.Maker;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
+    private WholeMovement movementMaker;
     private SceneManager sceneManager;
     private GameModel gameModel = new GameModel();
     private SystemVisualizer systemVisualizer;
@@ -49,27 +51,27 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
 
 
-        Constants.getInstance().setSystemViews(systemViews);
-        Constants.getInstance().setPockets(pockets);
+        Constants.getInstance().getSystemViews().addAll(systemViews);
+        Constants.getInstance().getPockets().addAll(pockets);
         addingShapes(systemViews , pockets);
 
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10)));
         timeline.setCycleCount(1);
-        timeline.play();
+//        timeline.play();
         timeline.setOnFinished(e ->{
             pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve());
             pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve());
         });
+        movementMaker = new WholeMovement();
 
         MenuButton.setOnAction(event -> {
             menuButtonClicked();
         });
         StartButton.setOnAction(event -> {
             startButtonClicked();
+            movementMaker.StartSending();
         });
-
-
 
 
 

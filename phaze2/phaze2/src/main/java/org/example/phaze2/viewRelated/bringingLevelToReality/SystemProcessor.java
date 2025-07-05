@@ -92,7 +92,7 @@ public class SystemProcessor implements Runnable{
     public void putPorts(SystemView systemView , SubSystemView subSystemView , int index) {
         if (subSystemView.DoesItHaveEnterGate()){
             Shape EnterGate = subSystemView.getEnterGate().createShape();
-
+            subSystemView.setEnterPort(EnterGate);
 
             EnterGate.setLayoutX(CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/4);
             EnterGate.setLayoutY(CurrentLevelConstants.getInstance().getUpperHeight()  +
@@ -107,6 +107,7 @@ public class SystemProcessor implements Runnable{
         if (subSystemView.DoesItHavaExitGate()){
             Shape ExitGate = subSystemView.getExitGate().createShape();
 
+            subSystemView.setExitPort(ExitGate);
 
             ExitGate.setLayoutX(CurrentLevelConstants.getInstance().getWidth() - CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/2);
             ExitGate.setLayoutY(CurrentLevelConstants.getInstance().getUpperHeight()  +

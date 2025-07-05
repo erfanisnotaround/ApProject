@@ -2,6 +2,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.PathMover;
@@ -15,7 +16,6 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
 import org.example.phaze2.model.portConnectingDetails.Connection;
-import org.w3c.dom.Node;
 
 import java.awt.*;
 import java.util.List;
