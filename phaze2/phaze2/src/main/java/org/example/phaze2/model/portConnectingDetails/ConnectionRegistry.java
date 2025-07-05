@@ -1,6 +1,7 @@
 package org.example.phaze2.model.portConnectingDetails;
 
 import javafx.scene.Node;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.PortInfo;
 
 import java.util.*;
@@ -15,6 +16,9 @@ public class ConnectionRegistry {
     public void registerExit(Node gate, PortInfo info) {
         portInfo.put(gate, info);
         exitGates.add(gate);
+        Constants.getInstance().setExitConnections(exitConnections);
+        Constants.getInstance().setPortInfo(portInfo);
+        Constants.getInstance().setConnections(connections);
     }
 
     public void registerEnter(Node gate, PortInfo info) {

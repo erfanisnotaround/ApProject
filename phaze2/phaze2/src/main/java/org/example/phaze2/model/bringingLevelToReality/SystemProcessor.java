@@ -1,10 +1,15 @@
 package org.example.phaze2.model.bringingLevelToReality;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
+import org.example.phaze2.model.levelDetails.Light;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
@@ -42,6 +47,8 @@ public class SystemProcessor implements Runnable{
 
         systemView.setLayoutX(systemInfo.getX());
         systemView.setLayoutY(systemInfo.getY());
+        addNameLabel(systemView , systemInfo.getSystemName());
+        addLight(systemView);
 
 
         for (int i = 0; i < systemInfo.getNumberOfSubSystems(); i++) {
@@ -50,6 +57,26 @@ public class SystemProcessor implements Runnable{
             systemView.getSubSystems().add(subSystemView);
             systemView.getChildren().add(subSystemView);
         }
+    }
+    public void addNameLabel(SystemView systemView, String name) {
+        Label nameLabel = new Label(name);
+        nameLabel.setTextFill(Color.WHITE);
+        nameLabel.setAlignment(Pos.CENTER_LEFT);
+        nameLabel.setPrefSize(CurrentLevelConstants.getInstance().getLightBarWidth()*2, CurrentLevelConstants.getInstance().getLightBarHeight());
+        systemView.getChildren().add(nameLabel);
+        nameLabel.setLayoutX(CurrentLevelConstants.getInstance().getNameLabelX());
+        nameLabel.setLayoutY(CurrentLevelConstants.getInstance().getNameLabelY());
+    }
+
+    public void addLight(SystemView systemView) {
+        CurrentLevelConstants constants = CurrentLevelConstants.getInstance();
+        Light light = new Light(constants.getLightRadius() , constants.getLightBarWidth() , constants.getLightBarHeight());
+
+        systemView.setLight(light);
+        systemView.getChildren().add(light);
+
+        light.setLayoutX(0);
+        light.setLayoutY(0);
     }
     public void processSubSystem(SubSystem subSystem , SubSystemView subSystemView , SystemView systemView , int index) {
         subSystemView.setDoesItHavaExitGate(subSystem.DoesItHavaExitGate());

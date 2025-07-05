@@ -8,9 +8,12 @@ public class CurrentLevelConstants {
     private final double UpperHeight = 20;
     private final double lightBarWidth = 30;
     private final double lightBarHeight = 10;
+    private final double LightRadius = 5;
     private final double HeightOfSubSystems = 40;
     private final double distanceOFRightForSubSystems = 10;
     private final double gapOFBottom = 5;
+    private final double NameLabelX = 60;
+    private final double NameLabelY = 2;
 
 
     private CurrentLevelConstants() {}
@@ -48,5 +51,17 @@ public class CurrentLevelConstants {
 
     public double getGapOFBottom() {
         return gapOFBottom;
+    }
+
+    public double getNameLabelX() {
+        return NameLabelX;
+    }
+
+    public double getNameLabelY() {
+        return NameLabelY;
+    }
+
+    public double getLightRadius() {
+        return LightRadius;
     }
 }

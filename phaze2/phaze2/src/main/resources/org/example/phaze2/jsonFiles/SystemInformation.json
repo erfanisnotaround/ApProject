@@ -6,7 +6,7 @@
     "systems": [
       {
         "systemType": "VPN",
-        "systemName": "MainLogic",
+        "systemName": "Main",
         "x": 100.0,
         "y": 200.0,
         "isItStartSystem": true,
@@ -28,7 +28,7 @@
       },
       {
         "systemType": "SPY",
-        "systemName": "BackupStorage",
+        "systemName": "Backup",
         "x": 400.0,
         "y": 300.0,
         "isItStartSystem": false,
@@ -46,11 +46,11 @@
     ],
     "pockets": [
       {
-        "type": "Messenger_1",
+        "type": "BIG_1",
         "delay": 1.5
       },
       {
-        "type": "SECRET_MESSENGER",
+        "type": "BIG_2",
         "delay": 2.0
       }
     ]

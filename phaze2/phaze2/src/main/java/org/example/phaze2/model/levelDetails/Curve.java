@@ -1,24 +1,16 @@
 package org.example.phaze2.model.levelDetails;
 
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Polyline;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Curve extends Polyline implements CurveBuilder , Runnable {
 
@@ -151,5 +143,8 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
 
     public void setLatestAcceptableLength(double latestAcceptableLength) {
         this.latestAcceptableLength = latestAcceptableLength;
+    }
+
+    public static class Ligth {
     }
 }

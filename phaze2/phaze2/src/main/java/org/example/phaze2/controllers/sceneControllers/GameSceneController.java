@@ -1,8 +1,11 @@
 package org.example.phaze2.controllers.sceneControllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
@@ -10,8 +13,12 @@ import org.example.phaze2.model.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
+import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
+import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.BigPocket1;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
@@ -38,12 +45,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     @Override
     public void MakeFirst() {
         System.out.println(21);
-        MenuButton.setOnAction(event -> {
-            menuButtonClicked();
-        });
-        StartButton.setOnAction(event -> {
-            startButtonClicked();
-        });
+
 
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
@@ -54,6 +56,25 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         Constants.getInstance().setSystemViews(systemViews);
         Constants.getInstance().setPockets(pockets);
         addingShapes(systemViews , pockets);
+
+        pockets.getLast().setLayoutX(200);
+        pockets.getLast().setLayoutY(200);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10)));
+        timeline.setCycleCount(1);
+        timeline.play();
+        timeline.setOnFinished(e ->{
+            pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve());
+            pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve());
+        });
+
+        MenuButton.setOnAction(event -> {
+            menuButtonClicked();
+        });
+        StartButton.setOnAction(event -> {
+            startButtonClicked();
+        });
+
+
 
 
 
@@ -79,11 +100,11 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     private void addingShapes(List<SystemView> systemViews , List<Pocket> pockets) {
 
-        for (Pocket pocket : pockets) {
-            ContainerPane.getChildren().add(pocket);
-        }
         for (SystemView systemView : systemViews) {
             ContainerPane.getChildren().addFirst(systemView);
+        }
+        for (Pocket pocket : pockets) {
+            ContainerPane.getChildren().addFirst(pocket);
         }
     }
 }

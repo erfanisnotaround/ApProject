@@ -5,11 +5,13 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
+import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
 
 public class Pocket extends ImageView implements Movable {
+    protected PathMover pathMover;
     private double distanceFromTheLine = 0;
     private double HP;
     private static int coinsPerEntry;
@@ -19,7 +21,7 @@ public class Pocket extends ImageView implements Movable {
     Movable movable;
     public Pocket(PocketTypes type) {
         this.type = type;
-        movable = PocketMoveFactory.givePocketMovementType(type);
+//        movable = PocketMoveFactory.givePocketMovementType(type);
     }
 
     public static int getCoinsPerEntry() {
@@ -74,5 +76,13 @@ public class Pocket extends ImageView implements Movable {
 
     public void setHP(double HP) {
         this.HP = HP;
+    }
+
+    public PathMover getPathMover() {
+        return pathMover;
+    }
+
+    public void setPathMover(PathMover pathMover) {
+        this.pathMover = pathMover;
     }
 }

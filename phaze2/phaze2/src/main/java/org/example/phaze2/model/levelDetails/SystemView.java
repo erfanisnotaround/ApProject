@@ -17,7 +17,6 @@ public class SystemView extends Pane {
 
     private  SystemBehavior behavior;  // nakaramad fellan
 
-
     private final double systemHeight;
     private final double systemWidth = CurrentLevelConstants.getInstance().getWidth();
     private BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
