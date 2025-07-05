@@ -6,19 +6,28 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
+import org.example.phaze2.model.portConnectingDetails.Connection;
+import org.w3c.dom.Node;
 
-public class Pocket extends ImageView implements Movable {
+import java.util.Map;
+import java.util.Random;
+
+public class Pocket extends ImageView implements Movable , Releasable {
+    protected Random random = new Random();
+    protected PathPrioritizing pathPrioritizing;
     protected PathMover pathMover;
-    private double distanceFromTheLine = 0;
-    private double HP;
-    private static int coinsPerEntry;
-    private BooleanProperty IsItCollided = new SimpleBooleanProperty(false);
-    private PocketTypes type;
-    private double delay;
-    Movable movable;
+    protected double distanceFromTheLine = 0;
+    protected double HP;
+    protected static int coinsPerEntry;
+    protected BooleanProperty IsItCollided = new SimpleBooleanProperty(false);
+    protected PocketTypes type;
+    protected double delay;
+    protected Movable movable;
     public Pocket(PocketTypes type) {
         this.type = type;
 //        movable = PocketMoveFactory.givePocketMovementType(type);
@@ -35,6 +44,11 @@ public class Pocket extends ImageView implements Movable {
     @Override
     public void move(Curve curve) {
         movable.move(curve);
+    }
+
+    @Override
+    public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+        return null;
     }
 
 
@@ -85,4 +99,5 @@ public class Pocket extends ImageView implements Movable {
     public void setPathMover(PathMover pathMover) {
         this.pathMover = pathMover;
     }
+
 }

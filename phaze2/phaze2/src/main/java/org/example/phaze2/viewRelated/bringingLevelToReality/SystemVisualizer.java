@@ -1,12 +1,10 @@
-package org.example.phaze2.model.bringingLevelToReality;
+package org.example.phaze2.viewRelated.bringingLevelToReality;
 
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
-import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.SystemView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SystemVisualizer {

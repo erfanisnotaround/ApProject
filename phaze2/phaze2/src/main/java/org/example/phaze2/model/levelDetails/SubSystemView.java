@@ -5,8 +5,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import org.example.phaze2.model.constants.PortTypes;
 
-import java.awt.*;
-
 public class SubSystemView extends Rectangle {
     private boolean doesItHaveEnterGate;
     private boolean doesItHavaExitGate;
@@ -22,7 +20,7 @@ public class SubSystemView extends Rectangle {
         setFill(Color.DARKORCHID);
     }
 
-    public boolean isDoesItHaveEnterGate() {
+    public boolean DoesItHaveEnterGate() {
         return doesItHaveEnterGate;
     }
 
@@ -30,7 +28,7 @@ public class SubSystemView extends Rectangle {
         this.doesItHaveEnterGate = doesItHaveEnterGate;
     }
 
-    public boolean isDoesItHavaExitGate() {
+    public boolean DoesItHavaExitGate() {
         return doesItHavaExitGate;
     }
 

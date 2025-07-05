@@ -1,11 +1,10 @@
-package org.example.phaze2.model.bringingLevelToReality;
+package org.example.phaze2.viewRelated.bringingLevelToReality;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
-import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
@@ -91,7 +90,7 @@ public class SystemProcessor implements Runnable{
 
     }
     public void putPorts(SystemView systemView , SubSystemView subSystemView , int index) {
-        if (subSystemView.isDoesItHaveEnterGate()){
+        if (subSystemView.DoesItHaveEnterGate()){
             Shape EnterGate = subSystemView.getEnterGate().createShape();
 
 
@@ -105,7 +104,7 @@ public class SystemProcessor implements Runnable{
             systemView.getChildren().add( EnterGate);
         }
 
-        if (subSystemView.isDoesItHavaExitGate()){
+        if (subSystemView.DoesItHavaExitGate()){
             Shape ExitGate = subSystemView.getExitGate().createShape();
 
 

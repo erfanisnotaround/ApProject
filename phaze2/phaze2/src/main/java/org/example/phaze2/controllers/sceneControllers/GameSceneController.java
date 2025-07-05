@@ -9,16 +9,12 @@ import javafx.util.Duration;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
-import org.example.phaze2.model.bringingLevelToReality.SystemVisualizer;
+import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
-import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
-import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.BigPocket1;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
@@ -57,8 +53,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         Constants.getInstance().setPockets(pockets);
         addingShapes(systemViews , pockets);
 
-        pockets.getLast().setLayoutX(200);
-        pockets.getLast().setLayoutY(200);
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10)));
         timeline.setCycleCount(1);
         timeline.play();
