@@ -5,17 +5,31 @@ import javafx.beans.property.SimpleBooleanProperty;
 import org.example.phaze2.model.constants.PortTypes;
 
 public class PortInfo {
-    public final SystemView system;
-    public final int        subIndex;
-    public final boolean    isExit;
-    public final PortTypes type;
-    public BooleanProperty isItReachedDestination ;
+    private final SystemView system;
+    private final int        subIndex;
+    private final boolean    isExit;
+    private final PortTypes type;
 
     public PortInfo(SystemView system, int subIndex, boolean isExit, PortTypes type) {
         this.system   = system;
         this.subIndex = subIndex;
         this.isExit    = isExit;
         this.type      = type;
-        this.isItReachedDestination = new SimpleBooleanProperty(false);
+    }
+
+    public SystemView getSystem() {
+        return system;
+    }
+
+    public int getSubIndex() {
+        return subIndex;
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public PortTypes getType() {
+        return type;
     }
 }

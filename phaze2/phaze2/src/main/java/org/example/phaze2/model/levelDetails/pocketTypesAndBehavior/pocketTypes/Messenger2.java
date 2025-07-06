@@ -25,21 +25,23 @@ public class Messenger2 extends Pocket implements Movable {
         setImage(image);
         setScaleX(0.02);
         setScaleY(0.02);
+//        pathMover = new PathMover(this);
+
         pathMover = new PathMover(this);
-
-
         pathPrioritizing = new PathPrioritizing();
     }
 
     @Override
     public void move(Curve curve) {
-        pathMover.move(curve , 100 , 60 , false);
+        pathMover.move(curve , 100 , 60 , true);
+        System.out.println(curve.getConnection().getFrom().getSystem().getSystemID() + " " + curve.getConnection().getTo().getSystem().getSystemID());
     }
 
     @Override
     public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
-        List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(systemView , PortTypes.SQUARE);
-        List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(systemView , PortTypes.SQUARE);
+        List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(systemView , PortTypes.TRIANGLE);
+        List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(systemView , PortTypes.TRIANGLE);
+
         if (!firstConnections.isEmpty()) {
 
             int randomFirstConnection = random.nextInt(firstConnections.size());

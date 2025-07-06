@@ -10,7 +10,7 @@ public class Connection {
     private Node toNode;
     private Node fromNode;
     private Curve curve;
-    public Connection(PortInfo toInfo, PortInfo fromInfo, Curve curve , Node fromNode, Node toNode) {
+    public Connection (PortInfo fromInfo , PortInfo toInfo, Curve curve , Node fromNode, Node toNode) {
         this.to = toInfo;
         this.from = fromInfo;
         this.curve = curve;
@@ -53,7 +53,7 @@ public class Connection {
         return curve;
     }
 
-    public void setCurve(Curve curve) {
+    public void setCurve(Curve curve)  {
         this.curve = curve;
     }
 }

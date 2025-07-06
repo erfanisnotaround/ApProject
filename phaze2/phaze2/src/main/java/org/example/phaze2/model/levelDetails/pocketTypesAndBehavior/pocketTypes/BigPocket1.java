@@ -37,15 +37,16 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
 
     @Override
     public void move(Curve curve) {
+        System.out.println("Moving curve");
         pathMover.move(curve , 100 , 50 , true);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2300), event -> {
-        }));
-        timeline.setCycleCount(1);
-        timeline.play();
-        timeline.setOnFinished(e -> {
-//            pathMover.restart(-100);
-            pathMover.reverse();
-        });
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2300), event -> {
+//        }));
+//        timeline.setCycleCount(1);
+//        timeline.play();
+//        timeline.setOnFinished(e -> {
+////            pathMover.restart(-100);
+//            pathMover.reverse();
+//        });
     }
 
     @Override

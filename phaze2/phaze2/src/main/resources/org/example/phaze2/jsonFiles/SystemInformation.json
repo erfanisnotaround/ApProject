@@ -1,6 +1,6 @@
 [
   {
-    "MaxWire" : 2700.0,
+    "MaxWire" : 10000.0,
     "numberOfSystems": 2,
     "levelPassed": false,
     "systems": [
@@ -15,14 +15,15 @@
         "SubSystems": [
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": true,
-            "EnterGate": "TRIANGLE",
+            "doesItHavaExitGate": false,
+            "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"
           },
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": false,
-            "EnterGate": "INFINITY"
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
           }
         ]
       },
@@ -31,6 +32,40 @@
         "systemName": "Backup",
         "x": 400.0,
         "y": 300.0,
+        "isItStartSystem": false,
+        "numberOfSubSystems": 1,
+        "isTheLightOn": true,
+        "SubSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
+          }
+        ]
+      },
+      {
+        "systemType": "SPY",
+        "systemName": "Backup2",
+        "x": 400.0,
+        "y": 500.0,
+        "isItStartSystem": false,
+        "numberOfSubSystems": 1,
+        "isTheLightOn": true,
+        "SubSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
+          }
+        ]
+      },
+      {
+        "systemType": "SPY",
+        "systemName": "Backup3",
+        "x": 600.0,
+        "y": 500.0,
         "isItStartSystem": false,
         "numberOfSubSystems": 1,
         "isTheLightOn": true,
@@ -51,7 +86,7 @@
       },
       {
         "type": "Messenger_2",
-        "delay": 2.0
+        "delay": 1.5
       }
     ]
   },

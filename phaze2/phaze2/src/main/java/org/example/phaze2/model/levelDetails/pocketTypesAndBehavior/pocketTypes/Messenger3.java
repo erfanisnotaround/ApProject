@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
@@ -24,6 +25,7 @@ public class Messenger3 extends Pocket implements Movable {
         setImage(image);
         setScaleX(0.1);
         setScaleY(0.1);
+        pathPrioritizing = new PathPrioritizing();
         pathMover = new PathMover(this);
     }
 

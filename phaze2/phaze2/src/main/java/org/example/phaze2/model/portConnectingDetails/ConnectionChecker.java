@@ -13,6 +13,6 @@ public class ConnectionChecker implements  ConnectionValidJudge{
 
     @Override
     public boolean isConnectionValid(PortInfo From, PortInfo To, double wireLength) {
-        return From.type == To.type && wireManager.canUse(wireLength);
+        return From.getType() == To.getType() && wireManager.canUse(wireLength);
     }
 }

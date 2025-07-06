@@ -56,7 +56,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         addingShapes(systemViews , pockets);
 
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(14)));
         timeline.setCycleCount(1);
 //        timeline.play();
         timeline.setOnFinished(e ->{

@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.Pane;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.SystemTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.BigPocket1;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
 
@@ -35,7 +37,6 @@ public class SystemView extends Pane {
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
         setPrefSize(systemWidth, systemHeight);
         this.systemType = systemType;
-
 
 
         String style =

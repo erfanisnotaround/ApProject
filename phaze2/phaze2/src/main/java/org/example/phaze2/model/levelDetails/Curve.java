@@ -23,6 +23,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
     private Connection connection;
     private BooleanProperty isItUsed = new SimpleBooleanProperty(false);
 
+
     private double StrokeWidth = 4;
     public Curve() {
 //        middlePoints.add(new Anchor(new Point2D(300 , 200)));

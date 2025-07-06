@@ -1,7 +1,11 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.PortTypes;
@@ -19,18 +23,23 @@ public class Messenger1 extends Pocket implements Movable {
     public Messenger1(PocketTypes type) {
         super(type);
         setCoinsPerEntry(2);
-        pathMover = new PathMover(this);
+//        pathMover = new PathMover(this);
         setImage(image);
         setScaleX(0.03);
         setScaleY(0.03);
 
 
+        pathMover = new PathMover(this);
         pathPrioritizing = new PathPrioritizing();
+
     }
+    double speed = 200;
 
     @Override
     public void move(Curve curve) {
-        pathMover.move(curve , 200 , 10 , false);
+        pathMover.move(curve , speed , 10 , true);
+
+
     }
 
     @Override
@@ -38,6 +47,8 @@ public class Messenger1 extends Pocket implements Movable {
 
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(systemView , PortTypes.SQUARE);
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(systemView , PortTypes.SQUARE);
+
+
         if (!firstConnections.isEmpty()) {
 
             int randomFirstConnection = random.nextInt(firstConnections.size());

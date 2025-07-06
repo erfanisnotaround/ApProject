@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
@@ -25,6 +26,7 @@ public class Pocket extends ImageView implements Movable , Releasable {
     protected double HP;
     protected static int coinsPerEntry;
     protected BooleanProperty IsItCollided = new SimpleBooleanProperty(false);
+    protected BooleanProperty IsItMoved = new SimpleBooleanProperty(false);
     protected PocketTypes type;
     protected double delay;
     protected Movable movable;
@@ -100,4 +102,16 @@ public class Pocket extends ImageView implements Movable , Releasable {
         this.pathMover = pathMover;
     }
 
+
+    public boolean isIsItMoved() {
+        return IsItMoved.get();
+    }
+
+    public BooleanProperty isItMovedProperty() {
+        return IsItMoved;
+    }
+
+    public void setIsItMoved(boolean isItMoved) {
+        this.IsItMoved.set(isItMoved);
+    }
 }
