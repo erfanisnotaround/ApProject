@@ -3,36 +3,38 @@ package org.example.phaze2.model.levelDetails;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.Pane;
+import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.SystemTypes;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.BigPocket1;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SwitchingPocketMovementInSystems;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
+import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class SystemView extends Pane {
-    private boolean isItDown = false;
-    private final SystemTypes systemType;
+public class SystemView extends Pane implements SystemBehavior , SwitchingPocketMovementInSystems {
+    protected boolean isItDown = false;
+    protected final SystemTypes systemType;
 
 
-    private  SystemBehavior behavior;  // nakaramad fellan
+    protected SystemBehavior behavior;  // nakaramad fellan
 
-    private final double systemHeight;
-    private final double systemWidth = CurrentLevelConstants.getInstance().getWidth();
-    private BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
-    private Light light;
-    private double x;
-    private double y;
-    private String systemID;
-    private boolean isItStartSystem;
-    private int numberOfSubSystems;
-    private boolean isTheLightOn;
-    private Pocket[] capacity = new Pocket[5];
-    private ArrayList<SubSystemView> SubSystems = new ArrayList<>();
-    private BooleanProperty IsItDown = new SimpleBooleanProperty(false);
-
+    protected final double systemHeight;
+    protected final double systemWidth = CurrentLevelConstants.getInstance().getWidth();
+    protected BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
+    protected Light light;
+    protected double x;
+    protected double y;
+    protected String systemID;
+    protected boolean isItStartSystem;
+    protected int numberOfSubSystems;
+    protected boolean isTheLightOn;
+    protected Pocket[] capacity = new Pocket[5];
+    protected ArrayList<SubSystemView> SubSystems = new ArrayList<>();
+    protected BooleanProperty IsItDown = new SimpleBooleanProperty(false);
+    protected PathPrioritizing pathPrioritizing = new PathPrioritizing();
+    protected Random random = new Random();
     public SystemView(SystemTypes systemType , int numberOfSubSystems) {
         this.numberOfSubSystems = numberOfSubSystems;
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
@@ -49,6 +51,15 @@ public class SystemView extends Pane {
         setStyle(style);
     }
 
+    @Override
+    public Connection behave(Pocket EntryPocket) {
+        return null;
+    }
+
+    @Override
+    public void switchPocket(Pocket pocket) {
+
+    }
     public SystemTypes getSystemType() {
         return systemType;
     }
@@ -170,4 +181,6 @@ public class SystemView extends Pane {
     public void setIsItDown(boolean isItDown) {
         this.IsItDown.set(isItDown);
     }
+
+
 }

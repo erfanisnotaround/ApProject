@@ -2,7 +2,6 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -10,13 +9,12 @@ import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.*;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
+import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class Messenger1 extends Pocket implements Movable {
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/square.png").toExternalForm());
@@ -27,17 +25,16 @@ public class Messenger1 extends Pocket implements Movable {
         setImage(image);
         setScaleX(0.03);
         setScaleY(0.03);
-
+        speed = 200;
+        acceleration = 0;
         HP = MaxHp = 2;
+        preferredType = PortTypes.SQUARE;
         pathMover = new PathMover(this , 0);
-        pathPrioritizing = new PathPrioritizing();
-
     }
-    double speed = 200;
 
     @Override
-    public void move(Curve curve) {
-        pathMover.move(curve , speed , 100 , true);
+    public void move(Curve curve, double speed, double acceleration) {
+        pathMover.move(curve , this.speed, 100 , true);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2400), e -> {}));
         timeline.setCycleCount(1);
@@ -51,28 +48,15 @@ public class Messenger1 extends Pocket implements Movable {
     @Override
     public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
 
-        List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(systemView , PortTypes.SQUARE);
-        List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(systemView , PortTypes.SQUARE);
+        Connection exitConnection = systemView.behave(this);
 
-
-        if (!firstConnections.isEmpty()) {
-
-            int randomFirstConnection = random.nextInt(firstConnections.size());
-            Connection connection = firstConnections.get(randomFirstConnection);
-
-            move(connection.getCurve());
-
-            return connection;
-
-        } else if (!secondConnections.isEmpty()) {
-
-            int randomSecondConnection = random.nextInt(secondConnections.size());
-            Connection connection = secondConnections.get(randomSecondConnection);
-
-            move(connection.getCurve());
-            return connection;
-
+        if (exitConnection != null && exitConnection.getFrom().getType().equals(preferredType)) {
+            move(exitConnection.getCurve() , speed, acceleration);
+        } else if (exitConnection != null && !exitConnection.getFrom().getType().equals(preferredType)) {
+            move(exitConnection.getCurve() , speed/2 , acceleration);
         }
-        else return null;
+
+
+        return exitConnection;
     }
 }

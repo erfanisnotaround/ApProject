@@ -9,7 +9,7 @@ import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
+import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -30,27 +30,27 @@ public class BigPocket2 extends Pocket implements Movable {
         setScaleY(0.2);
 
         HP = MaxHp = 10;
+        speed = 200;
+        acceleration = 0;
+        preferredType = PortTypes.ALL;
 
-        pathPrioritizing = new PathPrioritizing();
         pathMover = new PathMover(this , 0);
     }
 
     @Override
-    public void move(Curve curve) {
+    public void move(Curve curve, double speed, double acceleration) {
         pathMover.move(curve , 600 , 50 , false);
     }
 
     @Override
     public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
-        List<Connection> AllConnections = pathPrioritizing.AllSubSystems(systemView , PortTypes.SQUARE);
-        if (!AllConnections.isEmpty()) {
-            int randomSecondConnection = random.nextInt(AllConnections.size());
-            Connection connection = AllConnections.get(randomSecondConnection);
-            move(connection.getCurve());
+        Connection exitConnection = systemView.behave(this);
 
-            return connection;
-
+        if (exitConnection != null) {
+            move(exitConnection.getCurve() , speed, acceleration);
         }
-        else return null;
+
+
+        return exitConnection;
     }
 }

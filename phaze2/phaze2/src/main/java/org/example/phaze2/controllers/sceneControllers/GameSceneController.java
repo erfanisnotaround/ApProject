@@ -19,7 +19,6 @@ import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
@@ -60,8 +59,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         timeline.setCycleCount(1);
 //        timeline.play();
         timeline.setOnFinished(e ->{
-            pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve());
-            pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve());
+//            pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve(), , );
+//            pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve(), , );
         });
 
 

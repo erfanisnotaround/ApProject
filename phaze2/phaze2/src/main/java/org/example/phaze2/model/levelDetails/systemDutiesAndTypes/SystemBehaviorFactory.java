@@ -1,8 +1,8 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes;
 
-import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types.*;
 
 public class SystemBehaviorFactory {
 

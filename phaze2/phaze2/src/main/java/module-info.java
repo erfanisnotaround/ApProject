@@ -19,5 +19,6 @@ module org.example.phaze2 {
     opens org.example.phaze2.model.levelDetails to com.fasterxml.jackson.databind;
     exports org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes to com.fasterxml.jackson.databind;
     exports org.example.phaze2.model.levelDetails to com.fasterxml.jackson.databind;
+    exports org.example.phaze2.controllers.moverController to com.fasterxml.jackson.databind;
 
 }

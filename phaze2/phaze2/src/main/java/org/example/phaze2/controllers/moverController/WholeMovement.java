@@ -32,12 +32,15 @@ public class WholeMovement {
     //checkers and workers har har
 
     StartAvailableChecker startAvailableChecker;
-    private final Map<Connection, ChangeListener<Boolean>> waitingSendListeners = new HashMap<>();
 
 
     // in Class requirmenets
 
     SystemView startingSystemView;
+    private final Map<Connection, ChangeListener<Boolean>> waitingSendListeners = new HashMap<>();
+
+
+
     public WholeMovement() {
         connections = constants.getConnections();
         portInfoMap = constants.getPortInfo();

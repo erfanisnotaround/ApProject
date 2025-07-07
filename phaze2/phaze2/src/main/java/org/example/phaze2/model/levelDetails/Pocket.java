@@ -1,17 +1,14 @@
 package org.example.phaze2.model.levelDetails;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Polygon;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.controllers.moverController.PathPrioritizing;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
+import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
+import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -20,7 +17,6 @@ import java.util.Random;
 
 public class Pocket extends ImageView implements Movable , Releasable {
     protected Random random = new Random();
-    protected PathPrioritizing pathPrioritizing;
     protected PathMover pathMover;
     protected double distanceFromTheLine = 0;
     protected double HP;
@@ -31,6 +27,9 @@ public class Pocket extends ImageView implements Movable , Releasable {
     protected PocketTypes type;
     protected double delay;
     protected Movable movable;
+    protected double speed;
+    protected double acceleration;
+    protected PortTypes preferredType;
     public Pocket(PocketTypes type) {
         this.type = type;
     }
@@ -44,8 +43,8 @@ public class Pocket extends ImageView implements Movable , Releasable {
     }
 
     @Override
-    public void move(Curve curve) {
-        movable.move(curve);
+    public void move(Curve curve, double speed, double acceleration) {
+        movable.move(curve, speed , acceleration );
     }
 
     @Override
@@ -121,5 +120,9 @@ public class Pocket extends ImageView implements Movable , Releasable {
 
     public void setMaxHp(double maxHp) {
         MaxHp = maxHp;
+    }
+
+    public PortTypes getPreferredType() {
+        return preferredType;
     }
 }

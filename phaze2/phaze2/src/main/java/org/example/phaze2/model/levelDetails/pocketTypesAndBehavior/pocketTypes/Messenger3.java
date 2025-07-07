@@ -9,7 +9,7 @@ import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
+import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -28,37 +28,30 @@ public class Messenger3 extends Pocket implements Movable {
         setScaleY(0.1);
 
         HP = MaxHp = 1;
-
-
-        pathPrioritizing = new PathPrioritizing();
+        speed = 200;
+        acceleration = 15;
+        preferredType = PortTypes.INFINITY;
         pathMover = new PathMover(this , 90);
 
     }
 
     @Override
-    public void move(Curve curve) {
+    public void move(Curve curve, double speed, double acceleration) {
         pathMover.move(curve , 100 , 60 , true);
     }
 
     @Override
     public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
-        List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(systemView , PortTypes.SQUARE);
-        List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(systemView , PortTypes.SQUARE);
-        if (!firstConnections.isEmpty()) {
 
-            int randomFirstConnection = random.nextInt(firstConnections.size());
-            Connection connection = firstConnections.get(randomFirstConnection);
-            move(connection.getCurve());
-            return connection;
+        Connection exitConnection = systemView.behave(this);
 
-        } else if (!secondConnections.isEmpty()) {
-
-            int randomSecondConnection = random.nextInt(secondConnections.size());
-            Connection connection = secondConnections.get(randomSecondConnection);
-            move(connection.getCurve());
-            return connection;
-
+        if (exitConnection != null && exitConnection.getFrom().getType().equals(preferredType)) {
+            move(exitConnection.getCurve() , speed, acceleration);
+        } else if (exitConnection != null && !exitConnection.getFrom().getType().equals(preferredType)) {
+            move(exitConnection.getCurve() , speed , -1 * acceleration);
         }
-        else return null;
+
+
+        return exitConnection;
     }
 }

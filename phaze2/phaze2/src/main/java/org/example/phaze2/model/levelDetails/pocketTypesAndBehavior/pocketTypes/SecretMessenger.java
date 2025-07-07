@@ -9,7 +9,7 @@ import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Movable;
+import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypeGroup;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
@@ -25,12 +25,10 @@ public class SecretMessenger extends Pocket implements Movable {
         super(type);
 
         setImage(image);
-        setScaleX(0.04);
-        setScaleY(0.04);
+        setScaleX(0.03);
+        setScaleY(0.03);
         setCoinsPerEntry(5);
-        pathPrioritizing = new PathPrioritizing();
         pathMover = new PathMover(this , 0);
-        chooseTheMoveBehavior();
     }
     private void chooseTheMoveBehavior(){
         int randomBehavior = random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size());
@@ -40,23 +38,12 @@ public class SecretMessenger extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve) {
-        behavior.move(curve);
-
+    public void move(Curve curve, double speed, double acceleration) {
     }
 
     @Override
     public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
-        List<Connection> AllConnections = pathPrioritizing.AllSubSystems(systemView , PortTypes.SQUARE);
-        if (!AllConnections.isEmpty()) {
-            int randomSecondConnection = random.nextInt(AllConnections.size());
-            Connection connection = AllConnections.get(randomSecondConnection);
-
-            move(connection.getCurve());
-
-            return connection;
-
-        }
-        else return null;
+        chooseTheMoveBehavior();
+        return behavior.ReleaseAct(systemView, portInfoMap, exitConnections);
     }
 }

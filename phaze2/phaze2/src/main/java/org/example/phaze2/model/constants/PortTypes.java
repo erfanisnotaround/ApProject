@@ -67,7 +67,14 @@ public enum PortTypes {
             shape.setFill(Color.GREEN);
             return shape;
         }
+    },
+    ALL {
+        @Override
+        public Shape createShape() {
+            return null;
+        }
     };
+
 
     public abstract Shape createShape();
 }
