@@ -26,16 +26,17 @@ public class SecretMessenger extends Pocket implements Movable {
         setScaleX(0.1);
         setScaleY(0.1);
         setCoinsPerEntry(5);
-        pathMover = new PathMover(this);
+        pathMover = new PathMover(this , 0);
     }
     private void chooseTheMoveBehavior(){
         int randomBehavior = random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size());
         movable = PocketMoveFactory.givePocketMovementType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior));
+
     }
 
     @Override
     public void move(Curve curve) {
-
+        movable.move(curve);
     }
 
     @Override
@@ -44,6 +45,7 @@ public class SecretMessenger extends Pocket implements Movable {
         if (!AllConnections.isEmpty()) {
             int randomSecondConnection = random.nextInt(AllConnections.size());
             Connection connection = AllConnections.get(randomSecondConnection);
+            move(connection.getCurve());
 
             return connection;
 

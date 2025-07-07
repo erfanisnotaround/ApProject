@@ -23,15 +23,17 @@ public class Messenger3 extends Pocket implements Movable {
         super(type);
         setCoinsPerEntry(1);
         setImage(image);
+        setRotate(-90);
         setScaleX(0.1);
         setScaleY(0.1);
         pathPrioritizing = new PathPrioritizing();
-        pathMover = new PathMover(this);
+        pathMover = new PathMover(this , 90);
+
     }
 
     @Override
     public void move(Curve curve) {
-        pathMover.move(curve , 100 , 60 , false);
+        pathMover.move(curve , 100 , 60 , true);
     }
 
     @Override
@@ -42,12 +44,14 @@ public class Messenger3 extends Pocket implements Movable {
 
             int randomFirstConnection = random.nextInt(firstConnections.size());
             Connection connection = firstConnections.get(randomFirstConnection);
+            move(connection.getCurve());
             return connection;
 
         } else if (!secondConnections.isEmpty()) {
 
             int randomSecondConnection = random.nextInt(secondConnections.size());
             Connection connection = secondConnections.get(randomSecondConnection);
+            move(connection.getCurve());
             return connection;
 
         }

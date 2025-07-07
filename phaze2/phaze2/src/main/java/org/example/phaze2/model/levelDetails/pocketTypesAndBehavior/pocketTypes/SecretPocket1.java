@@ -25,7 +25,7 @@ public class SecretPocket1 extends Pocket implements Movable {
         setImage(image);
         setScaleX(0.02);
         setScaleY(0.02);
-        pathMover = new PathMover(this);
+        pathMover = new PathMover(this , 0);
     }
 
     @Override
@@ -39,6 +39,7 @@ public class SecretPocket1 extends Pocket implements Movable {
         if (!AllConnections.isEmpty()) {
             int randomSecondConnection = random.nextInt(AllConnections.size());
             Connection connection = AllConnections.get(randomSecondConnection);
+            move(connection.getCurve());
 
             return connection;
 

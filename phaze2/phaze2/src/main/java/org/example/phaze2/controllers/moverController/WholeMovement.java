@@ -1,11 +1,8 @@
 package org.example.phaze2.controllers.moverController;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
-import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
@@ -13,6 +10,8 @@ import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
+import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +44,8 @@ public class WholeMovement {
 
     }
     public void StartSending(){
+        Reset();
+
         getStartSystemView();
 
 
@@ -66,10 +67,9 @@ public class WholeMovement {
             return;
         }
 
-        System.out.println("waiting for exit");
 
 
-        AddToWaitingSystemView(systemView , pocket);
+        AddToWaitingSystemCapacity(systemView , pocket);
 
 
 
@@ -82,23 +82,27 @@ public class WholeMovement {
 
                 exitConnection.getCurve().isItUsedProperty().addListener((observable, oldValue, newValue) -> {
                     if (!newValue) {
-                        AddToWaitingSystemView(systemView , exitConnection);
+                        AddToWaitingSend(systemView , exitConnection);
                     }
                 });
             }
         }
     }
-    public void AddToWaitingSystemView(SystemView systemView , Connection connection){
+    public void AddToWaitingSend(SystemView systemView , Connection connection){
         for (int i = 0 ; i < systemView.getCapacity().length ; i++) {
             if (systemView.getCapacity()[i] != null){
                 Pocket pocket = systemView.getCapacity()[i];
-                Connection exitConnection = pocket.ReleaseAct(systemView , portInfoMap , exitConnections);
-                if (exitConnection != null) {
-                    resumeMovement(pocket , exitConnection);
-                    systemView.getCapacity()[i] = null;
-                }
+                SendingPockets(systemView , pocket);
+                systemView.getCapacity()[i] = null;
             }
         }
+    }
+    private boolean itThere(Pocket pocket , SystemView systemView ){
+        for (Pocket pocket1 : systemView.getCapacity()) {
+            if (pocket1 == null) continue;
+            if (pocket1.equals(pocket)) return true;
+        }
+        return false;
     }
     public void resumeMovement(Pocket pocket , Connection connection){
 
@@ -115,7 +119,8 @@ public class WholeMovement {
         };
         pocket.isItMovedProperty().addListener(l);
     }
-    public void AddToWaitingSystemView(SystemView systemView , Pocket pocket){
+    public void AddToWaitingSystemCapacity(SystemView systemView , Pocket pocket){
+        if (itThere(pocket , systemView)) return;
         for (int i = systemView.getCapacity().length - 1 ; i >= 0 ; i--){
             if (systemView.getCapacity()[i] == null){
                 systemView.getCapacity()[i] = pocket;
@@ -126,6 +131,19 @@ public class WholeMovement {
     public void getStartSystemView(){
         for (SystemView systemView : systemViews) {
             if (systemView.isItStartSystem()) startingSystemView = systemView;
+        }
+    }
+
+    private void Reset(){
+        for (Pocket pocket : pockets) {
+            pocket.setIsItMoved(false);
+            pocket.setIsItCollided(false);
+            pocket.setHP(pocket.getMaxHp());
+            pocket.setPathMover(new PathMover(pocket , 0));
+        }
+        for (SystemView systemView : systemViews) {
+            systemView.setIsItDown(false);
+            Arrays.fill(systemView.getCapacity(), null);
         }
     }
 }

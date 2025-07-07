@@ -53,7 +53,6 @@ public class ConnectionHandler {
         StartPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(center);
         startX = StartPoint.getX();
         startY = StartPoint.getY();
-        StartPoint = new Point2D(startX + 20, startY );
         startGate = ExitNode;
 
         currentCurve = new Curve();
@@ -191,7 +190,7 @@ public class ConnectionHandler {
     }
     private void clearSelection() {
         if (selectedCurve != null) {
-            selectedCurve.setFill(Color.BLACK);
+            selectedCurve.setFill(Color.GREEN);
             selectedCurve = null;
         }
     }

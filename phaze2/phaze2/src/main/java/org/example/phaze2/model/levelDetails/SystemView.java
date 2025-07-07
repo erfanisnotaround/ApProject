@@ -31,6 +31,7 @@ public class SystemView extends Pane {
     private boolean isTheLightOn;
     private Pocket[] capacity = new Pocket[5];
     private ArrayList<SubSystemView> SubSystems = new ArrayList<>();
+    private BooleanProperty IsItDown = new SimpleBooleanProperty(false);
 
     public SystemView(SystemTypes systemType , int numberOfSubSystems) {
         this.numberOfSubSystems = numberOfSubSystems;
@@ -156,5 +157,17 @@ public class SystemView extends Pane {
 
     public void setItDown(boolean itDown) {
         isItDown = itDown;
+    }
+
+    public boolean isIsItDown() {
+        return IsItDown.get();
+    }
+
+    public BooleanProperty isItDownProperty() {
+        return IsItDown;
+    }
+
+    public void setIsItDown(boolean isItDown) {
+        this.IsItDown.set(isItDown);
     }
 }

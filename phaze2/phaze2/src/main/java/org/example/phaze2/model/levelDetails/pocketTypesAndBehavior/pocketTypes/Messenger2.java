@@ -27,14 +27,14 @@ public class Messenger2 extends Pocket implements Movable {
         setScaleY(0.02);
 //        pathMover = new PathMover(this);
 
-        pathMover = new PathMover(this);
+        pathMover = new PathMover(this , 0);
         pathPrioritizing = new PathPrioritizing();
     }
 
     @Override
     public void move(Curve curve) {
+        pathMover.AddingImpactVector(5 , 6);
         pathMover.move(curve , 100 , 60 , true);
-        System.out.println(curve.getConnection().getFrom().getSystem().getSystemID() + " " + curve.getConnection().getTo().getSystem().getSystemID());
     }
 
     @Override

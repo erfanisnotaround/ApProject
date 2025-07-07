@@ -29,7 +29,7 @@ public class Messenger1 extends Pocket implements Movable {
         setScaleY(0.03);
 
 
-        pathMover = new PathMover(this);
+        pathMover = new PathMover(this , 0);
         pathPrioritizing = new PathPrioritizing();
 
     }
@@ -37,7 +37,7 @@ public class Messenger1 extends Pocket implements Movable {
 
     @Override
     public void move(Curve curve) {
-        pathMover.move(curve , speed , 10 , true);
+        pathMover.move(curve , speed , 100 , true);
 
 
     }

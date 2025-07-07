@@ -22,11 +22,12 @@ public class PathMover extends AnimationTimer {
 
     private double lineDistancePerMoveX = 0;
     private double lineDistancePerMoveY = 0;
-    private final int STEPS = 50;
+    private final int STEPS = 100;
+    private double AngleNeeded;
     private boolean rotate;
-    public PathMover(Pocket node) {
+    public PathMover(Pocket node , double angle) {
         this.node = node;
-
+        AngleNeeded = angle;
     }
 
     public synchronized void  move(Curve pl, double initialSpeed, double acceleration,
@@ -92,7 +93,7 @@ public class PathMover extends AnimationTimer {
         node.setLayoutY(cy);
 
         if (rotate) {
-            node.setRotate(Math.toDegrees(path.angleAt(s)));
+            node.setRotate(Math.toDegrees(path.angleAt(s)) + AngleNeeded);
         }
     }
 

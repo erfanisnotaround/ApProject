@@ -31,7 +31,7 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
         setImage(image);
         setScaleX(0.2);
         setScaleY(0.2);
-        pathMover = new PathMover(this);
+        pathMover = new PathMover(this , 0);
     }
 
 
@@ -55,6 +55,7 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
         if (!AllConnections.isEmpty()) {
             int randomSecondConnection = random.nextInt(AllConnections.size());
             Connection connection = AllConnections.get(randomSecondConnection);
+            move(connection.getCurve());
 
             return connection;
 

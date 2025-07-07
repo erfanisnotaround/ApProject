@@ -24,6 +24,7 @@ public class Pocket extends ImageView implements Movable , Releasable {
     protected PathMover pathMover;
     protected double distanceFromTheLine = 0;
     protected double HP;
+    protected double MaxHp;
     protected static int coinsPerEntry;
     protected BooleanProperty IsItCollided = new SimpleBooleanProperty(false);
     protected BooleanProperty IsItMoved = new SimpleBooleanProperty(false);
@@ -113,5 +114,13 @@ public class Pocket extends ImageView implements Movable , Releasable {
 
     public void setIsItMoved(boolean isItMoved) {
         this.IsItMoved.set(isItMoved);
+    }
+
+    public double getMaxHp() {
+        return MaxHp;
+    }
+
+    public void setMaxHp(double maxHp) {
+        MaxHp = maxHp;
     }
 }

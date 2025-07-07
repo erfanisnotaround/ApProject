@@ -26,7 +26,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
 
     private double StrokeWidth = 4;
     public Curve() {
-//        middlePoints.add(new Anchor(new Point2D(300 , 200)));
+        setFill(Color.GREEN);
     }
 
 
