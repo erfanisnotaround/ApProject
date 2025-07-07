@@ -33,7 +33,6 @@ public class Pocket extends ImageView implements Movable , Releasable {
     protected Movable movable;
     public Pocket(PocketTypes type) {
         this.type = type;
-//        movable = PocketMoveFactory.givePocketMovementType(type);
     }
 
     public static int getCoinsPerEntry() {

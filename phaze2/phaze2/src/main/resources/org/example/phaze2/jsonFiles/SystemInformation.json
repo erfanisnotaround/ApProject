@@ -81,11 +81,19 @@
     ],
     "pockets": [
       {
-        "type": "Messenger_1",
+        "type": "SECRET_1",
+        "delay": 1.5
+      },
+      {
+        "type": "SECRET_2",
         "delay": 1.5
       },
       {
         "type": "BIG_2",
+        "delay": 1.5
+      },
+      {
+        "type": "SECRET_MESSENGER",
         "delay": 1.5
       }
     ]

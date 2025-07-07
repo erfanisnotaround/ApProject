@@ -26,6 +26,10 @@ public class Messenger3 extends Pocket implements Movable {
         setRotate(-90);
         setScaleX(0.1);
         setScaleY(0.1);
+
+        HP = MaxHp = 1;
+
+
         pathPrioritizing = new PathPrioritizing();
         pathMover = new PathMover(this , 90);
 

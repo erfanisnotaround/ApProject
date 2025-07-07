@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
@@ -19,24 +20,29 @@ import java.util.Map;
 
 public class SecretMessenger extends Pocket implements Movable {
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/lock.png").toExternalForm());
+    Pocket behavior;
     public SecretMessenger(PocketTypes type) {
         super(type);
-        chooseTheMoveBehavior();
+
         setImage(image);
-        setScaleX(0.1);
-        setScaleY(0.1);
+        setScaleX(0.04);
+        setScaleY(0.04);
         setCoinsPerEntry(5);
+        pathPrioritizing = new PathPrioritizing();
         pathMover = new PathMover(this , 0);
+        chooseTheMoveBehavior();
     }
     private void chooseTheMoveBehavior(){
         int randomBehavior = random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size());
-        movable = PocketMoveFactory.givePocketMovementType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior));
-
+        behavior = PocketMoveFactory.giveType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior));
+        behavior.setPathMover(pathMover);
+        HP = MaxHp = behavior.getMaxHp();
     }
 
     @Override
     public void move(Curve curve) {
-        movable.move(curve);
+        behavior.move(curve);
+
     }
 
     @Override
@@ -45,6 +51,7 @@ public class SecretMessenger extends Pocket implements Movable {
         if (!AllConnections.isEmpty()) {
             int randomSecondConnection = random.nextInt(AllConnections.size());
             Connection connection = AllConnections.get(randomSecondConnection);
+
             move(connection.getCurve());
 
             return connection;

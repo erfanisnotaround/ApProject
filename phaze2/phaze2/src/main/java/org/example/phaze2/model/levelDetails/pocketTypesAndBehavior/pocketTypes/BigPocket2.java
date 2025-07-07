@@ -28,6 +28,9 @@ public class BigPocket2 extends Pocket implements Movable {
         setImage(image);
         setScaleX(0.2);
         setScaleY(0.2);
+
+        HP = MaxHp = 10;
+
         pathPrioritizing = new PathPrioritizing();
         pathMover = new PathMover(this , 0);
     }

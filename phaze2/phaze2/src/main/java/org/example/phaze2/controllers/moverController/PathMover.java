@@ -120,6 +120,9 @@ public class PathMover extends AnimationTimer {
         lineDistancePerMoveX = x/STEPS;
         lineDistancePerMoveY = y/STEPS;
     }
+    public void setNode(Pocket node) {
+        this.node = node;
+    }
 
 
 }

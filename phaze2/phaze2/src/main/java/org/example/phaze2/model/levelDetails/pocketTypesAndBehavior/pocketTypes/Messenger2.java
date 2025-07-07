@@ -25,7 +25,8 @@ public class Messenger2 extends Pocket implements Movable {
         setImage(image);
         setScaleX(0.02);
         setScaleY(0.02);
-//        pathMover = new PathMover(this);
+
+        HP = MaxHp = 3;
 
         pathMover = new PathMover(this , 0);
         pathPrioritizing = new PathPrioritizing();
@@ -33,7 +34,7 @@ public class Messenger2 extends Pocket implements Movable {
 
     @Override
     public void move(Curve curve) {
-        pathMover.AddingImpactVector(5 , 6);
+//        pathMover.AddingImpactVector(5 , 6);
         pathMover.move(curve , 100 , 60 , true);
     }
 

@@ -19,6 +19,7 @@ import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
@@ -43,8 +44,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     @Override
     public void MakeFirst() {
         System.out.println(21);
-
-
+        Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
         List<Pocket> pockets = systemVisualizer.getPockets();
@@ -63,12 +63,14 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
             pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve());
             pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve());
         });
-        movementMaker = new WholeMovement();
+
 
         MenuButton.setOnAction(event -> {
             menuButtonClicked();
         });
+        movementMaker = new WholeMovement();
         StartButton.setOnAction(event -> {
+
             startButtonClicked();
             movementMaker.StartSending();
         });

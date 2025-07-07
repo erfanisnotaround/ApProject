@@ -28,7 +28,7 @@ public class Messenger1 extends Pocket implements Movable {
         setScaleX(0.03);
         setScaleY(0.03);
 
-
+        HP = MaxHp = 2;
         pathMover = new PathMover(this , 0);
         pathPrioritizing = new PathPrioritizing();
 
@@ -38,6 +38,12 @@ public class Messenger1 extends Pocket implements Movable {
     @Override
     public void move(Curve curve) {
         pathMover.move(curve , speed , 100 , true);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2400), e -> {}));
+        timeline.setCycleCount(1);
+        timeline.setOnFinished(e -> {
+            pathMover.setSpeed(0);
+        });
 
 
     }

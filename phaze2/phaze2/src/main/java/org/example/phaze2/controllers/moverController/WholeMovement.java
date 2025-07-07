@@ -1,8 +1,11 @@
 package org.example.phaze2.controllers.moverController;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
+import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
@@ -12,6 +15,7 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.io.FileOutputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,13 +32,13 @@ public class WholeMovement {
     //checkers and workers har har
 
     StartAvailableChecker startAvailableChecker;
+    private final Map<Connection, ChangeListener<Boolean>> waitingSendListeners = new HashMap<>();
 
 
     // in Class requirmenets
 
     SystemView startingSystemView;
     public WholeMovement() {
-
         connections = constants.getConnections();
         portInfoMap = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
@@ -44,6 +48,7 @@ public class WholeMovement {
 
     }
     public void StartSending(){
+        System.out.println("StartSending");
         Reset();
 
         getStartSystemView();
@@ -53,11 +58,14 @@ public class WholeMovement {
         for (Pocket pocket : pockets) {
             SendingPockets(startingSystemView , pocket);
         }
+
         for (SystemView systemView : systemViews) {
             MakeSystemConnectionsWaiting(systemView);
         }
 
     }
+
+
 
 
     public void SendingPockets(SystemView systemView , Pocket pocket){
@@ -67,6 +75,7 @@ public class WholeMovement {
             return;
         }
 
+        System.out.println(pocket.getType());
 
 
         AddToWaitingSystemCapacity(systemView , pocket);
@@ -80,11 +89,15 @@ public class WholeMovement {
                 PortInfo portInfo = portInfoMap.get(subSystemView.getExitPort());
                 Connection exitConnection = exitConnections.get(portInfo);
 
-                exitConnection.getCurve().isItUsedProperty().addListener((observable, oldValue, newValue) -> {
+
+                ChangeListener<Boolean> listener = (observable, oldValue, newValue) -> {
                     if (!newValue) {
-                        AddToWaitingSend(systemView , exitConnection);
+                        AddToWaitingSend(systemView, exitConnection);
                     }
-                });
+                };
+
+                waitingSendListeners.put(exitConnection, listener);
+                exitConnection.getCurve().isItUsedProperty().addListener(listener);
             }
         }
     }
@@ -92,8 +105,9 @@ public class WholeMovement {
         for (int i = 0 ; i < systemView.getCapacity().length ; i++) {
             if (systemView.getCapacity()[i] != null){
                 Pocket pocket = systemView.getCapacity()[i];
-                SendingPockets(systemView , pocket);
                 systemView.getCapacity()[i] = null;
+                SendingPockets(systemView , pocket);
+
             }
         }
     }
@@ -120,10 +134,13 @@ public class WholeMovement {
         pocket.isItMovedProperty().addListener(l);
     }
     public void AddToWaitingSystemCapacity(SystemView systemView , Pocket pocket){
-        if (itThere(pocket , systemView)) return;
+        if (itThere(pocket , systemView)) {
+            return;
+        };
         for (int i = systemView.getCapacity().length - 1 ; i >= 0 ; i--){
             if (systemView.getCapacity()[i] == null){
                 systemView.getCapacity()[i] = pocket;
+                break;
             }
         }
     }
@@ -135,15 +152,32 @@ public class WholeMovement {
     }
 
     private void Reset(){
-        for (Pocket pocket : pockets) {
-            pocket.setIsItMoved(false);
-            pocket.setIsItCollided(false);
-            pocket.setHP(pocket.getMaxHp());
-            pocket.setPathMover(new PathMover(pocket , 0));
+
+        for (Map.Entry<Connection, ChangeListener<Boolean>> entry : waitingSendListeners.entrySet()) {
+            Connection connection = entry.getKey();
+            ChangeListener<Boolean> listener = entry.getValue();
+            connection.getCurve().isItUsedProperty().removeListener(listener);
+        }
+        waitingSendListeners.clear();
+
+
+        for (Connection connection : connections) {
+            connection.getCurve().setIsItUsed(false);
         }
         for (SystemView systemView : systemViews) {
             systemView.setIsItDown(false);
             Arrays.fill(systemView.getCapacity(), null);
         }
+        for (Pocket pocket : pockets) {
+            pocket.getPathMover().stop();
+            pocket.setIsItMoved(false);
+            pocket.setIsItCollided(false);
+            pocket.setHP(pocket.getMaxHp());
+
+            pocket.setLayoutX(500);
+            pocket.setLayoutY(500);
+        }
+
+
     }
 }

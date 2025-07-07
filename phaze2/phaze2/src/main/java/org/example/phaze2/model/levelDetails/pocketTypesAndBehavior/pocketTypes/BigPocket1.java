@@ -31,6 +31,9 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
         setImage(image);
         setScaleX(0.2);
         setScaleY(0.2);
+
+        HP = MaxHp = 8;
+
         pathMover = new PathMover(this , 0);
     }
 
