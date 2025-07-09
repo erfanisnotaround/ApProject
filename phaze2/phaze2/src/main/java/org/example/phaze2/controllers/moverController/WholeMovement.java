@@ -11,6 +11,7 @@ import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.PocketSwitchManager;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.io.FileOutputStream;
@@ -34,7 +35,6 @@ public class WholeMovement {
     StartAvailableChecker startAvailableChecker;
 
 
-    // in Class requirmenets
 
     SystemView startingSystemView;
     private final Map<Connection, ChangeListener<Boolean>> waitingSendListeners = new HashMap<>();
@@ -59,6 +59,7 @@ public class WholeMovement {
 
 
         for (Pocket pocket : pockets) {
+            pocket.setMovementManager(this);
             SendingPockets(startingSystemView , pocket);
         }
 
@@ -172,15 +173,22 @@ public class WholeMovement {
             Arrays.fill(systemView.getCapacity(), null);
         }
         for (Pocket pocket : pockets) {
-            pocket.getPathMover().stop();
-            pocket.setIsItMoved(false);
-            pocket.setIsItCollided(false);
-            pocket.setHP(pocket.getMaxHp());
-
-            pocket.setLayoutX(500);
-            pocket.setLayoutY(500);
+            PocketSwitchManager.reInitialize(pocket);
         }
+    }
 
+    public void RegisterPocket(Pocket pocket , Connection connection){
+        ChangeListener<Boolean> l = new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs,
+                                Boolean oldVal, Boolean newVal) {
 
+                if (!newVal) {
+                    obs.removeListener(this);
+                    SendingPockets(connection.getTo().getSystem(), pocket);
+                }
+            }
+        };
+        pocket.isItMovedProperty().addListener(l);
     }
 }

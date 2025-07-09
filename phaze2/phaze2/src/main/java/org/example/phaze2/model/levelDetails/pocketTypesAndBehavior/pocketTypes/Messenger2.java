@@ -20,11 +20,18 @@ public class Messenger2 extends Pocket implements Movable {
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/Triangle.png").toExternalForm());
     public Messenger2(PocketTypes type) {
         super(type);
+        Initialize();
+
+    }
+
+    @Override
+    protected void Initialize() {
         setCoinsPerEntry(3);
-        setImage(image);
+        imagePath = "/org/example/phaze2/images/Triangle.png";
+        setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
+
         setScaleX(0.02);
         setScaleY(0.02);
-
         HP = MaxHp = 3;
         speed = 200;
         acceleration = 20;

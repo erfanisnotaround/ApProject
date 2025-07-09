@@ -10,6 +10,7 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.WholeMovement;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.PocketSwitchManager;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
@@ -19,6 +20,7 @@ import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
@@ -52,13 +54,18 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         Constants.getInstance().getSystemViews().addAll(systemViews);
         Constants.getInstance().getPockets().addAll(pockets);
+
+        List<Pocket> constantPockets = new ArrayList<>(pockets);
+        Constants.getInstance().setConnectedPockets(constantPockets);
+
         addingShapes(systemViews , pockets);
+        PocketSwitchManager.setContainer(ContainerPane);
 
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(14)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(16)));
         timeline.setCycleCount(1);
-//        timeline.play();
+        timeline.play();
         timeline.setOnFinished(e ->{
+            Constants.getInstance().getPockets().getFirst().setItAffected(true);
 //            pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve(), , );
 //            pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve(), , );
         });
@@ -69,7 +76,6 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         });
         movementMaker = new WholeMovement();
         StartButton.setOnAction(event -> {
-
             startButtonClicked();
             movementMaker.StartSending();
         });

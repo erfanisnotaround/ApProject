@@ -22,10 +22,16 @@ public class BigPocket2 extends Pocket implements Movable {
 
     public BigPocket2(PocketTypes type) {
         super(type);
+        Initialize();
+    }
+
+    @Override
+    protected void Initialize() {
         setLayoutX(200);
         setLayoutY(200);
         setCoinsPerEntry(10);
-        setImage(image);
+        imagePath = "/org/example/phaze2/images/Big2.png";
+        setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setScaleX(0.2);
         setScaleY(0.2);
 

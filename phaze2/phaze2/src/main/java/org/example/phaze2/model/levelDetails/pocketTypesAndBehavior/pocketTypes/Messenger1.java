@@ -17,12 +17,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Messenger1 extends Pocket implements Movable {
-    Image image = new Image(getClass().getResource("/org/example/phaze2/images/square.png").toExternalForm());
     public Messenger1(PocketTypes type) {
         super(type);
+        Initialize();
+    }
+
+    @Override
+    protected void Initialize() {
+        imagePath = "/org/example/phaze2/images/square.png";
         setCoinsPerEntry(2);
-//        pathMover = new PathMover(this);
-        setImage(image);
+        setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setScaleX(0.03);
         setScaleY(0.03);
         speed = 200;

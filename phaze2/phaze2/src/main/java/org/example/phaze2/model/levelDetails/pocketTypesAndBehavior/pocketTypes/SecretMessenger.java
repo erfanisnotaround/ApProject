@@ -23,18 +23,23 @@ public class SecretMessenger extends Pocket implements Movable {
     Pocket behavior;
     public SecretMessenger(PocketTypes type) {
         super(type);
-
-        setImage(image);
-        setScaleX(0.03);
-        setScaleY(0.03);
-        setCoinsPerEntry(5);
-        pathMover = new PathMover(this , 0);
+        Initialize();
     }
     private void chooseTheMoveBehavior(){
         int randomBehavior = random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size());
         behavior = PocketMoveFactory.giveType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior));
         behavior.setPathMover(pathMover);
         HP = MaxHp = behavior.getMaxHp();
+    }
+
+    @Override
+    protected void Initialize() {
+        imagePath = "/org/example/phaze2/images/lock.png";
+        setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
+        setScaleX(0.03);
+        setScaleY(0.03);
+        setCoinsPerEntry(5);
+        pathMover = new PathMover(this , 0);
     }
 
     @Override

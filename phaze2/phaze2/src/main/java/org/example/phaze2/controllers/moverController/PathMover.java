@@ -114,6 +114,9 @@ public class PathMover extends AnimationTimer {
     public double getSpeed() {
         return v;
     }
+    public Curve getCurve() {
+        return curve;
+    }
 
     public void AddingImpactVector(double x, double y) {
         latestLineDistance = latestLineDistance.add(x, y);

@@ -24,6 +24,14 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
 
     public BigPocket1(PocketTypes type) {
         super(type);
+        Initialize();
+    }
+
+    @Override
+    protected void Initialize() {
+        setCoinsPerEntry(8);
+        imagePath = "/org/example/phaze2/images/Big1.png";
+        image = new Image(getClass().getResource(imagePath).toExternalForm());
         setImage(image);
         setScaleX(0.2);
         setScaleY(0.2);
@@ -35,7 +43,6 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
 
         pathMover = new PathMover(this , 0);
     }
-
 
     @Override
     public void move(Curve curve, double speed, double acceleration) {

@@ -22,8 +22,15 @@ public class SecretPocket1 extends Pocket implements Movable {
 
     public SecretPocket1(PocketTypes type) {
         super(type);
+        Initialize();
+
+    }
+
+    @Override
+    protected void Initialize() {
         setCoinsPerEntry(3);
-        setImage(image);
+        imagePath = "/org/example/phaze2/images/Shield.png";
+        setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setScaleX(0.02);
         setScaleY(0.02);
         speed = 200;

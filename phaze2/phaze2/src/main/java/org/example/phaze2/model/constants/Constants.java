@@ -25,6 +25,7 @@ public class Constants {
     private Map<PortInfo, Connection> exitConnections = new HashMap<>();
     private Map<Node, PortInfo> portInfo = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
+    private List<Pocket> constantsPockets = new ArrayList<>();
     private Constants() {}
     public static Constants getInstance() {
         return INSTANCE;
@@ -80,4 +81,11 @@ public class Constants {
         return connections;
     }
 
+    public List<Pocket> getConnectedPockets() {
+        return constantsPockets;
+    }
+
+    public void setConnectedPockets(List<Pocket> connectedPockets) {
+        this.constantsPockets = connectedPockets;
+    }
 }
