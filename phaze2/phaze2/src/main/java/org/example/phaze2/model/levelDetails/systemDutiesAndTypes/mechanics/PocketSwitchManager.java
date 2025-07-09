@@ -13,9 +13,13 @@ public class PocketSwitchManager {
     public static Pocket switchPocket(Pocket olderPocket , PocketTypes newPocketType) {
         System.out.println("switchPocket : " + newPocketType);
         Pocket newPocket = PocketMoveFactory.giveType(newPocketType);
+        newPocket.setFirstPocketType(olderPocket.getFirstPocketType());
+
+
         olderPocket.getMovementManager().RegisterPocket(newPocket , olderPocket.getPathMover().getCurve().getConnection());
 
-        newPocket.setFirstPocket(olderPocket.getFirstPocket());
+//        newPocket.setFirstPocketType(olderPocket.getFirstPocketType());
+//        newPocket.setTypeBeforeChange(olderPocket.getTypeBeforeChange());
 
         container.getChildren().add(newPocket);
         container.getChildren().remove(olderPocket);
@@ -42,7 +46,7 @@ public class PocketSwitchManager {
     }
 
     public static void reInitialize(Pocket olderPocket) {
-        Pocket newPocket = PocketMoveFactory.giveType(olderPocket.getFirstPocket().getType());
+        Pocket newPocket = PocketMoveFactory.giveType(olderPocket.getFirstPocketType());
 
         int indexOfFirstPocket = Constants.getInstance().getPockets().indexOf(olderPocket);
         Constants.getInstance().getPockets().set(indexOfFirstPocket , newPocket);
@@ -56,9 +60,17 @@ public class PocketSwitchManager {
         newPocket.setLayoutY(500);
         newPocket.setItAffected(false);
 
-        newPocket.setFirstPocket(newPocket);
+
+
+        newPocket.setFirstPocketType(newPocket.getType());
         container.getChildren().remove(olderPocket);
         container.getChildren().add(newPocket);
+    }
+    public void backToBeforeChange(Pocket olderPocket) {
+        Pocket newPocket = PocketMoveFactory.giveType(olderPocket.getFirstPocketType());
+
+        int indexOfFirstPocket = Constants.getInstance().getPockets().indexOf(olderPocket);
+        Constants.getInstance().getPockets().set(indexOfFirstPocket , newPocket);
     }
     public static void setContainer(Pane container) {
         PocketSwitchManager.container = container;

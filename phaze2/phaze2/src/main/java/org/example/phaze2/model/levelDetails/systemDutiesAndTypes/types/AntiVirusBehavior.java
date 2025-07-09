@@ -25,7 +25,7 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
 
     public AntiVirusBehavior(SystemTypes systemType, int numberOfSubSystems) {
         super(systemType, numberOfSubSystems);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500) ,event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000) ,event -> {
             checkArea(RadiusOfCheckingArea);
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -60,7 +60,7 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
     public void checkArea(double radius) {
         List<Pocket> pockets = Constants.getInstance().getPockets();
         for (Pocket pocket : pockets) {
-            if (distance(pocket.getLayoutX() , pocket.getLayoutY() , getLayoutX() , getLayoutY()) < RadiusOfCheckingArea && pocket.isItAffected() ) {
+            if (distance(pocket.getLayoutX() , pocket.getLayoutY() , getLayoutX() , getLayoutY()) < RadiusOfCheckingArea && pocket.isIsItMoved()) {
                 switchPocket(pocket);
             }
         }

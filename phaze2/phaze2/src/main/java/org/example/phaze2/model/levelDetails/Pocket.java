@@ -10,7 +10,6 @@ import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.PocketSwitchManager;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -34,7 +33,8 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
     protected double acceleration;
     protected PortTypes preferredType;
     protected String imagePath;
-    private Pocket FirstPocket;
+    private PocketTypes TypeBeforeChange;
+    private PocketTypes FirstPocketType;
     public Pocket(PocketTypes type) {
         this.type = type;
     }
@@ -170,11 +170,19 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
         this.movementManager = movementManager;
     }
 
-    public Pocket getFirstPocket() {
-        return FirstPocket;
+    public PocketTypes getFirstPocketType() {
+        return FirstPocketType;
     }
 
-    public void setFirstPocket(Pocket firstPocket) {
-        FirstPocket = firstPocket;
+    public void setFirstPocketType(PocketTypes firstPocketType) {
+        FirstPocketType = firstPocketType;
+    }
+
+    public PocketTypes getTypeBeforeChange() {
+        return TypeBeforeChange;
+    }
+
+    public void setTypeBeforeChange(PocketTypes typeBeforeChange) {
+        TypeBeforeChange = typeBeforeChange;
     }
 }
