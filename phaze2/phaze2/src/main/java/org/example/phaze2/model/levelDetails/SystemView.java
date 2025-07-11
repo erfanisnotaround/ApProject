@@ -60,7 +60,7 @@ public class SystemView extends Pane implements SystemBehavior , SwitchingPocket
 
     @Override
     public Pocket switchPocket(Pocket pocket, PocketTypes type) {
-
+        return pocket;
     }
     public SystemTypes getSystemType() {
         return systemType;

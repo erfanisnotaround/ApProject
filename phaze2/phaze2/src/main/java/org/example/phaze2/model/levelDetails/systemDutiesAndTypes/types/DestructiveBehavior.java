@@ -31,11 +31,11 @@ public class DestructiveBehavior extends SystemView implements SystemBehavior, S
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(this , EntryPocket.getPreferredType());
 
 
-        return getConnection(secondConnections , random.nextInt(secondConnections.size()));
+        return getConnection(secondConnections );
     }
-    public Connection getConnection(List<Connection> secondConnections, int randomSecondConnection) {
+    public Connection getConnection(List<Connection> secondConnections) {
         if (!secondConnections.isEmpty()) {
-            return secondConnections.get(randomSecondConnection);
+            return secondConnections.get(random.nextInt(secondConnections.size()));
 
         }
         else return null;

@@ -43,6 +43,6 @@ public class DistributeBehavior extends SystemView implements SystemBehavior, Sw
 
     @Override
     public Pocket switchPocket(Pocket pocket, PocketTypes type) {
-
+        return pocket;
     }
 }

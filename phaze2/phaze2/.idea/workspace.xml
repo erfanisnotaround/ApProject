@@ -6,17 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/WholeMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/WholeMovement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/AreaChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/AreaChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/SwitchingPocketMovementInSystems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/SwitchingPocketMovementInSystems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretMessenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretMessenger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/mechanics/PocketSwitchManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/mechanics/PocketSwitchManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/AntiVirusBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/AntiVirusBehavior.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/DestructiveBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/DestructiveBehavior.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/DistributeBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/DistributeBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/MergerBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/MergerBehavior.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/SpyBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/SpyBehavior.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/VpnBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/VpnBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +72,7 @@
     "ignore.preview.features.used": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/programming/project of Ap/faz 1/Phazes/phaze2/phaze2",
+    "last_opened_file_path": "D:/ap2025",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -185,7 +184,7 @@
       <workItem from="1751896235993" duration="22497000" />
       <workItem from="1752070868495" duration="17895000" />
       <workItem from="1752092413681" duration="60000" />
-      <workItem from="1752222157924" duration="5883000" />
+      <workItem from="1752222157924" duration="17834000" />
     </task>
     <servers />
   </component>

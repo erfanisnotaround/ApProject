@@ -25,16 +25,16 @@ public class SpyBehavior extends SystemView implements SystemBehavior, Switching
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(suitableSystemView , EntryPocket.getPreferredType());
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(suitableSystemView , EntryPocket.getPreferredType());
 
-        return getConnection(firstConnections , secondConnections , random.nextInt(firstConnections.size()) , random.nextInt(secondConnections.size()));
+        return getConnection(firstConnections , secondConnections);
 
     }
-    public Connection getConnection(List<Connection> firstConnections, List<Connection> secondConnections , int randomFirstConnection , int randomSecondConnection) {
+    public Connection getConnection(List<Connection> firstConnections, List<Connection> secondConnections ) {
 
         if (!firstConnections.isEmpty()) {
-            return firstConnections.get(randomFirstConnection);
+            return firstConnections.get(random.nextInt(firstConnections.size()));
 
         } else if (!secondConnections.isEmpty()) {
-            return secondConnections.get(randomSecondConnection);
+            return secondConnections.get(random.nextInt(secondConnections.size()));
 
         }
         else return null;

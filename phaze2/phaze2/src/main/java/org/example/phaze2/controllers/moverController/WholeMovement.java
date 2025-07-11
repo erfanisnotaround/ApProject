@@ -38,6 +38,7 @@ public class WholeMovement {
 
     SystemView startingSystemView;
     private final Map<Connection, ChangeListener<Boolean>> waitingSendListeners = new HashMap<>();
+    private final Map<Pocket, ChangeListener<Boolean>> pocketListeners = new HashMap<>();
 
 
 
@@ -135,6 +136,7 @@ public class WholeMovement {
                 }
             }
         };
+        pocketListeners.put(pocket, l);
         pocket.isItMovedProperty().addListener(l);
     }
     public void AddToWaitingSystemCapacity(SystemView systemView , Pocket pocket){
@@ -164,6 +166,12 @@ public class WholeMovement {
         }
         waitingSendListeners.clear();
 
+        for (Map.Entry<Pocket, ChangeListener<Boolean>> entry : pocketListeners.entrySet()) {
+            Pocket pocket = entry.getKey();
+            ChangeListener<Boolean> listener = entry.getValue();
+            pocket.isItMovedProperty().removeListener(listener);
+        }
+        pocketListeners.clear();
 
         for (Connection connection : connections) {
             connection.getCurve().setIsItUsed(false);

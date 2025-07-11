@@ -29,6 +29,7 @@ public class SecretMessenger extends Pocket implements Movable {
         int randomBehavior = random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size());
         behavior = PocketMoveFactory.giveType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior));
         behavior.setPathMover(pathMover);
+        preferredType = behavior.getPreferredType();
         HP = MaxHp = behavior.getMaxHp();
     }
 
@@ -40,6 +41,7 @@ public class SecretMessenger extends Pocket implements Movable {
         setScaleY(0.03);
         setCoinsPerEntry(5);
         pathMover = new PathMover(this , 0);
+        chooseTheMoveBehavior();
     }
 
     @Override

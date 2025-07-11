@@ -15,10 +15,10 @@ public class PocketSwitchManager {
         newPocket.setFirstPocketType(olderPocket.getFirstPocketType());
 
 
-        olderPocket.getMovementManager().RegisterPocket(newPocket , olderPocket.getPathMover().getCurve().getConnection());
+
 
 //        newPocket.setFirstPocketType(olderPocket.getFirstPocketType());
-//        newPocket.setTypeBeforeChange(olderPocket.getTypeBeforeChange());
+        newPocket.setTypeBeforeChange(olderPocket.getTypeBeforeChange());
 
         container.getChildren().add(newPocket);
         container.getChildren().remove(olderPocket);
@@ -40,6 +40,11 @@ public class PocketSwitchManager {
 
         newPocket.setIsItMoved(olderPocket.isIsItMoved());
         newPocket.setIsItCollided(olderPocket.isIsItCollided());
+
+
+        if (olderPocket.getPathMover().getCurve() != null && olderPocket.getMovementManager() != null) {
+            olderPocket.getMovementManager().RegisterPocket(newPocket , olderPocket.getPathMover().getCurve().getConnection());
+        }
 
         return newPocket;
     }
