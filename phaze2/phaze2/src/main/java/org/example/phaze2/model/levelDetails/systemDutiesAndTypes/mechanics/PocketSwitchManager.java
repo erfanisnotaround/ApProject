@@ -11,7 +11,6 @@ public class PocketSwitchManager {
     private static Pane container;
 
     public static Pocket switchPocket(Pocket olderPocket , PocketTypes newPocketType) {
-        System.out.println("switchPocket : " + newPocketType);
         Pocket newPocket = PocketMoveFactory.giveType(newPocketType);
         newPocket.setFirstPocketType(olderPocket.getFirstPocketType());
 
@@ -66,11 +65,26 @@ public class PocketSwitchManager {
         container.getChildren().remove(olderPocket);
         container.getChildren().add(newPocket);
     }
-    public void backToBeforeChange(Pocket olderPocket) {
-        Pocket newPocket = PocketMoveFactory.giveType(olderPocket.getFirstPocketType());
+    public static void backToBeforeChange(Pocket olderPocket) {
+        Pocket newPocket = PocketMoveFactory.giveType(olderPocket.getTypeBeforeChange());
 
         int indexOfFirstPocket = Constants.getInstance().getPockets().indexOf(olderPocket);
         Constants.getInstance().getPockets().set(indexOfFirstPocket , newPocket);
+
+        newPocket.getPathMover().stop();
+        newPocket.setIsItMoved(false);
+        newPocket.setIsItCollided(false);
+        newPocket.setHP(newPocket.getMaxHp());
+
+        newPocket.setLayoutX(500);
+        newPocket.setLayoutY(500);
+        newPocket.setItAffected(false);
+
+
+
+        newPocket.setFirstPocketType(newPocket.getType());
+        container.getChildren().remove(olderPocket);
+        container.getChildren().add(newPocket);
     }
     public static void setContainer(Pane container) {
         PocketSwitchManager.container = container;

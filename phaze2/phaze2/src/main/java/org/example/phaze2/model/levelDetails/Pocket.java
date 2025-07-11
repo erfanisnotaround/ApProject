@@ -35,6 +35,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
     protected String imagePath;
     private PocketTypes TypeBeforeChange;
     private PocketTypes FirstPocketType;
+    private SystemView WhichSystemViewThisPocketIsAffectedBy;
     public Pocket(PocketTypes type) {
         this.type = type;
     }
@@ -184,5 +185,13 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
 
     public void setTypeBeforeChange(PocketTypes typeBeforeChange) {
         TypeBeforeChange = typeBeforeChange;
+    }
+
+    public SystemView getWhichSystemViewThisPocketIsAffectedBy() {
+        return WhichSystemViewThisPocketIsAffectedBy;
+    }
+
+    public void setWhichSystemViewThisPocketIsAffectedBy(SystemView whichSystemViewThisPocketIsAffectedBy) {
+        WhichSystemViewThisPocketIsAffectedBy = whichSystemViewThisPocketIsAffectedBy;
     }
 }

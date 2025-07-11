@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.SystemTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SwitchingPocketMovementInSystems;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.portConnectingDetails.Connection;
@@ -35,6 +36,7 @@ public class SystemView extends Pane implements SystemBehavior , SwitchingPocket
     protected BooleanProperty IsItDown = new SimpleBooleanProperty(false);
     protected PathPrioritizing pathPrioritizing = new PathPrioritizing();
     protected Random random = new Random();
+
     public SystemView(SystemTypes systemType , int numberOfSubSystems) {
         this.numberOfSubSystems = numberOfSubSystems;
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
@@ -57,7 +59,7 @@ public class SystemView extends Pane implements SystemBehavior , SwitchingPocket
     }
 
     @Override
-    public void switchPocket(Pocket pocket) {
+    public Pocket switchPocket(Pocket pocket, PocketTypes type) {
 
     }
     public SystemTypes getSystemType() {
