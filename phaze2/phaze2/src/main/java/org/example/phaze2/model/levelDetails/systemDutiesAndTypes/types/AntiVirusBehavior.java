@@ -11,10 +11,10 @@ import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypeGroup;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.AreaChecker;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SwitchingPocketMovementInSystems;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.PocketSwitchManager;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
     }
 
     @Override
-    public Connection behave(Pocket EntryPocket) {
+    public Connection behave(PocketMain EntryPocket) {
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(this , EntryPocket.getPreferredType());
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(this , EntryPocket.getPreferredType());
         return getConnection(firstConnections , secondConnections);
@@ -62,25 +62,25 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
 
     @Override
     public boolean checkArea(double radius) {
-        List<Pocket> pockets = Constants.getInstance().getPockets();
-        for (Pocket pocket : pockets) {
+        List<PocketMain> pockets = Constants.getInstance().getPockets();
+        for (PocketMain pocket : pockets) {
             if (distance(pocket.getLayoutX() , pocket.getLayoutY() , getLayoutX() , getLayoutY()) < RadiusOfCheckingArea && pocket.isIsItMoved()) {
-                switchPocket(pocket, PocketTypeGroup.MESSENGER.getGroups().get(random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size())));
+                if (pocket.getType() != PocketTypes.SECRET_MESSENGER) switchPocket(pocket, PocketTypeGroup.MESSENGER.getGroups().get(random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size())));
                 return true;
             }
         }
         return false;
     }
-
-    @Override
-    public Pocket switchPocket(Pocket pocket, PocketTypes type) {
-
-        Pocket selectedPocket = PocketSwitchManager.switchPocket(pocket, type);
-        int indexOfFirstPocket = Constants.getInstance().getPockets().indexOf(pocket);
-        Constants.getInstance().getPockets().set(indexOfFirstPocket , selectedPocket);
-
-        return selectedPocket;
-    }
+//
+//    @Override
+//    public Pocket switchPocket(PocketMain pocket, PocketTypes type) {
+//
+//        Pocket selectedPocket = PocketSwitchManager.switchPocket(pocket, type);
+//        int indexOfFirstPocket = Constants.getInstance().getPockets().indexOf(pocket);
+//        Constants.getInstance().getPockets().set(indexOfFirstPocket , selectedPocket);
+//
+//        return selectedPocket;
+//    }
 
 
     private double distance(double x1, double y1, double x2, double y2) {
@@ -95,4 +95,9 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
     }
 
 
+    @Override
+    public PocketMain switchPocket(PocketMain pocket, PocketTypes type) {
+        pocket.setBehaviour(type);
+        return pocket;
+    }
 }

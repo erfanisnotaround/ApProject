@@ -6,15 +6,14 @@ import javafx.scene.layout.Pane;
 import org.example.phaze2.controllers.moverController.PathPrioritizing;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.SystemTypes;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SwitchingPocketMovementInSystems;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SystemView extends Pane implements SystemBehavior , SwitchingPocketMovementInSystems {
+public class SystemView extends Pane implements SystemBehavior  {
     protected boolean isItDown = false;
     protected final SystemTypes systemType;
 
@@ -31,7 +30,7 @@ public class SystemView extends Pane implements SystemBehavior , SwitchingPocket
     protected boolean isItStartSystem;
     protected int numberOfSubSystems;
     protected boolean isTheLightOn;
-    protected Pocket[] capacity = new Pocket[5];
+    protected PocketMain[] capacity = new PocketMain[5];
     protected ArrayList<SubSystemView> SubSystems = new ArrayList<>();
     protected BooleanProperty IsItDown = new SimpleBooleanProperty(false);
     protected PathPrioritizing pathPrioritizing = new PathPrioritizing();
@@ -54,14 +53,11 @@ public class SystemView extends Pane implements SystemBehavior , SwitchingPocket
     }
 
     @Override
-    public Connection behave(Pocket EntryPocket) {
+    public Connection behave(PocketMain EntryPocket) {
         return null;
     }
 
-    @Override
-    public Pocket switchPocket(Pocket pocket, PocketTypes type) {
-        return pocket;
-    }
+
     public SystemTypes getSystemType() {
         return systemType;
     }
@@ -86,11 +82,11 @@ public class SystemView extends Pane implements SystemBehavior , SwitchingPocket
         SubSystems = subSystems;
     }
 
-    public Pocket[] getCapacity() {
+    public PocketMain[] getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(Pocket[] capacity) {
+    public void setCapacity(PocketMain[] capacity) {
         this.capacity = capacity;
     }
 

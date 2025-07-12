@@ -1,17 +1,16 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
 import org.example.phaze2.model.constants.SystemTypes;
-import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.SecretMessenger;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SwitchingPocketMovementInSystems;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;
 
-public class DestructiveBehavior extends SystemView implements SystemBehavior, SwitchingPocketMovementInSystems {
+public class DestructiveBehavior extends SystemView implements SystemBehavior {
 
 
     public DestructiveBehavior(SystemTypes systemType, int numberOfSubSystems) {
@@ -19,8 +18,8 @@ public class DestructiveBehavior extends SystemView implements SystemBehavior, S
     }
 
     @Override
-    public Connection behave(Pocket EntryPocket) {
-        if (!(EntryPocket instanceof SecretMessenger)) {
+    public Connection behave(PocketMain EntryPocket) {
+        if (EntryPocket.getType()!= PocketTypes.SECRET_MESSENGER) {
             if (EntryPocket.getHP() == EntryPocket.getMaxHp() ){
                 EntryPocket.setHP(EntryPocket.getMaxHp() - 1);
             }
@@ -41,8 +40,5 @@ public class DestructiveBehavior extends SystemView implements SystemBehavior, S
         else return null;
     }
 
-    @Override
-    public Pocket switchPocket(Pocket pocket, PocketTypes type) {
-        return pocket;
-    }
+
 }

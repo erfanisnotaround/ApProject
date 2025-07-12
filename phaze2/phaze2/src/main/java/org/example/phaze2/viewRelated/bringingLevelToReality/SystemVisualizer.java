@@ -4,6 +4,7 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class SystemVisualizer {
     private Level CurrentLevel;
     private ConnectionUI connectionUI;
     private List<SystemView> SystemViews;
-    private List<Pocket> Pockets;
+    private List<PocketMain> Pockets;
 
     public SystemVisualizer(Level CurrentLevel , ConnectionUI connectionUI) {
         this.CurrentLevel = CurrentLevel;
@@ -32,7 +33,7 @@ public class SystemVisualizer {
     }
 
 
-    public List<Pocket> getPockets() {
+    public List<PocketMain> getPockets() {
         PocketProcessor pocketProcessor = new PocketProcessor(CurrentLevel.getPockets());
         Thread pocketsProcessor = new Thread(pocketProcessor);
         pocketsProcessor.start();

@@ -7,6 +7,7 @@ import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class PathPrioritizing {
     private List<Connection> connections;
     private Map<Node, PortInfo> portInfoMap;
     private Map<PortInfo , Connection> exitConnections;
-    private List<Pocket> pockets;
+    private List<PocketMain> pockets;
     private List<SystemView> systemViews;
     public PathPrioritizing() {
 

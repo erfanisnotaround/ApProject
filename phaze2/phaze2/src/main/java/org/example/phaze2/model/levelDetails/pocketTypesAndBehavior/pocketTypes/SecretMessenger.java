@@ -3,8 +3,6 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
-import org.example.phaze2.controllers.moverController.PathPrioritizing;
-import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
@@ -15,7 +13,6 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypeGr
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
-import java.util.List;
 import java.util.Map;
 
 public class SecretMessenger extends Pocket implements Movable {
@@ -49,8 +46,8 @@ public class SecretMessenger extends Pocket implements Movable {
     }
 
     @Override
-    public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
         chooseTheMoveBehavior();
-        return behavior.ReleaseAct(systemView, portInfoMap, exitConnections);
+        return behavior.ReleaseAct(pocket, systemView, portInfoMap, exitConnections);
     }
 }

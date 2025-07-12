@@ -1,20 +1,16 @@
 package org.example.phaze2.controllers.moverController;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
-import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.PocketSwitchManager;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
-import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,11 +20,11 @@ public class WholeMovement {
     Constants constants = Constants.getInstance();
 
     // resources
-    private List<Connection> connections;
-    private Map<Node , PortInfo> portInfoMap;
-    private Map<PortInfo , Connection> exitConnections;
-    private List<Pocket> pockets;
-    private List<SystemView> systemViews;
+    private volatile List<Connection> connections;
+    private volatile Map<Node , PortInfo> portInfoMap;
+    private volatile Map<PortInfo , Connection> exitConnections;
+    private volatile List<PocketMain> pockets;
+    private volatile List<SystemView> systemViews;
 
     //checkers and workers har har
 
@@ -38,7 +34,9 @@ public class WholeMovement {
 
     SystemView startingSystemView;
     private final Map<Connection, ChangeListener<Boolean>> waitingSendListeners = new HashMap<>();
-    private final Map<Pocket, ChangeListener<Boolean>> pocketListeners = new HashMap<>();
+    private final Map<PocketMain, ChangeListener<Boolean>> pocketListeners = new HashMap<>();
+    private final Map<SystemView, ChangeListener<Boolean>> SystemListeners = new HashMap<>();
+
 
 
 
@@ -59,7 +57,7 @@ public class WholeMovement {
 
 
 
-        for (Pocket pocket : pockets) {
+        for (PocketMain pocket : pockets) {
             pocket.setMovementManager(this);
             SendingPockets(startingSystemView , pocket);
         }
@@ -73,14 +71,14 @@ public class WholeMovement {
 
 
 
-    public void SendingPockets(SystemView systemView , Pocket pocket){
-        Connection exitConnection = pocket.ReleaseAct(systemView , portInfoMap , exitConnections);
+    public void SendingPockets(SystemView systemView , PocketMain pocket){
+        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, portInfoMap, exitConnections);
         if (exitConnection != null) {
             resumeMovement(pocket , exitConnection);
             return;
         }
 
-        System.out.println(pocket.getType());
+//        System.out.println(pocket.getType());
 
 
         AddToWaitingSystemCapacity(systemView , pocket);
@@ -96,34 +94,47 @@ public class WholeMovement {
 
 
                 ChangeListener<Boolean> listener = (observable, oldValue, newValue) -> {
-                    if (!newValue) {
+                    if (!CanWeSendPocketOnThisConnection(exitConnection)) {
                         AddToWaitingSend(systemView, exitConnection);
                     }
                 };
 
                 waitingSendListeners.put(exitConnection, listener);
                 exitConnection.getCurve().isItUsedProperty().addListener(listener);
+
+                if (!SystemListeners.containsKey(systemView)) {
+                    SystemListeners.put(systemView, listener);
+                    systemView.isItDownProperty().addListener(listener);
+                }
+
             }
+
+
         }
     }
+    private boolean CanWeSendPocketOnThisConnection(Connection connection){
+
+        return connection.getCurve().isIsItUsed() && connection.getFrom().getSystem().isItDown();
+    }
+
     public void AddToWaitingSend(SystemView systemView , Connection connection){
         for (int i = 0 ; i < systemView.getCapacity().length ; i++) {
             if (systemView.getCapacity()[i] != null){
-                Pocket pocket = systemView.getCapacity()[i];
+                PocketMain pocket = systemView.getCapacity()[i];
                 systemView.getCapacity()[i] = null;
                 SendingPockets(systemView , pocket);
 
             }
         }
     }
-    private boolean itThere(Pocket pocket , SystemView systemView ){
-        for (Pocket pocket1 : systemView.getCapacity()) {
+    private boolean itThere(PocketMain pocket , SystemView systemView ){
+        for (PocketMain pocket1 : systemView.getCapacity()) {
             if (pocket1 == null) continue;
             if (pocket1.equals(pocket)) return true;
         }
         return false;
     }
-    public void resumeMovement(Pocket pocket , Connection connection){
+    public void resumeMovement(PocketMain pocket , Connection connection){
 
         ChangeListener<Boolean> l = new ChangeListener<>() {
             @Override
@@ -139,7 +150,7 @@ public class WholeMovement {
         pocketListeners.put(pocket, l);
         pocket.isItMovedProperty().addListener(l);
     }
-    public void AddToWaitingSystemCapacity(SystemView systemView , Pocket pocket){
+    public void AddToWaitingSystemCapacity(SystemView systemView , PocketMain pocket){
         if (itThere(pocket , systemView)) {
             return;
         };
@@ -166,12 +177,20 @@ public class WholeMovement {
         }
         waitingSendListeners.clear();
 
-        for (Map.Entry<Pocket, ChangeListener<Boolean>> entry : pocketListeners.entrySet()) {
+        for (Map.Entry<PocketMain, ChangeListener<Boolean>> entry : pocketListeners.entrySet()) {
             Pocket pocket = entry.getKey();
             ChangeListener<Boolean> listener = entry.getValue();
             pocket.isItMovedProperty().removeListener(listener);
         }
         pocketListeners.clear();
+
+
+        for (Map.Entry<SystemView, ChangeListener<Boolean>> entry : SystemListeners.entrySet()) {
+            SystemView systemView = entry.getKey();
+            ChangeListener<Boolean> listener = entry.getValue();
+            systemView.isItDownProperty().removeListener(listener);
+        }
+        SystemListeners.clear();
 
         for (Connection connection : connections) {
             connection.getCurve().setIsItUsed(false);
@@ -180,23 +199,21 @@ public class WholeMovement {
             systemView.setIsItDown(false);
             Arrays.fill(systemView.getCapacity(), null);
         }
-        for (Pocket pocket : pockets) {
-            PocketSwitchManager.reInitialize(pocket);
+        for (PocketMain pocket : pockets) {
+//            PocketSwitchManager.reInitialize(pocket);
+            pocket.getPathMover().stop();
+            pocket.setIsItMoved(false);
+            pocket.setIsItCollided(false);
+            pocket.setHP(pocket.getMaxHp());
+
+            pocket.setLayoutX(500);
+            pocket.setLayoutY(500);
+            pocket.setItAffected(false);
+
+
+            pocket.setBehaviour(pocket.getFirstPocketType());
+            pocket.setWhichSystemViewThisPocketIsAffectedBy(null);
         }
     }
 
-    public void RegisterPocket(Pocket pocket , Connection connection){
-        ChangeListener<Boolean> l = new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> obs,
-                                Boolean oldVal, Boolean newVal) {
-
-                if (!newVal) {
-                    obs.removeListener(this);
-                    SendingPockets(connection.getTo().getSystem(), pocket);
-                }
-            }
-        };
-        pocket.isItMovedProperty().addListener(l);
-    }
 }

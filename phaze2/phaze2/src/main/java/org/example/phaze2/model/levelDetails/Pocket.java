@@ -10,6 +10,7 @@ import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -35,16 +36,16 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
     protected String imagePath;
     private PocketTypes TypeBeforeChange;
     private PocketTypes FirstPocketType;
-    private SystemView WhichSystemViewThisPocketIsAffectedBy;
+    private SystemView WhichSystemViewThisPocketIsAffectedBy = null;
     public Pocket(PocketTypes type) {
         this.type = type;
     }
 
-    public static int getCoinsPerEntry() {
+    public int getCoinsPerEntry() {
         return coinsPerEntry;
     }
 
-    public static void setCoinsPerEntry(int coinsPerEntry) {
+    public void setCoinsPerEntry(int coinsPerEntry) {
         Pocket.coinsPerEntry = coinsPerEntry;
     }
 
@@ -54,7 +55,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
     }
 
     @Override
-    public Connection ReleaseAct(SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
         return null;
     }
     protected void Initialize(){}

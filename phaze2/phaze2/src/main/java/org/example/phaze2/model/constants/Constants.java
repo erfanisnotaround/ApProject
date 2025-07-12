@@ -7,6 +7,7 @@ import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.levelDetails.Pocket;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.ArrayList;
@@ -21,11 +22,10 @@ public class Constants {
     private SceneManager sceneManager;
     private WireManager wireManager;
     private List<SystemView> systemViews = new ArrayList<>();
-    private List<Pocket> pockets = new ArrayList<>();
+    private List<PocketMain> pockets = new ArrayList<>();
     private Map<PortInfo, Connection> exitConnections = new HashMap<>();
     private Map<Node, PortInfo> portInfo = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
-    private List<Pocket> constantsPockets = new ArrayList<>();
     private Constants() {}
     public static Constants getInstance() {
         return INSTANCE;
@@ -60,7 +60,7 @@ public class Constants {
     }
 
 
-    public List<Pocket> getPockets() {
+    public List<PocketMain> getPockets() {
         return pockets;
     }
 
@@ -81,11 +81,4 @@ public class Constants {
         return connections;
     }
 
-    public List<Pocket> getConnectedPockets() {
-        return constantsPockets;
-    }
-
-    public void setConnectedPockets(List<Pocket> connectedPockets) {
-        this.constantsPockets = connectedPockets;
-    }
 }

@@ -10,7 +10,7 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.WholeMovement;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.PocketSwitchManager;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
@@ -20,7 +20,6 @@ import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
@@ -48,18 +47,16 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
-        List<Pocket> pockets = systemVisualizer.getPockets();
+        List<PocketMain> pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
 
 
         Constants.getInstance().getSystemViews().addAll(systemViews);
         Constants.getInstance().getPockets().addAll(pockets);
 
-        List<Pocket> constantPockets = new ArrayList<>(pockets);
-        Constants.getInstance().setConnectedPockets(constantPockets);
+
 
         addingShapes(systemViews , pockets);
-        PocketSwitchManager.setContainer(ContainerPane);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(16)));
         timeline.setCycleCount(1);
@@ -102,7 +99,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     }
 
-    private void addingShapes(List<SystemView> systemViews , List<Pocket> pockets) {
+    private void addingShapes(List<SystemView> systemViews , List<PocketMain> pockets) {
 
         for (SystemView systemView : systemViews) {
             ContainerPane.getChildren().addFirst(systemView);
