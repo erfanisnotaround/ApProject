@@ -6,16 +6,20 @@ import org.example.phaze2.model.constants.PortTypes;
 
 public class PortInfo {
     private final SystemView system;
-    private final int        subIndex;
+    private int        subIndex;
     private final boolean    isExit;
-    private final PortTypes type;
+    private PortTypes type;
+    private PortTypes beforeChange;
 
     public PortInfo(SystemView system, int subIndex, boolean isExit, PortTypes type) {
         this.system   = system;
         this.subIndex = subIndex;
         this.isExit    = isExit;
         this.type      = type;
+        this.beforeChange = type;
     }
+
+
 
     public SystemView getSystem() {
         return system;
@@ -31,5 +35,16 @@ public class PortInfo {
 
     public PortTypes getType() {
         return type;
+    }
+    public void setType(PortTypes type) {
+        this.type = type;
+    }
+
+    public PortTypes getBeforeChange() {
+        return beforeChange;
+    }
+
+    public void setBeforeChange(PortTypes beforeChange) {
+        this.beforeChange = beforeChange;
     }
 }

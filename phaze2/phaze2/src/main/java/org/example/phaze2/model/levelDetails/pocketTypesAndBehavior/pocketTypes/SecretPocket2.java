@@ -1,15 +1,14 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -38,16 +37,16 @@ public class SecretPocket2 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration) {
+    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
         pathMover.move(curve , 100 , 30 , false);
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
         Connection exitConnection = systemView.behave(pocket);
 
         if (exitConnection != null) {
-            move(exitConnection.getCurve() , speed, acceleration);
+            move(exitConnection.getCurve() , speed, acceleration, pocket );
         }
 
 

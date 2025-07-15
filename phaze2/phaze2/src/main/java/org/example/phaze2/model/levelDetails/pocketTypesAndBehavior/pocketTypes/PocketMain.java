@@ -1,20 +1,20 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.InitData;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
 
 public class PocketMain extends Pocket  implements InitData {
     Pocket behaviour;
+    private final double DistractionSteps = 100;
     public PocketMain(PocketTypes type) {
         super(type);
         behaviour = PocketMoveFactory.giveType(type);
@@ -41,8 +41,8 @@ public class PocketMain extends Pocket  implements InitData {
         setScaleX(behaviour.getScaleX()); setScaleY(behaviour.getScaleY());
 
 
-        setLayoutX(behaviour.getLayoutX());
-        setLayoutY(behaviour.getLayoutY());
+//        setLayoutX(behaviour.getLayoutX());
+//        setLayoutY(behaviour.getLayoutY());
         pocket.getPathMover().setNode(this);
 
 
@@ -54,24 +54,32 @@ public class PocketMain extends Pocket  implements InitData {
         setType(behaviour.getType());
         initData(pocket);
         if (isIsItMoved()){
-//            pathMover.start();
+
         }
     }
 
+
     @Override
-    public void move(Curve curve, double speed, double acceleration) {
-        behaviour.move(curve, speed, acceleration);
+    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
+        behaviour.move(curve, speed, acceleration, this);
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
-        return behaviour.ReleaseAct(this , systemView, portInfoMap, exitConnections);
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+
+        return behaviour.ReleaseAct(this , systemView, exitConnections);
+    }
+
+    public void distract(double x , double y) {
+        getPathMover().AddingImpactVector(x, y , DistractionSteps);
     }
 
     public void setBehaviour(PocketTypes behaviourType) {
+        behaviour.StopStrategy(behaviour , this );
         this.behaviour = PocketMoveFactory.giveType(behaviourType);
         setTypeBeforeChange(getType());
         PrepareNewBehavior(behaviour);
+//        System.out.println("Behaviour set to " + behaviour.getType());
     }
 
 }

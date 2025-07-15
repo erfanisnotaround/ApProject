@@ -20,9 +20,18 @@ public class PathMover extends AnimationTimer {
     private Point2D latestLineDistance = new Point2D(0, 0);
     private Point2D currentLineDistance = new Point2D(0, 0);
 
+
+    private Point2D latestLineDistanceForWholeMove = new Point2D(0, 0);
+    private Point2D currentLineDistanceForWholeMove = new Point2D(0, 0);
+
+    private double lineDistancePerMoveXForWhole = 0;
+    private double lineDistancePerMoveYForWhole = 0;
+
+
+
     private double lineDistancePerMoveX = 0;
     private double lineDistancePerMoveY = 0;
-    private final int STEPS = 100;
+    private double STEPS = 200;
     private double AngleNeeded;
     private boolean rotate;
     public PathMover(Pocket node , double angle) {
@@ -52,7 +61,6 @@ public class PathMover extends AnimationTimer {
         start();
 
 
-
     }
 
     @Override public void handle(long now) {
@@ -66,6 +74,9 @@ public class PathMover extends AnimationTimer {
         if (currentLineDistance.getX() < latestLineDistance.getX()) {
             currentLineDistance = currentLineDistance.add(lineDistancePerMoveX, lineDistancePerMoveY);
         }
+
+        currentLineDistanceForWholeMove = currentLineDistanceForWholeMove.add(lineDistancePerMoveXForWhole, lineDistancePerMoveYForWhole);
+
 
         double dt = (now - lastNs) / 1_000_000_000.0; // seconds
         lastNs = now;
@@ -86,8 +97,8 @@ public class PathMover extends AnimationTimer {
 
         Point2D p = path.pointAt(s);
         Bounds b = node.getBoundsInLocal();
-        double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX();
-        double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY();
+        double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX() + currentLineDistanceForWholeMove.getX();
+        double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY() + currentLineDistanceForWholeMove.getY();
 
         node.setLayoutX(cx);
         node.setLayoutY(cy);
@@ -118,13 +129,51 @@ public class PathMover extends AnimationTimer {
         return curve;
     }
 
-    public void AddingImpactVector(double x, double y) {
+    public void AddingImpactVector(double x, double y , double STEPS) {
+        this.STEPS = STEPS;
         latestLineDistance = latestLineDistance.add(x, y);
         lineDistancePerMoveX = x/STEPS;
         lineDistancePerMoveY = y/STEPS;
     }
+    public void AddWholeMoveVector(double x, double y ) {
+        lineDistancePerMoveXForWhole= x;
+        lineDistancePerMoveYForWhole= y;
+
+        System.out.println(x + " " + y);
+    }
     public void setNode(Pocket node) {
         this.node = node;
+    }
+
+    public void setCurrentLineDistance(Point2D currentLineDistance) {
+        this.currentLineDistance = currentLineDistance;
+    }
+
+    public Point2D getCurrentLineDistance() {
+        return currentLineDistance;
+    }
+
+    public void setLatestLineDistance(Point2D latestLineDistance) {
+        this.latestLineDistance = latestLineDistance;
+    }
+    public Point2D getLatestLineDistance() {
+        return latestLineDistance;
+    }
+
+    public Point2D getLatestLineDistanceForWholeMove() {
+        return latestLineDistanceForWholeMove;
+    }
+
+    public void setLatestLineDistanceForWholeMove(Point2D latestLineDistanceForWholeMove) {
+        this.latestLineDistanceForWholeMove = latestLineDistanceForWholeMove;
+    }
+
+    public Point2D getCurrentLineDistanceForWholeMove() {
+        return currentLineDistanceForWholeMove;
+    }
+
+    public void setCurrentLineDistanceForWholeMove(Point2D currentLineDistanceForWholeMove) {
+        this.currentLineDistanceForWholeMove = currentLineDistanceForWholeMove;
     }
 
 

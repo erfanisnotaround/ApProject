@@ -2,7 +2,6 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.PathMover;
@@ -10,6 +9,7 @@ import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.*;
 import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -35,7 +35,7 @@ public class Messenger1 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration) {
+    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
         pathMover.move(curve , this.speed, 100 , true);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2400), e -> {}));
@@ -48,14 +48,14 @@ public class Messenger1 extends Pocket implements Movable {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
 
         Connection exitConnection = systemView.behave(pocket);
 
-        if (exitConnection != null && exitConnection.getFrom().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed, acceleration);
-        } else if (exitConnection != null && !exitConnection.getFrom().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed/2 , acceleration);
+        if (exitConnection != null && exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
+            move(exitConnection.getCurve() , speed, acceleration, pocket);
+        } else if (exitConnection != null && !exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
+            move(exitConnection.getCurve() , speed/2 , acceleration, pocket );
         }
 
 

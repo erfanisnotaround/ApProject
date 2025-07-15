@@ -15,6 +15,8 @@ import java.util.List;
 public class Curve extends Polyline implements CurveBuilder , Runnable {
 
 
+    private final int FullHP = 3;
+    private int HP = FullHP;
     private double latestAcceptableLength;
     private List<Anchor> middlePoints = new ArrayList<>();
     private Point2D firstPoint;
@@ -146,6 +148,18 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         this.latestAcceptableLength = latestAcceptableLength;
     }
 
-    public static class Ligth {
+    public int getHP() {
+        return HP;
     }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+    public int getFullHP() {
+        return FullHP;
+    }
+    public List<Anchor> getAnchors(){
+        return middlePoints;
+    }
+
 }

@@ -1,7 +1,6 @@
 package org.example.phaze2.controllers.connectionsAndMaking;
 
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,6 +9,7 @@ import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Anchor;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.ConnectionHandler;
 
 public class ConnectionUI {
@@ -24,14 +24,14 @@ public class ConnectionUI {
         curveLayerManager = new CurveLayerManager(Container);
         connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(curveLayerManager) , this , Container);
     }
-    public void registerExitGate(Node gate, SystemView system, int subIndex, PortTypes type) {
+    public void registerExitGate(Port gate, SystemView system, int subIndex, PortTypes type) {
         connectionHandler.RegisterExitGate(gate, system, subIndex, type);
         gate.addEventHandler(MouseEvent.MOUSE_PRESSED,  mouseEvent -> connectionHandler.onPress(mouseEvent));
         gate.addEventHandler(MouseEvent.MOUSE_DRAGGED,  mouseEvent -> connectionHandler.onDrag(mouseEvent));
         gate.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseEvent -> connectionHandler.onRelease(mouseEvent));
     }
 
-    public void registerEnterGate(Node gate, SystemView system, int subIndex, PortTypes type) {
+    public void registerEnterGate(Port gate, SystemView system, int subIndex, PortTypes type) {
         connectionHandler.RegisterEnter(gate, system, subIndex, type);
     }
     public void RegisterCurve(Curve curve){

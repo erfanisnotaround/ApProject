@@ -2,8 +2,8 @@ package org.example.phaze2.model.levelDetails;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import org.example.phaze2.controllers.moverController.MovingPlanMaker;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.controllers.moverController.WholeMovement;
 import org.example.phaze2.model.constants.PortTypes;
@@ -16,7 +16,7 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 import java.util.Map;
 import java.util.Random;
 
-public abstract class Pocket extends ImageView implements Movable , Releasable {
+public abstract class Pocket extends ImageView implements Movable , Releasable , MovingPlanMaker {
     protected WholeMovement movementManager;
     protected boolean isItAffected = false;
     protected Random random = new Random();
@@ -50,14 +50,25 @@ public abstract class Pocket extends ImageView implements Movable , Releasable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration) {
-        movable.move(curve, speed , acceleration );
+    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
+        movable.move(curve, speed , acceleration, pocket);
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
         return null;
     }
+
+    @Override
+    public void movingStrategy(PocketMain pocketMain, Curve curve) {
+
+    }
+
+    @Override
+    public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
+
+    }
+
     protected void Initialize(){}
 
 

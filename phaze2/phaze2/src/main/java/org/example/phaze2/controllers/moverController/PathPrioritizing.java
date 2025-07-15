@@ -3,10 +3,7 @@ package org.example.phaze2.controllers.moverController;
 import javafx.scene.Node;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.PortInfo;
-import org.example.phaze2.model.levelDetails.SubSystemView;
-import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -17,14 +14,12 @@ import java.util.Map;
 public class PathPrioritizing {
     Constants constants = Constants.getInstance();
     private List<Connection> connections;
-    private Map<Node, PortInfo> portInfoMap;
-    private Map<PortInfo , Connection> exitConnections;
+    private Map<Port, Connection> exitConnections;
     private List<PocketMain> pockets;
     private List<SystemView> systemViews;
     public PathPrioritizing() {
 
         connections = constants.getConnections();
-        portInfoMap = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
         pockets = constants.getPockets();
         systemViews = constants.getSystemViews();
@@ -36,8 +31,7 @@ public class PathPrioritizing {
 
         for(SubSystemView subSystemView : systemView.getSubSystems()){
             if (subSystemView.DoesItHavaExitGate()){
-                PortInfo portInfo = portInfoMap.get(subSystemView.getExitPort());
-                Connection exitConnection = exitConnections.get(portInfo);
+                Connection exitConnection = exitConnections.get(subSystemView.getExitPort());
                 if (exitConnection == null){ continue;}
                 if (subSystemView.getExitGate() == portType && !exitConnection.getCurve().isIsItUsed()){
                     FirstConnection.add(exitConnection);
@@ -52,8 +46,7 @@ public class PathPrioritizing {
 
         for(SubSystemView subSystemView : systemView.getSubSystems()){
             if (subSystemView.DoesItHavaExitGate()){
-                PortInfo portInfo = portInfoMap.get(subSystemView.getExitPort());
-                Connection exitConnection = exitConnections.get(portInfo);
+                Connection exitConnection = exitConnections.get(subSystemView.getExitPort());
                 if (exitConnection == null){continue;}
                 if (subSystemView.getExitGate() != portType && !exitConnection.getCurve().isIsItUsed()){
                     SecondConnection.add(exitConnection);

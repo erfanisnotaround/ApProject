@@ -1,8 +1,8 @@
 package org.example.phaze2.model.levelDetails;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import org.example.phaze2.model.constants.PortTypes;
 
 public class SubSystemView extends Rectangle {
@@ -10,8 +10,8 @@ public class SubSystemView extends Rectangle {
     private boolean doesItHavaExitGate;
     private PortTypes EnterGate;
     private PortTypes ExitGate;
-    private Shape EnterPort;
-    private Shape ExitPort;
+    private Port EnterPort;
+    private Port ExitPort;
 
     public SubSystemView(double width, double height) {
         super(width, height);
@@ -52,19 +52,19 @@ public class SubSystemView extends Rectangle {
         ExitGate = exitGate;
     }
 
-    public Shape getEnterPort() {
+    public Port getEnterPort() {
         return EnterPort;
     }
 
-    public void setEnterPort(Shape enterPort) {
+    public void setEnterPort(Port enterPort) {
         EnterPort = enterPort;
     }
 
-    public Shape getExitPort() {
+    public Port getExitPort() {
         return ExitPort;
     }
 
-    public void setExitPort(Shape exitPort) {
+    public void setExitPort(Port exitPort) {
         ExitPort = exitPort;
     }
 }

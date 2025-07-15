@@ -1,16 +1,15 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -36,32 +35,26 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
 
         HP = MaxHp = 8;
         speed = 200;
-        acceleration = 0;
+        acceleration = 25;
         preferredType = PortTypes.ALL;
 
         pathMover = new PathMover(this , 0);
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration) {
-        System.out.println("Moving curve");
+    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
         pathMover.move(curve , speed , acceleration , true);
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2300), event -> {
-//        }));
-//        timeline.setCycleCount(1);
-//        timeline.play();
-//        timeline.setOnFinished(e -> {
-////            pathMover.restart(-100);
-//            pathMover.reverse();
-//        });
     }
+    
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Node, PortInfo> portInfoMap, Map<PortInfo, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
         Connection exitConnection = systemView.behave(pocket);
 
-        if (exitConnection != null) {
-            move(exitConnection.getCurve() , speed, acceleration);
+        if (exitConnection != null && exitConnection.getCurve().getAnchors().isEmpty()) {
+            move(exitConnection.getCurve() , speed, acceleration * 0 , pocket );
+        } else if (exitConnection != null && !exitConnection.getCurve().getAnchors().isEmpty()) {
+            move(exitConnection.getCurve() , speed, acceleration, pocket );
         }
 
 

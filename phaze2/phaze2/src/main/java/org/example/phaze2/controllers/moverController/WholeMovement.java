@@ -2,13 +2,14 @@ package org.example.phaze2.controllers.moverController;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Arrays;
@@ -21,8 +22,7 @@ public class WholeMovement {
 
     // resources
     private volatile List<Connection> connections;
-    private volatile Map<Node , PortInfo> portInfoMap;
-    private volatile Map<PortInfo , Connection> exitConnections;
+    private volatile Map<Port, Connection> exitConnections;
     private volatile List<PocketMain> pockets;
     private volatile List<SystemView> systemViews;
 
@@ -42,7 +42,6 @@ public class WholeMovement {
 
     public WholeMovement() {
         connections = constants.getConnections();
-        portInfoMap = constants.getPortInfo();
         exitConnections = constants.getExitConnections();
         pockets = constants.getPockets();
         systemViews = constants.getSystemViews();
@@ -72,7 +71,7 @@ public class WholeMovement {
 
 
     public void SendingPockets(SystemView systemView , PocketMain pocket){
-        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, portInfoMap, exitConnections);
+        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections);
         if (exitConnection != null) {
             resumeMovement(pocket , exitConnection);
             return;
@@ -89,8 +88,7 @@ public class WholeMovement {
     public void MakeSystemConnectionsWaiting(SystemView systemView){
         for (SubSystemView subSystemView : systemView.getSubSystems()) {
             if (subSystemView.DoesItHavaExitGate()){
-                PortInfo portInfo = portInfoMap.get(subSystemView.getExitPort());
-                Connection exitConnection = exitConnections.get(portInfo);
+                Connection exitConnection = exitConnections.get(subSystemView.getExitPort());
 
 
                 ChangeListener<Boolean> listener = (observable, oldValue, newValue) -> {
@@ -114,7 +112,7 @@ public class WholeMovement {
     }
     private boolean CanWeSendPocketOnThisConnection(Connection connection){
 
-        return connection.getCurve().isIsItUsed() && connection.getFrom().getSystem().isItDown();
+        return connection.getCurve().isIsItUsed() && connection.getFromPort().getPortInfo().getSystem().isItDown();
     }
 
     public void AddToWaitingSend(SystemView systemView , Connection connection){
@@ -136,6 +134,11 @@ public class WholeMovement {
     }
     public void resumeMovement(PocketMain pocket , Connection connection){
 
+        if (IsItBig(pocket)) {
+            connection.ChangePorts(PortTypes.TRIANGLE);
+            connection.getCurve().setHP(connection.getCurve().getHP() - 1);
+        }
+
         ChangeListener<Boolean> l = new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs,
@@ -143,7 +146,7 @@ public class WholeMovement {
 
                 if (!newVal) {
                     obs.removeListener(this);
-                    SendingPockets(connection.getTo().getSystem(), pocket);
+                    SendingPockets(connection.getToPort().getPortInfo().getSystem(), pocket);
                 }
             }
         };
@@ -161,7 +164,12 @@ public class WholeMovement {
             }
         }
     }
+    private boolean IsItBig(PocketMain pocket){
+        if (pocket.getType() == PocketTypes.BIG_1) return true;
+        else if (pocket.getType() == PocketTypes.BIG_2) return true;
 
+        return false;
+    }
     public void getStartSystemView(){
         for (SystemView systemView : systemViews) {
             if (systemView.isItStartSystem()) startingSystemView = systemView;
@@ -194,6 +202,8 @@ public class WholeMovement {
 
         for (Connection connection : connections) {
             connection.getCurve().setIsItUsed(false);
+            connection.resetIt();
+            connection.getCurve().setHP(connection.getCurve().getFullHP());
         }
         for (SystemView systemView : systemViews) {
             systemView.setIsItDown(false);
@@ -206,8 +216,8 @@ public class WholeMovement {
             pocket.setIsItCollided(false);
             pocket.setHP(pocket.getMaxHp());
 
-            pocket.setLayoutX(500);
-            pocket.setLayoutY(500);
+            pocket.setLayoutX(-1000);
+            pocket.setLayoutY(-1000);
             pocket.setItAffected(false);
 
 

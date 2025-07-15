@@ -47,8 +47,8 @@
       {
         "systemType": "DESTRUCTIVE",
         "systemName": "Backup2",
-        "x": 400.0,
-        "y": 500.0,
+        "x": 700.0,
+        "y": 700.0,
         "isItStartSystem": false,
         "numberOfSubSystems": 1,
         "isTheLightOn": true,
@@ -62,7 +62,7 @@
         ]
       },
       {
-        "systemType": "ANTI_VIRUS",
+        "systemType": "SPY",
         "systemName": "Backup3",
         "x": 600.0,
         "y": 500.0,
@@ -81,7 +81,7 @@
     ],
     "pockets": [
       {
-        "type": " Messenger_2",
+        "type": " BIG_2",
         "delay": 1.5
       },
       {

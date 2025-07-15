@@ -1,13 +1,11 @@
 package org.example.phaze2.model.constants;
 
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.ArrayList;
@@ -23,8 +21,7 @@ public class Constants {
     private WireManager wireManager;
     private List<SystemView> systemViews = new ArrayList<>();
     private List<PocketMain> pockets = new ArrayList<>();
-    private Map<PortInfo, Connection> exitConnections = new HashMap<>();
-    private Map<Node, PortInfo> portInfo = new HashMap<>();
+    private Map<Port, Connection> exitConnections = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
     private Constants() {}
     public static Constants getInstance() {
@@ -66,14 +63,10 @@ public class Constants {
 
 
 
-    public Map<PortInfo, Connection> getExitConnections() {
+    public Map<Port, Connection> getExitConnections() {
         return exitConnections;
     }
 
-
-    public Map<Node, PortInfo> getPortInfo() {
-        return portInfo;
-    }
 
 
 

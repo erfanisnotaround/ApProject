@@ -14,6 +14,7 @@ import org.example.phaze2.model.levelDetails.Anchor;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.PortInfo;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.Port;
 
 public class ConnectionHandler {
     private final Pane Container;
@@ -25,7 +26,7 @@ public class ConnectionHandler {
 
 
     private Curve    currentCurve;
-    private Node     startGate;
+    private Port     startGate;
     private double   startX, startY;
 
     private Curve    selectedCurve;
@@ -47,7 +48,7 @@ public class ConnectionHandler {
         this.Container = container;
     }
     public void onPress(MouseEvent mouseEvent) {
-        Node ExitNode = (Node) mouseEvent.getSource();
+        Port ExitNode = (Port) mouseEvent.getSource();
         if (!registry.getExitGates().contains(ExitNode)) return;
         Point2D center = getCenterInScene(ExitNode);
         StartPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(center);
@@ -56,7 +57,6 @@ public class ConnectionHandler {
         startGate = ExitNode;
 
         currentCurve = new Curve();
-//        currentCurve.setStrokeWidth(5);
         currentCurve.setFill(Color.GREEN);
         wireRenderer.renderCurve(currentCurve);
         mouseEvent.consume();
@@ -83,16 +83,16 @@ public class ConnectionHandler {
 
         double finalLen = currentCurve.ApproximateLength();
         Point2D scenePt = new Point2D(e.getSceneX(), e.getSceneY());
-        PortInfo fromInfo = registry.getPortMap().get(startGate);
+        PortInfo fromInfo = startGate.getPortInfo();
 
-        for (Node gate : registry.getEnterGates()) {
+        for (Port gate : registry.getEnterGates()) {
             Bounds eb = gate.getBoundsInLocal();
             Point2D cen = gate.localToScene(eb.getWidth()/2, eb.getHeight()/2);
             if (cen.distance(scenePt) < 5) {
-                PortInfo toInfo = registry.getPortMap().get(gate);
+                PortInfo toInfo = gate.getPortInfo();
                 if (ruleEngine.isConnectionValid(fromInfo , toInfo , finalLen)) {
                     Curve myCurve = currentCurve;
-                    Connection conn = new Connection(fromInfo, toInfo, myCurve, startGate, gate);
+                    Connection conn = new Connection(myCurve, startGate, gate);
                     myCurve.setConnection(conn);
                     myCurve.setFill(Color.GREEN);
                     addConnection(conn);
@@ -173,11 +173,11 @@ public class ConnectionHandler {
         Container.getChildren().remove(conn.getCurve());
     }
 
-    public void RegisterEnter(Node gate , SystemView system, int subIndex, PortTypes type) {
+    public void RegisterEnter(Port gate , SystemView system, int subIndex, PortTypes type) {
         PortInfo info = new PortInfo(system, subIndex, true, type);
         registry.registerEnter(gate , info);
     }
-    public void RegisterExitGate(Node gate , SystemView system, int subIndex, PortTypes type) {
+    public void RegisterExitGate(Port gate , SystemView system, int subIndex, PortTypes type) {
         PortInfo info = new PortInfo(system, subIndex, false, type);
         registry.registerExit(gate , info);
     }

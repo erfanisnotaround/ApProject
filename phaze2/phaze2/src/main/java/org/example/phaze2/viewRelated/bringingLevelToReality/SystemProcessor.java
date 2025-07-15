@@ -3,7 +3,6 @@ package org.example.phaze2.viewRelated.bringingLevelToReality;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
@@ -11,6 +10,7 @@ import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.Light;
 import org.example.phaze2.model.levelDetails.SubSystemView;
 import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.Port;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
 
 import java.util.ArrayList;
@@ -90,8 +90,9 @@ public class SystemProcessor implements Runnable{
 
     }
     public void putPorts(SystemView systemView , SubSystemView subSystemView , int index) {
+
         if (subSystemView.DoesItHaveEnterGate()){
-            Shape EnterGate = subSystemView.getEnterGate().createShape();
+            Port EnterGate = new Port(subSystemView.getEnterGate().createShape());
             subSystemView.setEnterPort(EnterGate);
 
             EnterGate.setLayoutX(CurrentLevelConstants.getInstance().getDistanceOFRightForSubSystems()/4);
@@ -105,7 +106,7 @@ public class SystemProcessor implements Runnable{
         }
 
         if (subSystemView.DoesItHavaExitGate()){
-            Shape ExitGate = subSystemView.getExitGate().createShape();
+            Port ExitGate = new Port(subSystemView.getExitGate().createShape());
 
             subSystemView.setExitPort(ExitGate);
 
