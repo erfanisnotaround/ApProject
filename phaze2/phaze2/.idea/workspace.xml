@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/MovingPlanMaker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Port.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/connectionsAndMaking/ConnectionUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/Movable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/Movable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/PathMover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/PathMover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/PathPrioritizing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/PathPrioritizing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/WholeMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/WholeMovement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/sceneControllers/GameSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/constants/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/PortInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/PortInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SubSystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SubSystemView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/Releasable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/Releasable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/SystemView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/BigPocket1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/BigPocket1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/BigPocket2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/BigPocket2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/Messenger1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/Messenger1.java" afterDir="false" />
@@ -29,10 +18,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretMessenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretMessenger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/portConnectingDetails/ConnectionRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/viewRelated/bringingLevelToReality/SystemProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/viewRelated/bringingLevelToReality/SystemProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +191,8 @@
       <workItem from="1752328573321" duration="17202000" />
       <workItem from="1752412999816" duration="9828000" />
       <workItem from="1752586129842" duration="2354000" />
-      <workItem from="1752589566406" duration="6927000" />
+      <workItem from="1752589566406" duration="7899000" />
+      <workItem from="1752671744746" duration="6986000" />
     </task>
     <servers />
   </component>

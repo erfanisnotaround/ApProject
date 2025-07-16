@@ -33,7 +33,7 @@ public class SecretPocket2 extends Pocket implements Movable {
         acceleration = 0;
         preferredType = PortTypes.ALL;
 
-        pathMover = new PathMover(this , 0);
+        pathMover = new PathMover(0);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class SecretMessenger extends Pocket implements Movable {
         setScaleX(0.03);
         setScaleY(0.03);
         setCoinsPerEntry(5);
-        pathMover = new PathMover(this , 0);
+        pathMover = new PathMover(0);
         chooseTheMoveBehavior();
     }
 

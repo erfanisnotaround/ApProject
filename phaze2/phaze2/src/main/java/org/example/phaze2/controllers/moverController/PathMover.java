@@ -7,10 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.shape.Polyline;
 import org.example.phaze2.model.levelDetails.Curve;
 import org.example.phaze2.model.levelDetails.Pocket;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 public class PathMover extends AnimationTimer {
     private Curve curve;
-    private Pocket node;
+    private PocketMain node;
     private PathData path;
     private double s = 0;           // distance travelled (px)
     private double v;               // current speed (px/s)
@@ -34,8 +35,8 @@ public class PathMover extends AnimationTimer {
     private double STEPS = 200;
     private double AngleNeeded;
     private boolean rotate;
-    public PathMover(Pocket node , double angle) {
-        this.node = node;
+    public PathMover(double angle) {
+
         AngleNeeded = angle;
     }
 
@@ -70,6 +71,9 @@ public class PathMover extends AnimationTimer {
             lastNs = now; return;
         }
 
+        boolean reachEnd = v >= 0 && s >= path.total();
+        boolean reachStart = v <= 0 && s <=0;
+
 
         if (currentLineDistance.getX() < latestLineDistance.getX()) {
             currentLineDistance = currentLineDistance.add(lineDistancePerMoveX, lineDistancePerMoveY);
@@ -85,15 +89,22 @@ public class PathMover extends AnimationTimer {
         v += a * dt;
 //        System.out.println(s);
 
-        if (s >= path.total()) {
+
+        if (reachEnd || reachStart) {
+            if (reachStart){
+                reverse();
+                s=0;
+                return;
+            }
             s = path.total();
             stop();
 
             curve.setIsItUsed(false);
             node.setIsItMoved(false);
-
+            node.StopStrategyMoving();
 
         }
+
 
         Point2D p = path.pointAt(s);
         Bounds b = node.getBoundsInLocal();
@@ -139,9 +150,8 @@ public class PathMover extends AnimationTimer {
         lineDistancePerMoveXForWhole= x;
         lineDistancePerMoveYForWhole= y;
 
-        System.out.println(x + " " + y);
     }
-    public void setNode(Pocket node) {
+    public void setNode(PocketMain node) {
         this.node = node;
     }
 

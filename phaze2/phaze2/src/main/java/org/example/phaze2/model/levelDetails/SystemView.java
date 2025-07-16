@@ -51,6 +51,12 @@ public class SystemView extends Pane implements SystemBehavior  {
                         " -fx-border-radius: 5;";
         setStyle(style);
     }
+    public boolean isCapacityEmpty() {
+        for (PocketMain p : capacity) {
+            if (p != null) return false;
+        }
+        return true;
+    }
 
     @Override
     public Connection behave(PocketMain EntryPocket) {

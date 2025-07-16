@@ -18,7 +18,7 @@ public class BigPocket2 extends Pocket implements Movable {
 
     private final double UnitCounter  = 100;
     private final double changePerUnit = 0.5;
-    private final int StepsPerUnit = 200;
+    private final int StepsPerUnit = 1000;
 
     public BigPocket2(PocketTypes type) {
         super(type);
@@ -40,7 +40,7 @@ public class BigPocket2 extends Pocket implements Movable {
         acceleration = 0;
         preferredType = PortTypes.ALL;
 
-        pathMover = new PathMover(this , 0);
+        pathMover = new PathMover(0);
     }
 
     @Override

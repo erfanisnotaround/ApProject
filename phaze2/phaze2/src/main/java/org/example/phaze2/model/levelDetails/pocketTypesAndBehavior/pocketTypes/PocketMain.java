@@ -54,7 +54,8 @@ public class PocketMain extends Pocket  implements InitData {
         setType(behaviour.getType());
         initData(pocket);
         if (isIsItMoved()){
-
+            System.out.println(behaviour.getType());
+            behaviour.movingStrategy(this , getPathMover().getCurve());
         }
     }
 
@@ -76,10 +77,15 @@ public class PocketMain extends Pocket  implements InitData {
 
     public void setBehaviour(PocketTypes behaviourType) {
         behaviour.StopStrategy(behaviour , this );
+
         this.behaviour = PocketMoveFactory.giveType(behaviourType);
+
         setTypeBeforeChange(getType());
         PrepareNewBehavior(behaviour);
 //        System.out.println("Behaviour set to " + behaviour.getType());
     }
 
+    public void StopStrategyMoving() {
+        behaviour.StopStrategy(behaviour , this);
+    }
 }

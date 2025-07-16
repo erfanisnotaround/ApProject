@@ -51,7 +51,6 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
 
     @Override
     public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
-        movable.move(curve, speed , acceleration, pocket);
     }
 
     @Override
