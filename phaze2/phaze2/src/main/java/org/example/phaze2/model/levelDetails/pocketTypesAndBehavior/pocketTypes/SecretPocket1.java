@@ -19,7 +19,7 @@ public class SecretPocket1 extends Pocket implements Movable {
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/Shield.png").toExternalForm());
 
     private static final double MAX_SPEED   = 1000;  // px / s when lane is free
-    private static final double MIN_SPEED   = 0;   // never crawl below this
+    private static final double MIN_SPEED   = 10;   // never crawl below this
     private static final double DECEL_STEP  = 20;   // px / s per frame when slowing
     private static final long   POLL_NS     = 40_000_000;
 

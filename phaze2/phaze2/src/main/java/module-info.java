@@ -3,6 +3,7 @@ module org.example.phaze2 {
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
+    requires java.sql;
 
 
     opens org.example.phaze2 to javafx.fxml;

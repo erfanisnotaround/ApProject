@@ -53,7 +53,6 @@ public class Messenger3 extends Pocket implements Movable {
 
         pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> {
-            System.out.println(pocket.getType() + " make It happen");
             pocket.setIsItCollided(true);
         });
         pause.play();
@@ -65,7 +64,6 @@ public class Messenger3 extends Pocket implements Movable {
                 if (t1) {
                     pocketMain.getPathMover().reverse();
                     pocketMain.setIsItCollided(false);
-                    System.out.println("mio2 " + pocketMain.getType());
                 }
             };
             pocketMain.isItCollidedProperty().addListener(Collide);

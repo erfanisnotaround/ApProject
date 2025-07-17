@@ -111,6 +111,9 @@ public class PathMover extends AnimationTimer {
         double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX() + currentLineDistanceForWholeMove.getX();
         double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY() + currentLineDistanceForWholeMove.getY();
 
+        node.setPlaceOfX(p.getX());
+        node.setPlaceOfY(p.getY());
+
         node.setLayoutX(cx);
         node.setLayoutY(cy);
 
@@ -184,6 +187,9 @@ public class PathMover extends AnimationTimer {
 
     public void setCurrentLineDistanceForWholeMove(Point2D currentLineDistanceForWholeMove) {
         this.currentLineDistanceForWholeMove = currentLineDistanceForWholeMove;
+    }
+    public PathData getPath() {
+        return path;
     }
 
 

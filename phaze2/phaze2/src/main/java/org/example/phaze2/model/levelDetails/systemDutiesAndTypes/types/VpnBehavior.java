@@ -28,6 +28,8 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
     @Override
     public Connection behave(PocketMain EntryPocket) {
 
+
+
         if (EntryPocket.getPathMover().getSpeed() >= 100){
             isItDownProperty().set(true);
             pauseTransition.play();
@@ -36,9 +38,13 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
             });
 
         }
-        if (EntryPocket.getType() != PocketTypes.SECRET_MESSENGER) {
+        if (EntryPocket.getType() != PocketTypes.SECRET_MESSENGER && EntryPocket.getType() != PocketTypes.SECRET_1) {
 
             EntryPocket.setBehaviour(PocketTypes.SECRET_MESSENGER);
+            EntryPocket.setWhichSystemViewThisPocketIsAffectedBy(this);
+        }
+        else if (EntryPocket.getType() == PocketTypes.SECRET_1) {
+            EntryPocket.setBehaviour(PocketTypes.SECRET_1);
             EntryPocket.setWhichSystemViewThisPocketIsAffectedBy(this);
         }
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(this , PortTypes.TRIANGLE);
