@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8e07ac6-c68c-42e7-86dc-f7ce648b82a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/BlockSide.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/GuardianBehaviour.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/HysteresisBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/MoveBehaviour.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/SpeedCalculatorForPocketSecret1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/GuardianBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/GuardianBehaviour.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/PathMover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/PathMover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Pocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/Messenger3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/Messenger3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/WholeMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/controllers/moverController/WholeMovement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/Curve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/PocketMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/PocketMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/pocketTypesAndBehavior/pocketTypes/SecretPocket2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/VpnBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/phaze2/model/levelDetails/systemDutiesAndTypes/types/VpnBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/phaze2/jsonFiles/SystemInformation.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,6 +189,9 @@
       <workItem from="1752586129842" duration="2354000" />
       <workItem from="1752589566406" duration="7899000" />
       <workItem from="1752671744746" duration="19622000" />
+      <workItem from="1752764893835" duration="613000" />
+      <workItem from="1752841703769" duration="13590000" />
+      <workItem from="1752933420935" duration="4149000" />
     </task>
     <servers />
   </component>

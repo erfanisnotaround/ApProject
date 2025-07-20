@@ -187,4 +187,23 @@ public class SystemView extends Pane implements SystemBehavior  {
     }
 
 
+
+
+
+
+//
+//
+    private int inSystem = 0;                     // <- NEW
+
+    public synchronized void EnterSystem() { inSystem++; }
+    public synchronized void ExitSystem() { if (inSystem > 0) inSystem--; }
+
+    public synchronized boolean hasWork() {       // ← use instead of isCapacityEmpty()
+        if (inSystem > 0) return false;            // pocket is approaching
+        return true;
+    }
+    public void reset(){
+        inSystem = 0;
+    }
+
 }

@@ -10,6 +10,7 @@ import org.example.phaze2.model.levelDetails.SystemView;
 import org.example.phaze2.controllers.moverController.Movable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
 import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.SpeedCalculatorForPocketSecret1;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -23,14 +24,16 @@ public class SecretPocket1 extends Pocket implements Movable {
     private static final double DECEL_STEP  = 20;   // px / s per frame when slowing
     private static final long   POLL_NS     = 40_000_000;
 
+    private boolean IsRunning = false;
+    SpeedCalculatorForPocketSecret1 speedCalculator = new SpeedCalculatorForPocketSecret1(this);
 
-    private final AnimationTimer regulator;     // slow-down brain
+
+    private AnimationTimer regulator;     // slow-down brain
     private SystemView targetSystem;
     public SecretPocket1(PocketTypes type) {
         super(type);
         Initialize();
 
-        regulator = buildRegulator();
 
     }
 
@@ -51,18 +54,31 @@ public class SecretPocket1 extends Pocket implements Movable {
     @Override
     public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
         movingStrategy(pocket , curve);
+
         pathMover.move(curve , speed , acceleration , true );
+        if (!targetSystem.isCapacityEmpty()){
+            pathMover.setSpeed(speedCalculator.calculateSpeed(targetSystem));
+        }
+
     }
 
     @Override
     public void movingStrategy(PocketMain pocketMain, Curve curve) {
+
         targetSystem = curve.getConnection().getToPort().getPortInfo().getSystem();
+        if (regulator != null) regulator.stop();     // stop previous
+        regulator = buildRegulator();                // brand-new timer
         regulator.start();
+        System.out.println("strategy started");
     }
 
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
-        regulator.stop();
+        if (regulator != null) {
+            regulator.stop();
+            regulator = null;                        // nothing running now
+            System.out.println("Stop strategy");
+        }
     }
 
     @Override
@@ -83,20 +99,25 @@ public class SecretPocket1 extends Pocket implements Movable {
 
             @Override public void handle(long now) {
 
-                /* throttle polling so we don’t run every frame */
                 if (now - lastCheck < POLL_NS) return;
                 lastCheck = now;
 
+                if (getPathMover().getPocketMain()!=null){
+                    if (!getPathMover().getPocketMain().isIsItMoved()) return;
+                }
+                System.out.println("ffffff");
+
                 double currentV = pathMover.getSpeed();
 
+
+
+
                 if (targetSystem != null && !targetSystem.isCapacityEmpty()) {
-                    /* destination busy → decelerate down toward MIN_SPEED */
-                    double newV = Math.max(MIN_SPEED, currentV - DECEL_STEP);
+                    double newV = speedCalculator.calculateSpeed(targetSystem);
                     pathMover.setSpeed(newV);
+
                 } else {
-                    /* destination free → accelerate smoothly back to MAX_SPEED */
-                    double newV = Math.min(MAX_SPEED, currentV + DECEL_STEP);
-                    pathMover.setSpeed(newV);
+                    pathMover.setSpeed(speed);
                 }
             }
         };

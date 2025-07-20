@@ -59,6 +59,7 @@ public class PathMover extends AnimationTimer {
 
         node.setIsItMoved(true);
         curve.setIsItUsed(true);
+        curve.setPocketMovingOnIt(node);
         start();
 
 
@@ -82,7 +83,7 @@ public class PathMover extends AnimationTimer {
         currentLineDistanceForWholeMove = currentLineDistanceForWholeMove.add(lineDistancePerMoveXForWhole, lineDistancePerMoveYForWhole);
 
 
-        double dt = (now - lastNs) / 1_000_000_000.0; // seconds
+        double dt = (now - lastNs) / 1_000_000_000.0;
         lastNs = now;
 
         s += v * dt + 0.5 * a * dt * dt;
@@ -99,9 +100,11 @@ public class PathMover extends AnimationTimer {
             s = path.total();
             stop();
 
+            node.StopStrategyMoving();
             curve.setIsItUsed(false);
             node.setIsItMoved(false);
-            node.StopStrategyMoving();
+            curve.setPocketMovingOnIt(null);
+
 
         }
 
@@ -190,6 +193,12 @@ public class PathMover extends AnimationTimer {
     }
     public PathData getPath() {
         return path;
+    }
+    public PocketMain getPocketMain() {
+        return node;
+    }
+    public double distanceRemains(){
+        return path.total() - s;
     }
 
 

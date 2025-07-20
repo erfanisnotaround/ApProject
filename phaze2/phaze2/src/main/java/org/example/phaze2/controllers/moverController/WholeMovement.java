@@ -58,7 +58,7 @@ public class WholeMovement {
 
         for (PocketMain pocket : pockets) {
             pocket.setMovementManager(this);
-            SendingPockets(startingSystemView , pocket);
+            SendingPockets(startingSystemView , pocket , -1);
         }
 
         for (SystemView systemView : systemViews) {
@@ -70,9 +70,12 @@ public class WholeMovement {
 
 
 
-    public void SendingPockets(SystemView systemView , PocketMain pocket){
+    public void SendingPockets(SystemView systemView , PocketMain pocket , int  fromSystem ){
         Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections);
         if (exitConnection != null) {
+            if (fromSystem != -1) {
+                systemView.getCapacity()[fromSystem] = null;
+            }
             resumeMovement(pocket , exitConnection);
             return;
         }
@@ -119,8 +122,9 @@ public class WholeMovement {
         for (int i = 0 ; i < systemView.getCapacity().length ; i++) {
             if (systemView.getCapacity()[i] != null){
                 PocketMain pocket = systemView.getCapacity()[i];
-                systemView.getCapacity()[i] = null;
-                SendingPockets(systemView , pocket);
+
+                SendingPockets(systemView , pocket , i);
+
 
             }
         }
@@ -146,7 +150,7 @@ public class WholeMovement {
 
                 if (!newVal) {
                     obs.removeListener(this);
-                    SendingPockets(connection.getToPort().getPortInfo().getSystem(), pocket);
+                    SendingPockets(connection.getToPort().getPortInfo().getSystem(), pocket , -1);
                 }
             }
         };
@@ -157,9 +161,10 @@ public class WholeMovement {
         if (itThere(pocket , systemView)) {
             return;
         };
-        for (int i = systemView.getCapacity().length - 1 ; i >= 0 ; i--){
+        for (int i = 0 ; i < systemView.getCapacity().length ; i++){
             if (systemView.getCapacity()[i] == null){
                 systemView.getCapacity()[i] = pocket;
+                systemView.EnterSystem();
                 break;
             }
         }
@@ -208,6 +213,7 @@ public class WholeMovement {
         for (SystemView systemView : systemViews) {
             systemView.setIsItDown(false);
             Arrays.fill(systemView.getCapacity(), null);
+            systemView.reset();
         }
         for (PocketMain pocket : pockets) {
 //            PocketSwitchManager.reInitialize(pocket);

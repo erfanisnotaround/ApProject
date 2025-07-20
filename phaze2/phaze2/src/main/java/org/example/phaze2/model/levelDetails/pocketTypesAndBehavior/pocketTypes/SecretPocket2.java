@@ -60,7 +60,7 @@ public class SecretPocket2 extends Pocket implements Movable {
     @Override
     public void movingStrategy(PocketMain pocketMain, Curve curve) {
         inRange = (ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-            System.out.println("mio2");
+
             pocketMain.getPathMover().reverse();
         };
 
@@ -88,7 +88,6 @@ public class SecretPocket2 extends Pocket implements Movable {
             double deltaY = pocketCheck.getPlaceOfY() - pocketMain.getPlaceOfY();
 
             if (Math.hypot(deltaX, deltaY) < CheckingRadius) {
-                System.out.println("mio 1");
                 inRangeProperty.set(!inRangeProperty.get());
             }
         }

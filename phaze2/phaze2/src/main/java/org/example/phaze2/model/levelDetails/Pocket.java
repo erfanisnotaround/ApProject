@@ -223,4 +223,6 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     public void setPlaceOfY(double placeOfY) {
         this.placeOfY = placeOfY;
     }
+
+
 }

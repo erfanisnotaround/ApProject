@@ -81,6 +81,15 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         });
 
 
+        Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(1)  , actionEvent -> {
+            for (SystemView systemView : systemViews) {
+                System.out.println(systemView.getSystemID() + " " + systemView.hasWork());
+            }
+        }));
+        timeline2.setCycleCount(-1);
+//        timeline2.play();
+
+
 
 
     }

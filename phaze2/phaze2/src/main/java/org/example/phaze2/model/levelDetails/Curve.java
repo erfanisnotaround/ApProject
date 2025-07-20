@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class Curve extends Polyline implements CurveBuilder , Runnable {
 
 
+    private PocketMain pocketMovingOnIt;
     private final int FullHP = 3;
     private int HP = FullHP;
     private double latestAcceptableLength;
@@ -162,4 +164,11 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         return middlePoints;
     }
 
+    public PocketMain getPocketMovingOnIt() {
+        return pocketMovingOnIt;
+    }
+
+    public void setPocketMovingOnIt(PocketMain pocketMovingOnIt) {
+        this.pocketMovingOnIt = pocketMovingOnIt;
+    }
 }
