@@ -41,9 +41,10 @@ public class PocketMain extends Pocket  implements InitData {
         setScaleX(behaviour.getScaleX()); setScaleY(behaviour.getScaleY());
 
 
-        setLayoutX(behaviour.getLayoutX());
-        setLayoutY(behaviour.getLayoutY());
         pocket.getPathMover().setNode(this);
+        if (isIsItMoved()){
+            behaviour.movingStrategy(this , getPathMover().getCurve());
+        }
 
 
         setLayoutX(2);
@@ -55,9 +56,7 @@ public class PocketMain extends Pocket  implements InitData {
         behaviour.setPathMover(getPathMover());
         setType(behaviour.getType());
         initData(pocket);
-        if (isIsItMoved()){
-            behaviour.movingStrategy(this , getPathMover().getCurve());
-        }
+
     }
 
 
@@ -83,7 +82,6 @@ public class PocketMain extends Pocket  implements InitData {
 
         setTypeBeforeChange(getType());
         PrepareNewBehavior(behaviour);
-//        System.out.println("Behaviour set to " + behaviour.getType());
     }
 
     public void StopStrategyMoving() {

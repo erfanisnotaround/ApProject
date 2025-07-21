@@ -60,17 +60,21 @@ public class Messenger3 extends Pocket implements Movable {
 
     @Override
     public void movingStrategy(PocketMain pocketMain, Curve curve) {
-            Collide = (observableValue, aBoolean, t1) -> {
-                if (t1) {
-                    pocketMain.getPathMover().reverse();
-                    pocketMain.setIsItCollided(false);
-                }
-            };
-            pocketMain.isItCollidedProperty().addListener(Collide);
+
+        if (pocketMain.getType() != PocketTypes.Messenger_3 && pocketMain.getType() != PocketTypes.SECRET_MESSENGER) return;
+        Collide = (observableValue, aBoolean, t1) -> {
+            if (t1) {
+                pocketMain.getPathMover().reverse();
+                pocketMain.setIsItCollided(false);
+                System.out.println("fired ..." + pocketMain.getType());
+            }
+        };
+        pocketMain.isItCollidedProperty().addListener(Collide);
     }
 
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
+        System.out.println(pocketMain.getType() + " stopping");
         if (Collide != null) pocketMain.isItCollidedProperty().removeListener(Collide);
         if (pause != null) pause.stop();
     }

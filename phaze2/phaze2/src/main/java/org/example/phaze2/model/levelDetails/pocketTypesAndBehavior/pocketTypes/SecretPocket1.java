@@ -69,17 +69,17 @@ public class SecretPocket1 extends Pocket implements Movable {
         if (regulator != null) regulator.stop();     // stop previous
         regulator = buildRegulator();                // brand-new timer
         regulator.start();
-        System.out.println("strategy started");
     }
 
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
         if (regulator != null) {
             regulator.stop();
-            regulator = null;                        // nothing running now
-            System.out.println("Stop strategy");
+            regulator = null;
+
         }
     }
+
 
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
@@ -105,12 +105,8 @@ public class SecretPocket1 extends Pocket implements Movable {
                 if (getPathMover().getPocketMain()!=null){
                     if (!getPathMover().getPocketMain().isIsItMoved()) return;
                 }
-                System.out.println("ffffff");
 
                 double currentV = pathMover.getSpeed();
-
-
-
 
                 if (targetSystem != null && !targetSystem.isCapacityEmpty()) {
                     double newV = speedCalculator.calculateSpeed(targetSystem);

@@ -30,6 +30,16 @@ public class SecretMessenger extends Pocket implements Movable {
     }
 
     @Override
+    public void movingStrategy(PocketMain pocketMain, Curve curve) {
+
+    }
+
+    @Override
+    public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
+        behavior.StopStrategy(LastPocket, pocketMain);
+    }
+
+    @Override
     protected void Initialize() {
         imagePath = "/org/example/phaze2/images/lock.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
