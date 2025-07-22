@@ -1,12 +1,9 @@
-package org.example.phaze2.controllers.moverController;
+package org.example.phaze2.controllers.moverController.moveRelated;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.shape.Polyline;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.Pocket;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 public class PathMover extends AnimationTimer {
@@ -199,6 +196,18 @@ public class PathMover extends AnimationTimer {
     }
     public double distanceRemains(){
         return path.total() - s;
+    }
+    public void moveForward() {
+        if (v <= 0 && a <= 0){
+            v *= -1;
+            a *= -1;
+        }
+    }
+    public void moveBackward() {
+        if (v >= 0){
+            v *= -1;
+            a *= -1;
+        }
     }
 
 

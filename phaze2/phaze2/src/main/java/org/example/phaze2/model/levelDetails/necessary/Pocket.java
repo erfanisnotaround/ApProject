@@ -1,15 +1,15 @@
-package org.example.phaze2.model.levelDetails;
+package org.example.phaze2.model.levelDetails.necessary;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
-import org.example.phaze2.controllers.moverController.MovingPlanMaker;
-import org.example.phaze2.controllers.moverController.PathMover;
-import org.example.phaze2.controllers.moverController.WholeMovement;
+import org.example.phaze2.controllers.moverController.moveRelated.MovingPlanMaker;
+import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.controllers.moverController.Movable;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.Releasable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.controllers.moverController.moveRelated.Movable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.Releasable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 

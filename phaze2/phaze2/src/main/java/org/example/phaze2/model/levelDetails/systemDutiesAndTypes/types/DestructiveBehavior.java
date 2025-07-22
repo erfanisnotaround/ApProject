@@ -1,10 +1,9 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
 import org.example.phaze2.model.constants.SystemTypes;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.SecretMessenger;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 

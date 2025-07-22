@@ -2,15 +2,15 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
-import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.controllers.moverController.Movable;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.Port;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.SpeedCalculatorForPocketSecret1;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Pocket;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.controllers.moverController.moveRelated.Movable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.SpeedCalculatorForPocketSecret1;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;

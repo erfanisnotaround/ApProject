@@ -6,10 +6,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Anchor;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Anchor;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.ConnectionHandler;
 
 public class ConnectionUI {

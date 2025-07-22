@@ -1,4 +1,4 @@
-package org.example.phaze2.controllers.moverController;
+package org.example.phaze2.controllers.moverController.moveRelated;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polyline;
@@ -7,12 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Utility that takes the flat doubles list from Polyline#getPoints()
- *  and turns it into     List<Point2D>  +  cumulative lengths.
- */
-record PathData(List<Point2D> pts, double[] cumLen, double total) {
+public record PathData(List<Point2D> pts, double[] cumLen, double total) {
 
-    static PathData fromPolyline(Polyline pl) {
+    public static PathData fromPolyline(Polyline pl) {
         List<Double> raw = pl.getPoints();
         int n = raw.size() / 2;
         List<Point2D> pts = new ArrayList<>(n);
@@ -27,7 +24,7 @@ record PathData(List<Point2D> pts, double[] cumLen, double total) {
         return new PathData(pts, cum, cum[n - 1]);
     }
 
-    Point2D pointAt(double s) {
+    public Point2D pointAt(double s) {
         if (s <= 0) return pts.get(0);
         if (s >= total) return pts.get(pts.size() - 1);
 
@@ -40,7 +37,7 @@ record PathData(List<Point2D> pts, double[] cumLen, double total) {
         return p0.interpolate(p1, t);
     }
 
-    double angleAt(double s) {
+    public double angleAt(double s) {
         if (s <= 0) return angle(pts.get(0), pts.get(1));
         if (s >= total) return angle(pts.get(pts.size() - 2), pts.get(pts.size() - 1));
 
@@ -48,6 +45,23 @@ record PathData(List<Point2D> pts, double[] cumLen, double total) {
         if (idx < 0) idx = -(idx + 1);
         Point2D p0 = pts.get(idx - 1), p1 = pts.get(idx);
         return angle(p0, p1);
+    }
+    public  double estimateS(Point2D position) {
+        double minDist = Double.MAX_VALUE;
+        double closestS = 0;
+
+        double step = 1.0;
+
+        for (double s = 0; s <= this.total(); s += step) {
+            Point2D pt = this.pointAt(s);
+            double dist = pt.distance(position);
+            if (dist < minDist) {
+                minDist = dist;
+                closestS = s;
+            }
+        }
+
+        return closestS;
     }
     private static double angle(Point2D a, Point2D b) { return Math.atan2(b.getY() - a.getY(), b.getX() - a.getX()); }
 }

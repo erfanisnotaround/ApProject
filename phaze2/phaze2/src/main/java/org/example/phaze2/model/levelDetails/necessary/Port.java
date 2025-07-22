@@ -1,4 +1,4 @@
-package org.example.phaze2.model.levelDetails;
+package org.example.phaze2.model.levelDetails.necessary;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Shape;

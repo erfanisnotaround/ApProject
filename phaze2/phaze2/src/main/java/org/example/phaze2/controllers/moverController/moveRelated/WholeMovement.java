@@ -1,15 +1,16 @@
-package org.example.phaze2.controllers.moverController;
+package org.example.phaze2.controllers.moverController.moveRelated;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import org.example.phaze2.controllers.moverController.checkings.StartAvailableChecker;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.SubSystemView;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.Pocket;
+import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Arrays;

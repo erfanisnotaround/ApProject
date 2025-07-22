@@ -7,10 +7,10 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
-import org.example.phaze2.model.levelDetails.Light;
-import org.example.phaze2.model.levelDetails.SubSystemView;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Light;
+import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
 
 import java.util.ArrayList;

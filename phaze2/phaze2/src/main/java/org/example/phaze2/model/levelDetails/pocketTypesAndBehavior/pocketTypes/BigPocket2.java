@@ -1,14 +1,14 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
 import javafx.scene.image.Image;
-import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.controllers.moverController.Movable;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Pocket;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.controllers.moverController.moveRelated.Movable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ public class BigPocket2 extends Pocket implements Movable {
 
     private final double UnitCounter  = 100;
     private final double changePerUnit = 0.5;
-    private final int StepsPerUnit = 1000;
+    private final int StepsPerUnit = 2000;
 
     public BigPocket2(PocketTypes type) {
         super(type);
@@ -45,7 +45,7 @@ public class BigPocket2 extends Pocket implements Movable {
     @Override
     public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
         movingStrategy(pocket , curve);
-        pathMover.move(curve , speed , acceleration , false);
+        pathMover.move(curve , speed , acceleration , true);
     }
 
     @Override

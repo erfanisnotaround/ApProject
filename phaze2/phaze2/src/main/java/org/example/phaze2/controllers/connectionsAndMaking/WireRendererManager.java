@@ -1,7 +1,7 @@
 package org.example.phaze2.controllers.connectionsAndMaking;
 
 import javafx.scene.Node;
-import org.example.phaze2.model.levelDetails.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.portConnectingDetails.WireRenderer;
 
 public class WireRendererManager implements WireRenderer {

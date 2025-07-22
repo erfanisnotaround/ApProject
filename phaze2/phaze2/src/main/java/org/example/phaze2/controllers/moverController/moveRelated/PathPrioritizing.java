@@ -1,9 +1,10 @@
-package org.example.phaze2.controllers.moverController;
+package org.example.phaze2.controllers.moverController.moveRelated;
 
-import javafx.scene.Node;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.*;
+import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 

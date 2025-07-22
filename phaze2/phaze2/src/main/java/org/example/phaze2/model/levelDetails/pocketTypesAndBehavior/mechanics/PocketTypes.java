@@ -1,4 +1,4 @@
-package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior;
+package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
 
 public enum PocketTypes {
     Messenger_1,

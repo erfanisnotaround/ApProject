@@ -1,6 +1,5 @@
-package org.example.phaze2.controllers.moverController;
+package org.example.phaze2.controllers.moverController.moveRelated;
 
-import org.example.phaze2.controllers.moverController.PathMover;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 public interface MoveBehaviour {

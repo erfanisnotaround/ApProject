@@ -1,7 +1,5 @@
-package org.example.phaze2.model.levelDetails;
+package org.example.phaze2.model.levelDetails.necessary;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import org.example.phaze2.model.constants.PortTypes;
 
 public class PortInfo {

@@ -1,20 +1,17 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
-import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.controllers.moverController.Movable;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Pocket;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.controllers.moverController.moveRelated.Movable;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
@@ -66,7 +63,6 @@ public class Messenger3 extends Pocket implements Movable {
             if (t1) {
                 pocketMain.getPathMover().reverse();
                 pocketMain.setIsItCollided(false);
-                System.out.println("fired ..." + pocketMain.getType());
             }
         };
         pocketMain.isItCollidedProperty().addListener(Collide);
@@ -74,7 +70,6 @@ public class Messenger3 extends Pocket implements Movable {
 
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
-        System.out.println(pocketMain.getType() + " stopping");
         if (Collide != null) pocketMain.isItCollidedProperty().removeListener(Collide);
         if (pause != null) pause.stop();
     }

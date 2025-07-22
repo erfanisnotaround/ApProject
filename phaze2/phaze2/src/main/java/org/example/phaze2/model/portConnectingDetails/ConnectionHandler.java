@@ -10,11 +10,11 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.connectionsAndMaking.WireRendererManager;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Anchor;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.PortInfo;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Anchor;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.PortInfo;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 
 public class ConnectionHandler {
     private final Pane Container;
@@ -126,7 +126,6 @@ public class ConnectionHandler {
             curve.setFill(Color.RED);
 
         }
-        System.out.println(curve.ApproximateLength());
 
     }
     public void DraggingAnchor(Curve curve , Anchor anchor) {

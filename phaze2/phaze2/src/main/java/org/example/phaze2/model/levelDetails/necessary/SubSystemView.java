@@ -1,6 +1,5 @@
-package org.example.phaze2.model.levelDetails;
+package org.example.phaze2.model.levelDetails.necessary;
 
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.example.phaze2.model.constants.PortTypes;

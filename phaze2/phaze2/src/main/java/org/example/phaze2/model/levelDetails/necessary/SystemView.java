@@ -1,9 +1,9 @@
-package org.example.phaze2.model.levelDetails;
+package org.example.phaze2.model.levelDetails.necessary;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.Pane;
-import org.example.phaze2.controllers.moverController.PathPrioritizing;
+import org.example.phaze2.controllers.moverController.moveRelated.PathPrioritizing;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;

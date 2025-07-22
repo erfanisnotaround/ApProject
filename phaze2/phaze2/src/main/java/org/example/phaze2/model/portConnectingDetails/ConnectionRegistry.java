@@ -2,8 +2,8 @@ package org.example.phaze2.model.portConnectingDetails;
 
 import javafx.scene.Node;
 import org.example.phaze2.model.constants.Constants;
-import org.example.phaze2.model.levelDetails.PortInfo;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.PortInfo;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 
 import java.util.*;
 

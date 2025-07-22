@@ -1,23 +1,37 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.Pocket;
-import org.example.phaze2.model.levelDetails.SystemView;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.InitData;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketMoveFactory;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
-import org.example.phaze2.model.levelDetails.Port;
+import javafx.util.Duration;
+import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Pocket;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.InitData;
+import org.example.phaze2.controllers.moverController.moveRelated.MakingGoBehindOrForward;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketMoveFactory;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.Map;
 
 public class PocketMain extends Pocket  implements InitData {
     Pocket behaviour;
+    MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
     private final double DistractionSteps = 100;
     public PocketMain(PocketTypes type) {
         super(type);
+        pathMover = new PathMover(0);
+        pathMover.setNode(this);
         behaviour = PocketMoveFactory.giveType(type);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),actionEvent -> {
+            pathMover.moveForward();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
         Initialize();
         initData(behaviour);
     }
@@ -26,10 +40,8 @@ public class PocketMain extends Pocket  implements InitData {
     protected void Initialize() {
         setCoinsPerEntry(behaviour.getCoinsPerEntry());
         setMaxHp(behaviour.getMaxHp()); setHP(behaviour.getHP());
-        setPathMover(behaviour.getPathMover());
         setMovementManager(behaviour.getMovementManager());
-        behaviour.getPathMover().setNode(this);
-        getPathMover().setNode(this);
+
         setFirstPocketType(behaviour.getType());
     }
 
@@ -41,6 +53,7 @@ public class PocketMain extends Pocket  implements InitData {
         setScaleX(behaviour.getScaleX()); setScaleY(behaviour.getScaleY());
 
 
+        pocket.setPathMover(pathMover);
         pocket.getPathMover().setNode(this);
         if (isIsItMoved()){
             behaviour.movingStrategy(this , getPathMover().getCurve());
@@ -92,4 +105,8 @@ public class PocketMain extends Pocket  implements InitData {
     public double getSpeed() {
         return behaviour.getSpeed();
     }
+    public MakingGoBehindOrForward getMakingGoBehindOrForward() {
+        return makingGoBehindOrForward;
+    }
+
 }

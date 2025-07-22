@@ -1,8 +1,8 @@
 package org.example.phaze2.model.portConnectingDetails;
 
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.Curve;
-import org.example.phaze2.model.levelDetails.Port;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 
 public class Connection {
     private Port toPort;

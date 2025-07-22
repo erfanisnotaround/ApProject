@@ -1,6 +1,6 @@
 package org.example.phaze2.model.jsonRefrencesAndLOadings;
 
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.PocketTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 
 public class PocketLoading {
     private PocketTypes type;

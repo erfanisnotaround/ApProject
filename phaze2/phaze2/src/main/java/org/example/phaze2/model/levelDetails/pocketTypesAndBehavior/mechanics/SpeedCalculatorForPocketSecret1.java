@@ -1,9 +1,11 @@
-package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior;
+package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
 
-import javafx.geometry.Point2D;
-import org.example.phaze2.controllers.moverController.PathMover;
+import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.Constants;
-import org.example.phaze2.model.levelDetails.*;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.SecretPocket1;
 import org.example.phaze2.model.portConnectingDetails.Connection;
@@ -16,7 +18,7 @@ public class SpeedCalculatorForPocketSecret1{
     private SecretPocket1 pocketSecret1;
     private PathMover pathMover;
 
-    private Map<Port , Connection> connections = Constants.getInstance().getExitConnections();
+    private Map<Port, Connection> connections = Constants.getInstance().getExitConnections();
     public SpeedCalculatorForPocketSecret1(SecretPocket1 pocketMain) {
         this.pocketSecret1 = pocketMain;
         this.pathMover = pocketMain.getPathMover();
@@ -95,6 +97,7 @@ public class SpeedCalculatorForPocketSecret1{
         double constant = connection.getCurve().ApproximateLength();
         if (pocket.isIsItMoved() && connection.getCurve().getPocketMovingOnIt() != null){
             constant = pocket.getPathMover().distanceRemains();
+            SpeedMultiplier = pocket.getPathMover().getSpeed();
         }
 
         return constant / SpeedMultiplier;

@@ -1,6 +1,4 @@
-package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior;
-
-import org.example.phaze2.model.constants.PortTypes;
+package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package org.example.phaze2.model.portConnectingDetails;
 
 import org.example.phaze2.model.WireManager;
-import org.example.phaze2.model.levelDetails.PortInfo;
+import org.example.phaze2.model.levelDetails.necessary.PortInfo;
 
 public class ConnectionChecker implements  ConnectionValidJudge{
     private final WireManager wireManager;

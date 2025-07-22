@@ -1,6 +1,6 @@
-package org.example.phaze2.controllers.moverController;
+package org.example.phaze2.controllers.moverController.checkings;
 
-import org.example.phaze2.model.levelDetails.SystemView;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
 
 import java.util.List;
 

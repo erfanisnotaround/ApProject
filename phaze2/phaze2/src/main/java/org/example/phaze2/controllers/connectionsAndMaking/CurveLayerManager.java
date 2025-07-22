@@ -2,7 +2,7 @@ package org.example.phaze2.controllers.connectionsAndMaking;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import org.example.phaze2.model.levelDetails.Curve;
+import org.example.phaze2.model.levelDetails.necessary.Curve;
 
 public class CurveLayerManager  {
     private final Pane layer;
