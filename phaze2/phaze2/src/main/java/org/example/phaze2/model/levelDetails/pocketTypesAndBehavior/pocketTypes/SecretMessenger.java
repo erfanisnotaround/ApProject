@@ -52,12 +52,12 @@ public class SecretMessenger extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
         chooseTheMoveBehavior();
-        return behavior.ReleaseAct(pocket, systemView, exitConnections);
+        return behavior.ReleaseAct(pocket, systemView, exitConnections, multiplier);
     }
 }

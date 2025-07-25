@@ -40,6 +40,8 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     private double placeOfY;
     private SystemView WhichSystemViewThisPocketIsAffectedBy = null;
     protected double angleNeeded;
+    private double availableTime = 400;
+
     public Pocket(PocketTypes type) {
         this.type = type;
     }
@@ -53,11 +55,11 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
         return null;
     }
 
@@ -232,5 +234,13 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
 
     public void setAngleNeeded(double angleNeeded) {
         this.angleNeeded = angleNeeded;
+    }
+
+    public double getAvailableTime() {
+        return availableTime;
+    }
+
+    public void setAvailableTime(double availableTime) {
+        this.availableTime = availableTime;
     }
 }

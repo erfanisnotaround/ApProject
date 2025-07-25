@@ -79,7 +79,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         movementMaker = new WholeMovement();
         StartButton.setOnAction(event -> {
             startButtonClicked();
-            movementMaker.StartSending();
+            movementMaker.StartSending(5);
         });
 
 
@@ -122,6 +122,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         }
         for (Pocket pocket : pockets) {
             ContainerPane.getChildren().addFirst(pocket);
+            pocket.setLayoutX(-1000);
         }
     }
 }

@@ -1,9 +1,6 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
-import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.controllers.moverController.moveRelated.Movable;
@@ -38,27 +35,20 @@ public class Messenger1 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
-        pathMover.move(curve , this.speed, 100 , true);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2400), e -> {}));
-        timeline.setCycleCount(1);
-        timeline.setOnFinished(e -> {
-            pathMover.setSpeed(0);
-        });
-
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+        pathMover.move(curve , RealSpeed , RealAcceleration , true);
 
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
 
         Connection exitConnection = systemView.behave(pocket);
 
         if (exitConnection != null && exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed, acceleration, pocket);
+            move(exitConnection.getCurve() , speed * multiplier, acceleration * multiplier, pocket);
         } else if (exitConnection != null && !exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed/2 , acceleration, pocket );
+            move(exitConnection.getCurve() , speed * multiplier /2  , acceleration * multiplier , pocket );
         }
 
 

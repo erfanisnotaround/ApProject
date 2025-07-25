@@ -3,10 +3,8 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
-import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBox;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBoxGenerator;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -74,7 +72,7 @@ public class PocketMain extends Pocket  implements InitData {
 //        Constants.getInstance().container.getChildren().add(hitBox);
 
 
-        setLayoutX(2);
+
 
     }
 
@@ -88,14 +86,14 @@ public class PocketMain extends Pocket  implements InitData {
 
 
     @Override
-    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
-        behaviour.move(curve, speed, acceleration, this);
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+        behaviour.move(curve, RealSpeed, RealAcceleration, this);
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
 
-        return behaviour.ReleaseAct(this , systemView, exitConnections);
+        return behaviour.ReleaseAct(this , systemView, exitConnections, multiplier);
     }
 
     public void distract(double x , double y) {

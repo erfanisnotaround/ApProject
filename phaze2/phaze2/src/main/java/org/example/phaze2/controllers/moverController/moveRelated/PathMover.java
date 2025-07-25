@@ -107,13 +107,20 @@ public class PathMover extends AnimationTimer {
         }
 
 
+
         Point2D p = path.pointAt(s);
         Bounds b = node.getBoundsInLocal();
-        double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX() + currentLineDistanceForWholeMove.getX();
-        double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY() + currentLineDistanceForWholeMove.getY();
+//        double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX() + currentLineDistanceForWholeMove.getX();
+//        double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY() + currentLineDistanceForWholeMove.getY();
+
+        double cx = p.getX() - b.getWidth()  * 0.5;
+        double cy = p.getY() - b.getHeight() * 0.5;
+
 
         node.setPlaceOfX(p.getX());
         node.setPlaceOfY(p.getY());
+
+
 
         node.setLayoutX(cx);
         node.setLayoutY(cy);
@@ -121,9 +128,17 @@ public class PathMover extends AnimationTimer {
 
         node.getHitBox().setLayoutX(cx);
         node.getHitBox().setLayoutY(cy);
-        if (node.getType().equals(PocketTypes.SECRET_MESSENGER)){
 
+        node.setAvailableTime(node.getAvailableTime() - 2);
+        if (node.getAvailableTime() <= 0) {
+            stop();
+            node.setLayoutX(cx);
+            node.setLayoutY(cy);
+
+            return;
         }
+
+
 
         if (rotate) {
             node.setRotate(Math.toDegrees(path.angleAt(s)) + AngleNeeded);

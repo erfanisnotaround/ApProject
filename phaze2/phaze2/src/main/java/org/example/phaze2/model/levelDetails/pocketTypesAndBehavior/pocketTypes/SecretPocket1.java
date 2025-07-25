@@ -17,8 +17,9 @@ import java.util.Map;
 
 public class SecretPocket1 extends Pocket implements Movable {
 
-    Image image = new Image(getClass().getResource("/org/example/phaze2/images/Shield.png").toExternalForm());
+    private Image image = new Image(getClass().getResource("/org/example/phaze2/images/Shield.png").toExternalForm());
 
+    private double multiplier = 1.0;
     private static final double MAX_SPEED   = 1000;  // px / s when lane is free
     private static final double MIN_SPEED   = 10;   // never crawl below this
     private static final double DECEL_STEP  = 20;   // px / s per frame when slowing
@@ -53,12 +54,12 @@ public class SecretPocket1 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
         movingStrategy(pocket , curve);
 
-        pathMover.move(curve , speed , acceleration , true );
+        pathMover.move(curve , RealSpeed * multiplier, RealAcceleration * multiplier, true );
         if (!targetSystem.isCapacityEmpty()){
-            pathMover.setSpeed(speedCalculator.calculateSpeed(targetSystem));
+            pathMover.setSpeed(speedCalculator.calculateSpeed(targetSystem , multiplier) * multiplier);
         }
 
     }
@@ -83,11 +84,12 @@ public class SecretPocket1 extends Pocket implements Movable {
 
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
         Connection exitConnection = systemView.behave(pocket);
 
+        this.multiplier = multiplier;
         if (exitConnection != null) {
-            move(exitConnection.getCurve() , speed, acceleration, pocket );
+            move(exitConnection.getCurve() , speed * multiplier, acceleration * multiplier, pocket );
         }
 
 
@@ -100,7 +102,7 @@ public class SecretPocket1 extends Pocket implements Movable {
 
             @Override public void handle(long now) {
 
-                if (now - lastCheck < POLL_NS) return;
+                if (now - lastCheck < POLL_NS / multiplier) return;
                 lastCheck = now;
 
                 if (getPathMover().getPocketMain()!=null){
@@ -110,11 +112,11 @@ public class SecretPocket1 extends Pocket implements Movable {
                 double currentV = pathMover.getSpeed();
 
                 if (targetSystem != null && !targetSystem.isCapacityEmpty()) {
-                    double newV = speedCalculator.calculateSpeed(targetSystem);
-                    pathMover.setSpeed(newV);
+                    double newV = speedCalculator.calculateSpeed(targetSystem , multiplier);
+                    pathMover.setSpeed(newV * multiplier);
 
                 } else {
-                    pathMover.setSpeed(speed);
+                    pathMover.setSpeed(speed * multiplier);
                 }
             }
         };

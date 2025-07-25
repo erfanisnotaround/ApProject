@@ -26,6 +26,7 @@ public class WholeMovement {
     private volatile Map<Port, Connection> exitConnections;
     private volatile List<PocketMain> pockets;
     private volatile List<SystemView> systemViews;
+    private double speedMultiplier = 1;
 
     //checkers and workers har har
 
@@ -49,7 +50,8 @@ public class WholeMovement {
         startAvailableChecker = new StartAvailableChecker(systemViews);
 
     }
-    public void StartSending(){
+    public void StartSending(double speedMultiplier){
+        this.speedMultiplier = speedMultiplier;
         System.out.println("StartSending");
         Reset();
 
@@ -58,6 +60,7 @@ public class WholeMovement {
 
 
         for (PocketMain pocket : pockets) {
+            System.out.println(speedMultiplier + " ahdhdhdhdhdh ");
             pocket.setMovementManager(this);
             SendingPockets(startingSystemView , pocket , -1);
         }
@@ -72,7 +75,7 @@ public class WholeMovement {
 
 
     public void SendingPockets(SystemView systemView , PocketMain pocket , int  fromSystem ){
-        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections);
+        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections , speedMultiplier );
         if (exitConnection != null) {
             if (fromSystem != -1) {
                 systemView.getCapacity()[fromSystem] = null;

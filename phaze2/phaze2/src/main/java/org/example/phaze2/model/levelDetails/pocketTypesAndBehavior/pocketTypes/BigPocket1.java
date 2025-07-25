@@ -35,7 +35,7 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
 
         HP = MaxHp = 8;
         speed = 200;
-        acceleration = 25;
+        acceleration = 10;
         angleNeeded = 0;
         preferredType = PortTypes.ALL;
 
@@ -43,19 +43,20 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
     }
 
     @Override
-    public void move(Curve curve, double speed, double acceleration, PocketMain pocket) {
-        pathMover.move(curve , speed , acceleration , true);
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+
+        pathMover.move(curve , RealSpeed , RealAcceleration , true);
     }
     
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
         Connection exitConnection = systemView.behave(pocket);
 
         if (exitConnection != null && exitConnection.getCurve().getAnchors().isEmpty()) {
-            move(exitConnection.getCurve() , speed, acceleration * 0 , pocket );
+            move(exitConnection.getCurve() , speed * multiplier , acceleration * multiplier * 0 , pocket );
         } else if (exitConnection != null && !exitConnection.getCurve().getAnchors().isEmpty()) {
-            move(exitConnection.getCurve() , speed, acceleration, pocket );
+            move(exitConnection.getCurve() , speed * multiplier , acceleration * multiplier, pocket );
         }
 
 

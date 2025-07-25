@@ -17,6 +17,7 @@ public class SpeedCalculatorForPocketSecret1{
 
     private SecretPocket1 pocketSecret1;
     private PathMover pathMover;
+    private double RealMultiplier = 1;
 
     private Map<Port, Connection> connections = Constants.getInstance().getExitConnections();
     public SpeedCalculatorForPocketSecret1(SecretPocket1 pocketMain) {
@@ -26,8 +27,9 @@ public class SpeedCalculatorForPocketSecret1{
 
 
 
-    public double calculateSpeed(SystemView systemView) {
+    public double calculateSpeed(SystemView systemView , double multiplier) {
         double wholeTimeRequired = 0;
+        this.RealMultiplier = multiplier;
 
 
 
@@ -40,7 +42,7 @@ public class SpeedCalculatorForPocketSecret1{
         double distanceRemains = pocketSecret1.getPathMover().distanceRemains();
 
 
-        return distanceRemains / wholeTimeRequired;
+        return distanceRemains * multiplier / wholeTimeRequired;
 
     }
     private double TImeInSystem(SystemView systemView ) {
@@ -99,6 +101,7 @@ public class SpeedCalculatorForPocketSecret1{
             constant = pocket.getPathMover().distanceRemains();
             SpeedMultiplier = pocket.getPathMover().getSpeed();
         }
+        SpeedMultiplier *= RealMultiplier;
 
         return constant / SpeedMultiplier;
     }
