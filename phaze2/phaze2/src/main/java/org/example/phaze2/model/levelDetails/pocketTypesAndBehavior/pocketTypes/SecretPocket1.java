@@ -54,10 +54,10 @@ public class SecretPocket1 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
         movingStrategy(pocket , curve);
 
-        pathMover.move(curve , RealSpeed * multiplier, RealAcceleration * multiplier, true );
+        pathMover.move(curve , RealSpeed * multiplier, RealAcceleration * multiplier, true , multiplier);
         if (!targetSystem.isCapacityEmpty()){
             pathMover.setSpeed(speedCalculator.calculateSpeed(targetSystem , multiplier) * multiplier);
         }
@@ -85,11 +85,11 @@ public class SecretPocket1 extends Pocket implements Movable {
 
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-        Connection exitConnection = systemView.behave(pocket);
+        Connection exitConnection = systemView.behave(pocket , multiplier );
 
         this.multiplier = multiplier;
         if (exitConnection != null) {
-            move(exitConnection.getCurve() , speed * multiplier, acceleration * multiplier, pocket );
+            move(exitConnection.getCurve() , speed , acceleration , pocket, multiplier );
         }
 
 

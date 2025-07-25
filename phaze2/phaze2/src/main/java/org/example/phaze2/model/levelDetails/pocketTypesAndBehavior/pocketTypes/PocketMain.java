@@ -86,8 +86,8 @@ public class PocketMain extends Pocket  implements InitData {
 
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
-        behaviour.move(curve, RealSpeed, RealAcceleration, this);
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
+        behaviour.move(curve, RealSpeed, RealAcceleration, this, multiplier);
     }
 
     @Override

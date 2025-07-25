@@ -16,7 +16,7 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket) {
+    public Connection behave(PocketMain EntryPocket, double multiplier) {
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(this , EntryPocket.getPreferredType());
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(this , EntryPocket.getPreferredType());
 

@@ -35,20 +35,20 @@ public class Messenger1 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
-        pathMover.move(curve , RealSpeed , RealAcceleration , true);
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
+        pathMover.move(curve , RealSpeed , RealAcceleration , true , multiplier);
 
     }
 
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
 
-        Connection exitConnection = systemView.behave(pocket);
+        Connection exitConnection = systemView.behave(pocket, multiplier);
 
         if (exitConnection != null && exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed * multiplier, acceleration * multiplier, pocket);
+            move(exitConnection.getCurve() , speed , acceleration , pocket, multiplier );
         } else if (exitConnection != null && !exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed * multiplier /2  , acceleration * multiplier , pocket );
+            move(exitConnection.getCurve() , speed  /2  , acceleration  , pocket, multiplier);
         }
 
 

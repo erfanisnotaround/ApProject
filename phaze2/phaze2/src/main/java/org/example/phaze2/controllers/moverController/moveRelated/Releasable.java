@@ -1,4 +1,4 @@
-package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
+package org.example.phaze2.controllers.moverController.moveRelated;
 
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;

@@ -53,8 +53,10 @@ public class SecretPocket2 extends Pocket implements Movable {
 
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
-        pathMover.move(curve , RealSpeed, RealAcceleration, true);
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
+
+        pathMover.move(curve , RealSpeed, RealAcceleration, true , multiplier);
+
         movingStrategy(pocket , curve);
     }
 
@@ -70,7 +72,7 @@ public class SecretPocket2 extends Pocket implements Movable {
         if (AreaCheckerTimeLine!=null) AreaCheckerTimeLine.stop();
     }
     private void CheckArea(PocketMain pocketMain) {
-        AreaCheckerTimeLine = new Timeline(new KeyFrame(Duration.millis(50) , actionEvent -> {
+        AreaCheckerTimeLine = new Timeline(new KeyFrame(Duration.millis(10) , actionEvent -> {
             SearchForPocketsInRange(pocketMain);
         }));
         AreaCheckerTimeLine.setCycleCount(-1);
@@ -91,10 +93,10 @@ public class SecretPocket2 extends Pocket implements Movable {
 
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-        Connection exitConnection = systemView.behave(pocket);
+        Connection exitConnection = systemView.behave(pocket , multiplier );
 
         if (exitConnection != null) {
-            move(exitConnection.getCurve() , speed * multiplier, acceleration * multiplier, pocket );
+            move(exitConnection.getCurve() , speed , acceleration , pocket, multiplier );
         }
 
 

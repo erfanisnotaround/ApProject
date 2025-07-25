@@ -8,6 +8,7 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.Po
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 public class PathMover extends AnimationTimer {
+    private double multiplier = 1;
     private Curve curve;
     private PocketMain node;
     private PathData path;
@@ -39,7 +40,7 @@ public class PathMover extends AnimationTimer {
     }
 
     public synchronized void  move(Curve pl, double initialSpeed, double acceleration,
-                      boolean rotateAlongTangent) {
+                      boolean rotateAlongTangent , double multiplier) {
 
 
         stop();
@@ -47,12 +48,13 @@ public class PathMover extends AnimationTimer {
 
         this.curve = pl;
         this.path = PathData.fromPolyline(pl);
-        this.v = initialSpeed;
-        this.a = acceleration;
+        this.v = initialSpeed * multiplier;
+        this.a = acceleration * multiplier;
         this.rotate = rotateAlongTangent;
 
         this.s      = 0;
         this.lastNs = -1;
+        this.multiplier = multiplier;
 
 
         node.setIsItMoved(true);
@@ -129,7 +131,7 @@ public class PathMover extends AnimationTimer {
         node.getHitBox().setLayoutX(cx);
         node.getHitBox().setLayoutY(cy);
 
-        node.setAvailableTime(node.getAvailableTime() - 2);
+        node.setAvailableTime(node.getAvailableTime() - (3 * multiplier));
         if (node.getAvailableTime() <= 0) {
             stop();
             node.setLayoutX(cx);

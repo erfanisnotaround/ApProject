@@ -59,7 +59,7 @@ public class SystemView extends Pane implements SystemBehavior  {
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket) {
+    public Connection behave(PocketMain EntryPocket, double multiplier) {
         return null;
     }
 

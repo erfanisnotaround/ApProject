@@ -50,7 +50,7 @@ public class WholeMovement {
         startAvailableChecker = new StartAvailableChecker(systemViews);
 
     }
-    public void StartSending(double speedMultiplier){
+    public void StartSending(double speedMultiplier , double AvailableTime){
         this.speedMultiplier = speedMultiplier;
         System.out.println("StartSending");
         Reset();
@@ -60,7 +60,7 @@ public class WholeMovement {
 
 
         for (PocketMain pocket : pockets) {
-            System.out.println(speedMultiplier + " ahdhdhdhdhdh ");
+            pocket.setAvailableTime(AvailableTime);
             pocket.setMovementManager(this);
             SendingPockets(startingSystemView , pocket , -1);
         }
@@ -221,6 +221,7 @@ public class WholeMovement {
         }
         for (PocketMain pocket : pockets) {
 //            PocketSwitchManager.reInitialize(pocket);
+            pocket.setAvailableTime(2000);
             pocket.getPathMover().stop();
             pocket.setIsItMoved(false);
             pocket.setIsItCollided(false);

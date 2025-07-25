@@ -44,9 +44,9 @@ public class BigPocket2 extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
         movingStrategy(pocket , curve);
-        pathMover.move(curve , RealSpeed , RealAcceleration, true);
+        pathMover.move(curve , RealSpeed , RealAcceleration, true , multiplier);
     }
 
     @Override
@@ -67,10 +67,10 @@ public class BigPocket2 extends Pocket implements Movable {
 
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-        Connection exitConnection = systemView.behave(pocket);
+        Connection exitConnection = systemView.behave(pocket, multiplier);
 
         if (exitConnection != null) {
-            move(exitConnection.getCurve() , speed * multiplier, acceleration * multiplier, pocket );
+            move(exitConnection.getCurve() , speed , acceleration, pocket, multiplier );
         }
 
 

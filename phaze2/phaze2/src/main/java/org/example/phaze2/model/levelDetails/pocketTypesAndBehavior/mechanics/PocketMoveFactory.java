@@ -1,6 +1,7 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
 
 import org.example.phaze2.controllers.moverController.moveRelated.Movable;
+import org.example.phaze2.controllers.moverController.moveRelated.Releasable;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.*;
 

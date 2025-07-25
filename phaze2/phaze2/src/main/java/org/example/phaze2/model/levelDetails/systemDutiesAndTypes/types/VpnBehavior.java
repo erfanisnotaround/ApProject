@@ -17,6 +17,7 @@ import java.util.List;
 
 public class VpnBehavior extends SystemView implements SystemBehavior, SwitchingPocketMovementInSystems {
 
+    double limitSpeed = 110;
     double coolDown = 1;
     private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(coolDown));
 
@@ -26,11 +27,12 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket) {
+    public Connection behave(PocketMain EntryPocket, double multiplier) {
 
 
 
-        if (EntryPocket.getPathMover().getSpeed() >= 100){
+        if (EntryPocket.getPathMover().getSpeed() >= limitSpeed * multiplier){
+            pauseTransition.setDuration(Duration.seconds(coolDown / multiplier));
             isItDownProperty().set(true);
             pauseTransition.play();
             pauseTransition.setOnFinished(event -> {

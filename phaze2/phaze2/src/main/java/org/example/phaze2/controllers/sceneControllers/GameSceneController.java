@@ -3,7 +3,11 @@ package org.example.phaze2.controllers.sceneControllers;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
@@ -11,6 +15,7 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
@@ -24,20 +29,25 @@ import org.example.phaze2.model.controllersInterfaces.Maker;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
-    private WholeMovement movementMaker;
     private SceneManager sceneManager;
     private GameModel gameModel = new GameModel();
     private SystemVisualizer systemVisualizer;
     private ConnectionUI connectionUI;
     CollisionMaker collisionManager = new CollisionMaker();
+    WholeMovement movementMaker = new WholeMovement();
 
+    private Scene scene;
 
+    @FXML
+    private Slider SliderOfTemporalProgress;
     @FXML
     private Button MenuButton;
     @FXML
     private Button StartButton;
     @FXML
     private Pane ContainerPane;
+    @FXML
+    private Pane main;
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
@@ -63,33 +73,36 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         addingShapes(systemViews , pockets);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(16)));
-        timeline.setCycleCount(1);
-        timeline.play();
-        timeline.setOnFinished(e ->{
-            Constants.getInstance().getPockets().getFirst().setItAffected(true);
-//            pockets.getFirst().move(Constants.getInstance().getConnections().getFirst().getCurve(), , );
-//            pockets.getLast().move(Constants.getInstance().getConnections().getFirst().getCurve(), , );
-        });
 
 
         MenuButton.setOnAction(event -> {
             menuButtonClicked();
         });
-        movementMaker = new WholeMovement();
+
         StartButton.setOnAction(event -> {
             startButtonClicked();
-            movementMaker.StartSending(5);
         });
 
+        SliderOfTemporalProgress.valueProperty().addListener((observable, oldValue, newValue) -> {
+            chooseTheDestinationTimeOfTemporal(newValue.doubleValue());
+        });
 
-        Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(1)  , actionEvent -> {
-            for (SystemView systemView : systemViews) {
-                System.out.println(systemView.getSystemID() + " " + systemView.hasWork());
+        SliderOfTemporalProgress.setMax(4000);
+
+        main.setFocusTraversable(true);
+        main.requestFocus();
+
+        main.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            KeyCode pressedKey = event.getCode();
+
+            for (SceneActions action : SceneActions.values()) {
+                if (action.getKeyCode() == pressedKey) {
+                    handleAction(action);
+                    break;
+                }
             }
-        }));
-        timeline2.setCycleCount(-1);
-//        timeline2.play();
+        });
+
 
 
         collisionManager.Start();
@@ -97,11 +110,32 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 
     }
+    void handleAction(SceneActions action) {
+        switch (action) {
+            case StartTempo -> movementMaker.StartSending( gameModel.getBasicTempoMultiplier() ,gameModel.getAvailableNeededTime());
+            case OpenShop -> System.out.println("Opening shop...");
+            case CloseShop -> System.out.println("Closing shop...");
+            case MoveSliderToRight -> moveTempo(1);
+            case MoveSliderToLeft -> moveTempo(-1);
+        }
+    }
+    void moveTempo (double forward) {
+        double Step = forward * gameModel.getMoveUnitOfSlider();
+        SliderOfTemporalProgress.setValue(SliderOfTemporalProgress.getValue() + Step );
+    }
     void menuButtonClicked() {
         gameModel.MenuButtonClicked();
+//        collisionManager.stop();
     }
     void startButtonClicked() {
+        main.requestFocus();
         gameModel.StartButtonClicked();
+
+        movementMaker.StartSending(gameModel.getBasicMoveMultiplier() , gameModel.getAvailableNeededTime());
+    }
+    void chooseTheDestinationTimeOfTemporal(double time){
+        main.requestFocus();
+        gameModel.SetAvailableNeededTime(time);
     }
 
     @Override
@@ -110,8 +144,6 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         ContainerPane.getChildren().clear();
         gameModel.setLevelInformation(data);
-
-
 
     }
 

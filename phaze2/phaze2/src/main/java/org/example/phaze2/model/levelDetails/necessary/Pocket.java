@@ -9,7 +9,7 @@ import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.controllers.moverController.moveRelated.Movable;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.Releasable;
+import org.example.phaze2.controllers.moverController.moveRelated.Releasable;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -40,7 +40,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     private double placeOfY;
     private SystemView WhichSystemViewThisPocketIsAffectedBy = null;
     protected double angleNeeded;
-    private double availableTime = 400;
+    private double availableTime = 4000;
 
     public Pocket(PocketTypes type) {
         this.type = type;
@@ -55,7 +55,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     }
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
     }
 
     @Override

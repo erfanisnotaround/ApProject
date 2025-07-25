@@ -38,16 +38,16 @@ public class Messenger3 extends Pocket implements Movable {
 
         HP = MaxHp = 1;
         speed = 200;
-        acceleration = 15;
+        acceleration = 5;
         preferredType = PortTypes.INFINITY;
         angleNeeded = 90;
         pathMover = new PathMover(angleNeeded);
     }
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
         movingStrategy(pocket , curve);
-        pathMover.move(curve , RealSpeed , RealAcceleration , true);
+        pathMover.move(curve , RealSpeed , RealAcceleration , true , multiplier);
 
         pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> {
@@ -78,12 +78,12 @@ public class Messenger3 extends Pocket implements Movable {
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
 
-        Connection exitConnection = systemView.behave(pocket);
+        Connection exitConnection = systemView.behave(pocket , multiplier);
 
         if (exitConnection != null && exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed * multiplier , acceleration * multiplier, pocket);
+            move(exitConnection.getCurve() , speed  , acceleration , pocket, multiplier );
         } else if (exitConnection != null && !exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
-            move(exitConnection.getCurve() , speed * multiplier , -1 * acceleration * multiplier, pocket );
+            move(exitConnection.getCurve() , speed  , -1 * acceleration , pocket, multiplier );
         }
 
 

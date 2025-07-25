@@ -52,7 +52,7 @@ public class SecretMessenger extends Pocket implements Movable {
     }
 
     @Override
-    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket) {
+    public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
     }
 
     @Override
