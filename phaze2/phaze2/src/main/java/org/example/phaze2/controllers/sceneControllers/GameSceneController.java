@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.GoingToGamaInformation;
@@ -28,6 +29,9 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private GameModel gameModel = new GameModel();
     private SystemVisualizer systemVisualizer;
     private ConnectionUI connectionUI;
+    CollisionMaker collisionManager = new CollisionMaker();
+
+
     @FXML
     private Button MenuButton;
     @FXML
@@ -43,6 +47,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     @Override
     public void MakeFirst() {
+        Constants.getInstance().container = ContainerPane;
         System.out.println(21);
         Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
@@ -86,6 +91,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         timeline2.setCycleCount(-1);
 //        timeline2.play();
 
+
+        collisionManager.Start();
 
 
 

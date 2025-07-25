@@ -46,7 +46,8 @@ public class SecretPocket2 extends Pocket implements Movable {
         acceleration = 0;
         preferredType = PortTypes.ALL;
 
-        pathMover = new PathMover(0);
+        angleNeeded = 0;
+        pathMover = new PathMover(angleNeeded);
 
     }
 

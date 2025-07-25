@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 public class PathMover extends AnimationTimer {
@@ -117,8 +118,16 @@ public class PathMover extends AnimationTimer {
         node.setLayoutX(cx);
         node.setLayoutY(cy);
 
+
+        node.getHitBox().setLayoutX(cx);
+        node.getHitBox().setLayoutY(cy);
+        if (node.getType().equals(PocketTypes.SECRET_MESSENGER)){
+
+        }
+
         if (rotate) {
             node.setRotate(Math.toDegrees(path.angleAt(s)) + AngleNeeded);
+            node.getHitBox().setRotate(Math.toDegrees(path.angleAt(s)) + AngleNeeded);
         }
     }
 
@@ -208,6 +217,12 @@ public class PathMover extends AnimationTimer {
             v *= -1;
             a *= -1;
         }
+    }
+    public double getAngleNeeded(){
+        return AngleNeeded;
+    }
+    public void setAngleNeeded(double angleNeeded) {
+        AngleNeeded = angleNeeded;
     }
 
 

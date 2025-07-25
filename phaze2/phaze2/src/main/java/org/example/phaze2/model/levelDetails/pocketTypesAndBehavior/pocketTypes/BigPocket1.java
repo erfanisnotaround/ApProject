@@ -36,9 +36,10 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
         HP = MaxHp = 8;
         speed = 200;
         acceleration = 25;
+        angleNeeded = 0;
         preferredType = PortTypes.ALL;
 
-        pathMover = new PathMover( 0);
+        pathMover = new PathMover(angleNeeded);
     }
 
     @Override

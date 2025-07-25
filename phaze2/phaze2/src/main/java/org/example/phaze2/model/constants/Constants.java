@@ -1,5 +1,6 @@
 package org.example.phaze2.model.constants;
 
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class Constants {
     private static final Constants INSTANCE = new Constants();
 
+    public Pane container;
     private Stage primaryStage;
     private SceneManager sceneManager;
     private WireManager wireManager;

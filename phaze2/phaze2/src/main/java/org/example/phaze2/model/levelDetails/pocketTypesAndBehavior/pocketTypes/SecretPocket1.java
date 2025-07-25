@@ -48,7 +48,8 @@ public class SecretPocket1 extends Pocket implements Movable {
         acceleration = 0;
         HP = MaxHp = 4;
         preferredType = PortTypes.ALL;
-        pathMover = new PathMover(0);
+        angleNeeded = 0;
+        pathMover = new PathMover(angleNeeded);
     }
 
     @Override

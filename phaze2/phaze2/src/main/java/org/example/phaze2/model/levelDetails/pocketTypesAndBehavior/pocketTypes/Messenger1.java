@@ -33,7 +33,8 @@ public class Messenger1 extends Pocket implements Movable {
         acceleration = 0;
         HP = MaxHp = 2;
         preferredType = PortTypes.SQUARE;
-        pathMover = new PathMover(0);
+        angleNeeded = 0;
+        pathMover = new PathMover(angleNeeded);
     }
 
     @Override

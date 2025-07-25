@@ -38,8 +38,9 @@ public class BigPocket2 extends Pocket implements Movable {
         speed = 200;
         acceleration = 0;
         preferredType = PortTypes.ALL;
+        angleNeeded = 0;
 
-        pathMover = new PathMover(0);
+        pathMover = new PathMover(angleNeeded);
     }
 
     @Override

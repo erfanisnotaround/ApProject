@@ -3,8 +3,12 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBox;
+import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBoxGenerator;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
@@ -18,6 +22,7 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 import java.util.Map;
 
 public class PocketMain extends Pocket  implements InitData {
+    private HitBox hitBox;
     Pocket behaviour;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
     private final double DistractionSteps = 100;
@@ -34,6 +39,7 @@ public class PocketMain extends Pocket  implements InitData {
         timeline.play();
         Initialize();
         initData(behaviour);
+
     }
 
     @Override
@@ -49,15 +55,23 @@ public class PocketMain extends Pocket  implements InitData {
     public void initData(Pocket pocket) {
 
         imagePath = behaviour.getImagePath();
-        setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
+        Image image = new Image(getClass().getResource(imagePath).toExternalForm());
+        setImage(image);
         setScaleX(behaviour.getScaleX()); setScaleY(behaviour.getScaleY());
 
 
         pocket.setPathMover(pathMover);
         pocket.getPathMover().setNode(this);
+        pocket.getPathMover().setAngleNeeded(pocket.getAngleNeeded());
         if (isIsItMoved()){
             behaviour.movingStrategy(this , getPathMover().getCurve());
         }
+
+        hitBox = HitBoxGenerator.generateHitBox(image);
+        hitBox.setScaleX(behaviour.getScaleX());
+        hitBox.setScaleY(behaviour.getScaleY());
+
+//        Constants.getInstance().container.getChildren().add(hitBox);
 
 
         setLayoutX(2);
@@ -107,6 +121,9 @@ public class PocketMain extends Pocket  implements InitData {
     }
     public MakingGoBehindOrForward getMakingGoBehindOrForward() {
         return makingGoBehindOrForward;
+    }
+    public HitBox getHitBox() {
+        return hitBox;
     }
 
 }

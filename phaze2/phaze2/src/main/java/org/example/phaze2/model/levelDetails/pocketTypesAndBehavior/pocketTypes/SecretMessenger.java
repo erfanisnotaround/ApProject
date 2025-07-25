@@ -15,7 +15,7 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 import java.util.Map;
 
 public class SecretMessenger extends Pocket implements Movable {
-    Image image = new Image(getClass().getResource("/org/example/phaze2/images/lock.png").toExternalForm());
+    Image image = new Image(getClass().getResource("/org/example/phaze2/images/Arcane_Seal.png").toExternalForm());
     Pocket behavior;
     public SecretMessenger(PocketTypes type) {
         super(type);
@@ -42,10 +42,10 @@ public class SecretMessenger extends Pocket implements Movable {
 
     @Override
     protected void Initialize() {
-        imagePath = "/org/example/phaze2/images/lock.png";
+        imagePath = "/org/example/phaze2/images/Arcane_Seal.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
-        setScaleX(0.03);
-        setScaleY(0.03);
+        setScaleX(0.15);
+        setScaleY(0.15);
         setCoinsPerEntry(5);
         pathMover = new PathMover(0);
         chooseTheMoveBehavior();

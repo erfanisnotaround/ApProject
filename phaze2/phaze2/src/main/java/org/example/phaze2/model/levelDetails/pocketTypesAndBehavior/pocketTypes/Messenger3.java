@@ -40,7 +40,8 @@ public class Messenger3 extends Pocket implements Movable {
         speed = 200;
         acceleration = 15;
         preferredType = PortTypes.INFINITY;
-        pathMover = new PathMover(90);
+        angleNeeded = 90;
+        pathMover = new PathMover(angleNeeded);
     }
 
     @Override

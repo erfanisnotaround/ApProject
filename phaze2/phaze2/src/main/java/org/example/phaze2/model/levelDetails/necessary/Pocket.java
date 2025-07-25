@@ -39,6 +39,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     private double placeOfX;
     private double placeOfY;
     private SystemView WhichSystemViewThisPocketIsAffectedBy = null;
+    protected double angleNeeded;
     public Pocket(PocketTypes type) {
         this.type = type;
     }
@@ -225,4 +226,11 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     }
 
 
+    public double getAngleNeeded() {
+        return angleNeeded;
+    }
+
+    public void setAngleNeeded(double angleNeeded) {
+        this.angleNeeded = angleNeeded;
+    }
 }
