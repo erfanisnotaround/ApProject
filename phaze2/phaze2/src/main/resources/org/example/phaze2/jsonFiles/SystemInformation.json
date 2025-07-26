@@ -1,5 +1,6 @@
 [
   {
+    "AvailableTime" : 30000.0,
     "MaxWire" : 10000.0,
     "numberOfSystems": 2,
     "levelPassed": false,
@@ -83,27 +84,12 @@
       {
         "type": " BIG_2",
         "delay": 1.5
-      },
-      {
-        "type": " Messenger_3",
-        "delay": 1.5
-      },
-      {
-        "type": " SECRET_1",
-        "delay": 1.5
-      },
-      {
-        "type": " BIG_1",
-        "delay": 1.5
-      },
-      {
-        "type": " SECRET_2",
-        "delay": 1.5
       }
     ]
   },
 
   {
+    "AvailableTime" : 1500.0,
     "MaxWire": 150.0,
     "numberOfSystems": 1,
     "levelPassed": false,

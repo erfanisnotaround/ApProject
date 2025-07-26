@@ -1,5 +1,6 @@
 package org.example.phaze2.controllers.collisionAndWinning;
 
+import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Shape;
@@ -49,6 +50,10 @@ public class CollisionController {
         for (CollisionPair pair : currentCollisionPairs) {
             if(!previousCollisionPairs.contains(pair)) {
                 collisionHandler.SpreadImpact(pair);
+                Platform.runLater(() -> {
+                    pair.getFirstPocket().setIsItCollided(true);
+                    pair.getSecondPocket().setIsItCollided(true);
+                });
             }
 //            System.out.println(" Collision detected ");
         }

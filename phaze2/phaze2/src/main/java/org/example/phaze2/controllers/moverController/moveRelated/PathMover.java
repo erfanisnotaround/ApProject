@@ -3,6 +3,7 @@ package org.example.phaze2.controllers.moverController.moveRelated;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -80,7 +81,7 @@ public class PathMover extends AnimationTimer {
             currentLineDistance = currentLineDistance.add(lineDistancePerMoveX, lineDistancePerMoveY);
         }
 
-        currentLineDistanceForWholeMove = currentLineDistanceForWholeMove.add(lineDistancePerMoveXForWhole, lineDistancePerMoveYForWhole);
+        currentLineDistanceForWholeMove = currentLineDistanceForWholeMove.add(lineDistancePerMoveXForWhole , lineDistancePerMoveYForWhole);
 
 
         double dt = (now - lastNs) / 1_000_000_000.0;
@@ -100,10 +101,12 @@ public class PathMover extends AnimationTimer {
             s = path.total();
             stop();
 
-            node.StopStrategyMoving();
             curve.setIsItUsed(false);
             node.setIsItMoved(false);
             curve.setPocketMovingOnIt(null);
+
+            node.StopStrategyMoving();
+
 
 
         }
@@ -112,11 +115,11 @@ public class PathMover extends AnimationTimer {
 
         Point2D p = path.pointAt(s);
         Bounds b = node.getBoundsInLocal();
-//        double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX() + currentLineDistanceForWholeMove.getX();
-//        double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY() + currentLineDistanceForWholeMove.getY();
-
-        double cx = p.getX() - b.getWidth()  * 0.5;
-        double cy = p.getY() - b.getHeight() * 0.5;
+        double cx = p.getX() - b.getWidth()  * 0.5 + currentLineDistance.getX() + currentLineDistanceForWholeMove.getX();
+        double cy = p.getY() - b.getHeight() * 0.5 + currentLineDistance.getY() + currentLineDistanceForWholeMove.getY();
+//
+//        double cx = p.getX() - b.getWidth()  * 0.5;
+//        double cy = p.getY() - b.getHeight() * 0.5;
 
 
         node.setPlaceOfX(p.getX());
@@ -136,6 +139,10 @@ public class PathMover extends AnimationTimer {
             stop();
             node.setLayoutX(cx);
             node.setLayoutY(cy);
+
+            for (PocketMain pocketMain : Constants.getInstance().getPockets()) {
+                pocketMain.getPathMover().stop();
+            }
 
             return;
         }
@@ -176,9 +183,9 @@ public class PathMover extends AnimationTimer {
         lineDistancePerMoveY = y/STEPS;
     }
     public void AddWholeMoveVector(double x, double y ) {
-        lineDistancePerMoveXForWhole= x;
-        lineDistancePerMoveYForWhole= y;
-
+        System.out.println(x + " adddedd " + y );
+        lineDistancePerMoveXForWhole = x;
+        lineDistancePerMoveYForWhole = y;
     }
     public void setNode(PocketMain node) {
         this.node = node;

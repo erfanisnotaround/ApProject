@@ -47,10 +47,13 @@ public class BigPocket2 extends Pocket implements Movable {
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
         movingStrategy(pocket , curve);
         pathMover.move(curve , RealSpeed , RealAcceleration, true , multiplier);
+
+
     }
 
     @Override
     public void movingStrategy(PocketMain pocketMain, Curve curve) {
+        System.out.println("we make it ");
         double curveLength = curve.ApproximateLength();
         double units = curveLength/UnitCounter;
 
@@ -62,7 +65,7 @@ public class BigPocket2 extends Pocket implements Movable {
 
     @Override
     public void StopStrategy(Pocket LastPocket , PocketMain pocketMain) {
-        pocketMain.getPathMover().setLatestLineDistance(pocketMain.getPathMover().getCurrentLineDistance());
+        pocketMain.getPathMover().AddWholeMoveVector(0 , 0);
     }
 
     @Override

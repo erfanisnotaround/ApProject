@@ -8,7 +8,7 @@ import org.example.phaze2.model.agentsAndManagers.SceneManager;
 public class GameModel {
     private SceneManager sceneManager;
     private GoingToGamaInformation levelInformation;
-    private double AvailableNeededTime = 1000;
+    private double AvailableNeededTime;
     private final double basicMoveMultiplier = 1;
     private final double basicTempoMultiplier = 15;
     private final double moveUnitOfSlider = 100;
@@ -30,6 +30,7 @@ public class GameModel {
 
     public void setLevelInformation(GoingToGamaInformation levelInformation) {
         this.levelInformation = levelInformation;
+        this.AvailableNeededTime = levelInformation.getLevel().getAvailableTime();
     }
     public void SetAvailableNeededTime(double availableNeededTime) {
         this.AvailableNeededTime = availableNeededTime;

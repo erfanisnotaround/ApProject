@@ -64,4 +64,7 @@ public class GoingToGamaInformation {
     public void setLevels(ArrayList<Level> levels) {
         this.levels = levels;
     }
+    public Level getLevel() {
+        return level;
+    }
 }

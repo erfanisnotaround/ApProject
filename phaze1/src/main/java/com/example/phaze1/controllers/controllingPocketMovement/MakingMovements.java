@@ -76,6 +76,7 @@ public class MakingMovements {
         timeline.play();
     }
     public void SendAPocket(Pocket pocket , SystemView systemView) {
+        if (pocket.isLastRound())return;
         double delay = pocket.getDelay();
         if (pocket.getDelay() >=0.1){
             delay = delay/pocket.getSpeed();
@@ -99,8 +100,8 @@ public class MakingMovements {
             else if (!secondPossibleChoices.isEmpty()) {
                 pocket.setInTheGame(true);
                 Random rand = new Random();
-                int choiceIndex = rand.nextInt(PossibleChoices.size());
-                ViewOfSubSystem FinalChoice = PossibleChoices.get(choiceIndex);
+                int choiceIndex = rand.nextInt(secondPossibleChoices.size());
+                ViewOfSubSystem FinalChoice = secondPossibleChoices.get(choiceIndex);
                 GatePortInfo ChoiceGate = portInfo.get(FinalChoice.ExitPort);
                 nowWeSendPockets(pocket , ChoiceGate);
             }
@@ -184,9 +185,11 @@ public class MakingMovements {
     }
 
     public void resume(Pocket pocket, Connection connection) {
+
         if (connection.to.system.isItStartSystem) {
             pocket.setLastRound(true);
         }
+
         BooleanProperty used = connection.curve.isItUsed;
         ChangeListener<Boolean> oneShot = new ChangeListener<>() {
             @Override

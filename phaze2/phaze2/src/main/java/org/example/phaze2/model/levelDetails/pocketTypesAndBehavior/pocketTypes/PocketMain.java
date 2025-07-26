@@ -1,6 +1,7 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -62,6 +63,8 @@ public class PocketMain extends Pocket  implements InitData {
         pocket.getPathMover().setNode(this);
         pocket.getPathMover().setAngleNeeded(pocket.getAngleNeeded());
         if (isIsItMoved()){
+            System.out.println(behaviour.getType() + " made a change");
+
             behaviour.movingStrategy(this , getPathMover().getCurve());
         }
 
@@ -101,12 +104,18 @@ public class PocketMain extends Pocket  implements InitData {
     }
 
     public void setBehaviour(PocketTypes behaviourType) {
-        behaviour.StopStrategy(behaviour , this );
+        PauseTransition pause = new PauseTransition(Duration.millis(20));
+        pause.setOnFinished(event -> {
+            behaviour.StopStrategy(behaviour , this );
+            System.out.println(behaviour.getType() + " hey looo");
 
-        this.behaviour = PocketMoveFactory.giveType(behaviourType);
+            this.behaviour = PocketMoveFactory.giveType(behaviourType);
 
-        setTypeBeforeChange(getType());
-        PrepareNewBehavior(behaviour);
+            setTypeBeforeChange(getType());
+            PrepareNewBehavior(behaviour);
+        });
+        pause.play();
+
     }
 
     public void StopStrategyMoving() {

@@ -44,6 +44,7 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
 
             EntryPocket.setBehaviour(PocketTypes.SECRET_MESSENGER);
             EntryPocket.setWhichSystemViewThisPocketIsAffectedBy(this);
+
         }
         else if (EntryPocket.getType() == PocketTypes.SECRET_1) {
             EntryPocket.setBehaviour(PocketTypes.SECRET_1);

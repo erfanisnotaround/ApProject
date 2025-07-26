@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Level {
+    @JsonProperty("AvailableTime")
+    private double AvailableTime;
     @JsonProperty("MaxWire")
     private double MaxWire;
     @JsonProperty("numberOfSystems")
@@ -26,4 +28,12 @@ public class Level {
     public void setMaxWire(double MaxWire) {this.MaxWire = MaxWire;}
     public ArrayList<PocketLoading> getPockets() {return pockets;}
     public void setPockets(ArrayList<PocketLoading> pockets) {this.pockets = pockets;}
+
+    public double getAvailableTime() {
+        return AvailableTime;
+    }
+
+    public void setAvailableTime(double availableTime) {
+        AvailableTime = availableTime;
+    }
 }
