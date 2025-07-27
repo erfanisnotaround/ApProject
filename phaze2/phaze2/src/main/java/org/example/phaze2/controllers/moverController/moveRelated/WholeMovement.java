@@ -75,7 +75,7 @@ public class WholeMovement {
 
 
     public void SendingPockets(SystemView systemView , PocketMain pocket , int  fromSystem ){
-        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections , speedMultiplier );
+        Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections , speedMultiplier, null);
         if (exitConnection != null) {
             if (fromSystem != -1) {
                 systemView.getCapacity()[fromSystem] = null;
@@ -220,7 +220,7 @@ public class WholeMovement {
             systemView.reset();
         }
         for (PocketMain pocket : pockets) {
-//            PocketSwitchManager.reInitialize(pocket);
+            pocket.getPathMover().reset();
             pocket.setAvailableTime(2000);
             pocket.getPathMover().stop();
             pocket.setIsItMoved(false);

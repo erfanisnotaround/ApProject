@@ -18,7 +18,7 @@ public class SystemView extends Pane implements SystemBehavior  {
     protected final SystemTypes systemType;
 
 
-    protected SystemBehavior behavior;  // nakaramad fellan
+    protected SystemBehavior behavior;
 
     protected final double systemHeight;
     protected final double systemWidth = CurrentLevelConstants.getInstance().getWidth();

@@ -5,18 +5,19 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 public class PathMover extends AnimationTimer {
+    private Port StarterPort;
     private double multiplier = 1;
     private Curve curve;
     private PocketMain node;
     private PathData path;
-    private double s = 0;           // distance travelled (px)
-    private double v;               // current speed (px/s)
-    private double a;         // constant acceleration (px/s²)
-    private long lastNs = -1;// last frame timestamp
+    private double s = 0;
+    private double v;
+    private double a;
+    private long lastNs = -1;
 
     private Point2D latestLineDistance = new Point2D(0, 0);
     private Point2D currentLineDistance = new Point2D(0, 0);
@@ -61,6 +62,8 @@ public class PathMover extends AnimationTimer {
         node.setIsItMoved(true);
         curve.setIsItUsed(true);
         curve.setPocketMovingOnIt(node);
+        StarterPort = curve.getConnection().getFromPort();
+
         start();
 
 
@@ -155,10 +158,11 @@ public class PathMover extends AnimationTimer {
         }
     }
 
-    public void restart(double startSpeed) {
+    public void reset() {
         s = 0;
-        v = startSpeed;
         lastNs = -1;
+        currentLineDistance = currentLineDistance.multiply(0);
+        latestLineDistance = latestLineDistance.multiply(0);
         start();
     }
 
@@ -179,13 +183,12 @@ public class PathMover extends AnimationTimer {
     public void AddingImpactVector(double x, double y , double STEPS) {
         this.STEPS = STEPS;
         latestLineDistance = latestLineDistance.add(x, y);
-        lineDistancePerMoveX = x/STEPS;
-        lineDistancePerMoveY = y/STEPS;
+        lineDistancePerMoveX = x * multiplier/STEPS;
+        lineDistancePerMoveY = y * multiplier/STEPS;
     }
     public void AddWholeMoveVector(double x, double y ) {
-        System.out.println(x + " adddedd " + y );
-        lineDistancePerMoveXForWhole = x;
-        lineDistancePerMoveYForWhole = y;
+        lineDistancePerMoveXForWhole = x * multiplier;
+        lineDistancePerMoveYForWhole = y * multiplier;
     }
     public void setNode(PocketMain node) {
         this.node = node;
@@ -248,6 +251,20 @@ public class PathMover extends AnimationTimer {
     public void setAngleNeeded(double angleNeeded) {
         AngleNeeded = angleNeeded;
     }
+    public double getMultiplier(){return multiplier;}
+    public double getS(){return s;}
+    public double GetAcceleration(){
+        return a;
+    }
+    public boolean GetRotate(){
+        return rotate;
+    }
+    public double GetSteps(){
+        return STEPS;
+    }
+    public double getLineDistancePerMoveX(){return lineDistancePerMoveX;}
+    public double getLineDistancePerMoveY(){return lineDistancePerMoveY;}
 
-
+    public double getLineDistancePerMoveXForWhole(){return lineDistancePerMoveXForWhole;}
+    public double getLineDistancePerMoveYForWhole(){return lineDistancePerMoveYForWhole;}
 }

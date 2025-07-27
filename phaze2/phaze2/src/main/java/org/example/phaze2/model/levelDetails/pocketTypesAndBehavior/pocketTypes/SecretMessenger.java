@@ -56,8 +56,8 @@ public class SecretMessenger extends Pocket implements Movable {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier, Connection exitConnection) {
         chooseTheMoveBehavior();
-        return behavior.ReleaseAct(pocket, systemView, exitConnections, multiplier);
+        return behavior.ReleaseAct(pocket, systemView, exitConnections, multiplier, exitConnection );
     }
 }

@@ -25,6 +25,9 @@ public class Constants {
     private List<PocketMain> pockets = new ArrayList<>();
     private Map<Port, Connection> exitConnections = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
+    private Map<String , PocketMain> pocketMainMap = new HashMap<>();
+    private Map<String , SystemView> systemViewMap = new HashMap<>();
+
     private Constants() {}
     public static Constants getInstance() {
         return INSTANCE;
@@ -76,4 +79,19 @@ public class Constants {
         return connections;
     }
 
+    public Map<String, PocketMain> getPocketMainMap() {
+        return pocketMainMap;
+    }
+
+    public void setPocketMainMap(Map<String, PocketMain> pocketMainMap) {
+        this.pocketMainMap = pocketMainMap;
+    }
+
+    public Map<String, SystemView> getSystemViewMap() {
+        return systemViewMap;
+    }
+
+    public void setSystemViewMap(Map<String, SystemView> systemViewMap) {
+        this.systemViewMap = systemViewMap;
+    }
 }

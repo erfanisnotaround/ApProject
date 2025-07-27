@@ -84,6 +84,30 @@
       {
         "type": " BIG_2",
         "delay": 1.5
+      },
+      {
+        "type": " BIG_1",
+        "delay": 1.5
+      },
+      {
+        "type": " SECRET_1",
+        "delay": 1.5
+      },
+      {
+        "type": " SECRET_2",
+        "delay": 1.5
+      },
+      {
+        "type": " Messenger_1",
+        "delay": 1.5
+      },
+      {
+        "type": " Messenger_2",
+        "delay": 1.5
+      },
+      {
+        "type": " Messenger_3",
+        "delay": 1.5
       }
     ]
   },

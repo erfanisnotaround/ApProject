@@ -40,7 +40,6 @@ public class BigPocket2 extends Pocket implements Movable {
         preferredType = PortTypes.ALL;
         angleNeeded = 0;
 
-        pathMover = new PathMover(angleNeeded);
     }
 
     @Override
@@ -69,8 +68,7 @@ public class BigPocket2 extends Pocket implements Movable {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-        Connection exitConnection = systemView.behave(pocket, multiplier);
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier, Connection exitConnection) {
 
         if (exitConnection != null) {
             move(exitConnection.getCurve() , speed , acceleration, pocket, multiplier );

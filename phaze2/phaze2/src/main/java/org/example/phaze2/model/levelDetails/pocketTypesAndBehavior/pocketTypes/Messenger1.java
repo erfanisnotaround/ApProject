@@ -31,7 +31,6 @@ public class Messenger1 extends Pocket implements Movable {
         HP = MaxHp = 2;
         preferredType = PortTypes.SQUARE;
         angleNeeded = 0;
-        pathMover = new PathMover(angleNeeded);
     }
 
     @Override
@@ -41,9 +40,8 @@ public class Messenger1 extends Pocket implements Movable {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier, Connection exitConnection) {
 
-        Connection exitConnection = systemView.behave(pocket, multiplier);
 
         if (exitConnection != null && exitConnection.getFromPort().getPortInfo().getType().equals(preferredType)) {
             move(exitConnection.getCurve() , speed , acceleration , pocket, multiplier );

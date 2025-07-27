@@ -50,7 +50,6 @@ public class SecretPocket1 extends Pocket implements Movable {
         HP = MaxHp = 4;
         preferredType = PortTypes.ALL;
         angleNeeded = 0;
-        pathMover = new PathMover(angleNeeded);
     }
 
     @Override
@@ -84,8 +83,8 @@ public class SecretPocket1 extends Pocket implements Movable {
 
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-        Connection exitConnection = systemView.behave(pocket , multiplier );
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier, Connection exitConnection) {
+
 
         this.multiplier = multiplier;
         if (exitConnection != null) {

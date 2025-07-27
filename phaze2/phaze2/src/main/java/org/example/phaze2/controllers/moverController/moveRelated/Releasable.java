@@ -8,5 +8,6 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 import java.util.Map;
 
 public interface Releasable {
-    Connection ReleaseAct(PocketMain pocket, SystemView systemView , Map<Port, Connection> exitConnections , double multiplier);
+    Connection ReleaseAct(PocketMain pocket, SystemView systemView , Map<Port, Connection> exitConnections , double multiplier , Connection exitConnection);
+
 }

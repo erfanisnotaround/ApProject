@@ -171,4 +171,5 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
     public void setPocketMovingOnIt(PocketMain pocketMovingOnIt) {
         this.pocketMovingOnIt = pocketMovingOnIt;
     }
+
 }

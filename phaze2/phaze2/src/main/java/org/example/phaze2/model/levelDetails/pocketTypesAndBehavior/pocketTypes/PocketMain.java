@@ -1,7 +1,6 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -32,7 +31,7 @@ public class PocketMain extends Pocket  implements InitData {
         behaviour = PocketMoveFactory.giveType(type);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),actionEvent -> {
-            pathMover.moveForward();
+            if (type == PocketTypes.SECRET_2) pathMover.moveForward();
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -63,9 +62,9 @@ public class PocketMain extends Pocket  implements InitData {
         pocket.getPathMover().setNode(this);
         pocket.getPathMover().setAngleNeeded(pocket.getAngleNeeded());
         if (isIsItMoved()){
-            System.out.println(behaviour.getType() + " made a change");
 
             behaviour.movingStrategy(this , getPathMover().getCurve());
+
         }
 
         hitBox = HitBoxGenerator.generateHitBox(image);
@@ -94,9 +93,10 @@ public class PocketMain extends Pocket  implements InitData {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-
-        return behaviour.ReleaseAct(this , systemView, exitConnections, multiplier);
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier , Connection connection) {
+        Connection exitConnection = systemView.behave(pocket, multiplier);
+        if (exitConnection == null) return null;
+        return behaviour.ReleaseAct(this , systemView, exitConnections, multiplier , exitConnection );
     }
 
     public void distract(double x , double y) {
@@ -104,18 +104,14 @@ public class PocketMain extends Pocket  implements InitData {
     }
 
     public void setBehaviour(PocketTypes behaviourType) {
-        PauseTransition pause = new PauseTransition(Duration.millis(20));
-        pause.setOnFinished(event -> {
-            behaviour.StopStrategy(behaviour , this );
-            System.out.println(behaviour.getType() + " hey looo");
 
-            this.behaviour = PocketMoveFactory.giveType(behaviourType);
 
-            setTypeBeforeChange(getType());
-            PrepareNewBehavior(behaviour);
-        });
-        pause.play();
+        behaviour.StopStrategy(behaviour , this );
 
+        this.behaviour = PocketMoveFactory.giveType(behaviourType);
+
+        setTypeBeforeChange(getType());
+        PrepareNewBehavior(behaviour);
     }
 
     public void StopStrategyMoving() {
@@ -132,5 +128,6 @@ public class PocketMain extends Pocket  implements InitData {
     public HitBox getHitBox() {
         return hitBox;
     }
+
 
 }

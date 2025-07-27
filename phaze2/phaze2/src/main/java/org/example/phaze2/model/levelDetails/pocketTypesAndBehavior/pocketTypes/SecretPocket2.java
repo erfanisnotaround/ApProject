@@ -47,7 +47,6 @@ public class SecretPocket2 extends Pocket implements Movable {
         preferredType = PortTypes.ALL;
 
         angleNeeded = 0;
-        pathMover = new PathMover(angleNeeded);
 
     }
 
@@ -56,7 +55,7 @@ public class SecretPocket2 extends Pocket implements Movable {
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
 
         pathMover.move(curve , RealSpeed, RealAcceleration, true , multiplier);
-
+//
         movingStrategy(pocket , curve);
     }
 
@@ -92,8 +91,9 @@ public class SecretPocket2 extends Pocket implements Movable {
     }
 
     @Override
-    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier) {
-        Connection exitConnection = systemView.behave(pocket , multiplier );
+    public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier, Connection exitConnection) {
+
+
 
         if (exitConnection != null) {
             move(exitConnection.getCurve() , speed , acceleration , pocket, multiplier );
