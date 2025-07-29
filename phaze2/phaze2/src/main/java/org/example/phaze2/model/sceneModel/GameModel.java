@@ -49,4 +49,7 @@ public class GameModel {
     public double getBasicTempoMultiplier() {
         return basicTempoMultiplier;
     }
+    public int getChosenLevel() {
+        return levelInformation.getChosenLevel();
+    }
 }

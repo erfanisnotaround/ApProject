@@ -17,6 +17,7 @@ import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.saversOfGame.SaveAndLoadController;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
@@ -35,6 +36,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private ConnectionUI connectionUI;
     CollisionMaker collisionManager = new CollisionMaker();
     WholeMovement movementMaker = new WholeMovement();
+    SaveAndLoadController saveAndLoadController = new SaveAndLoadController();
 
     private Scene scene;
 
@@ -105,8 +107,11 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 
 
-        collisionManager.Start();
 
+
+
+        collisionManager.Start();
+        saveAndLoadController.startAutoSave(0);
 
 
     }
@@ -125,12 +130,12 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     }
     void menuButtonClicked() {
         gameModel.MenuButtonClicked();
+        saveAndLoadController.writeLevelsToDisk();
 //        collisionManager.stop();
     }
     void startButtonClicked() {
         main.requestFocus();
         gameModel.StartButtonClicked();
-
         movementMaker.StartSending(gameModel.getBasicMoveMultiplier() , gameModel.getAvailableNeededTime());
     }
     void chooseTheDestinationTimeOfTemporal(double time){

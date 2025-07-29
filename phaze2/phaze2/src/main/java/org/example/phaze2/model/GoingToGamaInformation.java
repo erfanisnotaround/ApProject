@@ -67,4 +67,7 @@ public class GoingToGamaInformation {
     public Level getLevel() {
         return level;
     }
+    public int getChosenLevel() {
+        return ChosenLevel;
+    }
 }

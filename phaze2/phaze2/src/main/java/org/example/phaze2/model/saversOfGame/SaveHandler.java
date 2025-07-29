@@ -17,24 +17,45 @@ import java.util.List;
 
 public class SaveHandler {
 
-    private int CurrentLevel;
-    private JsonManager jsonManager;
-    public SaveHandler(int currentLevel) {
-        this.CurrentLevel = currentLevel;
-        jsonManager = new JsonManager("org/example/phaze2/jsonFiles/levelSaves.json");
-    }
-    public void StartSave() {
-        SystemSavings();
-        PocketSave();
-        ConnectionSave();
+    private List<SystemsPojo> systemsPojoLists = new ArrayList<>();
+    private List<PocketPojo> pocketPojoLists = new ArrayList<>();
+    private List<ConnectionPojo> connectionPojoLists = new ArrayList<>();
 
-    }
-    private void SystemSavings(){
+    private List<SystemView> systemViewCopy;
+    private List<PocketMain> pocketMainCopy;
+    private List<Connection> connectionsCopy;
+    public LevelPojo StartSave(){
 
         List<SystemView> systemViews = Constants.getInstance().getSystemViews();
-        List<SystemsPojo> systemsPojoLists = new ArrayList<>();
+         systemViewCopy = new ArrayList<>(systemViews);
 
-        List<SystemView> systemViewCopy = new ArrayList<>(systemViews);
+
+        List<PocketMain> pocketMains = Constants.getInstance().getPockets();
+         pocketMainCopy = new ArrayList<>(pocketMains);
+
+
+
+        List<Connection> connections = Constants.getInstance().getConnections();
+        connectionsCopy = new ArrayList<>(connections);
+
+
+
+        LevelPojo levelPojo = new LevelPojo();
+        List<SystemsPojo> systemsPojoList = SystemSavings();
+        List<PocketPojo> pocketPojoList = PocketSave();
+        List<ConnectionPojo> connectionPojoList = ConnectionSave();
+
+        levelPojo.setSystems(systemsPojoList);
+        levelPojo.setPockets(pocketPojoList);
+        levelPojo.setConnections(connectionPojoList);
+
+
+
+        return levelPojo;
+    }
+    private List<SystemsPojo> SystemSavings(){
+
+
         for(SystemView systemView : systemViewCopy){
             synchronized (systemView){
                 SystemsPojo systemsPojo = getSystemPojo(systemView);
@@ -42,6 +63,8 @@ public class SaveHandler {
             }
 
         }
+
+        return systemsPojoLists;
     }
     private SystemsPojo getSystemPojo(SystemView systemView){
 
@@ -73,19 +96,20 @@ public class SaveHandler {
         }
     }
 
-    private void PocketSave(){
+    private List<PocketPojo> PocketSave(){
 
-        List<PocketMain> pocketMains = Constants.getInstance().getPockets();
-        List<PocketPojo> pocketPojoList = new ArrayList<>();
+        pocketPojoLists.clear();
 
-        List<PocketMain> pocketMainCopy = new ArrayList<>(pocketMains);
+
         for (PocketMain pocketMain : pocketMainCopy){
             synchronized (pocketMain){
                 PocketPojo pocketPojo = PocketLoad(pocketMain);
-                pocketPojoList.add(pocketPojo);
+                pocketPojoLists.add(pocketPojo);
             }
 
         }
+
+        return pocketPojoLists;
     }
     private PocketPojo PocketLoad(PocketMain pocketMain){
 
@@ -102,27 +126,35 @@ public class SaveHandler {
         pocketPojo.setPlaceOfX(pocketMain.getPlaceOfX());
         pocketPojo.setPlaceOfY(pocketMain.getPlaceOfY());
 
-        pocketPojo.setWhichSystemViewThisPocketIsAffectedBy(pocketMain.getWhichSystemViewThisPocketIsAffectedBy().getSystemID());
+        SystemView systemView = pocketMain.getWhichSystemViewThisPocketIsAffectedBy();
+        if (systemView != null){
+            pocketPojo.setWhichSystemViewThisPocketIsAffectedBy(systemView.getSystemID());
+        }
+        else {
+            pocketPojo.setWhichSystemViewThisPocketIsAffectedBy(null);
+        }
         pocketPojo.setAvailableTime(pocketMain.getAvailableTime());
+
+        pocketPojo.setPathMover(SetPathMoverPojo(pocketPojo , pocketMain.getPathMover()));
+
 
         return pocketPojo;
     }
 
 
-    private void ConnectionSave(){
-        List<ConnectionPojo> connectionPojos = new ArrayList<>();
-        List<Connection> connections = Constants.getInstance().getConnections();
+    private List<ConnectionPojo> ConnectionSave(){
+        connectionPojoLists.clear();
 
-
-        List<Connection> connectionsCopy = new ArrayList<>(connections);
         for (Connection connection : connectionsCopy){
 
             synchronized (connection){
                 ConnectionPojo connectionPojo = ConnectionLoad(connection);
-                connectionPojos.add(connectionPojo);
+                connectionPojoLists.add(connectionPojo);
             }
 
         }
+
+        return connectionPojoLists;
     }
     private ConnectionPojo ConnectionLoad(Connection connection){
 
@@ -131,7 +163,8 @@ public class SaveHandler {
         connectionPojo.setFromPort(SetPortPojo(connection.getFromPort().getPortInfo()));
         connectionPojo.setToPort(SetPortPojo(connection.getToPort().getPortInfo()));
 
-        SetCurvePojo(connection.getCurve());
+
+        connectionPojo.setCurve(SetCurvePojo(connection.getCurve()));
 
 
 
@@ -154,7 +187,13 @@ public class SaveHandler {
         CurvePojo curvePojo = new CurvePojo();
         curvePojo.setHP(curve.getHP());
         curvePojo.setItUsed(curve.isIsItUsed());
-        curvePojo.setPocketMovingOnIt(curve.getPocketMovingOnIt().getPocketId());
+        PocketMain pocketMain = curve.getPocketMovingOnIt();
+        if (pocketMain != null){
+            curvePojo.setPocketMovingOnIt(pocketMain.getPocketId());
+        }
+        else {
+            curvePojo.setPocketMovingOnIt(null);
+        }
         curvePojo.setLatestAcceptableLength(curve.getLatestAcceptableLength());
 
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CollisionHandler {
     private final double waveRangeEffect = 100;
-    private final double basicMultiplier = 1;
+    private final double basicMultiplier = 0.3;
     private final int UnitOfNoisePerImpact = 1;
     private final double theUnitOfMeasuring = waveRangeEffect * basicMultiplier;
     List<PocketMain> pockets;

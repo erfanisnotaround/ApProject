@@ -82,30 +82,37 @@
     ],
     "pockets": [
       {
+        "pocketName": "kashi",
         "type": " BIG_2",
         "delay": 1.5
       },
       {
+        "pocketName": "rezaDozde",
         "type": " BIG_1",
         "delay": 1.5
       },
       {
+        "pocketName": "gorbe",
         "type": " SECRET_1",
         "delay": 1.5
       },
       {
+        "pocketName": "lachaki",
         "type": " SECRET_2",
         "delay": 1.5
       },
       {
+        "pocketName": "bagher",
         "type": " Messenger_1",
         "delay": 1.5
       },
       {
+        "pocketName": "manig",
         "type": " Messenger_2",
         "delay": 1.5
       },
       {
+        "pocketName": "pasta",
         "type": " Messenger_3",
         "delay": 1.5
       }
