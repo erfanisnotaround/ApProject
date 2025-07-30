@@ -39,6 +39,9 @@ public class Messenger2 extends Pocket implements Movable {
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
 //        pathMover.AddingImpactVector(5 , 6);
+
+        pathMover.setNode(pocket);
+
         pathMover.move(curve , RealSpeed, RealAcceleration , true , multiplier);
     }
 

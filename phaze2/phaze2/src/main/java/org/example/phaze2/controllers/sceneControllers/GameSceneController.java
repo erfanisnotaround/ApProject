@@ -111,7 +111,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 
         collisionManager.Start();
-        saveAndLoadController.startAutoSave(0);
+        saveAndLoadController.startAutoSave(gameModel.getChosenLevel());
 
 
     }

@@ -68,6 +68,6 @@ public class GoingToGamaInformation {
         return level;
     }
     public int getChosenLevel() {
-        return ChosenLevel;
+        return levels.indexOf(level);
     }
 }

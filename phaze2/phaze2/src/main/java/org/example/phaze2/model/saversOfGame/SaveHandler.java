@@ -34,9 +34,9 @@ public class SaveHandler {
          pocketMainCopy = new ArrayList<>(pocketMains);
 
 
-
         List<Connection> connections = Constants.getInstance().getConnections();
         connectionsCopy = new ArrayList<>(connections);
+
 
 
 
@@ -55,6 +55,8 @@ public class SaveHandler {
     }
     private List<SystemsPojo> SystemSavings(){
 
+
+        systemsPojoLists.clear();
 
         for(SystemView systemView : systemViewCopy){
             synchronized (systemView){
@@ -113,6 +115,7 @@ public class SaveHandler {
     }
     private PocketPojo PocketLoad(PocketMain pocketMain){
 
+
         PocketPojo pocketPojo = new PocketPojo();
         pocketPojo.setPocketID(pocketMain.getPocketId());
         pocketPojo.setItAffected(pocketMain.isItAffected());
@@ -136,6 +139,7 @@ public class SaveHandler {
         pocketPojo.setAvailableTime(pocketMain.getAvailableTime());
 
         pocketPojo.setPathMover(SetPathMoverPojo(pocketPojo , pocketMain.getPathMover()));
+
 
 
         return pocketPojo;
@@ -168,6 +172,8 @@ public class SaveHandler {
 
 
 
+
+
         return connectionPojo;
     }
     private PortPojo SetPortPojo(PortInfo portInfo){
@@ -192,7 +198,11 @@ public class SaveHandler {
             curvePojo.setPocketMovingOnIt(pocketMain.getPocketId());
         }
         else {
+
+
             curvePojo.setPocketMovingOnIt(null);
+
+
         }
         curvePojo.setLatestAcceptableLength(curve.getLatestAcceptableLength());
 

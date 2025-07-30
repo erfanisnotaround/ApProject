@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
@@ -11,14 +12,17 @@ import org.example.phaze2.model.levelDetails.necessary.Light;
 import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SystemProcessor implements Runnable{
     private final List<System> systemInfos;
     private List<SystemView> systemViews = new ArrayList<>();
+    private final Map<String , SystemView> systemViewsStringMap = Constants.getInstance().getSystemViewMap();
     private ConnectionUI connectionUI;
     public SystemProcessor(List<System> systemInfos , ConnectionUI connectionUI) {
         this.systemInfos = systemInfos;
@@ -26,6 +30,7 @@ public class SystemProcessor implements Runnable{
     }
     @Override
     public void run() {
+        systemViewsStringMap.clear();
         for (System system : systemInfos) {
             systemViews.add(processSystem(system));
         }
@@ -48,6 +53,8 @@ public class SystemProcessor implements Runnable{
         systemView.setLayoutY(systemInfo.getY());
         addNameLabel(systemView , systemInfo.getSystemName());
         addLight(systemView);
+
+        systemViewsStringMap.put(systemInfo.getSystemName(), systemView);
 
 
         for (int i = 0; i < systemInfo.getNumberOfSubSystems(); i++) {

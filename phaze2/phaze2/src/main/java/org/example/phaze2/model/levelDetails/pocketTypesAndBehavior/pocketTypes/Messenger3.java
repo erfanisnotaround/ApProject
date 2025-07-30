@@ -45,6 +45,9 @@ public class Messenger3 extends Pocket implements Movable {
 
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
+
+        pathMover.setNode(pocket);
+
         movingStrategy(pocket , curve);
         pathMover.move(curve , RealSpeed , RealAcceleration , true , multiplier);
 

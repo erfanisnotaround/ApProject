@@ -4,6 +4,8 @@ import javafx.scene.Node;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.necessary.PortInfo;
 import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.*;
 
@@ -13,6 +15,7 @@ public class ConnectionRegistry {
     private final Set<Port> enterGates = new HashSet<>();
     private final List<Connection> connections = constants.getConnections();
     private final Map<Port, Connection> exitConnections = constants.getExitConnections();
+
 
     public void registerExit(Port gate, PortInfo info) {
         gate.setPortInfo(info);

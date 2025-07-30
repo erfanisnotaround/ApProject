@@ -1,20 +1,25 @@
 package org.example.phaze2.viewRelated.bringingLevelToReality;
 
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.PocketLoading;
+import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PocketProcessor implements Runnable {
     private List<PocketMain> pockets = new ArrayList<>();
     private List<PocketLoading> pocketLoadings;
+    private final Map<String , PocketMain> pocketMainMap = Constants.getInstance().getPocketMainMap();
 
     public PocketProcessor(List<PocketLoading> pocketLoadings) {
         this.pocketLoadings = pocketLoadings;
     }
     @Override
     public void run() {
+        pocketMainMap.clear();
         for (PocketLoading pocketLoading : pocketLoadings) {
             pockets.add(processPocket(pocketLoading));
         }
@@ -26,6 +31,8 @@ public class PocketProcessor implements Runnable {
         pocket.setPocketId(pocketLoading.getPocketName());
         pocket.setFirstPocketType(pocket.getType());
         pocket.setTypeBeforeChange(pocketLoading.getType());
+
+        pocketMainMap.put(pocketLoading.getPocketName(), pocket);
         return pocket;
     }
 

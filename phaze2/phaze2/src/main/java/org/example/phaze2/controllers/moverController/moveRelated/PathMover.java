@@ -59,9 +59,9 @@ public class PathMover extends AnimationTimer {
         this.multiplier = multiplier;
 
 
+        curve.setPocketMovingOnIt(node);
         node.setIsItMoved(true);
         curve.setIsItUsed(true);
-        curve.setPocketMovingOnIt(node);
         StarterPort = curve.getConnection().getFromPort();
 
         start();
@@ -104,13 +104,12 @@ public class PathMover extends AnimationTimer {
             s = path.total();
             stop();
 
+            curve.setPocketMovingOnIt(null);
             curve.setIsItUsed(false);
             node.setIsItMoved(false);
-            curve.setPocketMovingOnIt(null);
+
 
             node.StopStrategyMoving();
-
-
 
         }
 
