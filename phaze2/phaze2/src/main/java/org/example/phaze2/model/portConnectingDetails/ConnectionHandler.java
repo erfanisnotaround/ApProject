@@ -50,8 +50,7 @@ public class ConnectionHandler {
     public void onPress(MouseEvent mouseEvent) {
         Port ExitNode = (Port) mouseEvent.getSource();
         if (!registry.getExitGates().contains(ExitNode)) return;
-        Point2D center = getCenterInScene(ExitNode);
-        StartPoint = wireRenderer.getLayerManager().getLayer().sceneToLocal(center);
+        StartPoint = getCenterNode(ExitNode);
         startX = StartPoint.getX();
         startY = StartPoint.getY();
         startGate = ExitNode;
@@ -91,8 +90,10 @@ public class ConnectionHandler {
             if (cen.distance(scenePt) < 5) {
                 PortInfo toInfo = gate.getPortInfo();
                 if (ruleEngine.isConnectionValid(fromInfo , toInfo , finalLen)) {
+                    EndPoint = getCenterNode(gate);
+                    currentCurve.build(StartPoint , EndPoint);
                     Curve myCurve = currentCurve;
-                    Connection conn = new Connection(myCurve, startGate, gate);
+                    Connection conn = new Connection(myCurve , startGate, gate);
                     myCurve.setConnection(conn);
                     myCurve.setFill(Color.GREEN);
                     addConnection(conn);
@@ -196,6 +197,20 @@ public class ConnectionHandler {
     public void resetSelection() {
         if (selectedCurve == null) return;
         selectedCurve.setFill(Color.GREEN);
+    }
+
+    public Point2D getCenterNode(Node node){
+        Point2D center = getCenterInScene(node);
+        return wireRenderer.getLayerManager().getLayer().sceneToLocal(center);
+    }
+
+    public void RegisterACurve(Connection connection) {
+        Point2D TempStarter = getCenterNode(connection.getFromPort().getShape());
+        Point2D TempEnder = getCenterNode(connection.getToPort().getShape());
+
+        connection.getCurve().build(TempStarter, TempEnder);
+        registry.addConnection(connection);
+        wireRenderer.renderCurve(connection.getCurve());
     }
 
 

@@ -27,6 +27,9 @@ public class Anchor extends Circle {
     public Point2D getLatestCord() {
         return latestCord;
     }
+    public void setLatestCord(Point2D latestCord) {
+        this.latestCord = latestCord;
+    }
     public void commit(){
         latestCord = center;
     }

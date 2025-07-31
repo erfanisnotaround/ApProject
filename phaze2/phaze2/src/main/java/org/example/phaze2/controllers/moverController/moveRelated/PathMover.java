@@ -62,7 +62,6 @@ public class PathMover extends AnimationTimer {
         curve.setPocketMovingOnIt(node);
         node.setIsItMoved(true);
         curve.setIsItUsed(true);
-        StarterPort = curve.getConnection().getFromPort();
 
         start();
 
@@ -251,6 +250,7 @@ public class PathMover extends AnimationTimer {
         AngleNeeded = angleNeeded;
     }
     public double getMultiplier(){return multiplier;}
+    public void setMultiplier(double multiplier) {this.multiplier = multiplier;}
     public double getS(){return s;}
     public double GetAcceleration(){
         return a;
@@ -266,4 +266,15 @@ public class PathMover extends AnimationTimer {
 
     public double getLineDistancePerMoveXForWhole(){return lineDistancePerMoveXForWhole;}
     public double getLineDistancePerMoveYForWhole(){return lineDistancePerMoveYForWhole;}
+    public void setA(double a) {this.a = a;}
+    public void SetS(double s) {this.s = s;}
+
+    public void setLineDistancePerMove(double lineDistancePerMoveX , double  lineDistancePerMoveY) {
+        this.lineDistancePerMoveX = lineDistancePerMoveX;
+        this.lineDistancePerMoveY = lineDistancePerMoveY;
+    }
+    public void setLineDistancePerMoveForWhole(double lineDistancePerMoveXForWhole , double  lineDistancePerMoveYForWhole) {
+        this.lineDistancePerMoveXForWhole = lineDistancePerMoveXForWhole;
+        this.lineDistancePerMoveYForWhole = lineDistancePerMoveYForWhole;
+    }
 }

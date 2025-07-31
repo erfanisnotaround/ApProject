@@ -1,6 +1,7 @@
 package org.example.phaze2.controllers.sceneControllers;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -36,7 +37,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private ConnectionUI connectionUI;
     CollisionMaker collisionManager = new CollisionMaker();
     WholeMovement movementMaker = new WholeMovement();
-    SaveAndLoadController saveAndLoadController = new SaveAndLoadController();
+    SaveAndLoadController saveAndLoadController;
 
     private Scene scene;
 
@@ -109,9 +110,23 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 
 
+         saveAndLoadController = new SaveAndLoadController(connectionUI , gameModel.getChosenLevel());
 
         collisionManager.Start();
-        saveAndLoadController.startAutoSave(gameModel.getChosenLevel());
+        saveAndLoadController.loadTheSave();
+
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(10));
+        pauseTransition.setOnFinished(event -> {
+           for (PocketMain pocket : Constants.getInstance().getPockets()) {
+               if (pocket.isIsItMoved()){
+                   pocket.getPathMover().start();
+
+               }
+           }
+        });
+        pauseTransition.play();
+
+//        saveAndLoadController.startAutoSave();
 
 
     }

@@ -129,6 +129,10 @@ public class SaveHandler {
         pocketPojo.setPlaceOfX(pocketMain.getPlaceOfX());
         pocketPojo.setPlaceOfY(pocketMain.getPlaceOfY());
 
+        pocketPojo.setXX(pocketMain.getLayoutX());
+        pocketPojo.setYY(pocketMain.getLayoutY());
+
+
         SystemView systemView = pocketMain.getWhichSystemViewThisPocketIsAffectedBy();
         if (systemView != null){
             pocketPojo.setWhichSystemViewThisPocketIsAffectedBy(systemView.getSystemID());

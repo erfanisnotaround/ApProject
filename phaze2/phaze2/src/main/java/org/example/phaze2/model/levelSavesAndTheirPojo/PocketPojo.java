@@ -17,6 +17,9 @@ public class PocketPojo {
     private String WhichSystemViewThisPocketIsAffectedBy;
     private double availableTime;
     private PathMoverPojo pathMover;
+    private double XX;
+    private double YY;
+
 
 
     public boolean isItAffected() {
@@ -130,4 +133,21 @@ public class PocketPojo {
     public void setPathMover(PathMoverPojo pathMover) {
         this.pathMover = pathMover;
     }
+
+    public double getXX() {
+        return XX;
+    }
+
+    public void setXX(double XX) {
+        this.XX = XX;
+    }
+
+    public double getYY() {
+        return YY;
+    }
+
+    public void setYY(double YY) {
+        this.YY = YY;
+    }
+
 }

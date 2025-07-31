@@ -10,6 +10,7 @@ import org.example.phaze2.model.levelDetails.necessary.Anchor;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.portConnectingDetails.Connection;
 import org.example.phaze2.model.portConnectingDetails.ConnectionHandler;
 
 public class ConnectionUI {
@@ -75,6 +76,9 @@ public class ConnectionUI {
         anchor.setOnMouseReleased(mouseEvent -> {
             connectionHandler.onAnchorReleased(anchor, curve);
         });
+    }
+    public void RegisterConnection(Connection connection){
+        connectionHandler.RegisterACurve(connection);
     }
     public void resetSelection(){
         connectionHandler.resetSelection();

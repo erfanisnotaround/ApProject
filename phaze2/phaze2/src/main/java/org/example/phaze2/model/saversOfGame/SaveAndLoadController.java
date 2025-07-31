@@ -1,6 +1,7 @@
 package org.example.phaze2.model.saversOfGame;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.agentsAndManagers.JsonManager;
 import org.example.phaze2.model.levelSavesAndTheirPojo.LevelPojo;
 
@@ -12,21 +13,38 @@ public class SaveAndLoadController {
 
     private final JsonManager jsonManager;
     private SaveMaker saveMaker;
+    private LoadMaker loadMaker;
     private List<LevelPojo> realLevelList;
+    private ConnectionUI connectionUI;
     private final String path = "D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze2\\phaze2\\src\\main\\resources\\org\\example\\phaze2\\jsonFiles\\levelSaves.json";
+    private int ChosenLevel;
 
-    public SaveAndLoadController() {
+    public SaveAndLoadController(ConnectionUI connectionUI , int ChosenLevel) {
         this.jsonManager = new JsonManager(path);
+        this.connectionUI = connectionUI;
+        this.ChosenLevel = ChosenLevel;
+        loadLevels();
+
     }
 
-    public void startAutoSave(int currentLevelIndex) {
-
+    private void loadLevels() {
         try {
             this.realLevelList = jsonManager.readArray(new TypeReference<List<LevelPojo>>() {});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.saveMaker = new SaveMaker(currentLevelIndex, realLevelList);
+    }
+
+    public void loadTheSave(){
+        loadMaker = new LoadMaker(ChosenLevel , connectionUI , realLevelList);
+        Thread thread = new Thread(loadMaker);
+        thread.start();
+    }
+
+    public void startAutoSave() {
+
+
+        this.saveMaker = new SaveMaker(ChosenLevel, realLevelList);
         this.saveMaker.start();
     }
 
