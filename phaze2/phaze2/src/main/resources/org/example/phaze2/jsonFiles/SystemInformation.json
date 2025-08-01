@@ -16,7 +16,7 @@
         "SubSystems": [
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": false,
+            "doesItHavaExitGate": true,
             "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"
           },
@@ -31,29 +31,18 @@
       {
         "systemType": "VPN",
         "systemName": "Backup",
-        "x": 400.0,
-        "y": 300.0,
-        "isItStartSystem": false,
-        "numberOfSubSystems": 1,
-        "isTheLightOn": true,
-        "SubSystems": [
-          {
-            "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": true,
-            "EnterGate": "SQUARE",
-            "ExitGate": "SQUARE"
-          }
-        ]
-      },
-      {
-        "systemType": "DESTRUCTIVE",
-        "systemName": "Backup2",
         "x": 700.0,
-        "y": 700.0,
+        "y": 200.0,
         "isItStartSystem": false,
-        "numberOfSubSystems": 1,
+        "numberOfSubSystems": 2,
         "isTheLightOn": true,
         "SubSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
+          },
           {
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
@@ -63,14 +52,20 @@
         ]
       },
       {
-        "systemType": "SPY",
-        "systemName": "Backup3",
-        "x": 600.0,
-        "y": 500.0,
+        "systemType": "VPN",
+        "systemName": "Backup",
+        "x": 1000.0,
+        "y": 200.0,
         "isItStartSystem": false,
-        "numberOfSubSystems": 1,
+        "numberOfSubSystems": 2,
         "isTheLightOn": true,
         "SubSystems": [
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
+          },
           {
             "doesItHaveEnterGate": true,
             "doesItHavaExitGate": true,
@@ -82,38 +77,13 @@
     ],
     "pockets": [
       {
-        "pocketName": "kashi",
-        "type": " BIG_2",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "rezaDozde",
-        "type": " BIG_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "gorbe",
+        "pocketName": "manig",
         "type": " SECRET_1",
         "delay": 1.5
       },
       {
-        "pocketName": "lachaki",
-        "type": " SECRET_2",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "bagher",
-        "type": " Messenger_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "manig",
-        "type": " Messenger_2",
-        "delay": 1.5
-      },
-      {
         "pocketName": "pasta",
-        "type": " Messenger_3",
+        "type": " SECRET_1",
         "delay": 1.5
       }
     ]

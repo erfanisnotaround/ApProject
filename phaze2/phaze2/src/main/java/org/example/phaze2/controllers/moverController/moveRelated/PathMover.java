@@ -7,6 +7,7 @@ import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.levelSavesAndTheirPojo.CurvePojo;
 
 public class PathMover extends AnimationTimer {
     private Port StarterPort;
@@ -33,7 +34,7 @@ public class PathMover extends AnimationTimer {
 
     private double lineDistancePerMoveX = 0;
     private double lineDistancePerMoveY = 0;
-    private double STEPS = 200;
+    private double STEPS = 80;
     private double AngleNeeded;
     private boolean rotate;
     public PathMover(double angle) {
@@ -48,14 +49,22 @@ public class PathMover extends AnimationTimer {
         stop();
 
 
+        lineDistancePerMoveX = lineDistancePerMoveY = 0;
+        lineDistancePerMoveXForWhole = lineDistancePerMoveYForWhole = 0;
+
+        // make the current value the new reference point
+        latestLineDistance          = currentLineDistance;
+        latestLineDistanceForWholeMove = currentLineDistanceForWholeMove;
+
+
+
+
+
         this.curve = pl;
         this.path = PathData.fromPolyline(pl);
         this.v = initialSpeed * multiplier;
         this.a = acceleration * multiplier;
         this.rotate = rotateAlongTangent;
-
-        this.s      = 0;
-        this.lastNs = -1;
         this.multiplier = multiplier;
 
 
@@ -100,6 +109,12 @@ public class PathMover extends AnimationTimer {
                 s=0;
                 return;
             }
+
+            node.setLayoutX(-1000);
+            node.setLayoutY(-1000);
+            node.getHitBox().setLayoutX(-1000);
+            node.getHitBox().setLayoutY(-1000);
+
             s = path.total();
             stop();
 
@@ -107,8 +122,8 @@ public class PathMover extends AnimationTimer {
             curve.setIsItUsed(false);
             node.setIsItMoved(false);
 
-
             node.StopStrategyMoving();
+            return;
 
         }
 
@@ -164,6 +179,10 @@ public class PathMover extends AnimationTimer {
         start();
     }
 
+    public void Initialize(){
+        this.s = 0;
+        this.lastNs = -1;
+    }
     public void reverse() {
         this.v *= -1;
         this.a *= -1;
@@ -179,6 +198,7 @@ public class PathMover extends AnimationTimer {
     }
 
     public void AddingImpactVector(double x, double y , double STEPS) {
+        System.out.println("AddingImpactVector");
         this.STEPS = STEPS;
         latestLineDistance = latestLineDistance.add(x, y);
         lineDistancePerMoveX = x * multiplier/STEPS;
@@ -276,5 +296,8 @@ public class PathMover extends AnimationTimer {
     public void setLineDistancePerMoveForWhole(double lineDistancePerMoveXForWhole , double  lineDistancePerMoveYForWhole) {
         this.lineDistancePerMoveXForWhole = lineDistancePerMoveXForWhole;
         this.lineDistancePerMoveYForWhole = lineDistancePerMoveYForWhole;
+    }
+    public void setCurve(Curve curve) {
+        this.curve = curve;
     }
 }

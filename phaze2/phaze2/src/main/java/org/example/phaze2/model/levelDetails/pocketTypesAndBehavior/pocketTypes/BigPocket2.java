@@ -45,8 +45,7 @@ public class BigPocket2 extends Pocket implements Movable {
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
 
-        pathMover.setNode(pocket);
-
+        pathMover.Initialize();
         movingStrategy(pocket , curve);
 
         pathMover.move(curve , RealSpeed , RealAcceleration, true , multiplier);

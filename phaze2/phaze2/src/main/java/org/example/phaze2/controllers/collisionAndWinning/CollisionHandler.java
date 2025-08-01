@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CollisionHandler {
     private final double waveRangeEffect = 100;
-    private final double basicMultiplier = 0.3;
+    private final double basicMultiplier = 1;
     private final int UnitOfNoisePerImpact = 1;
     private final double theUnitOfMeasuring = waveRangeEffect * basicMultiplier;
     List<PocketMain> pockets;
@@ -21,8 +21,8 @@ public class CollisionHandler {
         PocketMain secondPocket = pair.getSecondPocket();
         Point2D impactPoint = pair.getImpactPoint();
 
-        Point2D FirstImpactVector = getImpactVector(impactPoint , new Point2D(firstPocket.getPlaceOfX(), firstPocket.getPlaceOfY()));
-        Point2D SecondImpactVector = getImpactVector(impactPoint , new Point2D(secondPocket.getPlaceOfX(), secondPocket.getPlaceOfY()));
+        Point2D FirstImpactVector = getImpactVector(impactPoint , firstPocket.centre());
+        Point2D SecondImpactVector = getImpactVector(impactPoint , secondPocket.centre());
         ApplyImpactVector(firstPocket, FirstImpactVector);
         ApplyImpactVector(secondPocket, SecondImpactVector);
 
@@ -37,8 +37,8 @@ public class CollisionHandler {
 
             if (pocket.equals(firstPocket) || pocket.equals(secondPocket)) continue;
 
-            Point2D placeOfPocket = new Point2D(pocket.getPlaceOfX(), pocket.getPlaceOfY());
-            Point2D impactVector = getImpactVector(impactPoint , placeOfPocket);
+
+            Point2D impactVector = getImpactVector(impactPoint , pocket.centre());
             double size = Math.hypot(impactVector.getX() , impactVector.getY());
             if ( size == 0) continue;
             reducingHp(size , firstPocket);

@@ -2,6 +2,8 @@ package org.example.phaze2.model.levelDetails.necessary;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import org.example.phaze2.controllers.moverController.moveRelated.MovingPlanMaker;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
@@ -251,5 +253,12 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
 
     public void setPocketId(String pocketId) {
         this.pocketId = pocketId;
+    }
+    public Point2D centre() {			    // scene-space centre of the sprite
+        Bounds b = localToScene(getBoundsInLocal());
+        return new Point2D(
+                (b.getMinX() + b.getMaxX()) * .5,
+                (b.getMinY() + b.getMaxY()) * .5
+        );
     }
 }

@@ -1,36 +1,42 @@
 package org.example.phaze2.controllers.collisionAndWinning;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.util.Duration;
+import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CollisionMaker {
-    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    private ScheduledFuture<?> taskHandle;
-    private final AtomicBoolean paused = new AtomicBoolean(false);
-    private CollisionController collisionController = new CollisionController();
+public class CollisionMaker extends Thread {
+    private static final long WAIT_MS = 10;
+    private final CollisionController controller;
+    private volatile boolean running = true;
 
-    private final long lengthOfCheck = 10;
-    public void Start() {
-        taskHandle = scheduler.scheduleAtFixedRate( () -> {
-            if (paused.get()) return;
-            collisionController.Collision();
-        } , 0 , lengthOfCheck , TimeUnit.MILLISECONDS );
+    public CollisionMaker(List<PocketMain> pockets) {
+        super("CollisionThread");
+        setDaemon(false);                                   // keep JVM alive
+        setUncaughtExceptionHandler((t, e) -> e.printStackTrace());
+        controller = new CollisionController(pockets);
     }
 
-    public void pause() {
-        paused.set(true);
+    @Override public void run() {
+        try {
+            while (running && !isInterrupted()) {
+                controller.Collision();
+                Thread.sleep(WAIT_MS);
+            }
+        } catch (Throwable t) {             // catches Exception *and* Error
+            t.printStackTrace();
+        }
     }
 
-    public void resume() {
-        paused.set(false);
-    }
-
-    public void stop() {
-        if (taskHandle != null) taskHandle.cancel(false);
-        scheduler.shutdown();
-    }
-
+    public void shutdown() { running = false; interrupt(); }
 }

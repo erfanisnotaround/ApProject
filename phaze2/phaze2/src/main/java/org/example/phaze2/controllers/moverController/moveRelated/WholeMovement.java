@@ -65,13 +65,17 @@ public class WholeMovement {
             SendingPockets(startingSystemView , pocket , -1);
         }
 
-        for (SystemView systemView : systemViews) {
-            MakeSystemConnectionsWaiting(systemView);
-        }
+        PutListenersForSystems();
+
 
     }
 
 
+    public void PutListenersForSystems(){
+        for (SystemView systemView : systemViews) {
+            MakeSystemConnectionsWaiting(systemView);
+        }
+    }
 
 
     public void SendingPockets(SystemView systemView , PocketMain pocket , int  fromSystem ){

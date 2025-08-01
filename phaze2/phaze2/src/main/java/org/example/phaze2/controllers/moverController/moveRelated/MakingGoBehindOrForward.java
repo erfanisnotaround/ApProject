@@ -19,11 +19,9 @@ public class MakingGoBehindOrForward implements CheckIfBehindOrNot{
     @Override
     public void BehindOrNot(PocketMain pocket, Curve curve) {
 
-        Point2D thePocketCord = new Point2D(pocketMain.getPlaceOfX(), pocketMain.getPlaceOfY());
-        Point2D theTargetCord = new Point2D(pocket.getPlaceOfX(), pocket.getPlaceOfY());
-        Point2D closesPoint = behindOnCurveOrNot.ClosesPointOn( theTargetCord , curve);
+        Point2D closesPoint = behindOnCurveOrNot.ClosesPointOn( pocket.centre() , curve);
 
-        boolean moveFor = behindOnCurveOrNot.BehindOrNot(thePocketCord , curve , closesPoint);
+        boolean moveFor = behindOnCurveOrNot.BehindOrNot(pocketMain.centre() , curve , closesPoint);
         if (!moveFor && pocket.isIsItMoved()) {
             pocketMain.getPathMover().moveForward();
         }

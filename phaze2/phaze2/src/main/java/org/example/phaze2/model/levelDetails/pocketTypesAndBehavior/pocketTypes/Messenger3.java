@@ -33,8 +33,8 @@ public class Messenger3 extends Pocket implements Movable {
         imagePath = "/org/example/phaze2/images/infinity.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setRotate(-90);
-        setScaleX(0.1);
-        setScaleY(0.1);
+        setScaleX(0.15);
+        setScaleY(0.15);
 
         HP = MaxHp = 1;
         speed = 200;
@@ -46,16 +46,10 @@ public class Messenger3 extends Pocket implements Movable {
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
 
-        pathMover.setNode(pocket);
-
+        pathMover.Initialize();
         movingStrategy(pocket , curve);
         pathMover.move(curve , RealSpeed , RealAcceleration , true , multiplier);
 
-        pause = new PauseTransition(Duration.seconds(3));
-        pause.setOnFinished(event -> {
-            pocket.setIsItCollided(true);
-        });
-        pause.play();
     }
 
     @Override
@@ -64,7 +58,7 @@ public class Messenger3 extends Pocket implements Movable {
         if (pocketMain.getType() != PocketTypes.Messenger_3 && pocketMain.getType() != PocketTypes.SECRET_MESSENGER) return;
         Collide = (observableValue, aBoolean, t1) -> {
             if (t1) {
-                pocketMain.getPathMover().reverse();
+                pocketMain.getPathMover().moveBackward();
                 pocketMain.setIsItCollided(false);
             }
         };

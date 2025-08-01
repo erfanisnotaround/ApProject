@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBox;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBoxGenerator;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -23,7 +24,7 @@ public class PocketMain extends Pocket  implements InitData {
     private HitBox hitBox;
     Pocket behaviour;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
-    private final double DistractionSteps = 100;
+    private final double DistractionSteps = 80;
     public PocketMain(PocketTypes type) {
         super(type);
         pathMover = new PathMover(0);
@@ -68,8 +69,13 @@ public class PocketMain extends Pocket  implements InitData {
         }
 
         hitBox = HitBoxGenerator.generateHitBox(image);
-        hitBox.setScaleX(behaviour.getScaleX());
-        hitBox.setScaleY(behaviour.getScaleY());
+        hitBox.setScaleX(behaviour.getScaleX() - 0.01);
+        hitBox.setScaleY(behaviour.getScaleY() - 0.01);
+
+        hitBox.setStrokeWidth(2);
+        hitBox.setMouseTransparent(false);
+
+
 
 //        Constants.getInstance().container.getChildren().add(hitBox);
 
@@ -101,6 +107,8 @@ public class PocketMain extends Pocket  implements InitData {
 
     public void distract(double x , double y) {
         getPathMover().AddingImpactVector(x, y , DistractionSteps);
+
+
     }
 
     public void setBehaviour(PocketTypes behaviourType) {

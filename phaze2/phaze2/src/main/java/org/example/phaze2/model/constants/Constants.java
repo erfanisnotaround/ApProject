@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Constants {
     private static final Constants INSTANCE = new Constants();
@@ -22,7 +23,7 @@ public class Constants {
     private SceneManager sceneManager;
     private WireManager wireManager;
     private List<SystemView> systemViews = new ArrayList<>();
-    private List<PocketMain> pockets = new ArrayList<>();
+    private final List<PocketMain> pockets = new CopyOnWriteArrayList<>();;
     private Map<Port, Connection> exitConnections = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
     private Map<String , PocketMain> pocketMainMap = new HashMap<>();

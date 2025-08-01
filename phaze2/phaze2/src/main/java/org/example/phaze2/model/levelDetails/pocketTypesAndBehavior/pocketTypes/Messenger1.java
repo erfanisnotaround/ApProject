@@ -21,22 +21,21 @@ public class Messenger1 extends Pocket implements Movable {
 
     @Override
     protected void Initialize() {
-        imagePath = "/org/example/phaze2/images/square.png";
+        imagePath = "/org/example/phaze2/images/horns.png";
         setCoinsPerEntry(2);
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
-        setScaleX(0.03);
-        setScaleY(0.03);
+        setScaleX(0.05);
+        setScaleY(0.05);
         speed = 200;
         acceleration = 0;
         HP = MaxHp = 2;
         preferredType = PortTypes.SQUARE;
-        angleNeeded = 0;
+        angleNeeded = 90;
     }
 
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
-        pathMover.setNode(pocket);
-
+        pathMover.Initialize();
         pathMover.move(curve , RealSpeed , RealAcceleration , true , multiplier);
 
     }

@@ -27,8 +27,8 @@ public class Messenger2 extends Pocket implements Movable {
         imagePath = "/org/example/phaze2/images/Triangle.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
 
-        setScaleX(0.02);
-        setScaleY(0.02);
+        setScaleX(0.04);
+        setScaleY(0.04);
         HP = MaxHp = 3;
         speed = 200;
         acceleration = 20;
@@ -40,7 +40,7 @@ public class Messenger2 extends Pocket implements Movable {
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
 //        pathMover.AddingImpactVector(5 , 6);
 
-        pathMover.setNode(pocket);
+        pathMover.Initialize();
 
         pathMover.move(curve , RealSpeed, RealAcceleration , true , multiplier);
     }

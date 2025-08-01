@@ -54,7 +54,7 @@ public class SecretPocket2 extends Pocket implements Movable {
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
 
-        pathMover.setNode(pocket);
+        pathMover.Initialize();
 
         pathMover.move(curve , RealSpeed, RealAcceleration, true , multiplier);
 //
@@ -83,8 +83,8 @@ public class SecretPocket2 extends Pocket implements Movable {
         for (PocketMain pocketCheck : Constants.getInstance().getPockets()){
             if (!pocketMain.getType().equals(PocketTypes.SECRET_2)||pocketCheck.equals(pocketMain) || !pocketMain.isIsItMoved()) continue;
 
-            double deltaX = pocketCheck.getPlaceOfX() - pocketMain.getPlaceOfX();
-            double deltaY = pocketCheck.getPlaceOfY() - pocketMain.getPlaceOfY();
+            double deltaX = pocketCheck.centre().getX() - pocketMain.centre().getX();
+            double deltaY = pocketCheck.centre().getY() - pocketMain.centre().getY();
 
             if (Math.hypot(deltaX, deltaY) < CheckingRadius) {
                 pocketMain.getMakingGoBehindOrForward().BehindOrNot(pocketCheck , pocketMain.getPathMover().getCurve());

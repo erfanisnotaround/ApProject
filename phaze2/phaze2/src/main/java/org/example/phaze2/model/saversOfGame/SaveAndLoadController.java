@@ -46,6 +46,7 @@ public class SaveAndLoadController {
 
         this.saveMaker = new SaveMaker(ChosenLevel, realLevelList);
         this.saveMaker.start();
+
     }
 
     public void changeCurrentLevel(int newLevelIndex) {

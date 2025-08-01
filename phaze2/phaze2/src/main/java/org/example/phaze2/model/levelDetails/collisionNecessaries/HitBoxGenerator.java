@@ -8,6 +8,7 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.Po
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class HitBoxGenerator {
@@ -27,14 +28,22 @@ public class HitBoxGenerator {
         }
 
 
+        Point2D c = boundaryPoints.stream()
+                .reduce(Point2D::add)
+                .map(p -> new Point2D(p.getX()/boundaryPoints.size(),
+                        p.getY()/boundaryPoints.size()))
+                .get();
 
-        for (Point2D boundaryPoint : boundaryPoints) {
-            hitBox.getPoints().addAll(boundaryPoint.getX(), boundaryPoint.getY());
-        }
+        boundaryPoints.sort(Comparator.comparingDouble(p ->
+                Math.atan2(p.getY() - c.getY(), p.getX() - c.getX())));
 
-        hitBox.setFill(Color.TRANSPARENT);
-        hitBox.setStroke(Color.WHITE );
-        return hitBox;
+        // 3. Push them into a Polygon
+        HitBox poly = new HitBox();
+        boundaryPoints.forEach(p -> poly.getPoints().addAll(p.getX(), p.getY()));
+        poly.setFill(Color.TRANSPARENT);
+        poly.setStroke(Color.RED);           // debug
+        return poly;
+
     }
     private static boolean isOpaque(int x, int y, PixelReader reader, double threshold) {
         Color color = reader.getColor(x, y);

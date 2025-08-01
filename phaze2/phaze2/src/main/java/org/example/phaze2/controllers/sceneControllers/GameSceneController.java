@@ -1,7 +1,6 @@
 package org.example.phaze2.controllers.sceneControllers;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -12,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
+import org.example.phaze2.controllers.collisionAndWinning.CollisionHandler;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.GoingToGamaInformation;
@@ -23,11 +23,11 @@ import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
-import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
@@ -35,10 +35,12 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private GameModel gameModel = new GameModel();
     private SystemVisualizer systemVisualizer;
     private ConnectionUI connectionUI;
-    CollisionMaker collisionManager = new CollisionMaker();
+    private CollisionMaker  engine;
     WholeMovement movementMaker = new WholeMovement();
     SaveAndLoadController saveAndLoadController;
 
+
+    List<PocketMain> pockets;
     private Scene scene;
 
     @FXML
@@ -60,12 +62,20 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     @Override
     public void MakeFirst() {
+        Constants.getInstance().getPockets().clear();
+        Constants.getInstance().getSystemViews().clear();
+        Constants.getInstance().getExitConnections().clear();
+        Constants.getInstance().getConnections().clear();
+        Constants.getInstance().getPocketMainMap().clear();
+        Constants.getInstance().getSystemViewMap().clear();
+
+
         Constants.getInstance().container = ContainerPane;
         System.out.println(21);
         Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
-        List<PocketMain> pockets = systemVisualizer.getPockets();
+        pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
 
 
@@ -112,19 +122,12 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
          saveAndLoadController = new SaveAndLoadController(connectionUI , gameModel.getChosenLevel());
 
-        collisionManager.Start();
-        saveAndLoadController.loadTheSave();
+        engine = new CollisionMaker(pockets);
+        engine.start();
 
-        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(10));
-        pauseTransition.setOnFinished(event -> {
-           for (PocketMain pocket : Constants.getInstance().getPockets()) {
-               if (pocket.isIsItMoved()){
-                   pocket.getPathMover().start();
+//        saveAndLoadController.loadTheSave();
 
-               }
-           }
-        });
-        pauseTransition.play();
+//        pauseTransition.play();
 
 //        saveAndLoadController.startAutoSave();
 
@@ -146,7 +149,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     void menuButtonClicked() {
         gameModel.MenuButtonClicked();
         saveAndLoadController.writeLevelsToDisk();
-//        collisionManager.stop();
+//        collisionManager.Stop();
     }
     void startButtonClicked() {
         main.requestFocus();
@@ -172,9 +175,13 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         for (SystemView systemView : systemViews) {
             ContainerPane.getChildren().addFirst(systemView);
         }
-        for (Pocket pocket : pockets) {
-            ContainerPane.getChildren().addFirst(pocket);
+        for (PocketMain pocket : pockets) {
+            ContainerPane.getChildren().addLast(pocket);
             pocket.setLayoutX(-1000);
         }
     }
+    private List<PocketMain> getPockets() {
+        return pockets;
+    }
+
 }

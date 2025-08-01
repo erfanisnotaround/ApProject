@@ -50,11 +50,13 @@ public class SecretPocket1 extends Pocket implements Movable {
         HP = MaxHp = 4;
         preferredType = PortTypes.ALL;
         angleNeeded = 0;
+        regulator = buildRegulator();
     }
 
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
-        pathMover.setNode(pocket);
+
+        pathMover.Initialize();
 
         movingStrategy(pocket , curve);
 
@@ -69,18 +71,13 @@ public class SecretPocket1 extends Pocket implements Movable {
     public void movingStrategy(PocketMain pocketMain, Curve curve) {
 
         targetSystem = curve.getConnection().getToPort().getPortInfo().getSystem();
-        if (regulator != null) regulator.stop();     // stop previous
-        regulator = buildRegulator();                // brand-new timer
+
         regulator.start();
     }
 
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
-        if (regulator != null) {
             regulator.stop();
-            regulator = null;
-
-        }
     }
 
 
@@ -114,7 +111,11 @@ public class SecretPocket1 extends Pocket implements Movable {
 
                 if (targetSystem != null && !targetSystem.isCapacityEmpty()) {
                     double newV = speedCalculator.calculateSpeed(targetSystem , multiplier);
+
                     pathMover.setSpeed(newV * multiplier);
+                    if (newV < 2) {
+                        pathMover.setSpeed(2 * multiplier);
+                    }
 
                 } else {
                     pathMover.setSpeed(speed * multiplier);

@@ -158,7 +158,10 @@ public class LoadHandler {
 
         String pocketMovingOnItName = curvePojo.getPocketMovingOnIt();
         if (pocketMovingOnItName != null) {
-            curve.setPocketMovingOnIt(pocketMainMap.get(pocketMovingOnItName));
+            PocketMain pocketMain = pocketMainMap.get(pocketMovingOnItName);
+            curve.setPocketMovingOnIt(pocketMain);
+
+            pocketMain.getPathMover().setCurve(curve);
         }
         else curve.setPocketMovingOnIt(null);
 
