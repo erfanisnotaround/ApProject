@@ -34,7 +34,7 @@ public class PathMover extends AnimationTimer {
 
     private double lineDistancePerMoveX = 0;
     private double lineDistancePerMoveY = 0;
-    private double STEPS = 80;
+    private double STEPS = 50;
     private double AngleNeeded;
     private boolean rotate;
     public PathMover(double angle) {
@@ -47,16 +47,6 @@ public class PathMover extends AnimationTimer {
 
 
         stop();
-
-
-        lineDistancePerMoveX = lineDistancePerMoveY = 0;
-        lineDistancePerMoveXForWhole = lineDistancePerMoveYForWhole = 0;
-
-        // make the current value the new reference point
-        latestLineDistance          = currentLineDistance;
-        latestLineDistanceForWholeMove = currentLineDistanceForWholeMove;
-
-
 
 
 
@@ -198,7 +188,7 @@ public class PathMover extends AnimationTimer {
     }
 
     public void AddingImpactVector(double x, double y , double STEPS) {
-        System.out.println("AddingImpactVector");
+        System.out.println("AddingImpactVector " + x + " " + y );
         this.STEPS = STEPS;
         latestLineDistance = latestLineDistance.add(x, y);
         lineDistancePerMoveX = x * multiplier/STEPS;

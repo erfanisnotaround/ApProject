@@ -4,6 +4,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.hudModels.CoinsManager;
+import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.necessary.Port;
@@ -28,6 +30,9 @@ public class Constants {
     private List<Connection> connections = new ArrayList<>();
     private Map<String , PocketMain> pocketMainMap = new HashMap<>();
     private Map<String , SystemView> systemViewMap = new HashMap<>();
+
+    private CoinsManager coinsManager;
+    private NumberOfPocketLossManager numberOfPocketLossManager;
 
     private Constants() {}
     public static Constants getInstance() {
@@ -94,5 +99,21 @@ public class Constants {
 
     public void setSystemViewMap(Map<String, SystemView> systemViewMap) {
         this.systemViewMap = systemViewMap;
+    }
+
+    public CoinsManager getCoinsManager() {
+        return coinsManager;
+    }
+
+    public void setCoinsManager(CoinsManager coinsManager) {
+        this.coinsManager = coinsManager;
+    }
+
+    public NumberOfPocketLossManager getNumberOfPocketLossManager() {
+        return numberOfPocketLossManager;
+    }
+
+    public void setNumberOfPocketLossManager(NumberOfPocketLossManager numberOfPocketLossManager) {
+        this.numberOfPocketLossManager = numberOfPocketLossManager;
     }
 }

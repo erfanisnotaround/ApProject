@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import org.example.phaze2.controllers.moverController.checkings.StartAvailableChecker;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PortTypes;
+import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class WholeMovement {
     Constants constants = Constants.getInstance();
 
+    private CoinsManager coinsManager;
     // resources
     private volatile List<Connection> connections;
     private volatile Map<Port, Connection> exitConnections;
@@ -42,12 +44,13 @@ public class WholeMovement {
 
 
 
-    public WholeMovement() {
+    public WholeMovement(CoinsManager coinsManager) {
         connections = constants.getConnections();
         exitConnections = constants.getExitConnections();
         pockets = constants.getPockets();
         systemViews = constants.getSystemViews();
         startAvailableChecker = new StartAvailableChecker(systemViews);
+        this.coinsManager = coinsManager;
 
     }
     public void StartSending(double speedMultiplier , double AvailableTime){
@@ -157,6 +160,7 @@ public class WholeMovement {
                                 Boolean oldVal, Boolean newVal) {
 
                 if (!newVal) {
+                    coinsManager.Increment(pocket.getCoinsPerEntry());
                     obs.removeListener(this);
                     SendingPockets(connection.getToPort().getPortInfo().getSystem(), pocket , -1);
                 }

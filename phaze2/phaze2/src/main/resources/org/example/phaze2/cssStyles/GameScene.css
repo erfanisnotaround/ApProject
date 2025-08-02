@@ -1,0 +1,114 @@
+/* ───────────────────────────────────────────────
+          ULTRA-HORROR HUD  •  two label flavours
+   ─────────────────────────────────────────────── */
+
+/* HUD container: darker, cracked “glass” frame */
+#HUD {
+    -fx-background-color: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(10,0,0,0.90) 100%);
+    -fx-border-color: #300000, #4d0000;
+    -fx-border-width: 0 0 6 0, 0 0 10 0;   /* double-border → thick coagulated edge */
+    -fx-border-style: solid inside, solid inside;
+    -fx-background-insets: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   BASE SHARED RULES  (inherited by both flavours)
+   ═══════════════════════════════════════════════ */
+.horrifying-label1,
+.horrifying-label2 {
+
+    /* Creepy font stack – replace or extend as you like */
+    -fx-font-family: "Creepster", "Chiller", "Serif";
+    -fx-font-size: 36px;
+    -fx-letter-spacing: 1px;
+
+    /* Disquieting tilt & jitter */
+
+    -fx-translate-x: 0;   /* we jiggle on hover */
+    -fx-translate-y: 0;
+
+    -fx-background-color: transparent;
+    -fx-padding: 8 14 8 14;
+
+    /* Hair-thin pale outline so text never disappears on black */
+    -fx-effect: dropshadow( gaussian , rgba(230,230,230,0.75) , 2 , 0 , 0 , 0 );
+}
+
+/* ═══════════════════════════════════════════════
+   FLAVOUR 1 – vivid, dripping blood
+   ═══════════════════════════════════════════════ */
+.horrifying-label1 {
+
+    /* Saturated blood gradient */
+    -fx-text-fill: linear-gradient(to bottom,
+    #ff3b3b 0%,
+    #d60000 35%,
+    #8b0000 75%,
+    #410000 100%);
+
+    /* Oozing glow & chunky inner shadow */
+    -fx-effect: dropshadow( gaussian , #5a0000 , 18 , 0.85 , 0 , 0 ),
+    innershadow( gaussian , #000000 , 8 , 0.6 , 0 , 0 ),
+    dropshadow( gaussian , rgba(230,230,230,0.75) , 2 , 0 , 0 , 0 );
+}
+
+/* Hover – twitch */
+.horrifying-label1:hover,
+.horrifying-label2:hover {
+    -fx-translate-x: 1;       /* subtle shake */
+    -fx-translate-y: -2;
+}
+
+/* Focus – piercing flash */
+.horrifying-label1:focused,
+.horrifying-label2:focused {
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow( gaussian , #ff1a1a , 14 , 1 , 0 , 0 );
+}
+
+/* ═══════════════════════════════════════════════
+   FLAVOUR 2 – colour-flexible “rotting” look
+   ═══════════════════════════════════════════════ */
+
+/* 1) Pick your **base colour**.
+      Change just the three hexes below to switch the entire palette:
+      e.g. gray → #aaaaaa / #7a7a7a / #4a4a4a
+*/
+.horrifying-label2 {
+    /* Default: sickly necrotic gray */
+    -fx-text-fill: linear-gradient(to bottom,
+    #aaaaaa 0%,   /* << edit this */
+    #7a7a7a 40%,  /* << edit this */
+    #4a4a4a 100%  /* << edit this */
+    );
+
+    /* Moldy pallor glow */
+    -fx-effect: dropshadow( gaussian , #272727 , 16 , 0.8 , 0 , 0 ),
+    innershadow( gaussian , #000000 , 9 , 0.6 , 0 , 0 ),
+    dropshadow( gaussian , rgba(230,230,230,0.75) , 2 , 0 , 0 , 0 );
+}
+
+/* Optional: if you want a *subtle pulse* on flavour-2,
+   uncomment the following and drive it from code with a Timeline.
+
+.horrifying-label2 {
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+*/
+
+/* ═══════════════════════════════════════════════
+   INDIVIDUAL LABEL OVERRIDES  (examples)
+   Uncomment to give each label its own warped angle
+   ═══════════════════════════════════════════════
+
+#label1     { -fx-rotate:  4; }
+#label11    { -fx-rotate: -3; }
+#label111   { -fx-rotate:  6; }
+#label12    { -fx-rotate: -2; }
+#label112   { -fx-rotate:  1; }
+#label1111  { -fx-rotate: -5; }
+#label121   { -fx-rotate:  3; }
+#label1121  { -fx-rotate: -4; }
+#label11111 { -fx-rotate:  2; }
+*/

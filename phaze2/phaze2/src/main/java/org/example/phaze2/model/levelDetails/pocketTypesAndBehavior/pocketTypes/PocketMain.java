@@ -24,7 +24,7 @@ public class PocketMain extends Pocket  implements InitData {
     private HitBox hitBox;
     Pocket behaviour;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
-    private final double DistractionSteps = 80;
+    private final double DistractionSteps = 30;
     public PocketMain(PocketTypes type) {
         super(type);
         pathMover = new PathMover(0);
@@ -74,6 +74,8 @@ public class PocketMain extends Pocket  implements InitData {
 
         hitBox.setStrokeWidth(2);
         hitBox.setMouseTransparent(false);
+
+        setCoinsPerEntry(behaviour.getCoinsPerEntry());
 
 
 
