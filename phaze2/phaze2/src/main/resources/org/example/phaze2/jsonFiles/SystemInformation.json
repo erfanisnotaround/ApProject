@@ -78,12 +78,12 @@
     "pockets": [
       {
         "pocketName": "manig",
-        "type": " SECRET_MESSENGER",
+        "type": " BIG_1",
         "delay": 1.5
       },
       {
         "pocketName": "pasta",
-        "type": " SECRET_MESSENGER",
+        "type": " BIG_2",
         "delay": 1.5
       }
     ]

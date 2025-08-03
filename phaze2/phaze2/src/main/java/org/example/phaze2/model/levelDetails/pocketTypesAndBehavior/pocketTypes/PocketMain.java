@@ -43,7 +43,7 @@ public class PocketMain extends Pocket  implements InitData {
 
     @Override
     protected void Initialize() {
-        setCoinsPerEntry(behaviour.getCoinsPerEntry());
+
         setMaxHp(behaviour.getMaxHp()); setHP(behaviour.getHP());
         setMovementManager(behaviour.getMovementManager());
 
@@ -75,7 +75,8 @@ public class PocketMain extends Pocket  implements InitData {
         hitBox.setStrokeWidth(2);
         hitBox.setMouseTransparent(false);
 
-        setCoinsPerEntry(behaviour.getCoinsPerEntry());
+        coinsPerEntry = pocket.getCoinsPerEntry();
+
 
 
 
@@ -138,6 +139,8 @@ public class PocketMain extends Pocket  implements InitData {
     public HitBox getHitBox() {
         return hitBox;
     }
-
+    public int getCoinsPerEntry() {
+        return coinsPerEntry;
+    }
 
 }

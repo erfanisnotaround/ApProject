@@ -1,5 +1,7 @@
 package org.example.phaze2.controllers.sceneControllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,6 +9,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
@@ -158,6 +161,13 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         engine = new CollisionMaker(pockets);
         engine.start();
         hudListener.Start();
+//
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1) , event -> {
+//            System.out.println(pockets.getFirst().getCoinsPerEntry()+ " " + pockets.getFirst().getPocketId() + " another " +
+//                    pockets.getLast().getCoinsPerEntry() + " " + pockets.getLast().getPocketId());
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
 
 //        saveAndLoadController.loadTheSave();
 
@@ -168,7 +178,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     }
     void handleActionPressed(SceneActions action) {
-        System.out.println("Pressed " + action.getKeyCode());
+
          main.requestFocus();
         switch (action) {
             case StartTempo -> movementMaker.StartSending( gameModel.getBasicTempoMultiplier() ,gameModel.getAvailableNeededTime());
@@ -186,7 +196,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         }
     }
     void handleActionReleased(SceneActions action) {
-        System.out.println("Released " + action.getKeyCode());
+
         switch (action) {
             case StartTempo -> System.out.println("");
             case OpenShop -> System.out.println("Opening shop...");

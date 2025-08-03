@@ -154,14 +154,19 @@ public class WholeMovement {
             connection.getCurve().setHP(connection.getCurve().getHP() - 1);
         }
 
+
         ChangeListener<Boolean> l = new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs,
                                 Boolean oldVal, Boolean newVal) {
 
                 if (!newVal) {
-                    coinsManager.Increment(pocket.getCoinsPerEntry());
+
                     obs.removeListener(this);
+
+                    int coins = pocket.getCoinsPerEntry();
+                    coinsManager.Increment(coins);
+
                     SendingPockets(connection.getToPort().getPortInfo().getSystem(), pocket , -1);
                 }
             }

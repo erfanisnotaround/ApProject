@@ -27,6 +27,8 @@ public class SecretMessenger extends Pocket implements Movable {
         behavior.setPathMover(pathMover);
         preferredType = behavior.getPreferredType();
         HP = MaxHp = behavior.getMaxHp();
+        setCoinsPerEntry(2 * behavior.getCoinsPerEntry());
+        coinsPerEntry = 2 * behavior.getCoinsPerEntry();
     }
 
     @Override
@@ -46,7 +48,7 @@ public class SecretMessenger extends Pocket implements Movable {
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setScaleX(0.15);
         setScaleY(0.15);
-        setCoinsPerEntry(5);
+
         pathMover = new PathMover(0);
         chooseTheMoveBehavior();
     }

@@ -26,7 +26,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     protected double distanceFromTheLine = 0;
     protected double HP;
     protected double MaxHp;
-    protected static int coinsPerEntry;
+    protected int coinsPerEntry;
     protected BooleanProperty IsItCollided = new SimpleBooleanProperty(false);
     protected BooleanProperty IsItMoved = new SimpleBooleanProperty(false);
     protected PocketTypes type;
@@ -54,7 +54,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     }
 
     public void setCoinsPerEntry(int coinsPerEntry) {
-        Pocket.coinsPerEntry = coinsPerEntry;
+        this.coinsPerEntry = coinsPerEntry;
     }
 
     @Override

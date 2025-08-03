@@ -28,7 +28,7 @@ public class BigPocket2 extends Pocket implements Movable {
     @Override
     protected void Initialize() {
 
-        setCoinsPerEntry(10);
+
         imagePath = "/org/example/phaze2/images/Big2.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setScaleX(0.2);
@@ -39,6 +39,8 @@ public class BigPocket2 extends Pocket implements Movable {
         acceleration = 0;
         preferredType = PortTypes.ALL;
         angleNeeded = 0;
+        setCoinsPerEntry(10);
+        coinsPerEntry = 10;
 
     }
 

@@ -9,7 +9,7 @@ public class CurrentLevelConstants {
     private final double lightBarWidth = 30;
     private final double lightBarHeight = 10;
     private final double LightRadius = 5;
-    private final double HeightOfSubSystems = 40;
+    private final double HeightOfSubSystems = 60;
     private final double distanceOFRightForSubSystems = 10;
     private final double gapOFBottom = 5;
     private final double NameLabelX = 60;

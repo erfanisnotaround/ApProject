@@ -209,8 +209,14 @@ public class ConnectionHandler {
         Point2D TempEnder = getCenterNode(connection.getToPort().getShape());
 
         connection.getCurve().build(TempStarter, TempEnder);
-        registry.addConnection(connection);
-        wireRenderer.renderCurve(connection.getCurve());
+        double length = connection.getCurve().ApproximateLength();
+        if (wireManager.canUse(length)) {
+            registry.addConnection(connection);
+            wireRenderer.renderCurve(connection.getCurve());
+            wireManager.addWire(length);
+        }
+
+
     }
 
 

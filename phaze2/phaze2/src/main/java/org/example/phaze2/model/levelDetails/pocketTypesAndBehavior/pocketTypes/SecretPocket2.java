@@ -36,7 +36,7 @@ public class SecretPocket2 extends Pocket implements Movable {
 
     @Override
     protected void Initialize() {
-        setCoinsPerEntry(4);
+
         imagePath = "/org/example/phaze2/images/Mecha_Core.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setScaleX(0.2);
@@ -47,6 +47,8 @@ public class SecretPocket2 extends Pocket implements Movable {
         preferredType = PortTypes.ALL;
 
         angleNeeded = 0;
+        setCoinsPerEntry(4);
+        coinsPerEntry = 4;
 
     }
 

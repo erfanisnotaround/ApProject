@@ -29,7 +29,7 @@ public class Messenger3 extends Pocket implements Movable {
 
     @Override
     protected void Initialize() {
-        setCoinsPerEntry(1);
+
         imagePath = "/org/example/phaze2/images/infinity.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         setRotate(-90);
@@ -41,6 +41,8 @@ public class Messenger3 extends Pocket implements Movable {
         acceleration = 5;
         preferredType = PortTypes.INFINITY;
         angleNeeded = 90;
+        setCoinsPerEntry(1);
+        coinsPerEntry = 1;
     }
 
     @Override

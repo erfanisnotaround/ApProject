@@ -188,7 +188,6 @@ public class PathMover extends AnimationTimer {
     }
 
     public void AddingImpactVector(double x, double y , double STEPS) {
-        System.out.println("AddingImpactVector " + x + " " + y );
         this.STEPS = STEPS;
         latestLineDistance = latestLineDistance.add(x, y);
         lineDistancePerMoveX = x * multiplier/STEPS;
