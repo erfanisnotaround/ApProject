@@ -27,5 +27,7 @@ module org.example.phaze2 {
     exports org.example.phaze2.model.levelSavesAndTheirPojo to com.fasterxml.jackson.databind;
     exports org.example.phaze2.model.portConnectingDetails to com.fasterxml.jackson.databind;
     exports org.example.phaze2.model.hudModels to com.fasterxml.jackson.databind;
+    exports org.example.phaze2.model.abilities.mechanics.followers to com.fasterxml.jackson.databind;
+    opens org.example.phaze2.model.abilities.mechanics.followers to com.fasterxml.jackson.databind;
 
 }

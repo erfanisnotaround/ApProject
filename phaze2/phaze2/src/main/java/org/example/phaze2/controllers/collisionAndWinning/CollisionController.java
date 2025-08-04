@@ -53,8 +53,9 @@ public class CollisionController {
                     pair.getFirstPocket().setIsItCollided(true);
                     pair.getSecondPocket().setIsItCollided(true);
                 });
+                System.out.println(" Collision detected ");
+
             }
-            System.out.println(" Collision detected ");
         }
         for (CollisionPair pair : previousCollisionPairs) {
 //            System.out.println(" Collision detected ");

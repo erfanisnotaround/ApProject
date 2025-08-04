@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
+import org.example.phaze2.controllers.moverController.moveRelated.PathData;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
@@ -26,6 +27,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
     private final double strokeWidth = 4;
     private Connection connection;
     private BooleanProperty isItUsed = new SimpleBooleanProperty(false);
+    private PathData pathData;
 
 
     private double StrokeWidth = 4;
@@ -77,7 +79,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         poly.clear();
         if (knots.size() < 2) return;
 
-        final double STEP = 0.05;   // smaller → smoother, larger → faster
+        final double STEP = 0.05;
         for (int i = 0; i < knots.size() - 1; i++) {
             Point2D p0 = (i == 0)               ? knots.get(i)     : knots.get(i - 1);
             Point2D p1 =                         knots.get(i);
@@ -91,6 +93,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         }
         poly.addAll(end.getX(), end.getY());
         setStrokeWidth(strokeWidth);
+        pathData = PathData.fromPolyline(this);
     }
     private static Point2D catmullRom(Point2D p0, Point2D p1,
                                       Point2D p2, Point2D p3, double t) {

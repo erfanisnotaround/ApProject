@@ -2,6 +2,7 @@ package org.example.phaze2.model.levelDetails.necessary;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import org.example.phaze2.controllers.moverController.moveRelated.PathPrioritizing;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
@@ -35,6 +36,7 @@ public class SystemView extends Pane implements SystemBehavior  {
     protected BooleanProperty IsItDown = new SimpleBooleanProperty(false);
     protected PathPrioritizing pathPrioritizing = new PathPrioritizing();
     protected Random random = new Random();
+    private Point2D lastGoodCord;
 
     public SystemView(SystemTypes systemType , int numberOfSubSystems) {
         this.numberOfSubSystems = numberOfSubSystems;
@@ -206,4 +208,11 @@ public class SystemView extends Pane implements SystemBehavior  {
         inSystem = 0;
     }
 
+    public Point2D getLastGoodCord() {
+        return lastGoodCord;
+    }
+
+    public void setLastGoodCord(Point2D lastGoodCord) {
+        this.lastGoodCord = lastGoodCord;
+    }
 }

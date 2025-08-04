@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import org.example.phaze2.controllers.abilityManagers.AbilityManager;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
@@ -45,6 +46,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private final NumberOfPocketLossManager numberOfPocketLossManager = new NumberOfPocketLossManager();
     private HudListener hudListener;
     WholeMovement movementMaker = new WholeMovement(coinsManager);
+
+    private AbilityManager abilityManager = new AbilityManager(movementMaker , coinsManager);
 
 
 
@@ -161,19 +164,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         engine = new CollisionMaker(pockets);
         engine.start();
         hudListener.Start();
-//
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1) , event -> {
-//            System.out.println(pockets.getFirst().getCoinsPerEntry()+ " " + pockets.getFirst().getPocketId() + " another " +
-//                    pockets.getLast().getCoinsPerEntry() + " " + pockets.getLast().getPocketId());
-//        }));
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.play();
 
-//        saveAndLoadController.loadTheSave();
-
-//        pauseTransition.play();
-
-//        saveAndLoadController.startAutoSave();
 
 
     }

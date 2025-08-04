@@ -9,12 +9,14 @@ import javafx.scene.paint.Color;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.connectionsAndMaking.WireRendererManager;
 import org.example.phaze2.model.WireManager;
+import org.example.phaze2.model.constants.AbilityBooleansConstants;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PortTypes;
-import org.example.phaze2.model.levelDetails.necessary.Anchor;
-import org.example.phaze2.model.levelDetails.necessary.Curve;
-import org.example.phaze2.model.levelDetails.necessary.PortInfo;
-import org.example.phaze2.model.levelDetails.necessary.SystemView;
-import org.example.phaze2.model.levelDetails.necessary.Port;
+import org.example.phaze2.model.levelDetails.necessary.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 public class ConnectionHandler {
     private final Pane Container;
@@ -32,7 +34,10 @@ public class ConnectionHandler {
     private Curve    selectedCurve;
     Point2D EndPoint;
     Point2D StartPoint;
+    Point2D systemCord;
 
+    Map<Port , Connection> exitConnections;
+    ArrayList<Curve> curves = new ArrayList<>();
     private static final int STEPS = 40;
 
 
@@ -46,6 +51,8 @@ public class ConnectionHandler {
         this.wireRenderer = wireRenderer;
         this.connectionUI = connectionUI;
         this.Container = container;
+
+        exitConnections = Constants.getInstance().getExitConnections();
     }
     public void onPress(MouseEvent mouseEvent) {
         Port ExitNode = (Port) mouseEvent.getSource();
@@ -133,12 +140,12 @@ public class ConnectionHandler {
 
         curve.build(curve.getFirstPoint() , curve.getLastPoint());
 
-        curve.setFill(wireManager.canUse(curve.ApproximateLength()) ? Color.GREEN : Color.RED);
+        curve.setFill(wireManager.canUse(curve.ApproximateLength() - curve.getLatestAcceptableLength()) ? Color.GREEN : Color.RED);
 
 
     }
     public void onAnchorReleased(Anchor anchor , Curve curve) {
-        if (!wireManager.canUse(curve.ApproximateLength())) {
+        if (!wireManager.canUse(curve.ApproximateLength() - curve.getLatestAcceptableLength())) {
             anchor.setCenter(anchor.getLatestCord());
             curve.build(curve.getFirstPoint() , curve.getLastPoint());
 
@@ -215,9 +222,110 @@ public class ConnectionHandler {
             wireRenderer.renderCurve(connection.getCurve());
             wireManager.addWire(length);
         }
+    }
 
+    public void ClickSystem(SystemView system) {
+        if (!AbilityBooleansConstants.getInstance().isMovingSystemsAvailable()) return;
+
+        system.setLastGoodCord(new Point2D(system.getLayoutX(), system.getLayoutY()));
 
     }
+
+    public void DragSystem(SystemView system , MouseEvent dragEvent) {
+
+        if (!AbilityBooleansConstants.getInstance().isMovingSystemsAvailable()) return;
+
+
+        systemCord = wireRenderer.getLayerManager().getLayer().sceneToLocal(dragEvent.getSceneX() , dragEvent.getSceneY());
+
+        system.setLayoutX(systemCord.getX());
+        system.setLayoutY(systemCord.getY());
+
+        processCurvesOfSystem(system);
+
+    }
+    private Point2D processCurvesOfSystem(SystemView system) {
+        double length = 0;
+        double lastGoodLength = 0;
+        curves.clear();
+
+        for (SubSystemView subSystem : system.getSubSystems()) {
+            if (subSystem.DoesItHavaExitGate()){
+                Port exitGate = subSystem.getExitPort();
+                Connection exitConnection = exitConnections.get(exitGate);
+
+                Point2D lenghts = processConnection(exitConnection);
+                double exitLength = lenghts.getX();
+                double exitLastGoodLength = lenghts.getY();
+                length += exitLength;
+                lastGoodLength += exitLastGoodLength;
+
+                if (exitLength != 0) curves.add(exitConnection.getCurve());
+            }
+            if (subSystem.DoesItHaveEnterGate()){
+                Port EnterGate = subSystem.getEnterPort();
+                Connection exitConnection = exitConnections.get(EnterGate);
+
+                Point2D lenghts = processConnection(exitConnection);
+                double exitLength = lenghts.getX();
+                double exitLastGoodLength = lenghts.getY();
+                length += exitLength;
+                lastGoodLength += exitLastGoodLength;
+
+                if (exitLength != 0) curves.add(exitConnection.getCurve());
+
+            }
+        }
+        double tt = length - lastGoodLength;
+        if (wireManager.canUse(tt)) {
+            curves.forEach(curve -> {curve.setFill(Color.GREEN);});
+            return new Point2D(length, lastGoodLength);
+        }
+        curves.forEach(curve -> {curve.setFill(Color.RED);});
+        return null;
+    }
+    private Point2D processConnection(Connection exitConnection) {
+        if (exitConnection != null) {
+            Port fromPort = exitConnection.getFromPort();
+            Port toPort = exitConnection.getToPort();
+            Curve curve = exitConnection.getCurve();
+            curve.build(getCenterNode(fromPort.getShape()) , getCenterNode(toPort.getShape()));
+            return new Point2D(curve.ApproximateLength() , curve.getLatestAcceptableLength());
+        }
+        return new Point2D(0, 0);
+    }
+    public void ReleaseSystem(SystemView system) {
+
+        if (!AbilityBooleansConstants.getInstance().isMovingSystemsAvailable()) return;
+
+        Point2D lengthInfo = processCurvesOfSystem(system);
+        if (lengthInfo == null) {
+
+            system.setLayoutX(system.getLastGoodCord().getX());
+            system.setLayoutY(system.getLastGoodCord().getY());
+
+            processCurvesOfSystem(system);
+        }
+        else {
+
+            double newLen  = lengthInfo.getX();
+            double oldLen  = lengthInfo.getY();
+
+            wireManager.removeWire(oldLen);
+            wireManager.addWire(newLen);
+            curves.forEach(c -> c.setLatestAcceptableLength(c.ApproximateLength()));
+
+
+        }
+
+
+
+        system.setLastGoodCord(new Point2D(system.getLayoutX(), system.getLayoutY()));
+
+    }
+
+
+
 
 
 

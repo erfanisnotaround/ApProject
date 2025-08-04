@@ -8,6 +8,9 @@ public class CoinsManager {
     public void Increment(int EnteredCoins) {
         this.numberOfCoins += EnteredCoins;
     }
+    public void Decrement(int decrement) {
+        this.numberOfCoins -= decrement;
+    }
     public int getNumberOfCoins() {
         return  this.numberOfCoins;
     }

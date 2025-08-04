@@ -8,10 +8,9 @@ public interface AbilityExecutable {
 
     boolean isReady(GameContext context);
 
-    boolean execute(GameContext context);
+    void execute(GameContext context);
 
     long cooldown();
 
     long lastUsed();
-    void Execute();
 }

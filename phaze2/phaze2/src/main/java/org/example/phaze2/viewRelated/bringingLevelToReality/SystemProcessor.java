@@ -1,5 +1,6 @@
 package org.example.phaze2.viewRelated.bringingLevelToReality;
 
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -37,6 +38,7 @@ public class SystemProcessor implements Runnable{
     }
     public SystemView processSystem(System system) {
         SystemView systemView = SystemBehaviorFactory.create(system);
+        connectionUI.RegisterSystem(systemView);
         MakeOnlySystem(systemView , system);
 
         return systemView;
@@ -51,6 +53,8 @@ public class SystemProcessor implements Runnable{
 
         systemView.setLayoutX(systemInfo.getX());
         systemView.setLayoutY(systemInfo.getY());
+
+        systemView.setLastGoodCord(new Point2D(systemInfo.getX(), systemInfo.getY()));
         addNameLabel(systemView , systemInfo.getSystemName());
         addLight(systemView);
 

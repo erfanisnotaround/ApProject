@@ -16,7 +16,7 @@ public final class GameContext {
     public final List<SystemView> systems;
     public final CoinsManager coins;
 
-    private GameContext(WholeMovement m,
+    public GameContext(WholeMovement m,
                         List<PocketMain> p,
                         List<SystemView> s,
                         CoinsManager c) {

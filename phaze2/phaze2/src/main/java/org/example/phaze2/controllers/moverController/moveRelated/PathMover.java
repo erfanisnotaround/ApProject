@@ -18,6 +18,7 @@ public class PathMover extends AnimationTimer {
     private double s = 0;
     private double v;
     private double a;
+    private double commitedAcceleration = 0;
     private long lastNs = -1;
 
     private Point2D latestLineDistance = new Point2D(0, 0);
@@ -54,6 +55,9 @@ public class PathMover extends AnimationTimer {
         this.path = PathData.fromPolyline(pl);
         this.v = initialSpeed * multiplier;
         this.a = acceleration * multiplier;
+
+        this.commitedAcceleration = acceleration * multiplier;
+
         this.rotate = rotateAlongTangent;
         this.multiplier = multiplier;
 
@@ -78,7 +82,7 @@ public class PathMover extends AnimationTimer {
         boolean reachStart = v <= 0 && s <=0;
 
 
-        if (currentLineDistance.getX() < latestLineDistance.getX()) {
+        if (currentLineDistance.getX() !=  latestLineDistance.getX()) {
             currentLineDistance = currentLineDistance.add(lineDistancePerMoveX, lineDistancePerMoveY);
         }
 
@@ -193,6 +197,7 @@ public class PathMover extends AnimationTimer {
         lineDistancePerMoveX = x * multiplier/STEPS;
         lineDistancePerMoveY = y * multiplier/STEPS;
     }
+
     public void AddWholeMoveVector(double x, double y ) {
         lineDistancePerMoveXForWhole = x * multiplier;
         lineDistancePerMoveYForWhole = y * multiplier;
@@ -286,7 +291,14 @@ public class PathMover extends AnimationTimer {
         this.lineDistancePerMoveXForWhole = lineDistancePerMoveXForWhole;
         this.lineDistancePerMoveYForWhole = lineDistancePerMoveYForWhole;
     }
+    public void returnToCommitedAcceleration() {
+        this.a = commitedAcceleration;
+    }
     public void setCurve(Curve curve) {
         this.curve = curve;
     }
+    public double getCommitedAcceleration(){
+        return commitedAcceleration;
+    }
+
 }

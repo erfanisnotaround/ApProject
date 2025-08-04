@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.example.phaze2.model.WireManager;
+import org.example.phaze2.model.constants.AbilityBooleansConstants;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Anchor;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -36,6 +37,9 @@ public class ConnectionUI {
         connectionHandler.RegisterEnter(gate, system, subIndex, type);
     }
     public void RegisterCurve(Curve curve){
+
+
+
         curve.setOnMouseClicked(evt -> {
 
             if (evt.getClickCount() == 2) {
@@ -79,6 +83,11 @@ public class ConnectionUI {
     }
     public void RegisterConnection(Connection connection){
         connectionHandler.RegisterACurve(connection);
+    }
+    public void RegisterSystem(SystemView system){
+        system.setOnMouseClicked(mouseEvent -> {connectionHandler.ClickSystem(system);});
+        system.setOnMouseDragged(mouseEvent -> {connectionHandler.DragSystem(system , mouseEvent);});
+        system.setOnMouseReleased(mouseEvent -> {connectionHandler.ReleaseSystem(system);});
     }
     public void resetSelection(){
         connectionHandler.resetSelection();
