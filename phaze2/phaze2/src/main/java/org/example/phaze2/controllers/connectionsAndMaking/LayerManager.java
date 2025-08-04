@@ -4,11 +4,13 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 
-public class CurveLayerManager  {
+public class LayerManager {
     private final Pane layer;
+    private final Pane paneOfActions;
 
-    public CurveLayerManager(Pane layer) {
+    public LayerManager(Pane layer , Pane paneOfActions) {
         this.layer = layer;
+        this.paneOfActions = paneOfActions;
     }
 
     public void addCurve(Node curve) {

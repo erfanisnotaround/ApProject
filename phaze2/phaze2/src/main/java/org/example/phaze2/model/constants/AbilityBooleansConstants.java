@@ -4,6 +4,7 @@ public class AbilityBooleansConstants {
     private static AbilityBooleansConstants instance = new AbilityBooleansConstants();
 
     private boolean movingSystemsAvailable = true;
+    private boolean weAreAddingAbility = true;
 
 
     private AbilityBooleansConstants() {}
@@ -18,5 +19,13 @@ public class AbilityBooleansConstants {
 
     public void setMovingSystemsAvailable(boolean movingSystemsAvailable) {
         this.movingSystemsAvailable = movingSystemsAvailable;
+    }
+
+    public boolean isWeAreAddingAbility() {
+        return weAreAddingAbility;
+    }
+
+    public void setWeAreAddingAbility(boolean weAreAddingAbility) {
+        this.weAreAddingAbility = weAreAddingAbility;
     }
 }

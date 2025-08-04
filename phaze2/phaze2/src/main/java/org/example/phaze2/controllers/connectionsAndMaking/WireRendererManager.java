@@ -5,11 +5,11 @@ import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.portConnectingDetails.WireRenderer;
 
 public class WireRendererManager implements WireRenderer {
-    private final CurveLayerManager layerManager;
-    public WireRendererManager(CurveLayerManager layerManager) {
+    private final LayerManager layerManager;
+    public WireRendererManager(LayerManager layerManager) {
         this.layerManager = layerManager;
     }
-    public CurveLayerManager getLayerManager() {
+    public LayerManager getLayerManager() {
         return layerManager;
     }
     @Override

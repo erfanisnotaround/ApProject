@@ -20,7 +20,7 @@ public class ZeroAccelerationMaker extends Follower {
     }
 
     @Override
-    void execute(PocketMain pocket) {
+    public void execute(PocketMain pocket) {
 
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(eachTimeCheckMilliSeconds), event -> {

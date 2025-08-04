@@ -12,7 +12,7 @@ public abstract class Follower extends Circle {
         this.FollowerType = FollowerType;
     }
 
-    abstract void execute(PocketMain pocket);
+    public abstract void execute(PocketMain pocket);
 
 
     public FollowerType getFollowerType() {

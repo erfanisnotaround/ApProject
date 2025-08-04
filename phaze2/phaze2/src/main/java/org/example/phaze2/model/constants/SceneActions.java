@@ -8,7 +8,8 @@ public enum SceneActions {
     CloseShop         (KeyCode.C),
     MoveSliderToRight (KeyCode.RIGHT),
     MoveSliderToLeft  (KeyCode.LEFT),
-    Open_Close_HUD(KeyCode.TAB);
+    Open_Close_HUD(KeyCode.TAB),
+    Release_Follower(KeyCode.R);
 
     private final KeyCode defaultKey;
     private KeyCode actionKey;

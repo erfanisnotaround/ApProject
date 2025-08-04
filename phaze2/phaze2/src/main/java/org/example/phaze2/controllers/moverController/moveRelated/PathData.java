@@ -25,6 +25,7 @@ public record PathData(List<Point2D> pts, double[] cumLen, double total) {
     }
 
     public Point2D pointAt(double s) {
+
         if (s <= 0) return pts.get(0);
         if (s >= total) return pts.get(pts.size() - 1);
 
@@ -62,6 +63,28 @@ public record PathData(List<Point2D> pts, double[] cumLen, double total) {
         }
 
         return closestS;
+    }
+    public double distanceTo(Point2D q) {
+        double best = Double.MAX_VALUE;
+
+        for (int i = 1; i < pts.size(); i++) {
+            Point2D a = pts.get(i - 1);          
+            Point2D b = pts.get(i);
+
+            Point2D ab = b.subtract(a);
+            Point2D aq = q.subtract(a);
+
+            double ab2 = ab.dotProduct(ab);
+            if (ab2 == 0) continue;
+
+            double t = Math.max(0, Math.min(1, aq.dotProduct(ab) / ab2));
+
+            Point2D p = new Point2D(a.getX() + t * ab.getX(),
+                    a.getY() + t * ab.getY());
+
+            best = Math.min(best, p.distance(q));
+        }
+        return best;
     }
     private static double angle(Point2D a, Point2D b) { return Math.atan2(b.getY() - a.getY(), b.getX() - a.getX()); }
 }

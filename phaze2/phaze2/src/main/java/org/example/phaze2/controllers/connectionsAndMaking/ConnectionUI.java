@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.example.phaze2.model.WireManager;
-import org.example.phaze2.model.constants.AbilityBooleansConstants;
+import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Anchor;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -17,14 +17,15 @@ import org.example.phaze2.model.portConnectingDetails.ConnectionHandler;
 public class ConnectionUI {
     Pane Container;
     WireManager wireManager;
-    CurveLayerManager curveLayerManager;
+    LayerManager LayerManager;
     ConnectionHandler connectionHandler;
 
-    public ConnectionUI(Pane Container, WireManager wireManager) {
+    public ConnectionUI(Pane Container, WireManager wireManager , Pane paneOfActions) {
         this.Container = Container;
         this.wireManager = wireManager;
-        curveLayerManager = new CurveLayerManager(Container);
-        connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(curveLayerManager) , this , Container);
+        LayerManager = new LayerManager(Container , paneOfActions);
+        Constants.getInstance().setLayerManager(LayerManager);
+        connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(LayerManager) , this , Container);
     }
     public void registerExitGate(Port gate, SystemView system, int subIndex, PortTypes type) {
         connectionHandler.RegisterExitGate(gate, system, subIndex, type);
@@ -66,7 +67,7 @@ public class ConnectionUI {
     public void RegisterAnchor(Anchor anchor , Curve curve){
         anchor.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getClickCount() == 2) {
-                curveLayerManager.removeNode(anchor);
+                LayerManager.removeNode(anchor);
                 curve.RemoveAnchor(anchor);
                 curve.build(curve.getFirstPoint() , curve.getLastPoint());
             }

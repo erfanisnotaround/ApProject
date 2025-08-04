@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.abilityManagers.AbilityManager;
+import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
@@ -42,6 +43,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     SaveAndLoadController saveAndLoadController;
     private MakeHUD makeHUD;
 
+    private final FollowerAdder followerAdder = new FollowerAdder();
     private final CoinsManager coinsManager = new CoinsManager();
     private final NumberOfPocketLossManager numberOfPocketLossManager = new NumberOfPocketLossManager();
     private HudListener hudListener;
@@ -100,7 +102,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         Constants.getInstance().container = ContainerPane;
         Constants.getInstance().getPockets().clear();
-        connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager());
+        connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main);
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
         pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
@@ -155,6 +157,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
                 }
             }
         });
+        main.setOnMouseMoved(followerAdder::FollowTheMouse);
+
 
 
 
@@ -181,9 +185,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
                 HUD.setVisible(true);
 
-
-
             }
+            case Release_Follower -> followerAdder.ReleaseFollower();
         }
     }
     void handleActionReleased(SceneActions action) {

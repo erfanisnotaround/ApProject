@@ -7,6 +7,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import org.example.phaze2.controllers.moverController.moveRelated.PathData;
+import org.example.phaze2.model.abilities.mechanics.followers.Follower;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 import org.example.phaze2.model.portConnectingDetails.CurveBuilder;
@@ -22,6 +23,8 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
     private int HP = FullHP;
     private double latestAcceptableLength;
     private List<Anchor> middlePoints = new ArrayList<>();
+    private List<Follower> followers = new ArrayList<>();
+
     private Point2D firstPoint;
     private Point2D lastPoint;
     private final double strokeWidth = 4;
@@ -94,6 +97,15 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         poly.addAll(end.getX(), end.getY());
         setStrokeWidth(strokeWidth);
         pathData = PathData.fromPolyline(this);
+        ChangePlaceOfFollowers();
+    }
+    private void ChangePlaceOfFollowers(){
+        for (Follower follower : followers) {
+            double ratio = follower.getRatio();
+            Point2D pointAtS = pathData.pointAt(ratio);
+            follower.setCenterX(pointAtS.getX());
+            follower.setCenterY(pointAtS.getY());
+        }
     }
     private static Point2D catmullRom(Point2D p0, Point2D p1,
                                       Point2D p2, Point2D p3, double t) {
@@ -173,6 +185,15 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
 
     public void setPocketMovingOnIt(PocketMain pocketMovingOnIt) {
         this.pocketMovingOnIt = pocketMovingOnIt;
+    }
+    public PathData getPathData() {
+        return pathData;
+    }
+    public void AddFollower(Follower follower) {
+        followers.add(follower);
+    }
+    public void RemoveFollower(Follower follower) {
+        followers.remove(follower);
     }
 
 }

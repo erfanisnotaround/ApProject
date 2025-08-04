@@ -13,7 +13,7 @@ public class ZeroLIneDistanceMaker extends Follower{
     }
 
     @Override
-    void execute(PocketMain pocket) {
+    public void execute(PocketMain pocket) {
         Point2D currentLineDistance = pocket.getPathMover().getCurrentLineDistance();
         pocket.getPathMover().setLatestLineDistance(new Point2D(0 , 0));
         pocket.distract(-currentLineDistance.getX() , -currentLineDistance.getY());
