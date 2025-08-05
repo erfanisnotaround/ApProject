@@ -21,10 +21,10 @@ public class Messenger1 extends Pocket implements Movable {
 
     @Override
     protected void Initialize() {
-        imagePath = "/org/example/phaze2/images/horns.png";
+        imagePath = "/org/example/phaze2/images/Arcane_Seal.png";
         setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
-        setScaleX(0.05);
-        setScaleY(0.05);
+        setScaleX(0.15);
+        setScaleY(0.15);
         speed = 200;
         acceleration = 0;
         HP = MaxHp = 2;

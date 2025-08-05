@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("BLUE PRINT HELL");
 //        primaryStage.setMaximized(true);
-//        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         SceneManager sceneManager = new SceneManager(primaryStage);
         sceneManager.switchScreen(PositionStatus.MENU);
 

@@ -109,7 +109,7 @@ public class PocketMain extends Pocket  implements InitData {
     }
 
     public void distract(double x , double y) {
-        getPathMover().AddingImpactVector(x, y , DistractionSteps);
+        getPathMover().AddingImpactVector(x, y);
 
 
     }

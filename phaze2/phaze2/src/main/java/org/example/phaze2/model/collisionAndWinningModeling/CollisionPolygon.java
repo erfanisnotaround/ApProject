@@ -19,10 +19,6 @@ public class CollisionPolygon {
         this.axes = calculateAxes();
     }
 
-    /**
-     * Projects this polygon onto a given axis.
-     * @return A double array containing [min, max].
-     */
     public double[] project(Point2D axis) {
         double min = Double.POSITIVE_INFINITY;
         double max = Double.NEGATIVE_INFINITY;

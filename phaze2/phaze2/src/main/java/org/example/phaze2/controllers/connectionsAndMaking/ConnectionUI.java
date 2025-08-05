@@ -24,7 +24,6 @@ public class ConnectionUI {
         this.Container = Container;
         this.wireManager = wireManager;
         LayerManager = new LayerManager(Container , paneOfActions);
-        Constants.getInstance().setLayerManager(LayerManager);
         connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(LayerManager) , this , Container);
     }
     public void registerExitGate(Port gate, SystemView system, int subIndex, PortTypes type) {

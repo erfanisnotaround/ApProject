@@ -3,6 +3,8 @@ package org.example.phaze2.controllers.abilityManagers.following;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import org.example.phaze2.controllers.moverController.moveRelated.PathData;
 import org.example.phaze2.model.abilities.mechanics.followers.Follower;
 import org.example.phaze2.model.abilities.mechanics.followers.FollowerFactory;
@@ -13,25 +15,46 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;
 
-public class FollowerAdder {
+public class FollowerAdder implements FollowerSpawner{
 
+    private final Pane ContainerPane;
     private Follower SelectedFollower = null;
     private FollowerAbilityController followerAbilityController = new FollowerAbilityController();
 
-    public void AddFollower(FollowerType followerType) {
+    public FollowerAdder(Pane ContainerPane) {
+        this.ContainerPane = ContainerPane;
+    }
+
+
+    @Override
+    public void spawn(FollowerType followerType) {
+
+
+        if (AbilityBooleansConstants.getInstance().isWeAreAddingAbility()) return;
 
         Follower follower = FollowerFactory.createFollower(followerType);
         SelectedFollower = follower;
 
-        AbilityBooleansConstants.getInstance().setWeAreAddingAbility(false);
+
+        follower.setFill(Color.WHITE);
+        follower.setRadius(5);
+        AbilityBooleansConstants.getInstance().setWeAreAddingAbility(true);
+        ContainerPane.getChildren().add(SelectedFollower);
+
+
+
+
 
     }
+
     public void FollowTheMouse(MouseEvent mouseEvent) {
         if (SelectedFollower != null) {
             SelectedFollower.setCenterX(mouseEvent.getX());
             SelectedFollower.setCenterY(mouseEvent.getY());
         }
+
     }
+    @Override
     public void ReleaseFollower() {
         if (SelectedFollower == null) return;
         List<Connection> connections = Constants.getInstance().getConnections();
@@ -39,6 +62,9 @@ public class FollowerAdder {
         Connection closestConnection = findClosestConnection(connections);
 
         followerAbilityController.AddFollower(SelectedFollower , closestConnection.getCurve());
+        SelectedFollower = null;
+        AbilityBooleansConstants.getInstance().setWeAreAddingAbility(false);
+
     }
     private Connection findClosestConnection(List<Connection> connections) {
         Point2D pointOfSelectedFollower = new Point2D(SelectedFollower.getCenterX(), SelectedFollower.getCenterY());

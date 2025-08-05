@@ -20,7 +20,7 @@ public class CollisionModel {
         return new Point2D(CenterX, CenterY);
 
     }
-    public boolean checkCollision(CollisionPolygon polyA , CollisionPolygon polyB) {
+    public static boolean checkCollision(CollisionPolygon polyA , CollisionPolygon polyB) {
         List<Point2D> axes = new ArrayList<>();
         axes.addAll(polyA.getAxes());
         axes.addAll(polyB.getAxes());
@@ -30,7 +30,7 @@ public class CollisionModel {
             double[] p2 = polyB.project(axis);
 
             if (p1[1] < p2[0] || p2[1] < p1[0]) {
-                return false; // Found a separating axis
+                return false;
             }
         }
         return true; // No gap found, they are colliding

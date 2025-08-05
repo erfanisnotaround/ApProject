@@ -31,7 +31,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
     private Connection connection;
     private BooleanProperty isItUsed = new SimpleBooleanProperty(false);
     private PathData pathData;
-
+    private double prevLength = 0.0;
 
     private double StrokeWidth = 4;
     public Curve() {
@@ -62,14 +62,15 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         this.lastPoint = lastPoint;
     }
 
+
     @Override
     public void run() {
 
     }
 
-    @Override
     public void build(Point2D start, Point2D end) {
 
+        /* ---------- 1. build the polyline exactly as you already do ---------- */
         firstPoint = start;
         lastPoint  = end;
 
@@ -79,6 +80,7 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         knots.add(end);
 
         ObservableList<Double> poly = getPoints();
+
         poly.clear();
         if (knots.size() < 2) return;
 
@@ -96,17 +98,30 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
         }
         poly.addAll(end.getX(), end.getY());
         setStrokeWidth(strokeWidth);
-        pathData = PathData.fromPolyline(this);
-        ChangePlaceOfFollowers();
+
+        PathData newData = PathData.fromPolyline(this);
+        double newLength = ApproximateLength();
+        double scale = (prevLength == 0) ? 1.0
+                : newLength / prevLength;
+
+        for (Follower f : followers) {
+            f.setRatio(f.getRatio() * scale);
+        }
+
+        pathData    = newData;
+        prevLength  = newLength;
+
+        repositionFollowers();
     }
-    private void ChangePlaceOfFollowers(){
-        for (Follower follower : followers) {
-            double ratio = follower.getRatio();
-            Point2D pointAtS = pathData.pointAt(ratio);
-            follower.setCenterX(pointAtS.getX());
-            follower.setCenterY(pointAtS.getY());
+
+    private void repositionFollowers() {
+        for (Follower f : followers) {
+            Point2D p = pathData.pointAt(f.getRatio());
+            f.setCenterX(p.getX());
+            f.setCenterY(p.getY());
         }
     }
+
     private static Point2D catmullRom(Point2D p0, Point2D p1,
                                       Point2D p2, Point2D p3, double t) {
         double t2 = t * t;

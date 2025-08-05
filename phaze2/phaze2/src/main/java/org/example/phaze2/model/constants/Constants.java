@@ -2,6 +2,7 @@ package org.example.phaze2.model.constants;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.connectionsAndMaking.LayerManager;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
@@ -35,7 +36,6 @@ public class Constants {
     private CoinsManager coinsManager;
     private NumberOfPocketLossManager numberOfPocketLossManager;
 
-    private LayerManager layerManager;
 
     private Constants() {}
     public static Constants getInstance() {
@@ -120,11 +120,6 @@ public class Constants {
         this.numberOfPocketLossManager = numberOfPocketLossManager;
     }
 
-    public LayerManager getLayerManager() {
-        return layerManager;
-    }
 
-    public void setLayerManager(LayerManager layerManager) {
-        this.layerManager = layerManager;
-    }
+
 }

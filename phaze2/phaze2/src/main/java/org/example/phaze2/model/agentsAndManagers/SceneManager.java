@@ -91,5 +91,12 @@ public class SceneManager {
         fadeOut.play();
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+    public Scene getScene() {
+        return scene;
+    }
+
 
 }

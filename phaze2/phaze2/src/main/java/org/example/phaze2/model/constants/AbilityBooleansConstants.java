@@ -4,7 +4,7 @@ public class AbilityBooleansConstants {
     private static AbilityBooleansConstants instance = new AbilityBooleansConstants();
 
     private boolean movingSystemsAvailable = true;
-    private boolean weAreAddingAbility = true;
+    private boolean weAreAddingAbility = false;
 
 
     private AbilityBooleansConstants() {}

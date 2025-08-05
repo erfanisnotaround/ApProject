@@ -16,6 +16,7 @@ import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
+import org.example.phaze2.controllers.shopController.ShopController;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.constants.SceneActions;
@@ -43,13 +44,15 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     SaveAndLoadController saveAndLoadController;
     private MakeHUD makeHUD;
 
-    private final FollowerAdder followerAdder = new FollowerAdder();
     private final CoinsManager coinsManager = new CoinsManager();
     private final NumberOfPocketLossManager numberOfPocketLossManager = new NumberOfPocketLossManager();
     private HudListener hudListener;
     WholeMovement movementMaker = new WholeMovement(coinsManager);
 
-    private AbilityManager abilityManager = new AbilityManager(movementMaker , coinsManager);
+    private FollowerAdder  followerAdder;
+    private AbilityManager abilityManager;
+
+    private ShopController ShopController;
 
 
 
@@ -78,6 +81,9 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     @Override
     public void MakeFirst() {
 
+        followerAdder = new FollowerAdder(ContainerPane);
+        abilityManager = new AbilityManager(movementMaker , coinsManager , followerAdder);
+        ShopController = new ShopController(sceneManager.getStage() , main , abilityManager);
 
 
 
@@ -100,7 +106,6 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         Constants.getInstance().getSystemViewMap().clear();
 
 
-        Constants.getInstance().container = ContainerPane;
         Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main);
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
@@ -134,7 +139,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         main.setFocusTraversable(true);
         main.requestFocus();
 
-        main.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        sceneManager.getScene().addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             KeyCode pressedKey = event.getCode();
 
             for (SceneActions action : SceneActions.values()) {
@@ -144,9 +149,10 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
                     break;
                 }
             }
+
         });
 
-        main.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        sceneManager.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             KeyCode ReleasedKey = event.getCode();
 
             for (SceneActions action : SceneActions.values()) {
@@ -157,7 +163,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
                 }
             }
         });
-        main.setOnMouseMoved(followerAdder::FollowTheMouse);
+        sceneManager.getScene().setOnMouseMoved(followerAdder::FollowTheMouse);
 
 
 
@@ -177,8 +183,12 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
          main.requestFocus();
         switch (action) {
             case StartTempo -> movementMaker.StartSending( gameModel.getBasicTempoMultiplier() ,gameModel.getAvailableNeededTime());
-            case OpenShop -> System.out.println("Opening shop...");
-            case CloseShop -> System.out.println("Closing shop...");
+            case OpenShop -> {
+                ShopController.OpenShop();
+            }
+            case CloseShop -> {
+                ShopController.CloseShop();
+            }
             case MoveSliderToRight -> moveTempo(1);
             case MoveSliderToLeft -> moveTempo(-1);
             case Open_Close_HUD -> {
@@ -193,9 +203,9 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         switch (action) {
             case StartTempo -> System.out.println("");
-            case OpenShop -> System.out.println("Opening shop...");
-            case CloseShop -> System.out.println("Closing shop...");
-            case MoveSliderToRight -> System.out.println("Moving slider");
+            case OpenShop -> System.out.println("");
+            case CloseShop -> System.out.println("");
+            case MoveSliderToRight -> System.out.println("");
             case MoveSliderToLeft -> System.out.println("");
             case Open_Close_HUD -> {
                 HUD.setVisible(false);

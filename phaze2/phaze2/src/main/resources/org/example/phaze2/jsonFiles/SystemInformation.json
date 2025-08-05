@@ -54,8 +54,8 @@
       {
         "systemType": "VPN",
         "systemName": "Backup",
-        "x": 1000.0,
-        "y": 200.0,
+        "x": 700.0,
+        "y": 400.0,
         "isItStartSystem": false,
         "numberOfSubSystems": 2,
         "isTheLightOn": true,
@@ -78,12 +78,22 @@
     "pockets": [
       {
         "pocketName": "manig",
-        "type": " BIG_1",
+        "type": " Messenger_1",
         "delay": 1.5
       },
       {
-        "pocketName": "pasta",
-        "type": " BIG_2",
+        "pocketName": "manig",
+        "type": " Messenger_1",
+        "delay": 1.5
+      },
+      {
+        "pocketName": "manig",
+        "type": " Messenger_1",
+        "delay": 1.5
+      },
+      {
+        "pocketName": "manig",
+        "type": " Messenger_1",
         "delay": 1.5
       }
     ]

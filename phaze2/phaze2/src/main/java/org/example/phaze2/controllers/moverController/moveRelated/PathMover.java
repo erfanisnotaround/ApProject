@@ -35,7 +35,7 @@ public class PathMover extends AnimationTimer {
 
     private double lineDistancePerMoveX = 0;
     private double lineDistancePerMoveY = 0;
-    private double STEPS = 50;
+    private double STEPS = 1;
     private double AngleNeeded;
     private boolean rotate;
     public PathMover(double angle) {
@@ -191,8 +191,8 @@ public class PathMover extends AnimationTimer {
         return curve;
     }
 
-    public void AddingImpactVector(double x, double y , double STEPS) {
-        this.STEPS = STEPS;
+    public void AddingImpactVector(double x, double y) {
+
         latestLineDistance = latestLineDistance.add(x, y);
         lineDistancePerMoveX = x * multiplier/STEPS;
         lineDistancePerMoveY = y * multiplier/STEPS;

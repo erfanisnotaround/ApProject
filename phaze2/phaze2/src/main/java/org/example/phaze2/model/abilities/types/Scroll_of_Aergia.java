@@ -1,9 +1,13 @@
 package org.example.phaze2.model.abilities.types;
 
+import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.model.abilities.AbilityTypes;
 import org.example.phaze2.model.abilities.mechanics.AbilityExecutable;
+import org.example.phaze2.model.abilities.mechanics.followers.Follower;
+import org.example.phaze2.model.abilities.mechanics.followers.FollowerType;
 import org.example.phaze2.model.abilities.modelingAbilities.GameContext;
 import org.example.phaze2.model.constants.AbilityBooleansConstants;
+import org.example.phaze2.model.constants.Constants;
 
 public class Scroll_of_Aergia implements AbilityExecutable {
 
@@ -12,6 +16,9 @@ public class Scroll_of_Aergia implements AbilityExecutable {
     private long lastUsed = 0;
     private final AbilityBooleansConstants abilityBooleansConstants = AbilityBooleansConstants.getInstance();
 
+
+    public Scroll_of_Aergia() {
+    }
 
     @Override
     public AbilityTypes AbilityType() {
@@ -26,6 +33,7 @@ public class Scroll_of_Aergia implements AbilityExecutable {
     @Override
     public void execute(GameContext context) {
         lastUsed = context.now();
+        context.getFollowerSpawner().spawn(FollowerType.Acceleration_zero_Maker);
     }
 
     @Override

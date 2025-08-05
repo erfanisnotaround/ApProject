@@ -1,5 +1,7 @@
 package org.example.phaze2.controllers.abilityManagers;
 
+import javafx.scene.layout.Pane;
+import org.example.phaze2.controllers.abilityManagers.following.FollowerSpawner;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.abilities.AbilityTypes;
 import org.example.phaze2.model.abilities.mechanics.AbilityExecutable;
@@ -20,10 +22,10 @@ public class AbilityManager {
 
     Map<AbilityTypes , AbilityExecutable> executableMap = new HashMap<>();
 
-    public AbilityManager(WholeMovement wholeMovement , CoinsManager coinsManager){
+    public AbilityManager(WholeMovement wholeMovement , CoinsManager coinsManager , FollowerSpawner followerSpawner) {
         this.wholeMovement = wholeMovement;
         this.coinManager = coinsManager;
-        this.gameContext = new GameContext(wholeMovement , Constants.getInstance().getPockets(), Constants.getInstance().getSystemViews(), coinsManager);
+        this.gameContext = new GameContext(wholeMovement , Constants.getInstance().getPockets(), Constants.getInstance().getSystemViews(), coinsManager , followerSpawner );
 
     }
     public void ExecuteAbility(AbilityTypes abilityType){
@@ -37,12 +39,15 @@ public class AbilityManager {
 
     }
     private void ExecuteAbility(AbilityExecutable executable){
-        if (executable.isReady(gameContext)) executable.execute(gameContext);
+        if (!executable.isReady(gameContext)) executable.execute(gameContext);
 
     }
     private void RegisterAbility(AbilityTypes abilityType){
         AbilityExecutable executable = AbilityFactory.createAbility(abilityType);
         executableMap.put(abilityType, executable );
+    }
+    public GameContext getGameContext() {
+        return gameContext;
     }
 
 
