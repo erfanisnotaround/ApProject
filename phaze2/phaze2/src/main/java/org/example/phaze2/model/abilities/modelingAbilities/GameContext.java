@@ -3,6 +3,8 @@ package org.example.phaze2.model.abilities.modelingAbilities;
 import org.example.phaze2.controllers.abilityManagers.following.FollowerSpawner;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
+import org.example.phaze2.model.hudModels.AbilityAliveManager;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -17,17 +19,23 @@ public final class GameContext {
     public final List<SystemView> systems;
     public final CoinsManager coins;
     private final FollowerSpawner spawner;
+    private final AbilityAliveManager aliveManager;
+    private final GameState gameState;
 
     public GameContext(WholeMovement m,
                         List<PocketMain> p,
                         List<SystemView> s,
                         CoinsManager c,
-                        FollowerSpawner spawner) {
+                        FollowerSpawner spawner,
+                       AbilityAliveManager aliveManager,
+                       GameState gameState) {
         this.movement = m;
         this.pockets  = p;
         this.systems  = s;
         this.coins    = c;
         this.spawner = spawner;
+        this.aliveManager = aliveManager;
+        this.gameState = gameState;
     }
 
     public FollowerSpawner getFollowerSpawner() {
@@ -37,5 +45,12 @@ public final class GameContext {
 
 
     public long now() { return System.currentTimeMillis(); }
+
+    public AbilityAliveManager getAliveManager() {
+        return aliveManager;
+    }
+    public GameState getGameState() {
+        return gameState;
+    }
 }
 

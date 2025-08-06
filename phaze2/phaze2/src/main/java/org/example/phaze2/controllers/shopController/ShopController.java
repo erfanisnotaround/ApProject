@@ -63,7 +63,7 @@ public class ShopController {
             }
         };
 
-        ownerScene.addEventHandler(KeyEvent.KEY_PRESSED,  hotKeys);
+        ownerScene.addEventHandler(KeyEvent.KEY_PRESSED ,  hotKeys);
 
     }
 

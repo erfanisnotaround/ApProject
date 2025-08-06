@@ -3,6 +3,7 @@ package org.example.phaze2.controllers.collisionAndWinning;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.List;
@@ -12,9 +13,12 @@ public class CollisionHandler {
     private final double basicMultiplier = 1;
     private final int UnitOfNoisePerImpact = 1;
     private final double theUnitOfMeasuring = waveRangeEffect * basicMultiplier;
+    private final GameState gameState;
     List<PocketMain> pockets;
-    public CollisionHandler() {
-        this.pockets = Constants.getInstance().getPockets();
+    public CollisionHandler(List<PocketMain> pockets, GameState gameState) {
+        this.pockets = pockets;
+        this.gameState = gameState;
+
     }
     public void SpreadImpact(CollisionPair pair) {
         PocketMain firstPocket = pair.getFirstPocket();
@@ -33,6 +37,7 @@ public class CollisionHandler {
 
     }
     private void SpreadWave(PocketMain firstPocket, PocketMain secondPocket , Point2D impactPoint) {
+        if (!gameState.CanWeSpreadWave()) return;
         for (PocketMain pocket : pockets) {
 
             if (pocket.equals(firstPocket) || pocket.equals(secondPocket)) continue;

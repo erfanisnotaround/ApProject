@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.ArrayList;
@@ -19,12 +20,13 @@ public class CollisionMaker extends Thread {
     private static final long WAIT_MS = 10;
     private final CollisionController controller;
     private volatile boolean running = true;
-
-    public CollisionMaker(List<PocketMain> pockets) {
+    private final GameState gameState;
+    public CollisionMaker(List<PocketMain> pockets , GameState gameState) {
         super("CollisionThread");
         setDaemon(false);                                   // keep JVM alive
         setUncaughtExceptionHandler((t, e) -> e.printStackTrace());
-        controller = new CollisionController(pockets);
+        this.gameState = gameState;
+        controller = new CollisionController(pockets , gameState);
     }
 
     @Override public void run() {

@@ -1,19 +1,15 @@
 package org.example.phaze2.model.abilities.types;
 
-import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.model.abilities.AbilityTypes;
 import org.example.phaze2.model.abilities.mechanics.AbilityExecutable;
 import org.example.phaze2.model.abilities.mechanics.followers.FollowerType;
 import org.example.phaze2.model.abilities.modelingAbilities.GameContext;
-import org.example.phaze2.model.constants.AbilityBooleansConstants;
-import org.example.phaze2.model.constants.Constants;
 
 public class Scroll_Of_Eliphus implements AbilityExecutable {
 
 
     private final int coinsCost = 20;
     private long lastUsed = 0;
-    private final AbilityBooleansConstants abilityBooleansConstants = AbilityBooleansConstants.getInstance();
 
 
     public Scroll_Of_Eliphus() {
@@ -34,6 +30,7 @@ public class Scroll_Of_Eliphus implements AbilityExecutable {
     public void execute(GameContext context) {
 
 
+        context.getGameState().setWeAreAddingAbility(true);
 
         lastUsed = context.now();
         context.getFollowerSpawner().spawn(FollowerType.LineDistance_Zero_Maker);

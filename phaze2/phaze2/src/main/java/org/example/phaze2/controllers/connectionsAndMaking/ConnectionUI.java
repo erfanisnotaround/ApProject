@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Anchor;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -19,12 +20,13 @@ public class ConnectionUI {
     WireManager wireManager;
     LayerManager LayerManager;
     ConnectionHandler connectionHandler;
-
-    public ConnectionUI(Pane Container, WireManager wireManager , Pane paneOfActions) {
+    private final GameState gameState;
+    public ConnectionUI(Pane Container, WireManager wireManager , Pane paneOfActions , GameState gameState) {
+        this.gameState = gameState;
         this.Container = Container;
         this.wireManager = wireManager;
         LayerManager = new LayerManager(Container , paneOfActions);
-        connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(LayerManager) , this , Container);
+        connectionHandler = new ConnectionHandler(wireManager , new WireRendererManager(LayerManager) , this , Container,gameState);
     }
     public void registerExitGate(Port gate, SystemView system, int subIndex, PortTypes type) {
         connectionHandler.RegisterExitGate(gate, system, subIndex, type);
@@ -85,9 +87,20 @@ public class ConnectionUI {
         connectionHandler.RegisterACurve(connection);
     }
     public void RegisterSystem(SystemView system){
-        system.setOnMouseClicked(mouseEvent -> {connectionHandler.ClickSystem(system);});
-        system.setOnMouseDragged(mouseEvent -> {connectionHandler.DragSystem(system , mouseEvent);});
-        system.setOnMouseReleased(mouseEvent -> {connectionHandler.ReleaseSystem(system);});
+        system.setOnMouseClicked(mouseEvent -> {
+            if (!gameState.isMovingSystemsAvailable()) return;
+            connectionHandler.ClickSystem(system);
+        });
+        system.setOnMouseDragged(mouseEvent -> {
+            if (!gameState.isMovingSystemsAvailable()) return;
+
+            connectionHandler.DragSystem(system , mouseEvent);
+        });
+        system.setOnMouseReleased(mouseEvent -> {
+            if (!gameState.isMovingSystemsAvailable()) return;
+            connectionHandler.ReleaseSystem(system);
+
+        });
     }
     public void resetSelection(){
         connectionHandler.resetSelection();

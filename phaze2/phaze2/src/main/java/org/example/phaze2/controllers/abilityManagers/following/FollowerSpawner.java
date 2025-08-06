@@ -6,4 +6,5 @@ import org.example.phaze2.model.abilities.modelingAbilities.GameContext;
 public interface FollowerSpawner {
     void spawn(FollowerType followerType);
     void ReleaseFollower();
+    void SetGameContext(GameContext gameContext);
 }

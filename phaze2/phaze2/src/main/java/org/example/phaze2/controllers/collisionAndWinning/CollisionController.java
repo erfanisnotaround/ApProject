@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 import org.example.phaze2.model.collisionAndWinningModeling.CollisionModel;
 import org.example.phaze2.model.collisionAndWinningModeling.CollisionPolygon;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.ArrayList;
@@ -17,12 +18,15 @@ public class CollisionController {
     List<PocketMain> pockets;
     Set<CollisionPair> previousCollisionPairs = new HashSet<CollisionPair>();
     CollisionModel collisionModel = new CollisionModel();
-    CollisionHandler collisionHandler = new CollisionHandler();
+    CollisionHandler collisionHandler;
 
 
     private final double RadiusOfCollision = 10;
-    public CollisionController(List<PocketMain> pockets) {
+    private final GameState gameState;
+    public CollisionController(List<PocketMain> pockets , GameState gameState) {
         this.pockets = pockets;
+        this.gameState = gameState;
+        collisionHandler = new CollisionHandler(pockets , gameState);
     }
 
 
@@ -46,19 +50,22 @@ public class CollisionController {
             }
         }
 
-        for (CollisionPair pair : currentCollisionPairs) {
-            if(!previousCollisionPairs.contains(pair)) {
-                collisionHandler.SpreadImpact(pair);
-                Platform.runLater(() -> {
-                    pair.getFirstPocket().setIsItCollided(true);
-                    pair.getSecondPocket().setIsItCollided(true);
-                });
-                System.out.println(" Collision detected ");
 
+        if (gameState.DoesCollideCounts()){
+            for (CollisionPair pair : currentCollisionPairs) {
+                if(!previousCollisionPairs.contains(pair)) {
+                    collisionHandler.SpreadImpact(pair);
+                    Platform.runLater(() -> {
+                        pair.getFirstPocket().setIsItCollided(true);
+                        pair.getSecondPocket().setIsItCollided(true);
+                    });
+                    System.out.println(" Collision detected ");
+
+                }
             }
-        }
-        for (CollisionPair pair : previousCollisionPairs) {
+            for (CollisionPair pair : previousCollisionPairs) {
 //            System.out.println(" Collision detected ");
+            }
         }
 
         previousCollisionPairs.clear();

@@ -17,7 +17,7 @@ public class MakeHUD {
     int numberOfNormalLabels;
     int numberAbilityLabels;
 
-    AbilityTypes[] abilities = {AbilityTypes.Scroll_of_Aergia , AbilityTypes.Scroll_of_Sisyphus , AbilityTypes.Scroll_of_Eliphas};
+    AbilityTypes[] abilities =AbilityTypes.values();
 
     String[] texts = {
             "Coins : 0",

@@ -19,6 +19,7 @@ import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.controllers.shopController.ShopController;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
@@ -53,7 +54,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private AbilityManager abilityManager;
 
     private ShopController ShopController;
-
+    private final GameState gameState = new GameState();
 
 
     List<PocketMain> pockets;
@@ -82,7 +83,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     public void MakeFirst() {
 
         followerAdder = new FollowerAdder(ContainerPane);
-        abilityManager = new AbilityManager(movementMaker , coinsManager , followerAdder);
+        abilityManager = new AbilityManager(movementMaker , coinsManager , followerAdder ,gameState);
         ShopController = new ShopController(sceneManager.getStage() , main , abilityManager);
 
 
@@ -90,9 +91,11 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         Constants.getInstance().setCoinsManager(coinsManager);
         Constants.getInstance().setNumberOfPocketLossManager(numberOfPocketLossManager);
 
-        makeHUD = new MakeHUD(HUD , 3 , 3);
+        makeHUD = new MakeHUD(HUD , 3 , 6);
+
         makeHUD.makeHUD();
-        hudListener = new HudListener(makeHUD);
+
+        hudListener = new HudListener(makeHUD , gameState);
 
 
         HUD.setVisible(false);
@@ -107,7 +110,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 
         Constants.getInstance().getPockets().clear();
-        connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main);
+        connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main , gameState);
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
         pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
@@ -171,7 +174,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         saveAndLoadController = new SaveAndLoadController(connectionUI , gameModel.getChosenLevel());
 
-        engine = new CollisionMaker(pockets);
+        engine = new CollisionMaker(pockets , gameState);
         engine.start();
         hudListener.Start();
 

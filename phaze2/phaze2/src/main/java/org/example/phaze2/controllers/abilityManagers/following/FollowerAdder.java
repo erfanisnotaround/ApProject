@@ -4,12 +4,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import org.example.phaze2.controllers.moverController.moveRelated.PathData;
 import org.example.phaze2.model.abilities.mechanics.followers.Follower;
 import org.example.phaze2.model.abilities.mechanics.followers.FollowerFactory;
 import org.example.phaze2.model.abilities.mechanics.followers.FollowerType;
-import org.example.phaze2.model.constants.AbilityBooleansConstants;
+import org.example.phaze2.model.abilities.modelingAbilities.GameContext;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -20,6 +18,7 @@ public class FollowerAdder implements FollowerSpawner{
     private final Pane ContainerPane;
     private Follower SelectedFollower = null;
     private FollowerAbilityController followerAbilityController = new FollowerAbilityController();
+    private GameContext gameContext;
 
     public FollowerAdder(Pane ContainerPane) {
         this.ContainerPane = ContainerPane;
@@ -29,16 +28,14 @@ public class FollowerAdder implements FollowerSpawner{
     @Override
     public void spawn(FollowerType followerType) {
 
-
-        if (AbilityBooleansConstants.getInstance().isWeAreAddingAbility()) return;
-
+        if (gameContext.getGameState().isWeAreAddingAbility()) return;
         Follower follower = FollowerFactory.createFollower(followerType);
         SelectedFollower = follower;
 
 
         follower.setFill(Color.WHITE);
         follower.setRadius(5);
-        AbilityBooleansConstants.getInstance().setWeAreAddingAbility(true);
+
         ContainerPane.getChildren().add(SelectedFollower);
 
 
@@ -63,9 +60,14 @@ public class FollowerAdder implements FollowerSpawner{
 
         followerAbilityController.AddFollower(SelectedFollower , closestConnection.getCurve());
         SelectedFollower = null;
-        AbilityBooleansConstants.getInstance().setWeAreAddingAbility(false);
 
+        gameContext.getGameState().setWeAreAddingAbility(false);
+
+        gameContext.getAliveManager().RemoveAbility(SelectedFollower.getFollowerType().getAbilityType());
     }
+
+
+
     private Connection findClosestConnection(List<Connection> connections) {
         Point2D pointOfSelectedFollower = new Point2D(SelectedFollower.getCenterX(), SelectedFollower.getCenterY());
         Connection closest = connections.getFirst();
@@ -79,6 +81,13 @@ public class FollowerAdder implements FollowerSpawner{
             }
         }
         return closest;
+    }
+    @Override
+    public void SetGameContext(GameContext gameContext) {
+        this.gameContext = gameContext;
+    }
+    private GameContext getGameContext() {
+        return gameContext;
     }
 
 

@@ -9,13 +9,12 @@ import javafx.scene.paint.Color;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.connectionsAndMaking.WireRendererManager;
 import org.example.phaze2.model.WireManager;
-import org.example.phaze2.model.constants.AbilityBooleansConstants;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class ConnectionHandler {
@@ -25,7 +24,7 @@ public class ConnectionHandler {
     private final WireManager wireManager;
     private final ConnectionRegistry registry;
     private final WireRendererManager wireRenderer;
-
+    private final GameState gameState;
 
     private Curve    currentCurve;
     private Port     startGate;
@@ -43,7 +42,7 @@ public class ConnectionHandler {
 
     public ConnectionHandler(WireManager wireManager,
                               WireRendererManager wireRenderer
-    ,ConnectionUI connectionUI , Pane container) {
+    ,ConnectionUI connectionUI , Pane container,GameState gameState) {
 
         this.wireManager = wireManager;
         this.ruleEngine = new ConnectionChecker(wireManager);
@@ -51,7 +50,7 @@ public class ConnectionHandler {
         this.wireRenderer = wireRenderer;
         this.connectionUI = connectionUI;
         this.Container = container;
-
+        this.gameState = gameState;
         exitConnections = Constants.getInstance().getExitConnections();
     }
     public void onPress(MouseEvent mouseEvent) {
@@ -225,7 +224,6 @@ public class ConnectionHandler {
     }
 
     public void ClickSystem(SystemView system) {
-        if (!AbilityBooleansConstants.getInstance().isMovingSystemsAvailable()) return;
 
         system.setLastGoodCord(new Point2D(system.getLayoutX(), system.getLayoutY()));
 
@@ -233,7 +231,6 @@ public class ConnectionHandler {
 
     public void DragSystem(SystemView system , MouseEvent dragEvent) {
 
-        if (!AbilityBooleansConstants.getInstance().isMovingSystemsAvailable()) return;
 
 
         systemCord = wireRenderer.getLayerManager().getLayer().sceneToLocal(dragEvent.getSceneX() , dragEvent.getSceneY());
@@ -296,7 +293,6 @@ public class ConnectionHandler {
     }
     public void ReleaseSystem(SystemView system) {
 
-        if (!AbilityBooleansConstants.getInstance().isMovingSystemsAvailable()) return;
 
         Point2D lengthInfo = processCurvesOfSystem(system);
         if (lengthInfo == null) {
@@ -315,6 +311,7 @@ public class ConnectionHandler {
             wireManager.addWire(newLen);
             curves.forEach(c -> c.setLatestAcceptableLength(c.ApproximateLength()));
 
+            gameState.setMovingSystemsAvailable(false);
 
         }
 
