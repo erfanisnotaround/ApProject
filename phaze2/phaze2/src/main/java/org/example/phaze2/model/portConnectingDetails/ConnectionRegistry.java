@@ -2,6 +2,7 @@ package org.example.phaze2.model.portConnectingDetails;
 
 import javafx.scene.Node;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.PortInfo;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
@@ -16,6 +17,11 @@ public class ConnectionRegistry {
     private final List<Connection> connections = constants.getConnections();
     private final Map<Port, Connection> exitConnections = constants.getExitConnections();
 
+    private GameState gameState;
+
+    public ConnectionRegistry(GameState gameState){
+        this.gameState = gameState;
+    }
 
     public void registerExit(Port gate, PortInfo info) {
         gate.setPortInfo(info);
@@ -44,14 +50,25 @@ public class ConnectionRegistry {
         connections.add(connection);
         exitConnections.put(connection.getFromPort(), connection);
         exitConnections.put(connection.getToPort(), connection);
+
+        gameState.getResources().getConnections().add(connection);
+        gameState.getResources().getExitConnections().put(connection.getFromPort(), connection);
+        gameState.getResources().getExitConnections().put(connection.getToPort(), connection);
+
     }
 
     public void removeConnection(Connection conn) {
+        if (conn == null) return;
         connections.remove(conn);
         exitConnections.remove(conn.getFromPort());
         exitConnections.remove(conn.getToPort());
         exitGates.add(conn.getFromPort());
         enterGates.add(conn.getToPort());
+
+        gameState.getResources().getConnections().remove(conn);
+        gameState.getResources().getExitConnections().remove(conn.getFromPort());
+        gameState.getResources().getExitConnections().remove(conn.getToPort());
+
     }
 
     public List<Connection> getConnections() {

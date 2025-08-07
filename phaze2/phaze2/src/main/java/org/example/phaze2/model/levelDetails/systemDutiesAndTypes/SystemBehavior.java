@@ -4,5 +4,6 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 public interface SystemBehavior {
-    Connection behave(PocketMain EntryPocket , double multiplier);
+    Connection ReleaseBehave(PocketMain EntryPocket , double multiplier);
+    void EnterBehave(PocketMain EntryPocket , double multiplier);
 }

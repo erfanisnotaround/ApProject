@@ -68,6 +68,7 @@ public class ConnectionUI {
     public void RegisterAnchor(Anchor anchor , Curve curve){
         anchor.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getClickCount() == 2) {
+                if (!gameState.isAddingANchorAvailable()) return;
                 LayerManager.removeNode(anchor);
                 curve.RemoveAnchor(anchor);
                 curve.build(curve.getFirstPoint() , curve.getLastPoint());
@@ -85,6 +86,10 @@ public class ConnectionUI {
     }
     public void RegisterConnection(Connection connection){
         connectionHandler.RegisterACurve(connection);
+    }
+    public void removeConnection(){
+        Connection connection = connectionHandler.getSelectedConnection();
+        connectionHandler.removeConnection(connection);
     }
     public void RegisterSystem(SystemView system){
         system.setOnMouseClicked(mouseEvent -> {

@@ -5,6 +5,7 @@ public final class GameState {
     private volatile boolean weAreAddingAbility = false;
     private volatile boolean CanWeSpreadWave = true;
     private volatile boolean DoesCollideCounts = true;
+    private volatile boolean AddingANchorAvailable = false;
     private volatile Resources resources = new Resources();
 
     public boolean isMovingSystemsAvailable() {
@@ -39,4 +40,11 @@ public final class GameState {
         return resources;
     }
 
+    public boolean isAddingANchorAvailable() {
+        return AddingANchorAvailable;
+    }
+
+    public void setAddingANchorAvailable(boolean addingANchorAvailable) {
+        AddingANchorAvailable = addingANchorAvailable;
+    }
 }

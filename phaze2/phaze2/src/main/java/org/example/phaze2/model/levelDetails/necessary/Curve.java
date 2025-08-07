@@ -210,5 +210,8 @@ public class Curve extends Polyline implements CurveBuilder , Runnable {
     public void RemoveFollower(Follower follower) {
         followers.remove(follower);
     }
+    public List<Follower> getFollowers() {
+        return followers;
+    }
 
 }

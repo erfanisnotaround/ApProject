@@ -42,11 +42,17 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket, double multiplier) {
+    public Connection ReleaseBehave(PocketMain EntryPocket, double multiplier) {
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(this , EntryPocket.getPreferredType());
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(this , EntryPocket.getPreferredType());
         return getConnection(firstConnections , secondConnections);
     }
+
+    @Override
+    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+
+    }
+
     public Connection getConnection(List<Connection> firstConnections, List<Connection> secondConnections) {
 
         if (!firstConnections.isEmpty()) {

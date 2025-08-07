@@ -15,6 +15,7 @@ import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
+import org.example.phaze2.controllers.moverController.checkings.AllMovingAndReadyCheckers;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.controllers.shopController.ShopController;
 import org.example.phaze2.model.GoingToGamaInformation;
@@ -55,7 +56,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     private ShopController ShopController;
     private final GameState gameState = new GameState();
-
+    private final AllMovingAndReadyCheckers allMovingAndReadyCheckers = new AllMovingAndReadyCheckers(gameState);
 
     List<PocketMain> pockets;
     private Scene scene;
@@ -177,6 +178,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         engine = new CollisionMaker(pockets , gameState);
         engine.start();
         hudListener.Start();
+        allMovingAndReadyCheckers.check();
 
 
 
@@ -200,6 +202,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
             }
             case Release_Follower -> followerAdder.ReleaseFollower();
+            case DELETE_SELECTION -> connectionUI.removeConnection();
         }
     }
     void handleActionReleased(SceneActions action) {
@@ -247,9 +250,11 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         for (SystemView systemView : systemViews) {
             ContainerPane.getChildren().addFirst(systemView);
+            gameState.getResources().getSystemViews().add(systemView);
         }
         for (PocketMain pocket : pockets) {
             ContainerPane.getChildren().addLast(pocket);
+            gameState.getResources().getPockets().add(pocket);
             pocket.setLayoutX(-1000);
         }
     }

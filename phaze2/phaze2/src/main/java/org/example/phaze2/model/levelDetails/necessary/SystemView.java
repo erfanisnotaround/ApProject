@@ -61,8 +61,13 @@ public class SystemView extends Pane implements SystemBehavior  {
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket, double multiplier) {
+    public Connection ReleaseBehave(PocketMain EntryPocket, double multiplier) {
         return null;
+    }
+
+    @Override
+    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+
     }
 
 
@@ -104,6 +109,8 @@ public class SystemView extends Pane implements SystemBehavior  {
 
     public void setTheLightOn(boolean theLightOn) {
         isTheLightOn = theLightOn;
+        if (light != null) light.setItOn(theLightOn);
+        lightBoolean.set(theLightOn);
     }
 
     public int getNumberOfSubSystems() {
@@ -166,6 +173,8 @@ public class SystemView extends Pane implements SystemBehavior  {
 
     public void setLightBoolean(boolean lightBoolean) {
         this.lightBoolean.set(lightBoolean);
+        if (light != null) light.setItOn(lightBoolean);
+        isTheLightOn = lightBoolean;
     }
 
     public boolean isItDown() {

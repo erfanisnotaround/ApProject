@@ -9,6 +9,7 @@ public enum SceneActions {
     MoveSliderToRight (KeyCode.RIGHT),
     MoveSliderToLeft  (KeyCode.LEFT),
     Open_Close_HUD(KeyCode.TAB),
+    DELETE_SELECTION(KeyCode.DELETE),
     Release_Follower(KeyCode.R);
 
     private final KeyCode defaultKey;

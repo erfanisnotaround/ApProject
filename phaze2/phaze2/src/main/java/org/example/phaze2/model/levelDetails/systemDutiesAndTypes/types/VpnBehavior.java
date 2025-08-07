@@ -27,7 +27,7 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket, double multiplier) {
+    public Connection ReleaseBehave(PocketMain EntryPocket, double multiplier) {
 
 
 
@@ -57,6 +57,11 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
 
 
         return newEntryConnection;
+    }
+
+    @Override
+    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+
     }
 
     public Connection getConnection(List<Connection> firstConnections, List<Connection> secondConnections ) {

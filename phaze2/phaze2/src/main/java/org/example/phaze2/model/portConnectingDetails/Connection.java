@@ -8,6 +8,7 @@ public class Connection {
     private Port toPort;
     private Port fromPort;
     private Curve curve;
+    private boolean canWeUse = true;
     public Connection (Curve curve , Port from, Port to) {
 
         this.curve = curve;
@@ -52,5 +53,13 @@ public class Connection {
 
     public void setFromPort(Port fromPort) {
         this.fromPort = fromPort;
+    }
+
+    public boolean isCanWeUse() {
+        return canWeUse;
+    }
+
+    public void setCanWeUse(boolean canWeUse) {
+        this.canWeUse = canWeUse;
     }
 }

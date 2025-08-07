@@ -14,6 +14,7 @@ public class AbilityFactory {
             case OTAR -> new OTar();
             case OAIRYAMAN -> new OAiryaman();
             case OANAHITA -> new OAnahita();
+            case ANCHOR_POINT -> new AnchotPointAbility();
         };
 
     }

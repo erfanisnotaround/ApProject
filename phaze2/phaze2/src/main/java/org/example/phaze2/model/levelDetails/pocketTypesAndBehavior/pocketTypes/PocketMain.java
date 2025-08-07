@@ -5,7 +5,6 @@ import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
-import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBox;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBoxGenerator;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -48,6 +47,8 @@ public class PocketMain extends Pocket  implements InitData {
         setMovementManager(behaviour.getMovementManager());
 
         setFirstPocketType(behaviour.getType());
+
+
     }
 
     @Override
@@ -103,7 +104,7 @@ public class PocketMain extends Pocket  implements InitData {
 
     @Override
     public Connection ReleaseAct(PocketMain pocket, SystemView systemView, Map<Port, Connection> exitConnections, double multiplier , Connection connection) {
-        Connection exitConnection = systemView.behave(pocket, multiplier);
+        Connection exitConnection = systemView.ReleaseBehave(pocket, multiplier);
         if (exitConnection == null) return null;
         return behaviour.ReleaseAct(this , systemView, exitConnections, multiplier , exitConnection );
     }

@@ -10,13 +10,15 @@ import java.util.List;
 
 public class DistributeBehavior extends SystemView implements SystemBehavior {
 
+    private final int CapacityCells = 10;
 
     public DistributeBehavior(SystemTypes systemType, int numberOfSubSystems) {
         super(systemType, numberOfSubSystems);
+        capacity = new PocketMain[CapacityCells];
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket, double multiplier) {
+    public Connection ReleaseBehave(PocketMain EntryPocket, double multiplier) {
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(this , EntryPocket.getPreferredType());
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(this , EntryPocket.getPreferredType());
 
@@ -37,6 +39,11 @@ public class DistributeBehavior extends SystemView implements SystemBehavior {
 
         }
         else return null;
+    }
+
+    @Override
+    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+
     }
 
 

@@ -53,7 +53,7 @@
       },
       {
         "systemType": "VPN",
-        "systemName": "Backup",
+        "systemName": "Backup2",
         "x": 700.0,
         "y": 400.0,
         "isItStartSystem": false,

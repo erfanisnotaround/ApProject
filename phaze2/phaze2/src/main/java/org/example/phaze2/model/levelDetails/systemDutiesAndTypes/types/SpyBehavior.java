@@ -18,7 +18,7 @@ public class SpyBehavior extends SystemView implements SystemBehavior {
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket, double multiplier) {
+    public Connection ReleaseBehave(PocketMain EntryPocket, double multiplier) {
         SystemView suitableSystemView = FineARandomSPySystem();
         List<Connection> firstConnections = pathPrioritizing.firstPrioritizedSubSystems(suitableSystemView , EntryPocket.getPreferredType());
         List<Connection> secondConnections = pathPrioritizing.SecondPrioritizedSubSystems(suitableSystemView , EntryPocket.getPreferredType());
@@ -26,6 +26,12 @@ public class SpyBehavior extends SystemView implements SystemBehavior {
         return getConnection(firstConnections , secondConnections);
 
     }
+
+    @Override
+    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+
+    }
+
     public Connection getConnection(List<Connection> firstConnections, List<Connection> secondConnections ) {
 
         if (!firstConnections.isEmpty()) {

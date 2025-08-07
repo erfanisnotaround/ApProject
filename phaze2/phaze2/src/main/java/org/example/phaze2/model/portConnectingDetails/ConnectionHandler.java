@@ -46,7 +46,7 @@ public class ConnectionHandler {
 
         this.wireManager = wireManager;
         this.ruleEngine = new ConnectionChecker(wireManager);
-        this.registry = new ConnectionRegistry();
+        this.registry = new ConnectionRegistry(gameState);
         this.wireRenderer = wireRenderer;
         this.connectionUI = connectionUI;
         this.Container = container;
@@ -133,6 +133,7 @@ public class ConnectionHandler {
             curve.setFill(Color.RED);
 
         }
+        if (curve.getConnection().isCanWeUse()) curve.setFill(Color.RED);
 
     }
     public void DraggingAnchor(Curve curve , Anchor anchor) {
@@ -140,6 +141,7 @@ public class ConnectionHandler {
         curve.build(curve.getFirstPoint() , curve.getLastPoint());
 
         curve.setFill(wireManager.canUse(curve.ApproximateLength() - curve.getLatestAcceptableLength()) ? Color.GREEN : Color.RED);
+        if (!curve.getConnection().isCanWeUse()) curve.setFill(Color.RED);
 
 
     }
@@ -156,6 +158,9 @@ public class ConnectionHandler {
             curve.setLatestAcceptableLength(curve.ApproximateLength());
         }
         curve.setFill(Color.GREEN);
+
+        if (!curve.getConnection().isCanWeUse()) curve.setFill(Color.RED);
+
 
     }
     private void cleanup() {
@@ -177,6 +182,8 @@ public class ConnectionHandler {
         wireManager.removeWire(conn.getCurve().ApproximateLength());
         wireRenderer.removeNode(conn.getCurve());
         Container.getChildren().remove(conn.getCurve());
+        conn.getCurve().getAnchors().forEach(anchor -> Container.getChildren().remove(anchor));
+        conn.getCurve().getFollowers().forEach(follower -> Container.getChildren().remove(follower));
     }
 
     public void RegisterEnter(Port gate , SystemView system, int subIndex, PortTypes type) {
@@ -240,6 +247,7 @@ public class ConnectionHandler {
 
         processCurvesOfSystem(system);
 
+
     }
     private Point2D processCurvesOfSystem(SystemView system) {
         double length = 0;
@@ -275,10 +283,11 @@ public class ConnectionHandler {
         }
         double tt = length - lastGoodLength;
         if (wireManager.canUse(tt)) {
-            curves.forEach(curve -> {curve.setFill(Color.GREEN);});
+            curves.forEach(curve -> {curve.setFill(Color.GREEN);        if (!curve.getConnection().isCanWeUse()) curve.setFill(Color.RED);
+            });
             return new Point2D(length, lastGoodLength);
         }
-        curves.forEach(curve -> {curve.setFill(Color.RED);});
+        curves.forEach(curve -> {curve.setFill(Color.RED);        if (!curve.getConnection().isCanWeUse()) curve.setFill(Color.RED);});
         return null;
     }
     private Point2D processConnection(Connection exitConnection) {
@@ -321,6 +330,11 @@ public class ConnectionHandler {
 
     }
 
+
+    public Connection getSelectedConnection() {
+        if (selectedCurve == null) return null;
+        return selectedCurve.getConnection();
+    }
 
 
 

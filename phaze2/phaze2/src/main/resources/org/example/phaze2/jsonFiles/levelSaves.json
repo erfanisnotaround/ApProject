@@ -25,18 +25,18 @@
       "lineDistancePerMoveX" : -0.07285096777962921,
       "lineDistancePerMoveY" : 0.008714190976556381,
       "rotate" : true,
-      "steps" : 100.0,
       "starterPort" : null,
-      "angleNeeded" : 0.0
+      "angleNeeded" : 0.0,
+      "steps" : 100.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : false,
-    "yy" : 645.3202614111984,
     "xx" : 607.8202614111984,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "itCollided" : true,
+    "yy" : 645.3202614111984,
     "itAffected" : true,
-    "hp" : 8.0
+    "itCollided" : true,
+    "typeBeforeChange" : "SECRET_MESSENGER",
+    "hp" : 8.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   }, {
     "pocketID" : "rezaDozde",
     "type" : "BIG_1",
@@ -63,18 +63,18 @@
       "lineDistancePerMoveX" : -0.07354991565981099,
       "lineDistancePerMoveY" : -0.01441154339380216,
       "rotate" : true,
-      "steps" : 100.0,
       "starterPort" : null,
-      "angleNeeded" : 0.0
+      "angleNeeded" : 0.0,
+      "steps" : 100.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : false,
-    "yy" : 649.9342700976034,
     "xx" : 610.9030020664965,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "itCollided" : true,
+    "yy" : 649.9342700976034,
     "itAffected" : true,
-    "hp" : 4.0
+    "itCollided" : true,
+    "typeBeforeChange" : "SECRET_MESSENGER",
+    "hp" : 4.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   }, {
     "pocketID" : "gorbe",
     "type" : "SECRET_1",
@@ -101,18 +101,18 @@
       "lineDistancePerMoveX" : -0.015321771572520921,
       "lineDistancePerMoveY" : -0.055708419510623663,
       "rotate" : true,
-      "steps" : 100.0,
       "starterPort" : null,
-      "angleNeeded" : 0.0
+      "angleNeeded" : 0.0,
+      "steps" : 100.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : "Backup",
     "itMoved" : true,
-    "yy" : 284.0742436715823,
     "xx" : 337.35278413768435,
-    "typeBeforeChange" : "SECRET_1",
-    "itCollided" : true,
+    "yy" : 284.0742436715823,
     "itAffected" : true,
-    "hp" : 2.0
+    "itCollided" : true,
+    "typeBeforeChange" : "SECRET_1",
+    "hp" : 2.0,
+    "whichSystemViewThisPocketIsAffectedBy" : "Backup"
   }, {
     "pocketID" : "lachaki",
     "type" : "SECRET_2",
@@ -139,18 +139,18 @@
       "lineDistancePerMoveX" : 0.0,
       "lineDistancePerMoveY" : 0.0,
       "rotate" : true,
-      "steps" : 200.0,
       "starterPort" : null,
-      "angleNeeded" : 0.0
+      "angleNeeded" : 0.0,
+      "steps" : 200.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : true,
-    "yy" : 219.57895755653516,
     "xx" : 59.55636545195782,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "itCollided" : false,
+    "yy" : 219.57895755653516,
     "itAffected" : true,
-    "hp" : 5.0
+    "itCollided" : false,
+    "typeBeforeChange" : "SECRET_MESSENGER",
+    "hp" : 5.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   }, {
     "pocketID" : "bagher",
     "type" : "Messenger_1",
@@ -177,18 +177,18 @@
       "lineDistancePerMoveX" : 0.07354991565981099,
       "lineDistancePerMoveY" : 0.01441154339380216,
       "rotate" : true,
-      "steps" : 100.0,
       "starterPort" : null,
-      "angleNeeded" : 0.0
+      "angleNeeded" : 0.0,
+      "steps" : 100.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : false,
-    "yy" : 490.455565882774,
     "xx" : 458.92854148164093,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "itCollided" : true,
+    "yy" : 490.455565882774,
     "itAffected" : true,
-    "hp" : -1.5108646799002472
+    "itCollided" : true,
+    "typeBeforeChange" : "SECRET_MESSENGER",
+    "hp" : -1.5108646799002472,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   }, {
     "pocketID" : "manig",
     "type" : "Messenger_2",
@@ -215,18 +215,18 @@
       "lineDistancePerMoveX" : -0.07285096777962921,
       "lineDistancePerMoveY" : 0.008714190976556381,
       "rotate" : true,
-      "steps" : 100.0,
       "starterPort" : null,
-      "angleNeeded" : 0.0
+      "angleNeeded" : 0.0,
+      "steps" : 100.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : false,
-    "yy" : 345.0,
     "xx" : 307.5,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "itCollided" : false,
+    "yy" : 345.0,
     "itAffected" : true,
-    "hp" : 2.0
+    "itCollided" : false,
+    "typeBeforeChange" : "SECRET_MESSENGER",
+    "hp" : 2.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   }, {
     "pocketID" : "pasta",
     "type" : "Messenger_3",
@@ -253,18 +253,18 @@
       "lineDistancePerMoveX" : 0.0,
       "lineDistancePerMoveY" : 0.0,
       "rotate" : false,
-      "steps" : 200.0,
       "starterPort" : null,
-      "angleNeeded" : 90.0
+      "angleNeeded" : 90.0,
+      "steps" : 200.0
     },
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : false,
-    "yy" : -1000.0,
     "xx" : -1000.0,
-    "typeBeforeChange" : "Messenger_3",
-    "itCollided" : false,
+    "yy" : -1000.0,
     "itAffected" : true,
-    "hp" : 0.0
+    "itCollided" : false,
+    "typeBeforeChange" : "Messenger_3",
+    "hp" : 0.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   } ],
   "systems" : [ {
     "systemType" : "DESTRUCTIVE",
@@ -330,8 +330,8 @@
       "pocketMovingOnIt" : null,
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : false,
-      "hp" : -1
+      "hp" : -1,
+      "itUsed" : false
     }
   }, {
     "fromPort" : {
@@ -352,8 +352,8 @@
       "pocketMovingOnIt" : null,
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : false,
-      "hp" : 3
+      "hp" : 3,
+      "itUsed" : false
     }
   }, {
     "fromPort" : {
@@ -374,8 +374,8 @@
       "pocketMovingOnIt" : "gorbe",
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : true,
-      "hp" : 0
+      "hp" : 0,
+      "itUsed" : true
     }
   }, {
     "fromPort" : {
@@ -396,8 +396,8 @@
       "pocketMovingOnIt" : "lachaki",
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : true,
-      "hp" : 1
+      "hp" : 1,
+      "itUsed" : true
     }
   } ]
 }, {

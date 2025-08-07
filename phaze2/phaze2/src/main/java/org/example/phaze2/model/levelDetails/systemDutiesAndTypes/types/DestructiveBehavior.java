@@ -17,7 +17,7 @@ public class DestructiveBehavior extends SystemView implements SystemBehavior {
     }
 
     @Override
-    public Connection behave(PocketMain EntryPocket, double multiplier) {
+    public Connection ReleaseBehave(PocketMain EntryPocket, double multiplier) {
         if (EntryPocket.getType()!= PocketTypes.SECRET_MESSENGER) {
             if (EntryPocket.getHP() == EntryPocket.getMaxHp() ){
                 EntryPocket.setHP(EntryPocket.getMaxHp() - 1);
@@ -31,6 +31,12 @@ public class DestructiveBehavior extends SystemView implements SystemBehavior {
 
         return getConnection(secondConnections );
     }
+
+    @Override
+    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+
+    }
+
     public Connection getConnection(List<Connection> secondConnections) {
         if (!secondConnections.isEmpty()) {
             return secondConnections.get(random.nextInt(secondConnections.size()));

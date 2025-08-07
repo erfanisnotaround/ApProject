@@ -8,7 +8,8 @@ public enum AbilityTypes {
     Scroll_of_Eliphas(3),
     OTAR(4),
     OAIRYAMAN(5),
-    OANAHITA(6);
+    OANAHITA(6),
+    ANCHOR_POINT(7);
 
     int numberToAccessLabel;
     AbilityTypes(int numberToAccessLabel){
