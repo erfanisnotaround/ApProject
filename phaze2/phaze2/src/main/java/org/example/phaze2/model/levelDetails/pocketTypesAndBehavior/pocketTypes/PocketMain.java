@@ -22,6 +22,8 @@ import java.util.Map;
 public class PocketMain extends Pocket  implements InitData {
     private HitBox hitBox;
     Pocket behaviour;
+    private String GroupId;
+    private boolean pocketIsLostByDisterbute = false;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
     private final double DistractionSteps = 30;
     public PocketMain(PocketTypes type) {
@@ -97,6 +99,7 @@ public class PocketMain extends Pocket  implements InitData {
     }
 
 
+
     @Override
     public void move(Curve curve, double RealSpeed, double RealAcceleration, PocketMain pocket, double multiplier) {
         behaviour.move(curve, RealSpeed, RealAcceleration, this, multiplier);
@@ -144,4 +147,19 @@ public class PocketMain extends Pocket  implements InitData {
         return coinsPerEntry;
     }
 
+    public String getGroupId() {
+        return GroupId;
+    }
+
+    public void setGroupId(String groupId) {
+        GroupId = groupId;
+    }
+
+    public boolean isPocketIsLostByDisterbute() {
+        return pocketIsLostByDisterbute;
+    }
+
+    public void setPocketIsLostByDisterbute(boolean pocketIsLostByDisterbute) {
+        this.pocketIsLostByDisterbute = pocketIsLostByDisterbute;
+    }
 }

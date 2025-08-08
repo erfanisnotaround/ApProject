@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypeGroup;
@@ -23,8 +24,8 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
     private final double RadiusOfCheckingArea = 2000;
     Timeline timeline;
     PauseTransition cooldown = new PauseTransition(Duration.seconds(coolDownTime));
-    public AntiVirusBehavior(SystemTypes systemType, int numberOfSubSystems) {
-        super(systemType, numberOfSubSystems);
+    public AntiVirusBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
+        super(systemType, numberOfSubSystems , gameState);
 
 
 

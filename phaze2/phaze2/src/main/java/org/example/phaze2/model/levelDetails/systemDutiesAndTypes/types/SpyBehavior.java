@@ -1,6 +1,7 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -13,8 +14,8 @@ import java.util.List;
 public class SpyBehavior extends SystemView implements SystemBehavior {
 
 
-    public SpyBehavior(SystemTypes systemType, int numberOfSubSystems) {
-        super(systemType, numberOfSubSystems);
+    public SpyBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
+        super(systemType, numberOfSubSystems , gameState);
     }
 
     @Override

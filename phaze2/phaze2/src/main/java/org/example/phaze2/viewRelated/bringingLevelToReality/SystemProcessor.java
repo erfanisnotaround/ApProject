@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.necessary.Light;
@@ -25,9 +26,11 @@ public class SystemProcessor implements Runnable{
     private List<SystemView> systemViews = new ArrayList<>();
     private final Map<String , SystemView> systemViewsStringMap = Constants.getInstance().getSystemViewMap();
     private ConnectionUI connectionUI;
-    public SystemProcessor(List<System> systemInfos , ConnectionUI connectionUI) {
+    private final GameState gameState;
+    public SystemProcessor(List<System> systemInfos , ConnectionUI connectionUI , GameState gameState) {
         this.systemInfos = systemInfos;
         this.connectionUI = connectionUI;
+        this.gameState = gameState;
     }
     @Override
     public void run() {
@@ -37,7 +40,7 @@ public class SystemProcessor implements Runnable{
         }
     }
     public SystemView processSystem(System system) {
-        SystemView systemView = SystemBehaviorFactory.create(system);
+        SystemView systemView = SystemBehaviorFactory.create(system , gameState);
         connectionUI.RegisterSystem(systemView);
         MakeOnlySystem(systemView , system);
 

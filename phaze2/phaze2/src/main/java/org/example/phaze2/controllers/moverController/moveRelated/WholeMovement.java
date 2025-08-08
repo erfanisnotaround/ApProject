@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import org.example.phaze2.controllers.moverController.checkings.StartAvailableChecker;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -29,6 +30,7 @@ public class WholeMovement {
     private volatile List<PocketMain> pockets;
     private volatile List<SystemView> systemViews;
     private double speedMultiplier = 1;
+    private GameState gameState;
 
     //checkers and workers har har
 
@@ -44,13 +46,14 @@ public class WholeMovement {
 
 
 
-    public WholeMovement(CoinsManager coinsManager) {
+    public WholeMovement(CoinsManager coinsManager , GameState gameState) {
         connections = constants.getConnections();
         exitConnections = constants.getExitConnections();
         pockets = constants.getPockets();
         systemViews = constants.getSystemViews();
         startAvailableChecker = new StartAvailableChecker(systemViews);
         this.coinsManager = coinsManager;
+        this.gameState = gameState;
 
     }
     public void StartSending(double speedMultiplier , double AvailableTime){
@@ -154,6 +157,9 @@ public class WholeMovement {
             connection.getCurve().setHP(connection.getCurve().getHP() - 1);
         }
 
+        SystemView targetSystem = connection.getToPort().getPortInfo().getSystem();
+
+
 
         ChangeListener<Boolean> l = new ChangeListener<>() {
             @Override
@@ -166,8 +172,13 @@ public class WholeMovement {
 
                     int coins = pocket.getCoinsPerEntry();
                     coinsManager.Increment(coins);
+                    targetSystem.EnterBehave(pocket, speedMultiplier);
+                    if (pocket.isPocketIsLostByDisterbute()){
 
-                    SendingPockets(connection.getToPort().getPortInfo().getSystem(), pocket , -1);
+                        AddToWaitingSend(targetSystem , connection);
+
+
+                    } else SendingPockets(targetSystem, pocket , -1);
                 }
             }
         };

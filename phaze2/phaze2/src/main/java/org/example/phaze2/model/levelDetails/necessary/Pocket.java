@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import org.example.phaze2.controllers.moverController.moveRelated.MovingPlanMaker;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.controllers.moverController.moveRelated.Movable;
@@ -25,7 +26,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     protected PathMover pathMover;
     protected double distanceFromTheLine = 0;
     protected double HP;
-    protected double MaxHp;
+    protected int MaxHp;
     protected int coinsPerEntry;
     protected BooleanProperty IsItCollided = new SimpleBooleanProperty(false);
     protected BooleanProperty IsItMoved = new SimpleBooleanProperty(false);
@@ -44,7 +45,6 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     protected double angleNeeded;
     private double availableTime = 4000;
     private String pocketId;
-
     public Pocket(PocketTypes type) {
         this.type = type;
     }
@@ -140,11 +140,11 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
         this.IsItMoved.set(isItMoved);
     }
 
-    public double getMaxHp() {
+    public int getMaxHp() {
         return MaxHp;
     }
 
-    public void setMaxHp(double maxHp) {
+    public void setMaxHp(int maxHp) {
         MaxHp = maxHp;
     }
 
@@ -261,4 +261,8 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
                 (b.getMinY() + b.getMaxY()) * .5
         );
     }
+
+
+
+
 }

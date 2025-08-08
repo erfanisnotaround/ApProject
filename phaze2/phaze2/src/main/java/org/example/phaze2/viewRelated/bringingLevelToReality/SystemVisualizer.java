@@ -1,6 +1,7 @@
 package org.example.phaze2.viewRelated.bringingLevelToReality;
 
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -12,14 +13,16 @@ public class SystemVisualizer {
     private ConnectionUI connectionUI;
     private List<SystemView> SystemViews;
     private List<PocketMain> Pockets;
+    private final GameState gameState;
 
-    public SystemVisualizer(Level CurrentLevel , ConnectionUI connectionUI) {
+    public SystemVisualizer(Level CurrentLevel , ConnectionUI connectionUI , GameState gameState) {
         this.CurrentLevel = CurrentLevel;
         this.connectionUI = connectionUI;
+        this.gameState = gameState;
     }
 
     public List<SystemView> getSystemViews() {
-        SystemProcessor systemProcessor = new SystemProcessor(CurrentLevel.getSystems() , connectionUI);
+        SystemProcessor systemProcessor = new SystemProcessor(CurrentLevel.getSystems() , connectionUI , gameState);
         Thread systemsProcessor = new Thread(systemProcessor);
         systemsProcessor.start();
         try {

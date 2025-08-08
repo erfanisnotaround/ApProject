@@ -7,6 +7,7 @@ public final class GameState {
     private volatile boolean DoesCollideCounts = true;
     private volatile boolean AddingANchorAvailable = false;
     private volatile Resources resources = new Resources();
+    private volatile VisualConstant visualConstant = new VisualConstant();
 
     public boolean isMovingSystemsAvailable() {
         return movingSystemsAvailable;
@@ -47,4 +48,10 @@ public final class GameState {
     public void setAddingANchorAvailable(boolean addingANchorAvailable) {
         AddingANchorAvailable = addingANchorAvailable;
     }
+
+    public VisualConstant getVisualConstant() {
+        return visualConstant;
+    }
+
+
 }

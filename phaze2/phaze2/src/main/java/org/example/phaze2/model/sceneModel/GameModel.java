@@ -10,7 +10,7 @@ public class GameModel {
     private GoingToGamaInformation levelInformation;
     private double AvailableNeededTime;
     private final double basicMoveMultiplier = 1;
-    private final double basicTempoMultiplier = 15;
+    private final double basicTempoMultiplier = 10;
     private final double moveUnitOfSlider = 100;
 
     public void setSceneManager(SceneManager sceneManager) {

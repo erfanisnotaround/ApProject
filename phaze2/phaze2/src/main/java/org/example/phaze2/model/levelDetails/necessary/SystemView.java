@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import org.example.phaze2.controllers.moverController.moveRelated.PathPrioritizing;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
@@ -37,9 +38,11 @@ public class SystemView extends Pane implements SystemBehavior  {
     protected PathPrioritizing pathPrioritizing = new PathPrioritizing();
     protected Random random = new Random();
     private Point2D lastGoodCord;
+    private final GameState gameState;
 
-    public SystemView(SystemTypes systemType , int numberOfSubSystems) {
+    public SystemView(SystemTypes systemType , int numberOfSubSystems , GameState gameState) {
         this.numberOfSubSystems = numberOfSubSystems;
+        this.gameState = gameState;
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
         setPrefSize(systemWidth, systemHeight);
         this.systemType = systemType;
@@ -223,5 +226,9 @@ public class SystemView extends Pane implements SystemBehavior  {
 
     public void setLastGoodCord(Point2D lastGoodCord) {
         this.lastGoodCord = lastGoodCord;
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 }

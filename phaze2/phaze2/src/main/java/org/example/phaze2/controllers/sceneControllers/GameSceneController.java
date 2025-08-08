@@ -1,7 +1,5 @@
 package org.example.phaze2.controllers.sceneControllers;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +7,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 import org.example.phaze2.controllers.abilityManagers.AbilityManager;
 import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
@@ -24,6 +21,8 @@ import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketViewManager;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.saversOfGame.SaveAndLoadController;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
@@ -49,13 +48,14 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private final CoinsManager coinsManager = new CoinsManager();
     private final NumberOfPocketLossManager numberOfPocketLossManager = new NumberOfPocketLossManager();
     private HudListener hudListener;
-    WholeMovement movementMaker = new WholeMovement(coinsManager);
+
 
     private FollowerAdder  followerAdder;
     private AbilityManager abilityManager;
 
     private ShopController ShopController;
     private final GameState gameState = new GameState();
+    WholeMovement movementMaker = new WholeMovement(coinsManager , gameState);
     private final AllMovingAndReadyCheckers allMovingAndReadyCheckers = new AllMovingAndReadyCheckers(gameState);
 
     List<PocketMain> pockets;
@@ -82,6 +82,23 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
     @Override
     public void MakeFirst() {
+
+
+        gameState.getVisualConstant().setContainerPane(ContainerPane);
+
+
+
+        PocketViewPort view = new PocketViewManager(gameState.getVisualConstant().getContainerPane());
+        PocketRepository repo = new PocketRepository(gameState.getResources());
+        PocketVisualEffect effect = new HueShiftEffect();
+        BigPocketSplitter splitter = new BigPocketSplitter(view, repo, effect, gameState);
+
+        gameState.getVisualConstant().setSplitter(splitter);
+        gameState.getVisualConstant().setEffect(effect);
+        gameState.getVisualConstant().setRepo(repo);
+        gameState.getVisualConstant().setView(view);
+
+
 
         followerAdder = new FollowerAdder(ContainerPane);
         abilityManager = new AbilityManager(movementMaker , coinsManager , followerAdder ,gameState);
@@ -112,7 +129,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main , gameState);
-        systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI);
+        systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI , gameState);
         pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
 

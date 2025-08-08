@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -21,8 +22,8 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
     double coolDown = 1;
     private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(coolDown));
 
-    public VpnBehavior(SystemTypes systemType, int numberOfSubSystems) {
-        super(systemType, numberOfSubSystems);
+    public VpnBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
+        super(systemType, numberOfSubSystems , gameState);
         AddListener();
     }
 

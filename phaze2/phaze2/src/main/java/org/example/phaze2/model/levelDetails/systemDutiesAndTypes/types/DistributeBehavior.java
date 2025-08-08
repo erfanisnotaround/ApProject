@@ -1,20 +1,25 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.BigPocketSplitter;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DistributeBehavior extends SystemView implements SystemBehavior {
 
     private final int CapacityCells = 10;
+    BigPocketSplitter splitter;
 
-    public DistributeBehavior(SystemTypes systemType, int numberOfSubSystems) {
-        super(systemType, numberOfSubSystems);
+    public DistributeBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
+        super(systemType, numberOfSubSystems , gameState);
         capacity = new PocketMain[CapacityCells];
+        splitter = gameState.getVisualConstant().getSplitter();
     }
 
     @Override
@@ -42,7 +47,15 @@ public class DistributeBehavior extends SystemView implements SystemBehavior {
     }
 
     @Override
-    public void EnterBehave(PocketMain EntryPocket, double multiplier) {
+    public void EnterBehave(PocketMain EntryPocket , double multiplier) {
+        boolean isBigPocket = splitter.isBigPocket(EntryPocket);
+        if (isBigPocket) {
+
+            Arrays.fill(capacity, null);
+            EntryPocket.setPocketIsLostByDisterbute(true);
+            splitter.split(EntryPocket , this);
+
+        }
 
     }
 

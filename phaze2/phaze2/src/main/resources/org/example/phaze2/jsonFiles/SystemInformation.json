@@ -11,7 +11,7 @@
         "x": 100.0,
         "y": 200.0,
         "isItStartSystem": true,
-        "numberOfSubSystems": 2,
+        "numberOfSubSystems": 3,
         "isTheLightOn": false,
         "SubSystems": [
           {
@@ -25,11 +25,17 @@
             "doesItHavaExitGate": true,
             "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"
+          },
+          {
+            "doesItHaveEnterGate": true,
+            "doesItHavaExitGate": false,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
           }
         ]
       },
       {
-        "systemType": "VPN",
+        "systemType": "DESTRUCTIVE",
         "systemName": "Backup",
         "x": 700.0,
         "y": 200.0,
@@ -52,12 +58,12 @@
         ]
       },
       {
-        "systemType": "VPN",
+        "systemType": "DISTRIBUTOR",
         "systemName": "Backup2",
         "x": 700.0,
         "y": 400.0,
         "isItStartSystem": false,
-        "numberOfSubSystems": 2,
+        "numberOfSubSystems": 3,
         "isTheLightOn": true,
         "SubSystems": [
           {
@@ -71,6 +77,12 @@
             "doesItHavaExitGate": true,
             "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"
+          },
+          {
+            "doesItHaveEnterGate": false,
+            "doesItHavaExitGate": true,
+            "EnterGate": "SQUARE",
+            "ExitGate": "SQUARE"
           }
         ]
       }
@@ -78,22 +90,7 @@
     "pockets": [
       {
         "pocketName": "manig",
-        "type": " Messenger_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "manig",
-        "type": " Messenger_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "manig",
-        "type": " Messenger_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "manig",
-        "type": " Messenger_1",
+        "type": " BIG_1",
         "delay": 1.5
       }
     ]

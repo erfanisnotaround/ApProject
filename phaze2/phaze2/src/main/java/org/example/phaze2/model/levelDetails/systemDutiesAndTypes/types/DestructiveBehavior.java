@@ -1,10 +1,12 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.BigPocketSplitter;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;
@@ -12,8 +14,10 @@ import java.util.List;
 public class DestructiveBehavior extends SystemView implements SystemBehavior {
 
 
-    public DestructiveBehavior(SystemTypes systemType, int numberOfSubSystems) {
-        super(systemType, numberOfSubSystems);
+
+    public DestructiveBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
+        super(systemType, numberOfSubSystems , gameState);
+
     }
 
     @Override

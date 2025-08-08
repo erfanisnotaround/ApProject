@@ -1,7 +1,10 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.Messenger3;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.portConnectingDetails.Connection;
@@ -12,8 +15,10 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
 
     private final int CapacityCells = 10;
 
-    public MergerBehavior(SystemTypes systemType, int numberOfSubSystems) {
-        super(systemType, numberOfSubSystems);
+    private final Messenger3[] MergeCapacityTake = new Messenger3[CapacityCells];
+
+    public MergerBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
+        super(systemType, numberOfSubSystems , gameState);
         capacity = new PocketMain[CapacityCells];
 
     }
