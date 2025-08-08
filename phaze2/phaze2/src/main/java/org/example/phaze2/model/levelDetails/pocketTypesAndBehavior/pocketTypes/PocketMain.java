@@ -23,7 +23,9 @@ public class PocketMain extends Pocket  implements InitData {
     private HitBox hitBox;
     Pocket behaviour;
     private String GroupId;
+    private boolean capturedByMerger = false;
     private boolean pocketIsLostByDisterbute = false;
+    private boolean lastRound = false;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
     private final double DistractionSteps = 30;
     public PocketMain(PocketTypes type) {
@@ -161,5 +163,21 @@ public class PocketMain extends Pocket  implements InitData {
 
     public void setPocketIsLostByDisterbute(boolean pocketIsLostByDisterbute) {
         this.pocketIsLostByDisterbute = pocketIsLostByDisterbute;
+    }
+
+    public boolean isCapturedByMerger() {
+        return capturedByMerger;
+    }
+
+    public void setCapturedByMerger(boolean capturedByMerger) {
+        this.capturedByMerger = capturedByMerger;
+    }
+
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean lastRound) {
+        this.lastRound = lastRound;
     }
 }

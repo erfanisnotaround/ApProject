@@ -63,6 +63,15 @@ public class WholeMovement {
 
         getStartSystemView();
 
+//        PocketMain ppp = new PocketMain(PocketTypes.Messenger_2);
+//        PocketMain pp = new PocketMain(PocketTypes.Messenger_1);
+//        PocketMain p = new PocketMain(PocketTypes.Messenger_3);
+//        gameState.getVisualConstant().getView().add(p);
+//        gameState.getVisualConstant().getView().add(pp);
+//        gameState.getVisualConstant().getView().add(ppp);
+//        startingSystemView.getCapacity()[0] = pp;
+//        startingSystemView.getCapacity()[1] = pp;
+//        startingSystemView.getCapacity()[2] = pp;
 
 
         for (PocketMain pocket : pockets) {
@@ -90,6 +99,7 @@ public class WholeMovement {
             if (fromSystem != -1) {
                 systemView.getCapacity()[fromSystem] = null;
             }
+
             resumeMovement(pocket , exitConnection);
             return;
         }
@@ -135,8 +145,8 @@ public class WholeMovement {
     public void AddToWaitingSend(SystemView systemView , Connection connection){
         for (int i = 0 ; i < systemView.getCapacity().length ; i++) {
             if (systemView.getCapacity()[i] != null){
-                PocketMain pocket = systemView.getCapacity()[i];
 
+                PocketMain pocket = systemView.getCapacity()[i];
                 SendingPockets(systemView , pocket , i);
 
 
@@ -159,6 +169,7 @@ public class WholeMovement {
 
         SystemView targetSystem = connection.getToPort().getPortInfo().getSystem();
 
+        if (targetSystem.equals(startingSystemView)) pocket.setLastRound(true);
 
 
         ChangeListener<Boolean> l = new ChangeListener<>() {
@@ -172,8 +183,10 @@ public class WholeMovement {
 
                     int coins = pocket.getCoinsPerEntry();
                     coinsManager.Increment(coins);
+
+                    if (pocket.isLastRound()) return;
                     targetSystem.EnterBehave(pocket, speedMultiplier);
-                    if (pocket.isPocketIsLostByDisterbute()){
+                    if (pocket.isPocketIsLostByDisterbute() || pocket.isCapturedByMerger()){
 
                         AddToWaitingSend(targetSystem , connection);
 

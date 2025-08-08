@@ -11,7 +11,7 @@
         "x": 100.0,
         "y": 200.0,
         "isItStartSystem": true,
-        "numberOfSubSystems": 3,
+        "numberOfSubSystems": 2,
         "isTheLightOn": false,
         "SubSystems": [
           {
@@ -25,20 +25,14 @@
             "doesItHavaExitGate": true,
             "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"
-          },
-          {
-            "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": false,
-            "EnterGate": "SQUARE",
-            "ExitGate": "SQUARE"
           }
         ]
       },
       {
-        "systemType": "DESTRUCTIVE",
+        "systemType": "MERGER",
         "systemName": "Backup",
-        "x": 700.0,
-        "y": 200.0,
+        "x": 900.0,
+        "y": 800.0,
         "isItStartSystem": false,
         "numberOfSubSystems": 2,
         "isTheLightOn": true,
@@ -61,9 +55,9 @@
         "systemType": "DISTRIBUTOR",
         "systemName": "Backup2",
         "x": 700.0,
-        "y": 400.0,
+        "y": 200.0,
         "isItStartSystem": false,
-        "numberOfSubSystems": 3,
+        "numberOfSubSystems": 2,
         "isTheLightOn": true,
         "SubSystems": [
           {
@@ -74,12 +68,6 @@
           },
           {
             "doesItHaveEnterGate": true,
-            "doesItHavaExitGate": true,
-            "EnterGate": "SQUARE",
-            "ExitGate": "SQUARE"
-          },
-          {
-            "doesItHaveEnterGate": false,
             "doesItHavaExitGate": true,
             "EnterGate": "SQUARE",
             "ExitGate": "SQUARE"

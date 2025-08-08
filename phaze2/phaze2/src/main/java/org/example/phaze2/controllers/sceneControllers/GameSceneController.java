@@ -21,7 +21,12 @@ import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketViewManager;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.DefaultMerger;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.FlexibleMergePolicy;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.PocketMergePolicy;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.PocketMerger;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.saversOfGame.SaveAndLoadController;
@@ -97,6 +102,14 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         gameState.getVisualConstant().setEffect(effect);
         gameState.getVisualConstant().setRepo(repo);
         gameState.getVisualConstant().setView(view);
+
+
+        PocketMerger merger = new DefaultMerger(view, repo, effect);
+        PocketMergePolicy policy = new FlexibleMergePolicy(4);
+
+        gameState.getMergerConfig().setMerger(merger);
+        gameState.getMergerConfig().setPolicy(policy);
+
 
 
 

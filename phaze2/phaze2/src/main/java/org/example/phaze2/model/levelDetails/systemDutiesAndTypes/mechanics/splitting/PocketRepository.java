@@ -6,6 +6,6 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.
 public class PocketRepository {
     private final Resources res;
     public PocketRepository(Resources res) { this.res = res; }
-    void add(PocketMain p)    { res.getPockets().add(p); }
-    void remove(PocketMain p) { res.getPockets().remove(p); }
+    public void add(PocketMain p)    { res.getPockets().add(p); }
+    public void remove(PocketMain p) { res.getPockets().remove(p); }
 }

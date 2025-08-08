@@ -1,6 +1,7 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting;
 
 import javafx.application.Platform;
+import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypeGroup;
@@ -31,7 +32,7 @@ public class BigPocketSplitter implements PocketSplitter {
         if (!isBigPocket(bigPocket)) return;
 
         if (Platform.isFxApplicationThread()) {
-            doSplit(bigPocket, systemView);            // immediate – no race
+            doSplit(bigPocket, systemView);
         } else {
             Platform.runLater(() -> doSplit(bigPocket, systemView));
         }
@@ -48,16 +49,26 @@ public class BigPocketSplitter implements PocketSplitter {
         view.remove(bigPocket);
         repo.remove(bigPocket);
 
+        gameState.getResources().getPockets().remove(bigPocket);
+
+        WholeMovement wholeMovement = bigPocket.getMovementManager();
         for (int i = 0; i < pieces; i++) {
             PocketMain m3 = new PocketMain(PocketTypes.Messenger_3);
             m3.setGroupId(group);
+
+            m3.setMovementManager(bigPocket.getMovementManager());
+            m3.setAvailableTime(bigPocket.getAvailableTime());
+
             m3.setLayoutX(bigPocket.getLayoutX());
             m3.setLayoutY(bigPocket.getLayoutY());
             effect.apply(m3, group);
 
             view.add(m3);
             repo.add(m3);
-            systemView.getCapacity()[i] = m3;
+            gameState.getResources().getPockets().add(m3);
+
+            wholeMovement.SendingPockets(systemView , m3 , -1);
+
         }
     }
 

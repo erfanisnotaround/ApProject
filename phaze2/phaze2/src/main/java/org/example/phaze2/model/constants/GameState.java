@@ -8,6 +8,7 @@ public final class GameState {
     private volatile boolean AddingANchorAvailable = false;
     private volatile Resources resources = new Resources();
     private volatile VisualConstant visualConstant = new VisualConstant();
+    private volatile MergerConfig mergerConfig = new MergerConfig();
 
     public boolean isMovingSystemsAvailable() {
         return movingSystemsAvailable;
@@ -54,4 +55,11 @@ public final class GameState {
     }
 
 
+    public MergerConfig getMergerConfig() {
+        return mergerConfig;
+    }
+
+    public void setMergerConfig(MergerConfig mergerConfig) {
+        this.mergerConfig = mergerConfig;
+    }
 }

@@ -104,10 +104,10 @@ public class PathMover extends AnimationTimer {
                 return;
             }
 
-            node.setLayoutX(-1000);
-            node.setLayoutY(-1000);
-            node.getHitBox().setLayoutX(-1000);
-            node.getHitBox().setLayoutY(-1000);
+//            node.setLayoutX(-1000);
+//            node.setLayoutY(-1000);
+//            node.getHitBox().setLayoutX(-1000);
+//            node.getHitBox().setLayoutY(-1000);
 
             s = path.total();
             stop();
