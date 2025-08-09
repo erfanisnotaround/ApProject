@@ -61,6 +61,7 @@ public class BigPocketSplitter implements PocketSplitter {
 
             m3.setLayoutX(bigPocket.getLayoutX());
             m3.setLayoutY(bigPocket.getLayoutY());
+            m3.setPocketId(i+group);
             effect.apply(m3, group);
 
             view.add(m3);

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CollisionHandler {
     private final double waveRangeEffect = 100;
-    private final double basicMultiplier = 1;
+    private final double basicMultiplier = 0.3;
     private final int UnitOfNoisePerImpact = 1;
     private final double theUnitOfMeasuring = waveRangeEffect * basicMultiplier;
     private final GameState gameState;
@@ -39,16 +39,16 @@ public class CollisionHandler {
     private void SpreadWave(PocketMain firstPocket, PocketMain secondPocket , Point2D impactPoint) {
         if (!gameState.CanWeSpreadWave()) return;
         for (PocketMain pocket : pockets) {
-
             if (pocket.equals(firstPocket) || pocket.equals(secondPocket)) continue;
-
 
             Point2D impactVector = getImpactVector(impactPoint , pocket.centre());
             double size = Math.hypot(impactVector.getX() , impactVector.getY());
-            if ( size == 0) continue;
-            reducingHp(size , firstPocket);
-            ApplyImpactVector(pocket, impactVector);
+            if (size == 0) continue;
 
+
+            reducingHp(size , pocket);
+
+            ApplyImpactVector(pocket, impactVector);
         }
     }
     private void reducingHp(double impactVectorSize , PocketMain pocket) {
@@ -72,9 +72,8 @@ public class CollisionHandler {
 
     private void ApplyImpactVector(PocketMain pocket , Point2D impactVector) {
 
-        Platform.runLater(() -> {
+            System.out.println("Applying Impact Vector " + impactVector);
             pocket.distract(impactVector.getX(), impactVector.getY());
-        });
 
     }
 

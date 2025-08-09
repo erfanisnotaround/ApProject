@@ -17,13 +17,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CollisionMaker extends Thread {
-    private static final long WAIT_MS = 10;
+    private static final long WAIT_MS = 1;
     private final CollisionController controller;
     private volatile boolean running = true;
     private final GameState gameState;
     public CollisionMaker(List<PocketMain> pockets , GameState gameState) {
         super("CollisionThread");
-        setDaemon(false);                                   // keep JVM alive
+        setDaemon(false);
         setUncaughtExceptionHandler((t, e) -> e.printStackTrace());
         this.gameState = gameState;
         controller = new CollisionController(pockets , gameState);

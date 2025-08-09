@@ -1,6 +1,7 @@
 package org.example.phaze2.model.constants;
 
 import org.example.phaze2.model.hudModels.AbilityAliveManager;
+import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -21,7 +22,7 @@ public final class Resources {
     private List<Connection> connections = new ArrayList<>();
     private Map<String , PocketMain> pocketMainMap = new HashMap<>();
     private Map<String , SystemView> systemViewMap = new HashMap<>();
-
+    private List<PocketMain> FirstOriginalPockets;
     public AbilityAliveManager getAbilityAliveManager() {
         return abilityAliveManager;
     }
@@ -68,5 +69,13 @@ public final class Resources {
 
     public void setSystemViews(List<SystemView> systemViews) {
         this.systemViews = systemViews;
+    }
+
+    public List<PocketMain> getFirstOriginalPockets() {
+        return FirstOriginalPockets;
+    }
+
+    public void setFirstOriginalPockets(List<PocketMain> firstOriginalPockets) {
+        FirstOriginalPockets = firstOriginalPockets;
     }
 }

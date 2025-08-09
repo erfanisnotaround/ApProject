@@ -5,7 +5,7 @@ public enum PositionStatus {
     SETTINGS("/org/example/phaze2/fxmlFiles/SettingsScene.fxml"),
     LEVELS("/org/example/phaze2/fxmlFiles/LevelsScene.fxml"),
     GAME("/org/example/phaze2/fxmlFiles/GameScene.fxml"),
-    GAME_OVER("/org/example/phaze2/fxmlFiles/GameOVerScene.fxml");
+    AFTER_GAME("/org/example/phaze2/fxmlFiles/GameOVerScene.fxml");
 
     private String path;
     PositionStatus(String path) {

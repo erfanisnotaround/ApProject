@@ -15,10 +15,7 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WholeMovement {
     Constants constants = Constants.getInstance();
@@ -63,15 +60,7 @@ public class WholeMovement {
 
         getStartSystemView();
 
-//        PocketMain ppp = new PocketMain(PocketTypes.Messenger_2);
-//        PocketMain pp = new PocketMain(PocketTypes.Messenger_1);
-//        PocketMain p = new PocketMain(PocketTypes.Messenger_3);
-//        gameState.getVisualConstant().getView().add(p);
-//        gameState.getVisualConstant().getView().add(pp);
-//        gameState.getVisualConstant().getView().add(ppp);
-//        startingSystemView.getCapacity()[0] = pp;
-//        startingSystemView.getCapacity()[1] = pp;
-//        startingSystemView.getCapacity()[2] = pp;
+
 
 
         for (PocketMain pocket : pockets) {
@@ -162,6 +151,7 @@ public class WholeMovement {
     }
     public void resumeMovement(PocketMain pocket , Connection connection){
 
+
         if (IsItBig(pocket)) {
             connection.ChangePorts(PortTypes.TRIANGLE);
             connection.getCurve().setHP(connection.getCurve().getHP() - 1);
@@ -177,22 +167,20 @@ public class WholeMovement {
             public void changed(ObservableValue<? extends Boolean> obs,
                                 Boolean oldVal, Boolean newVal) {
 
-                if (!newVal) {
-
-                    obs.removeListener(this);
-
-                    int coins = pocket.getCoinsPerEntry();
-                    coinsManager.Increment(coins);
-
-                    if (pocket.isLastRound()) return;
-                    targetSystem.EnterBehave(pocket, speedMultiplier);
-                    if (pocket.isPocketIsLostByDisterbute() || pocket.isCapturedByMerger()){
-
-                        AddToWaitingSend(targetSystem , connection);
 
 
-                    } else SendingPockets(targetSystem, pocket , -1);
+
+                obs.removeListener(this);
+                int coins = pocket.getCoinsPerEntry();
+                coinsManager.Increment(coins);
+                if (pocket.isLastRound()) return;
+                targetSystem.EnterBehave(pocket, speedMultiplier);
+                if (pocket.isPocketIsLostByDisterbute() || pocket.isCapturedByMerger()){
+                    AddToWaitingSend(targetSystem , connection);
+                } else {
+                    SendingPockets(targetSystem, pocket , -1);
                 }
+
             }
         };
         pocketListeners.put(pocket, l);
@@ -257,6 +245,7 @@ public class WholeMovement {
             systemView.reset();
         }
         for (PocketMain pocket : pockets) {
+
             pocket.getPathMover().reset();
             pocket.setAvailableTime(2000);
             pocket.getPathMover().stop();
@@ -267,11 +256,13 @@ public class WholeMovement {
             pocket.setLayoutX(-1000);
             pocket.setLayoutY(-1000);
             pocket.setItAffected(false);
+            pocket.setLastRound(false);
 
 
             pocket.setBehaviour(pocket.getFirstPocketType());
             pocket.setWhichSystemViewThisPocketIsAffectedBy(null);
         }
+
     }
 
 }

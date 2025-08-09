@@ -9,8 +9,10 @@ import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelSavesAndTheirPojo.CurvePojo;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class PathMover extends AnimationTimer {
-    private Port StarterPort;
+    private static final double EPS = 1e-4;
     private double multiplier = 1;
     private Curve curve;
     private PocketMain node;
@@ -20,6 +22,7 @@ public class PathMover extends AnimationTimer {
     private double a;
     private double commitedAcceleration = 0;
     private long lastNs = -1;
+    private boolean paused = false;
 
     private Point2D latestLineDistance = new Point2D(0, 0);
     private Point2D currentLineDistance = new Point2D(0, 0);
@@ -31,11 +34,11 @@ public class PathMover extends AnimationTimer {
     private double lineDistancePerMoveXForWhole = 0;
     private double lineDistancePerMoveYForWhole = 0;
 
-
+    private final AtomicReference<Point2D> pendingKick = new AtomicReference<>(Point2D.ZERO);
 
     private double lineDistancePerMoveX = 0;
     private double lineDistancePerMoveY = 0;
-    private double STEPS = 1;
+    private double STEPS = 10;
     private double AngleNeeded;
     private boolean rotate;
     public PathMover(double angle) {
@@ -66,6 +69,7 @@ public class PathMover extends AnimationTimer {
         node.setIsItMoved(true);
         curve.setIsItUsed(true);
 
+
         start();
 
 
@@ -73,18 +77,31 @@ public class PathMover extends AnimationTimer {
 
     @Override public void handle(long now) {
 
+        if (paused) return;
 
         if (lastNs < 0) {
             lastNs = now; return;
         }
 
+
+        Point2D kick = pendingKick.getAndSet(Point2D.ZERO);
+        if (kick.getX() != 0 || kick.getY() != 0) {
+            // kick updates the target
+            latestLineDistance = latestLineDistance.add(kick);
+            // per-frame step (tempo-independent)
+            lineDistancePerMoveX = kick.getX() / STEPS;
+            lineDistancePerMoveY = kick.getY() / STEPS;
+        }
+
+        // 2) advance the visual offset toward the target
+        advanceKickTowardsTarget();
+
+
         boolean reachEnd = v >= 0 && s >= path.total();
         boolean reachStart = v <= 0 && s <=0;
 
 
-        if (currentLineDistance.getX() !=  latestLineDistance.getX()) {
-            currentLineDistance = currentLineDistance.add(lineDistancePerMoveX, lineDistancePerMoveY);
-        }
+
 
         currentLineDistanceForWholeMove = currentLineDistanceForWholeMove.add(lineDistancePerMoveXForWhole , lineDistancePerMoveYForWhole);
 
@@ -97,28 +114,21 @@ public class PathMover extends AnimationTimer {
 //        System.out.println(s);
 
 
-        if (reachEnd || reachStart) {
-            if (reachStart){
-                reverse();
-                s=0;
-                return;
-            }
 
-//            node.setLayoutX(-1000);
-//            node.setLayoutY(-1000);
-//            node.getHitBox().setLayoutX(-1000);
-//            node.getHitBox().setLayoutY(-1000);
+        if (reachStart){
+            reverse();
+        }
 
+
+        if (reachEnd) {
             s = path.total();
             stop();
-
             curve.setPocketMovingOnIt(null);
             curve.setIsItUsed(false);
             node.setIsItMoved(false);
-
             node.StopStrategyMoving();
-            return;
 
+            return;
         }
 
 
@@ -150,6 +160,8 @@ public class PathMover extends AnimationTimer {
             node.setLayoutX(cx);
             node.setLayoutY(cy);
 
+
+
             for (PocketMain pocketMain : Constants.getInstance().getPockets()) {
                 pocketMain.getPathMover().stop();
             }
@@ -172,6 +184,9 @@ public class PathMover extends AnimationTimer {
         latestLineDistance = latestLineDistance.multiply(0);
         start();
     }
+    public void enqueueImpulse(double dx, double dy) {
+        pendingKick.updateAndGet(prev -> new Point2D(prev.getX() + dx, prev.getY() + dy));
+    }
 
     public void Initialize(){
         this.s = 0;
@@ -191,12 +206,6 @@ public class PathMover extends AnimationTimer {
         return curve;
     }
 
-    public void AddingImpactVector(double x, double y) {
-
-        latestLineDistance = latestLineDistance.add(x, y);
-        lineDistancePerMoveX = x * multiplier/STEPS;
-        lineDistancePerMoveY = y * multiplier/STEPS;
-    }
 
     public void AddWholeMoveVector(double x, double y ) {
         lineDistancePerMoveXForWhole = x * multiplier;
@@ -256,6 +265,8 @@ public class PathMover extends AnimationTimer {
             v *= -1;
             a *= -1;
         }
+
+        System.out.println("backward");
     }
     public double getAngleNeeded(){
         return AngleNeeded;
@@ -300,5 +311,38 @@ public class PathMover extends AnimationTimer {
     public double getCommitedAcceleration(){
         return commitedAcceleration;
     }
+    private void advanceKickTowardsTarget() {
+        // amount still to apply
+        Point2D remaining = latestLineDistance.subtract(currentLineDistance);
+        double rx = remaining.getX();
+        double ry = remaining.getY();
 
+        // close enough? snap and stop stepping
+        if (Math.abs(rx) <= EPS && Math.abs(ry) <= EPS) {
+            currentLineDistance = latestLineDistance;
+            lineDistancePerMoveX = 0;
+            lineDistancePerMoveY = 0;
+            return;
+        }
+
+        // move by at most one "step" toward the target so we don't overshoot
+        double stepX = Math.copySign(Math.min(Math.abs(lineDistancePerMoveX), Math.abs(rx)), rx);
+        double stepY = Math.copySign(Math.min(Math.abs(lineDistancePerMoveY), Math.abs(ry)), ry);
+
+        currentLineDistance = currentLineDistance.add(stepX, stepY);
+    }
+    public void stopAndDetachNow() {
+        stop();
+        if (curve != null) {
+            curve.setPocketMovingOnIt(null);
+            curve.setIsItUsed(false);
+        }
+
+    }
+    public void pause(){
+        paused = true;
+    }
+    public void resume(){
+        paused = false;
+    }
 }

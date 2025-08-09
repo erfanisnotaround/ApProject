@@ -1,5 +1,7 @@
 package org.example.phaze2.controllers.sceneControllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,6 +9,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.example.phaze2.controllers.abilityManagers.AbilityManager;
 import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
@@ -15,6 +18,7 @@ import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
 import org.example.phaze2.controllers.moverController.checkings.AllMovingAndReadyCheckers;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
 import org.example.phaze2.controllers.shopController.ShopController;
+import org.example.phaze2.controllers.winAndPocketLoss.*;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.constants.GameState;
@@ -30,6 +34,10 @@ import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merg
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.saversOfGame.SaveAndLoadController;
+import org.example.phaze2.model.winAndPocketLossModel.DefaultGameDataProvider;
+import org.example.phaze2.model.winAndPocketLossModel.GameOverType;
+import org.example.phaze2.model.winAndPocketLossModel.PocketLossCondition;
+import org.example.phaze2.model.winAndPocketLossModel.WinCondition;
 import org.example.phaze2.viewRelated.bringingLevelToReality.SystemVisualizer;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
@@ -39,6 +47,7 @@ import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 import org.example.phaze2.viewRelated.hudView.MakeHUD;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneController implements Maker, ControlledScreen , DataReceivingController<GoingToGamaInformation> {
@@ -140,11 +149,16 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         Constants.getInstance().getSystemViewMap().clear();
 
 
+
+
         Constants.getInstance().getPockets().clear();
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main , gameState);
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI , gameState);
         pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
+
+        List<PocketMain> pocketMains =  new ArrayList<>(pockets);
+        gameState.getResources().setFirstOriginalPockets(pocketMains);
 
 
         Constants.getInstance().getSystemViews().addAll(systemViews);
@@ -211,13 +225,46 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         allMovingAndReadyCheckers.check();
 
 
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1) , event -> {
+            System.out.println("dd");
+        }));
+        timeline.setCycleCount(-1);
+//        timeline.play();
+
+
+
+
+
+        DeadPocketPlacementStrategy lossBin =
+                new SimpleCornerLossBin(ContainerPane, 20, 20, 32, 8);
+
+        PocketReaper reaper = new PocketReaper(pockets, lossBin);
+
+        DefaultGameDataProvider dataProvider = new DefaultGameDataProvider(gameState);
+        GameOverEvaluator evaluator = new GameOverEvaluator(new FxSceneGameOverHandler(sceneManager))
+                .add(new PocketLossCondition(dataProvider), GameOverType.POCKET_LOSS)
+                .add(new WinCondition(dataProvider),        GameOverType.WIN);
+
+        BackgroundConditionScheduler bgScheduler =
+                new BackgroundConditionScheduler(reaper, evaluator, new FxSceneGameOverHandler(sceneManager));
+
+        bgScheduler.start();
+
+        gameState.getPocketWinAndLoss().setLossBin(lossBin);
+        gameState.getPocketWinAndLoss().setReaper(reaper);
+        gameState.getPocketWinAndLoss().setEvaluator(evaluator);
+        gameState.getPocketWinAndLoss().setDataProvider(dataProvider);
+
 
     }
     void handleActionPressed(SceneActions action) {
 
          main.requestFocus();
         switch (action) {
-            case StartTempo -> movementMaker.StartSending( gameModel.getBasicTempoMultiplier() ,gameModel.getAvailableNeededTime());
+            case StartTempo -> {
+                movementMaker.StartSending( gameModel.getBasicTempoMultiplier() ,gameModel.getAvailableNeededTime());
+                gameState.getPocketWinAndLoss().getEvaluator().reset();
+            }
             case OpenShop -> {
                 ShopController.OpenShop();
             }
@@ -260,6 +307,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     void startButtonClicked() {
         main.requestFocus();
         gameModel.StartButtonClicked();
+        gameState.getPocketWinAndLoss().getEvaluator().reset();
         movementMaker.StartSending(gameModel.getBasicMoveMultiplier() , gameModel.getAvailableNeededTime());
     }
     void chooseTheDestinationTimeOfTemporal(double time){

@@ -54,13 +54,11 @@ public class CollisionController {
         if (gameState.DoesCollideCounts()){
             for (CollisionPair pair : currentCollisionPairs) {
                 if(!previousCollisionPairs.contains(pair)) {
-                    collisionHandler.SpreadImpact(pair);
-                    Platform.runLater(() -> {
+                    Platform.runLater(()->{
                         pair.getFirstPocket().setIsItCollided(true);
                         pair.getSecondPocket().setIsItCollided(true);
                     });
-                    System.out.println(" Collision detected ");
-
+                    collisionHandler.SpreadImpact(pair);
                 }
             }
             for (CollisionPair pair : previousCollisionPairs) {
