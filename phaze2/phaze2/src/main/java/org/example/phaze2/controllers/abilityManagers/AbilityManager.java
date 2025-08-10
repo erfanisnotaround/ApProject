@@ -24,7 +24,7 @@ public class AbilityManager {
     Map<AbilityTypes , AbilityExecutable> executableMap = new HashMap<>();
 
     public AbilityManager(WholeMovement wholeMovement , CoinsManager coinsManager , FollowerSpawner followerSpawner , GameState gameState) {
-        this.aliveAbilities = gameState.getResources().getAbilityAliveManager();
+        this.aliveAbilities = gameState.getHudStuffDAta().getAbilityAliveManager();
         this.wholeMovement = wholeMovement;
         this.coinManager = coinsManager;
         this.gameContext = new GameContext(wholeMovement , Constants.getInstance().getPockets(), Constants.getInstance().getSystemViews(),

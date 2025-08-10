@@ -4,4 +4,5 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.
 
 public interface DeadPocketPlacementStrategy {
     void place(PocketMain pocket);
+    void reset();
 }

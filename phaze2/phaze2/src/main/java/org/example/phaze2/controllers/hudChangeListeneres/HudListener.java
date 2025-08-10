@@ -7,10 +7,8 @@ import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.abilities.AbilityTypes;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
-import org.example.phaze2.model.hudModels.AbilityAliveManager;
-import org.example.phaze2.model.hudModels.CoinsManager;
-import org.example.phaze2.model.hudModels.HUDLabelsIndex;
-import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
+import org.example.phaze2.model.hudModels.*;
+import org.example.phaze2.model.winAndPocketLossModel.GameOverType;
 import org.example.phaze2.viewRelated.hudView.AbilityLabels;
 import org.example.phaze2.viewRelated.hudView.MakeHUD;
 
@@ -28,6 +26,8 @@ public class HudListener extends AnimationTimer {
     private WireManager wireManager;
     private GameState gameState;
     private AbilityAliveManager abilityAliveManager;
+    private BasicTransfer basicTransfer;
+
 
     public HudListener(MakeHUD makeHUD , GameState gameState) {
         this.makeHUD = makeHUD;
@@ -42,7 +42,8 @@ public class HudListener extends AnimationTimer {
 
     @Override
     public void handle(long l) {
-        abilityAliveManager = gameState.getResources().getAbilityAliveManager();
+        abilityAliveManager = gameState.getHudStuffDAta().getAbilityAliveManager();
+        basicTransfer = gameState.getHudStuffDAta().getBasicTransfer();
         for (Map.Entry<Integer, AbilityLabels> entry : AbilityLAbelsMap.entrySet()) {
             Integer key = entry.getKey();
             AbilityLabels abilityLabels = entry.getValue();
@@ -62,8 +63,9 @@ public class HudListener extends AnimationTimer {
 
         normalLabelsMap.get(HUDLabelsIndex.Coins.getNumberToAccessLabel()).setText("Coins : " + coinsManager.getNumberOfCoins());
         normalLabelsMap.get(HUDLabelsIndex.WireLeft.getNumberToAccessLabel()).setText("Wire Left : " + wireManager.remaining());
-//        normalLabelsMap.get(HUDLabelsIndex.PocketLoss.getNumberToAccessLabel()).setText("PocketLoss : " + numberOfPocketLossManager.getPocketLoss());
-
+        int pocektLoss = basicTransfer.FirstFactor(GameOverType.POCKET_LOSS);
+        int total = basicTransfer.SecondFactor(GameOverType.POCKET_LOSS);
+        normalLabelsMap.get(HUDLabelsIndex.PocketLoss.getNumberToAccessLabel()).setText("Loss relation : " + pocektLoss + " / " + total);
 
 
 

@@ -1,6 +1,7 @@
 // src/main/java/org/example/phaze2/model/winAndPocketLossModel/PocketLossCondition.java
 package org.example.phaze2.model.winAndPocketLossModel;
 
+import javafx.geometry.Point2D;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.IdentityHashMap;
@@ -16,16 +17,15 @@ public class PocketLossCondition implements GameCondition {
 
     @Override public boolean check() {
         List<PocketMain> pockets = data.getAllPockets();
+        lostSum = 0;
         if (totalMaxHp < 0) {
             totalMaxHp = pockets.stream().mapToInt(PocketMain::getMaxHp).sum();
         }
 
         for (PocketMain p : pockets) {
-                System.out.println(p.getHP() + " " + p.getMaxHp() + " " + p.getType());
             if (p.getHP() <= 0) {
 
                 lostSum += p.getMaxHp();
-
 
             }
         }
@@ -37,7 +37,16 @@ public class PocketLossCondition implements GameCondition {
     }
 
     @Override
+    public int[] statusAtFiring() {
+        int[] status = new int[2];
+        status[0] = lostSum;
+        status[1] = totalMaxHp;
+        return status;
+    }
+
+    @Override
     public void reset() {
-        
+        lostSum = 0;
+        totalMaxHp = -1;
     }
 }

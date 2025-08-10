@@ -48,12 +48,13 @@ public class WholeMovement {
         exitConnections = constants.getExitConnections();
         pockets = constants.getPockets();
         systemViews = constants.getSystemViews();
-        startAvailableChecker = new StartAvailableChecker(systemViews);
+        startAvailableChecker = new StartAvailableChecker(systemViews , gameState.getResources().getConnections());
         this.coinsManager = coinsManager;
         this.gameState = gameState;
 
     }
     public void StartSending(double speedMultiplier , double AvailableTime){
+        if (!startAvailableChecker.canWeStartConnections()) return;
         this.speedMultiplier = speedMultiplier;
         System.out.println("StartSending");
         Reset();

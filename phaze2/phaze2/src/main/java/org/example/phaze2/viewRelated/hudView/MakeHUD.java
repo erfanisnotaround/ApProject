@@ -49,7 +49,7 @@ public class MakeHUD {
             lbl.setAlignment(Pos.CENTER);
             lbl.setPrefSize(cellW, cellH);
 
-            normalLabelsMap.put(i, lbl);
+            normalLabelsMap.put(i + 1, lbl);
             int col = i % 3, row = i / 3;
             SetPositionAndStyle("horrifying-label1" ,lbl ,new Point2D(col * cellW , row * cellH));
 

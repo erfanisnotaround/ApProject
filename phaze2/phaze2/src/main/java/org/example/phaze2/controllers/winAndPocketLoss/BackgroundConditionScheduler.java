@@ -34,7 +34,7 @@ public class BackgroundConditionScheduler {
 
             var dead = reaper.detectDead();
             if (!dead.isEmpty()) {
-                Platform.runLater(() -> reaper.applyOnFx(dead));
+                reaper.applyOnFx(dead);
             }
             var type = evaluator.evaluateOnce();
 
@@ -46,4 +46,8 @@ public class BackgroundConditionScheduler {
     }
 
     public void stop() { ses.shutdownNow(); }
+    public void reset(){
+        reaper.reset();
+        evaluator.reset();
+    }
 }

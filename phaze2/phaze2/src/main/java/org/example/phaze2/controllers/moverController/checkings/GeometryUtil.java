@@ -5,7 +5,6 @@ import javafx.scene.shape.Polyline;
 
 public final class GeometryUtil {
 
-    /* Region-code bits for Cohen–Sutherland */
     private static final int INSIDE = 0;
     private static final int LEFT   = 1;
     private static final int RIGHT  = 2;
@@ -14,7 +13,6 @@ public final class GeometryUtil {
 
     public static boolean polylineIntersectsRect(Polyline pl, Bounds r) {
 
-        // 0) AABB reject – almost free
         if (!pl.getBoundsInParent().intersects(r)) return false;
 
         var pts = pl.getPoints();
@@ -27,7 +25,7 @@ public final class GeometryUtil {
         return false;
     }
 
-    /* Cohen–Sutherland, no allocations */
+
     private static boolean segmentIntersectsRect(double x1, double y1,
                                                  double x2, double y2,
                                                  Bounds r) {
@@ -46,7 +44,6 @@ public final class GeometryUtil {
                 return false;
             }
 
-            // choose an endpoint that is outside
             int outCode = (code1 != 0) ? code1 : code2;
             double x = 0, y = 0;
 
@@ -64,7 +61,6 @@ public final class GeometryUtil {
                 x = xmin;
             }
 
-            // move the outside point to the intersection
             if (outCode == code1) {
                 x1 = x; y1 = y; code1 = computeCode(x1, y1, xmin, ymin, xmax, ymax);
             } else {

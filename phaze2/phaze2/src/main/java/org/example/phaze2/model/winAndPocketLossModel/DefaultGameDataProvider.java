@@ -21,6 +21,12 @@ public class DefaultGameDataProvider implements GameDataProvider {
     @Override public int getStartedCount()     { return started.get(); }
     @Override public int getDeliveredCount()   { return delivered.get(); }
 
+    @Override
+    public void reset() {
+        started.set(0);
+        delivered.set(0);
+    }
+
 
     public void incStarted()   { started.incrementAndGet(); }
     public void incDelivered() { delivered.incrementAndGet(); }

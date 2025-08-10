@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class Resources {
-    private final AbilityAliveManager abilityAliveManager = new AbilityAliveManager();
 
     private List<SystemView> systemViews = new ArrayList<>();
     private final List<PocketMain> pockets = new CopyOnWriteArrayList<>();
@@ -23,9 +22,6 @@ public final class Resources {
     private Map<String , PocketMain> pocketMainMap = new HashMap<>();
     private Map<String , SystemView> systemViewMap = new HashMap<>();
     private List<PocketMain> FirstOriginalPockets;
-    public AbilityAliveManager getAbilityAliveManager() {
-        return abilityAliveManager;
-    }
 
     public Map<String, SystemView> getSystemViewMap() {
         return systemViewMap;

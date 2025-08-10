@@ -40,7 +40,7 @@ public class Messenger3 extends Pocket implements Movable {
         speed = 200;
         acceleration = 5;
         preferredType = PortTypes.INFINITY;
-        angleNeeded = 90;
+        angleNeeded = 0;
         setCoinsPerEntry(1);
         coinsPerEntry = 1;
     }

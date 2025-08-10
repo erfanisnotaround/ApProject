@@ -8,4 +8,5 @@ public interface GameDataProvider {
     List<PocketMain> getAllPockets();   // live list from GameState
     int getStartedCount();
     int getDeliveredCount();
+    void reset();
 }

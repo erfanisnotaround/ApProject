@@ -78,12 +78,22 @@
     "pockets": [
       {
         "pocketName": "manig",
-        "type": " SECRET_MESSENGER",
+        "type": " Messenger_3",
         "delay": 1.5
       },
       {
         "pocketName": "manig",
-        "type": " Messenger_3",
+        "type": " Messenger_2",
+        "delay": 1.5
+      },
+      {
+        "pocketName": "manig",
+        "type": " Messenger_2",
+        "delay": 1.5
+      },
+      {
+        "pocketName": "manig",
+        "type": " Messenger_2",
         "delay": 1.5
       }
     ]

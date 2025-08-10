@@ -10,6 +10,7 @@ public final class GameState {
     private volatile VisualConstant visualConstant = new VisualConstant();
     private volatile MergerConfig mergerConfig = new MergerConfig();
     private volatile PocketWinAndLoss pocketWinAndLoss = new PocketWinAndLoss();
+    private volatile HUDStuffDAta hudStuffDAta = new HUDStuffDAta();
 
     public boolean isMovingSystemsAvailable() {
         return movingSystemsAvailable;
@@ -70,5 +71,13 @@ public final class GameState {
 
     public void setPocketWinAndLoss(PocketWinAndLoss pocketWinAndLoss) {
         this.pocketWinAndLoss = pocketWinAndLoss;
+    }
+
+    public HUDStuffDAta getHudStuffDAta() {
+        return hudStuffDAta;
+    }
+
+    public void setHudStuffDAta(HUDStuffDAta hudStuffDAta) {
+        this.hudStuffDAta = hudStuffDAta;
     }
 }

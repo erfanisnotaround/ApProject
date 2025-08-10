@@ -88,7 +88,8 @@ public class Constants {
         return connections;
     }
 
-    public Map<String, PocketMain> getPocketMainMap() {
+    public Map<String, PocketMain> getPocketMainMap()
+    {
         return pocketMainMap;
     }
 

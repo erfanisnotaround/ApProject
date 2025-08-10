@@ -23,6 +23,7 @@ import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SceneActions;
+import org.example.phaze2.model.hudModels.BasicTransfer;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
@@ -71,7 +72,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private final GameState gameState = new GameState();
     WholeMovement movementMaker = new WholeMovement(coinsManager , gameState);
     private final AllMovingAndReadyCheckers allMovingAndReadyCheckers = new AllMovingAndReadyCheckers(gameState);
-
+    private BasicTransfer basicTransfer;
     List<PocketMain> pockets;
     private Scene scene;
 
@@ -221,7 +222,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         engine = new CollisionMaker(pockets , gameState);
         engine.start();
-        hudListener.Start();
+
         allMovingAndReadyCheckers.check();
 
 
@@ -236,7 +237,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 
         DeadPocketPlacementStrategy lossBin =
-                new SimpleCornerLossBin(ContainerPane, 20, 20, 32, 8);
+                new SimpleCornerLossBin(ContainerPane, 1500, 900, 32, 8);
 
         PocketReaper reaper = new PocketReaper(pockets, lossBin);
 
@@ -254,6 +255,13 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         gameState.getPocketWinAndLoss().setReaper(reaper);
         gameState.getPocketWinAndLoss().setEvaluator(evaluator);
         gameState.getPocketWinAndLoss().setDataProvider(dataProvider);
+        gameState.getPocketWinAndLoss().setBgScheduler(bgScheduler);
+
+
+        basicTransfer = new BasicTransfer(gameState);
+        gameState.getHudStuffDAta().setBasicTransfer(basicTransfer);
+
+        hudListener.Start();
 
 
     }
@@ -262,8 +270,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
          main.requestFocus();
         switch (action) {
             case StartTempo -> {
+                gameState.getPocketWinAndLoss().getBgScheduler().reset();
                 movementMaker.StartSending( gameModel.getBasicTempoMultiplier() ,gameModel.getAvailableNeededTime());
-                gameState.getPocketWinAndLoss().getEvaluator().reset();
             }
             case OpenShop -> {
                 ShopController.OpenShop();
@@ -307,7 +315,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     void startButtonClicked() {
         main.requestFocus();
         gameModel.StartButtonClicked();
-        gameState.getPocketWinAndLoss().getEvaluator().reset();
+        gameState.getPocketWinAndLoss().getBgScheduler().reset();
         movementMaker.StartSending(gameModel.getBasicMoveMultiplier() , gameModel.getAvailableNeededTime());
     }
     void chooseTheDestinationTimeOfTemporal(double time){

@@ -13,6 +13,7 @@ public final class PocketWinAndLoss {
 
     private DefaultGameDataProvider dataProvider;
     private GameOverEvaluator evaluator;
+    private BackgroundConditionScheduler bgScheduler;
 
     public DeadPocketPlacementStrategy getLossBin() {
         return lossBin;
@@ -44,5 +45,13 @@ public final class PocketWinAndLoss {
 
     public void setEvaluator(GameOverEvaluator evaluator) {
         this.evaluator = evaluator;
+    }
+
+    public BackgroundConditionScheduler getBgScheduler() {
+        return bgScheduler;
+    }
+
+    public void setBgScheduler(BackgroundConditionScheduler bgScheduler) {
+        this.bgScheduler = bgScheduler;
     }
 }

@@ -1,6 +1,7 @@
 // org/example/phaze2/controllers/winAndPocketLoss/PocketReaper.java
 package org.example.phaze2.controllers.winAndPocketLoss;
 
+import javafx.application.Platform;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.*;
@@ -17,7 +18,6 @@ public class PocketReaper {
     }
 
     public List<PocketMain> detectDead() {
-        System.out.println("fired3");
         List<PocketMain> dead = new ArrayList<>();
         for (PocketMain p : pockets) {
             if (p.getHP() <= 0 && !reaped.contains(p)) {
@@ -25,14 +25,19 @@ public class PocketReaper {
                 dead.add(p);
             }
         }
-        System.out.println("fired4");
         return dead;
     }
 
-    public void applyOnFx(java.util.List<PocketMain> dead) {
+    public void applyOnFx(List<PocketMain> dead) {
         for (PocketMain p : dead) {
-            p.getPathMover().stopAndDetachNow();      // touches JavaFX – must be FX
-            placement.place(p);                       // e.g., move to a loss bin
+            Platform.runLater(() -> {
+                p.getPathMover().stopAndDetachNow();
+            });
+            placement.place(p);
         }
+    }
+    public void reset(){
+        reaped.clear();
+        placement.reset();
     }
 }

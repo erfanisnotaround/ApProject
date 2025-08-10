@@ -27,4 +27,10 @@ public class SimpleCornerLossBin implements DeadPocketPlacementStrategy {
             p.toFront();
         });
     }
+
+    @Override
+    public void reset() {
+        index = 0;
+    }
+
 }

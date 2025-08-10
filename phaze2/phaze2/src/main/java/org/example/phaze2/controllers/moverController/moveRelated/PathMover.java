@@ -86,14 +86,11 @@ public class PathMover extends AnimationTimer {
 
         Point2D kick = pendingKick.getAndSet(Point2D.ZERO);
         if (kick.getX() != 0 || kick.getY() != 0) {
-            // kick updates the target
             latestLineDistance = latestLineDistance.add(kick);
-            // per-frame step (tempo-independent)
             lineDistancePerMoveX = kick.getX() / STEPS;
             lineDistancePerMoveY = kick.getY() / STEPS;
         }
 
-        // 2) advance the visual offset toward the target
         advanceKickTowardsTarget();
 
 
@@ -111,9 +108,6 @@ public class PathMover extends AnimationTimer {
 
         s += v * dt + 0.5 * a * dt * dt;
         v += a * dt;
-//        System.out.println(s);
-
-
 
         if (reachStart){
             reverse();
@@ -265,8 +259,6 @@ public class PathMover extends AnimationTimer {
             v *= -1;
             a *= -1;
         }
-
-        System.out.println("backward");
     }
     public double getAngleNeeded(){
         return AngleNeeded;
@@ -332,11 +324,12 @@ public class PathMover extends AnimationTimer {
         currentLineDistance = currentLineDistance.add(stepX, stepY);
     }
     public void stopAndDetachNow() {
-        stop();
         if (curve != null) {
-            curve.setPocketMovingOnIt(null);
             curve.setIsItUsed(false);
+            curve.setPocketMovingOnIt(null);
         }
+        stop();
+
 
     }
     public void pause(){
