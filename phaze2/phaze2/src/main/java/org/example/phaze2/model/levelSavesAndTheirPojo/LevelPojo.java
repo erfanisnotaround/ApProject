@@ -6,6 +6,7 @@ public class LevelPojo {
     private List<PocketPojo> pockets;
     private List<SystemsPojo> systems;
     private List<ConnectionPojo> connections;
+    private LevelCurrentDetailsPojo currentDetails;
 
 
 
@@ -31,5 +32,13 @@ public class LevelPojo {
 
     public void setConnections(List<ConnectionPojo> connections) {
         this.connections = connections;
+    }
+
+    public LevelCurrentDetailsPojo getCurrentDetails() {
+        return currentDetails;
+    }
+
+    public void setCurrentDetails(LevelCurrentDetailsPojo currentDetails) {
+        this.currentDetails = currentDetails;
     }
 }

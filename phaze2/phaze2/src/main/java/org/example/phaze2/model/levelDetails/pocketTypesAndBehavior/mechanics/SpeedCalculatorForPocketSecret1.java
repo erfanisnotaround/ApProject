@@ -2,6 +2,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
 
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
@@ -19,10 +20,11 @@ public class SpeedCalculatorForPocketSecret1{
     private PathMover pathMover;
     private double RealMultiplier = 1;
 
-    private Map<Port, Connection> connections = Constants.getInstance().getExitConnections();
-    public SpeedCalculatorForPocketSecret1(SecretPocket1 pocketMain) {
+    private Map<Port, Connection> connections ;
+    public SpeedCalculatorForPocketSecret1(SecretPocket1 pocketMain , GameState gameState) {
         this.pocketSecret1 = pocketMain;
         this.pathMover = pocketMain.getPathMover();
+        connections = gameState.getResources().getExitConnections();
     }
 
 

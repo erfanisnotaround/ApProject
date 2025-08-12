@@ -1,9 +1,16 @@
 package org.example.phaze2.model.saversOfGame;
 
 import javafx.geometry.Point2D;
+import org.example.phaze2.controllers.abilityManagers.AbilityManager;
+import org.example.phaze2.controllers.abilityManagers.following.FollowerAbilityController;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.abilities.AbilityTypes;
+import org.example.phaze2.model.abilities.mechanics.followers.Follower;
+import org.example.phaze2.model.abilities.mechanics.followers.FollowerFactory;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
+import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelSavesAndTheirPojo.*;
@@ -11,20 +18,32 @@ import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LoadHandler {
-    Constants constants = Constants.getInstance();
-    List<PocketMain> pocketMains = constants.getPockets();
-    List<SystemView> systemViews = constants.getSystemViews();
-    List<Connection> connections = constants.getConnections();
 
-    Map<String , PocketMain> pocketMainMap = constants.getPocketMainMap();
-    Map<String , SystemView> systemViewMap = constants.getSystemViewMap();
+    List<PocketMain> pocketMains;
+    List<SystemView> systemViews;
+    List<Connection> connections;
+
+    Map<String , PocketMain> pocketMainMap;
+    Map<String , SystemView> systemViewMap;
 
     private ConnectionUI connectionUI;
+    private LoadAndSaveCompleterNecessaries loadCompleterNecessaries;
+    private FollowerAbilityController followerAbilityController;
+    private GameState gameState;
 
-    public LoadHandler(ConnectionUI connectionUI) {
-        this.connectionUI = connectionUI;
+    public LoadHandler(LoadAndSaveCompleterNecessaries loadCompleterNecessaries) {
+        this.loadCompleterNecessaries = loadCompleterNecessaries;
+        this.connectionUI = loadCompleterNecessaries.getConnectionUI();
+        this.followerAbilityController = loadCompleterNecessaries.getFollowerAbilityController();
+        this.gameState = loadCompleterNecessaries.getGameState();
+        pocketMains = gameState.getResources().getPockets();
+        systemViews = gameState.getResources().getSystemViews();
+        connections = gameState.getResources().getConnections();
+        pocketMainMap = gameState.getResources().getPocketMainMap();
+        systemViewMap = gameState.getResources().getSystemViewMap();
     }
 
 
@@ -34,9 +53,11 @@ public class LoadHandler {
         List<ConnectionPojo> connectionPojo = InfoOfLevel.getConnections();
 
 
+        loadLevelThings(InfoOfLevel.getCurrentDetails());
         SetPockets(pocketPojo);
         SetSystemViews(systemsPojo);
         SetConnections(connectionPojo);
+
     }
     private void SetPockets(List<PocketPojo> pocketPojoList) {
 
@@ -54,6 +75,7 @@ public class LoadHandler {
         targetPocket.setHP(pocketPojo.getHP());
         targetPocket.setIsItCollided(pocketPojo.isItCollided());
         targetPocket.setIsItMoved(pocketPojo.isItMoved());
+        System.out.println(pocketPojo.isItMoved());
 
         targetPocket.setDelay(pocketPojo.getDelay());
         targetPocket.setFirstPocketType(pocketPojo.getFirstPocketType());
@@ -162,12 +184,14 @@ public class LoadHandler {
             curve.setPocketMovingOnIt(pocketMain);
 
             pocketMain.getPathMover().setCurve(curve);
+
         }
         else curve.setPocketMovingOnIt(null);
 
         for (AnchorPojo anchorPojo : curvePojo.getMiddlePoints()) {
             setMiddlePoints(curve , anchorPojo);
         }
+        setFollowers(curvePojo);
 
         return curve;
 
@@ -177,6 +201,26 @@ public class LoadHandler {
         anchor.setLatestCord(new Point2D(anchorPojo.getLatestCordX() , anchorPojo.getLatestCordY()));
         curve.getAnchors().add(anchor);
     }
+    private void setFollowers(CurvePojo curvePojo) {
+        for (FollowerPojo followerPojo : curvePojo.getFollowers()) {
+            Follower follower  = FollowerFactory.createFollower(followerPojo.getFollowerType());
+            follower.setRatio(followerPojo.getRatio());
+        }
+    }
 
+    private void loadLevelThings(LevelCurrentDetailsPojo levelCurrentDetailsPojo) {
+        CoinsManager coinsManager = loadCompleterNecessaries.getCoinsManager();
+        coinsManager.setNumberOfCoins(levelCurrentDetailsPojo.getCoinsHave());
+        setAbilities(levelCurrentDetailsPojo.getAliveAbilities());
+
+    }
+    private void setAbilities(Set<AbilityExecutorPojo> abilities) {
+        loadCompleterNecessaries.getAfterPreShow().getAbilityInfo().clear();
+        for (AbilityExecutorPojo abilityExecutorPojo : abilities) {
+            loadCompleterNecessaries.getAfterPreShow().getAbilityInfo().add(abilityExecutorPojo);
+            loadCompleterNecessaries.getAbilityAliveManager().AddAliveAbility(abilityExecutorPojo.getAbilityType());
+            loadCompleterNecessaries.getAbilityManager().RegisterAbility(abilityExecutorPojo.getAbilityType());
+        }
+    }
 
 }

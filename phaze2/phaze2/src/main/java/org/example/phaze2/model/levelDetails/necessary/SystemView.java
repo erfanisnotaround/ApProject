@@ -35,7 +35,7 @@ public class SystemView extends Pane implements SystemBehavior  {
     protected PocketMain[] capacity = new PocketMain[5];
     protected ArrayList<SubSystemView> SubSystems = new ArrayList<>();
     protected BooleanProperty IsItDown = new SimpleBooleanProperty(false);
-    protected PathPrioritizing pathPrioritizing = new PathPrioritizing();
+    protected PathPrioritizing pathPrioritizing;
     protected Random random = new Random();
     private Point2D lastGoodCord;
     private final GameState gameState;
@@ -43,6 +43,7 @@ public class SystemView extends Pane implements SystemBehavior  {
     public SystemView(SystemTypes systemType , int numberOfSubSystems , GameState gameState) {
         this.numberOfSubSystems = numberOfSubSystems;
         this.gameState = gameState;
+        pathPrioritizing = new PathPrioritizing(gameState);
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
         setPrefSize(systemWidth, systemHeight);
         this.systemType = systemType;

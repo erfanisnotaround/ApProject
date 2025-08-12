@@ -20,7 +20,7 @@ public class Scroll_Of_SisyPhus implements AbilityExecutable {
     }
 
     @Override
-    public void execute(GameContext context) {
+    public void execute(GameContext context , double length) {
         context.getGameState().setWeAreAddingAbility(true);
         lastUsed = context.now();
         context.coins.Decrement(coinsCost);
@@ -36,4 +36,6 @@ public class Scroll_Of_SisyPhus implements AbilityExecutable {
     public long lastUsed() {
         return 0;
     }
+
+
 }

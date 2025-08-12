@@ -2,6 +2,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
@@ -17,13 +18,13 @@ import java.util.Map;
 public class SecretMessenger extends Pocket implements Movable {
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/Arcane_Seal.png").toExternalForm());
     Pocket behavior;
-    public SecretMessenger(PocketTypes type) {
-        super(type);
+    public SecretMessenger(PocketTypes type , GameState gameState) {
+        super(type , gameState);
         Initialize();
     }
     private void chooseTheMoveBehavior(){
         int randomBehavior = random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size());
-        behavior = PocketMoveFactory.giveType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior));
+        behavior = PocketMoveFactory.giveType(PocketTypeGroup.MESSENGER.getGroups().get(randomBehavior) , getGameState());
         behavior.setPathMover(pathMover);
         preferredType = behavior.getPreferredType();
         HP = MaxHp = behavior.getMaxHp();
@@ -49,7 +50,6 @@ public class SecretMessenger extends Pocket implements Movable {
         setScaleX(0.15);
         setScaleY(0.15);
 
-        pathMover = new PathMover(0);
         chooseTheMoveBehavior();
     }
 

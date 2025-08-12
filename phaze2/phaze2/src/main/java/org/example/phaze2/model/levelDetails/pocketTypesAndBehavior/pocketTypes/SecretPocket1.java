@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -26,13 +27,14 @@ public class SecretPocket1 extends Pocket implements Movable {
     private static final long   POLL_NS     = 40_000_000;
 
     private boolean IsRunning = false;
-    SpeedCalculatorForPocketSecret1 speedCalculator = new SpeedCalculatorForPocketSecret1(this);
+    SpeedCalculatorForPocketSecret1 speedCalculator;
 
 
     private AnimationTimer regulator;     // slow-down brain
     private SystemView targetSystem;
-    public SecretPocket1(PocketTypes type) {
-        super(type);
+    public SecretPocket1(PocketTypes type , GameState gameState) {
+        super(type , gameState);
+        speedCalculator = new SpeedCalculatorForPocketSecret1(this , gameState);
         Initialize();
 
 

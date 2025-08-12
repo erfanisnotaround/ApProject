@@ -34,9 +34,8 @@ public class HudListener extends AnimationTimer {
         AbilityLAbelsMap = makeHUD.getAbilityLabelsMap();
         normalLabelsMap  = makeHUD.getNormalLabelsMap();
 
-        coinsManager = Constants.getInstance().getCoinsManager();
-        numberOfPocketLossManager = Constants.getInstance().getNumberOfPocketLossManager();
-        wireManager = Constants.getInstance().getWireManager();
+        coinsManager = gameState.getHudStuffDAta().getCoinsManager();
+        wireManager = gameState.getResources().getWireManager();
         this.gameState = gameState;
     }
 

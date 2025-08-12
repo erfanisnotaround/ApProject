@@ -44,10 +44,10 @@ public class WholeMovement {
 
 
     public WholeMovement(CoinsManager coinsManager , GameState gameState) {
-        connections = constants.getConnections();
-        exitConnections = constants.getExitConnections();
-        pockets = constants.getPockets();
-        systemViews = constants.getSystemViews();
+        connections = gameState.getResources().getConnections();
+        exitConnections = gameState.getResources().getExitConnections();
+        pockets = gameState.getResources().getPockets();
+        systemViews = gameState.getResources().getSystemViews();
         startAvailableChecker = new StartAvailableChecker(systemViews , gameState.getResources().getConnections());
         this.coinsManager = coinsManager;
         this.gameState = gameState;

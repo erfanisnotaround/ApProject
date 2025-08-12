@@ -24,13 +24,14 @@ import java.util.Map;
 public class SystemProcessor implements Runnable{
     private final List<System> systemInfos;
     private List<SystemView> systemViews = new ArrayList<>();
-    private final Map<String , SystemView> systemViewsStringMap = Constants.getInstance().getSystemViewMap();
+    private final Map<String , SystemView> systemViewsStringMap;
     private ConnectionUI connectionUI;
     private final GameState gameState;
     public SystemProcessor(List<System> systemInfos , ConnectionUI connectionUI , GameState gameState) {
         this.systemInfos = systemInfos;
         this.connectionUI = connectionUI;
         this.gameState = gameState;
+        systemViewsStringMap = gameState.getResources().getSystemViewMap();
     }
     @Override
     public void run() {

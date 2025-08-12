@@ -36,7 +36,7 @@ public class SystemVisualizer {
 
 
     public List<PocketMain> getPockets() {
-        PocketProcessor pocketProcessor = new PocketProcessor(CurrentLevel.getPockets());
+        PocketProcessor pocketProcessor = new PocketProcessor(CurrentLevel.getPockets() , gameState);
         Thread pocketsProcessor = new Thread(pocketProcessor);
         pocketsProcessor.start();
 

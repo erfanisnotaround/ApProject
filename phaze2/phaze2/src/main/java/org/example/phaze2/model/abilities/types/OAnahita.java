@@ -19,8 +19,8 @@ public class OAnahita implements AbilityExecutable {
     }
 
     @Override
-    public void execute(GameContext context) {
-        for (PocketMain pocketMain : Constants.getInstance().getPockets()){
+    public void execute(GameContext context , double length) {
+        for (PocketMain pocketMain : context.getGameState().getResources().getPockets()){
             pocketMain.setHP(pocketMain.getMaxHp());
         }
     }

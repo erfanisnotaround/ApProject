@@ -6,7 +6,6 @@ import org.example.phaze2.model.agentsAndManagers.JsonManager;
 import org.example.phaze2.model.levelSavesAndTheirPojo.LevelPojo;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
 
 public class SaveAndLoadController {
@@ -18,11 +17,12 @@ public class SaveAndLoadController {
     private ConnectionUI connectionUI;
     private final String path = "D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze2\\phaze2\\src\\main\\resources\\org\\example\\phaze2\\jsonFiles\\levelSaves.json";
     private int ChosenLevel;
+    private LoadAndSaveCompleterNecessaries loadCompleterNecessaries;
 
-    public SaveAndLoadController(ConnectionUI connectionUI , int ChosenLevel) {
+    public SaveAndLoadController(int ChosenLevel , LoadAndSaveCompleterNecessaries loadCompleterNecessaries) {
         this.jsonManager = new JsonManager(path);
-        this.connectionUI = connectionUI;
         this.ChosenLevel = ChosenLevel;
+        this.loadCompleterNecessaries = loadCompleterNecessaries;
         loadLevels();
 
     }
@@ -36,7 +36,7 @@ public class SaveAndLoadController {
     }
 
     public void loadTheSave(){
-        loadMaker = new LoadMaker(ChosenLevel , connectionUI , realLevelList);
+        loadMaker = new LoadMaker(ChosenLevel ,realLevelList , loadCompleterNecessaries);
         Thread thread = new Thread(loadMaker);
         thread.start();
     }
@@ -44,7 +44,7 @@ public class SaveAndLoadController {
     public void startAutoSave() {
 
 
-        this.saveMaker = new SaveMaker(ChosenLevel, realLevelList);
+        this.saveMaker = new SaveMaker(ChosenLevel, realLevelList , loadCompleterNecessaries);
         this.saveMaker.start();
 
     }

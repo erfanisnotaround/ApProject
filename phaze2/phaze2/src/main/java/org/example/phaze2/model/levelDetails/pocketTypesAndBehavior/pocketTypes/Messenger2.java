@@ -2,6 +2,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -15,8 +16,8 @@ import java.util.Map;
 
 public class Messenger2 extends Pocket implements Movable {
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/Triangle.png").toExternalForm());
-    public Messenger2(PocketTypes type) {
-        super(type);
+    public Messenger2(PocketTypes type , GameState gameState) {
+        super(type , gameState);
         Initialize();
 
     }

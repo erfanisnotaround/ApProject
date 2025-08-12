@@ -2,6 +2,7 @@ package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes
 
 import javafx.scene.image.Image;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -19,8 +20,8 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
 
 
 
-    public BigPocket1(PocketTypes type) {
-        super(type);
+    public BigPocket1(PocketTypes type , GameState gameState) {
+        super(type , gameState);
         Initialize();
     }
 

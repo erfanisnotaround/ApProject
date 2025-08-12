@@ -1,6 +1,7 @@
 package org.example.phaze2.controllers.moverController.moveRelated;
 
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
@@ -13,17 +14,17 @@ import java.util.List;
 import java.util.Map;
 
 public class PathPrioritizing {
-    Constants constants = Constants.getInstance();
+
     private List<Connection> connections;
     private Map<Port, Connection> exitConnections;
     private List<PocketMain> pockets;
     private List<SystemView> systemViews;
-    public PathPrioritizing() {
+    public PathPrioritizing(GameState gameState) {
 
-        connections = constants.getConnections();
-        exitConnections = constants.getExitConnections();
-        pockets = constants.getPockets();
-        systemViews = constants.getSystemViews();
+        connections = gameState.getResources().getConnections();
+        exitConnections = gameState.getResources().getExitConnections();
+        pockets = gameState.getResources().getPockets();
+        systemViews = gameState.getResources().getSystemViews();
 
     }
 

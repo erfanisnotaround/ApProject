@@ -26,7 +26,7 @@ public class Scroll_of_Aergia implements AbilityExecutable {
     }
 
     @Override
-    public void execute(GameContext context) {
+    public void execute(GameContext context , double length) {
         lastUsed = context.now();
         context.getFollowerSpawner().spawn(FollowerType.Acceleration_zero_Maker);
     }
@@ -40,5 +40,6 @@ public class Scroll_of_Aergia implements AbilityExecutable {
     public long lastUsed() {
         return this.lastUsed;
     }
+
 
 }

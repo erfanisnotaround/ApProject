@@ -22,7 +22,7 @@ public class OAiryaman implements AbilityExecutable {
     }
 
     @Override
-    public void execute(GameContext context) {
+    public void execute(GameContext context , double length) {
 
         context.getGameState().setDoesCollideCounts(false);
         PauseTransition pause = new PauseTransition(Duration.seconds(LengthOfActivation));

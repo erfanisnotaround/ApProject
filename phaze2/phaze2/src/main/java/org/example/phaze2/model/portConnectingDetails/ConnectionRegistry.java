@@ -14,13 +14,15 @@ public class ConnectionRegistry {
     Constants constants = Constants.getInstance();
     private final Set<Port> exitGates = new HashSet<>();
     private final Set<Port> enterGates = new HashSet<>();
-    private final List<Connection> connections = constants.getConnections();
-    private final Map<Port, Connection> exitConnections = constants.getExitConnections();
+    private final List<Connection> connections;
+    private final Map<Port, Connection> exitConnections;
 
     private GameState gameState;
 
     public ConnectionRegistry(GameState gameState){
         this.gameState = gameState;
+        connections = gameState.getResources().getConnections();
+        exitConnections = gameState.getResources().getExitConnections();
     }
 
     public void registerExit(Port gate, PortInfo info) {

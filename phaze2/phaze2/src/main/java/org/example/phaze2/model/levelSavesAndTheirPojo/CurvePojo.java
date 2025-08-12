@@ -8,6 +8,7 @@ public class CurvePojo {
     private int HP;
     private double latestAcceptableLength;
     private List<AnchorPojo> middlePoints;
+    private List<FollowerPojo> followers;
     private boolean isItUsed;
 
     public String getPocketMovingOnIt() {
@@ -50,4 +51,11 @@ public class CurvePojo {
         isItUsed = itUsed;
     }
 
+    public List<FollowerPojo> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<FollowerPojo> followers) {
+        this.followers = followers;
+    }
 }

@@ -1,7 +1,5 @@
 package org.example.phaze2.controllers.sceneControllers;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +7,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 import org.example.phaze2.controllers.abilityManagers.AbilityManager;
 import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.collisionAndWinning.CollisionMaker;
@@ -26,7 +23,6 @@ import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.hudModels.BasicTransfer;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketViewManager;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.DefaultMerger;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.FlexibleMergePolicy;
@@ -34,6 +30,8 @@ import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merg
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.PocketMerger;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.levelSavesAndTheirPojo.AfterPreShow;
+import org.example.phaze2.model.saversOfGame.LoadAndSaveCompleterNecessaries;
 import org.example.phaze2.model.saversOfGame.SaveAndLoadController;
 import org.example.phaze2.model.winAndPocketLossModel.DefaultGameDataProvider;
 import org.example.phaze2.model.winAndPocketLossModel.GameOverType;
@@ -75,6 +73,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
     private BasicTransfer basicTransfer;
     List<PocketMain> pockets;
     private Scene scene;
+    private AfterPreShow afterPreShow;
 
     @FXML
     private Slider SliderOfTemporalProgress;
@@ -114,7 +113,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         gameState.getVisualConstant().setView(view);
 
 
-        PocketMerger merger = new DefaultMerger(view, repo, effect);
+        PocketMerger merger = new DefaultMerger(view, repo, effect , gameState);
         PocketMergePolicy policy = new FlexibleMergePolicy(4);
 
         gameState.getMergerConfig().setMerger(merger);
@@ -126,10 +125,11 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         followerAdder = new FollowerAdder(ContainerPane);
         abilityManager = new AbilityManager(movementMaker , coinsManager , followerAdder ,gameState);
         ShopController = new ShopController(sceneManager.getStage() , main , abilityManager);
+        afterPreShow = new AfterPreShow(abilityManager);
 
 
 
-        Constants.getInstance().setCoinsManager(coinsManager);
+        gameState.getHudStuffDAta().setCoinsManager(coinsManager);
         Constants.getInstance().setNumberOfPocketLossManager(numberOfPocketLossManager);
 
         makeHUD = new MakeHUD(HUD , 3 , 6);
@@ -142,17 +142,17 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         HUD.setVisible(false);
         HUD.setMouseTransparent(true);
         HUD.setFocusTraversable(false);
-        Constants.getInstance().getPockets().clear();
-        Constants.getInstance().getSystemViews().clear();
-        Constants.getInstance().getExitConnections().clear();
-        Constants.getInstance().getConnections().clear();
-        Constants.getInstance().getPocketMainMap().clear();
-        Constants.getInstance().getSystemViewMap().clear();
+        gameState.getResources().getPockets().clear();
+        gameState.getResources().getSystemViews().clear();
+        gameState.getResources().getExitConnections().clear();
+        gameState.getResources().getConnections().clear();
+        gameState.getResources().getPocketMainMap().clear();
+        gameState.getResources().getSystemViewMap().clear();
 
 
 
 
-        Constants.getInstance().getPockets().clear();
+
         connectionUI = new ConnectionUI(ContainerPane , gameModel.getLevelInformation().getWireManager() , main , gameState);
         systemVisualizer = new SystemVisualizer(gameModel.getLevelInformation().getFirstUnAvaialbleLevel() , connectionUI , gameState);
         pockets = systemVisualizer.getPockets();
@@ -162,12 +162,11 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         gameState.getResources().setFirstOriginalPockets(pocketMains);
 
 
-        Constants.getInstance().getSystemViews().addAll(systemViews);
-        Constants.getInstance().getPockets().addAll(pockets);
 
 
 
         addingShapes(systemViews , pockets);
+
 
 
 
@@ -212,13 +211,17 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
                 }
             }
         });
+
         sceneManager.getScene().setOnMouseMoved(followerAdder::FollowTheMouse);
 
 
 
 
 
-        saveAndLoadController = new SaveAndLoadController(connectionUI , gameModel.getChosenLevel());
+        saveAndLoadController = new SaveAndLoadController(gameModel.getChosenLevel() , new LoadAndSaveCompleterNecessaries(followerAdder , connectionUI ,
+                gameState.getHudStuffDAta().getAbilityAliveManager(),
+                coinsManager , abilityManager,afterPreShow , gameState));
+
 
         engine = new CollisionMaker(pockets , gameState);
         engine.start();
@@ -226,11 +229,8 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         allMovingAndReadyCheckers.check();
 
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1) , event -> {
-            System.out.println("dd");
-        }));
-        timeline.setCycleCount(-1);
-//        timeline.play();
+
+
 
 
 
@@ -262,6 +262,13 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         gameState.getHudStuffDAta().setBasicTransfer(basicTransfer);
 
         hudListener.Start();
+
+
+//        saveAndLoadController.startAutoSave();
+        saveAndLoadController.loadTheSave();
+        afterPreShow.setPocketMains(gameState.getResources().getPockets());
+
+        afterPreShow.preShow();
 
 
     }
@@ -329,10 +336,12 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
         ContainerPane.getChildren().clear();
         gameModel.setLevelInformation(data);
-
+        gameState.getResources().setWireManager(data.getWireManager());
     }
 
     private void addingShapes(List<SystemView> systemViews , List<PocketMain> pockets) {
+        gameState.getResources().getSystemViews().clear();
+        gameState.getResources().getSystemViews().clear();
 
         for (SystemView systemView : systemViews) {
             ContainerPane.getChildren().addFirst(systemView);
@@ -342,6 +351,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
             ContainerPane.getChildren().addLast(pocket);
             gameState.getResources().getPockets().add(pocket);
             pocket.setLayoutX(-1000);
+//            pocket.setLayoutY(500);
         }
     }
     private List<PocketMain> getPockets() {

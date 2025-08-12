@@ -85,7 +85,7 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
         });
     }
     public void OperationOfChangingPockets() {
-        List<PocketMain> pockets = Constants.getInstance().getPockets();
+        List<PocketMain> pockets = getGameState().getResources().getPockets();
         for (PocketMain pocket : pockets) {
             if (pocket.getType() != pocket.getTypeBeforeChange() && pocket.getWhichSystemViewThisPocketIsAffectedBy() != null
                     &&pocket.getWhichSystemViewThisPocketIsAffectedBy().equals(this)) {

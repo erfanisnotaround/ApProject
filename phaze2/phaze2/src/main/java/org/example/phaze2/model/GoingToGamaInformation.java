@@ -39,7 +39,7 @@ public class GoingToGamaInformation {
                 level = getFirstUnAvaialbleLevel();
             }
             this.wireManager = new WireManager(level.getMaxWire());
-            Constants.getInstance().setWireManager(wireManager);
+
 
         }
 

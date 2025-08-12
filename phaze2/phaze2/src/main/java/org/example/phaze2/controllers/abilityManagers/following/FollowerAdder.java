@@ -54,16 +54,18 @@ public class FollowerAdder implements FollowerSpawner{
     @Override
     public void ReleaseFollower() {
         if (SelectedFollower == null) return;
-        List<Connection> connections = Constants.getInstance().getConnections();
+        List<Connection> connections = gameContext.getGameState().getResources().getConnections();
 
         Connection closestConnection = findClosestConnection(connections);
 
         followerAbilityController.AddFollower(SelectedFollower , closestConnection.getCurve());
-        SelectedFollower = null;
+
 
         gameContext.getGameState().setWeAreAddingAbility(false);
 
         gameContext.getAliveManager().RemoveAbility(SelectedFollower.getFollowerType().getAbilityType());
+
+        SelectedFollower = null;
     }
 
 
@@ -88,6 +90,9 @@ public class FollowerAdder implements FollowerSpawner{
     }
     private GameContext getGameContext() {
         return gameContext;
+    }
+    public FollowerAbilityController getFollowerAbilityController() {
+        return followerAbilityController;
     }
 
 

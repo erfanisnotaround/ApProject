@@ -1,5 +1,6 @@
 package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge;
 
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -13,11 +14,13 @@ public class DefaultMerger implements PocketMerger {
     private final PocketViewPort view;
     private final PocketRepository repo;
     private final PocketVisualEffect effect;
+    private GameState gameState;
 
-    public DefaultMerger(PocketViewPort view, PocketRepository repo, PocketVisualEffect effect) {
+    public DefaultMerger(PocketViewPort view, PocketRepository repo, PocketVisualEffect effect , GameState gameState) {
         this.view = view;
         this.repo = repo;
         this.effect = effect;
+        this.gameState = gameState;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class DefaultMerger implements PocketMerger {
             repo.remove(part);
         }
 
-        PocketMain merged = new PocketMain(type);
+        PocketMain merged = new PocketMain(type , gameState);
         merged.setGroupId(groupId);
         merged.setLayoutX(seed.getLayoutX());
         merged.setLayoutY(seed.getLayoutY());

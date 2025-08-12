@@ -1,8 +1,5 @@
 package org.example.phaze2.model.saversOfGame;
 
-import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
-import org.example.phaze2.model.constants.Constants;
-import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
 import org.example.phaze2.model.levelSavesAndTheirPojo.LevelPojo;
 
 import java.util.List;
@@ -10,14 +7,12 @@ import java.util.List;
 public class LoadMaker implements Runnable {
     private int ChosenLevel;
     private LoadHandler loadHandler;
-    private ConnectionUI connectionUI;
     private List<LevelPojo> readableLevelList;
 
 
-    public LoadMaker(int chosenLevel , ConnectionUI connectionUI , List<LevelPojo> readableLevelList) {
+    public LoadMaker(int chosenLevel ,List<LevelPojo> readableLevelList , LoadAndSaveCompleterNecessaries loadCompleterNecessaries) {
         this.ChosenLevel = chosenLevel;
-        this.connectionUI = connectionUI;
-        loadHandler = new LoadHandler(connectionUI);
+        loadHandler = new LoadHandler(loadCompleterNecessaries);
         this.readableLevelList = readableLevelList;
     }
 

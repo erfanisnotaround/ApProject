@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
@@ -41,9 +42,10 @@ public class PathMover extends AnimationTimer {
     private double STEPS = 10;
     private double AngleNeeded;
     private boolean rotate;
-    public PathMover(double angle) {
-
+    private GameState gameState;
+    public PathMover(double angle , GameState gameState) {
         AngleNeeded = angle;
+        this.gameState = gameState;
     }
 
     public synchronized void  move(Curve pl, double initialSpeed, double acceleration,
@@ -156,7 +158,7 @@ public class PathMover extends AnimationTimer {
 
 
 
-            for (PocketMain pocketMain : Constants.getInstance().getPockets()) {
+            for (PocketMain pocketMain : gameState.getResources().getPockets()) {
                 pocketMain.getPathMover().stop();
             }
 
@@ -327,6 +329,7 @@ public class PathMover extends AnimationTimer {
         if (curve != null) {
             curve.setIsItUsed(false);
             curve.setPocketMovingOnIt(null);
+
         }
         stop();
 

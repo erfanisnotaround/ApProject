@@ -53,7 +53,7 @@ public class BigPocketSplitter implements PocketSplitter {
 
         WholeMovement wholeMovement = bigPocket.getMovementManager();
         for (int i = 0; i < pieces; i++) {
-            PocketMain m3 = new PocketMain(PocketTypes.Messenger_3);
+            PocketMain m3 = new PocketMain(PocketTypes.Messenger_3 , gameState);
             m3.setGroupId(group);
 
             m3.setMovementManager(bigPocket.getMovementManager());

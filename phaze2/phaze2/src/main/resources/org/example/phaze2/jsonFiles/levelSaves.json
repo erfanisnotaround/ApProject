@@ -1,131 +1,17 @@
 [ {
   "pockets" : [ {
-    "pocketID" : "kashi",
-    "type" : "BIG_2",
+    "pocketID" : "manig",
+    "type" : "Messenger_3",
     "delay" : 1.5,
-    "firstPocketType" : "BIG_2",
-    "placeOfX" : 707.5,
-    "placeOfY" : 745.0,
-    "availableTime" : 24081.0,
+    "firstPocketType" : "Messenger_3",
+    "placeOfX" : 203.05155777758878,
+    "placeOfY" : 315.0,
+    "availableTime" : 29994.0,
     "pathMover" : {
       "multiplier" : 1.0,
-      "s" : 200.14057559625428,
-      "v" : 200.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : -12.267672199967947,
-      "latestLineDistanceY" : 2.841183057532713,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.3202614111983872,
-      "currentLineDistanceForWholeMoveY" : 0.3202614111983872,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : -0.07285096777962921,
-      "lineDistancePerMoveY" : 0.008714190976556381,
-      "rotate" : true,
-      "steps" : 100.0,
-      "angleNeeded" : 0.0,
-      "starterPort" : null
-    },
-    "hp" : 8.0,
-    "itMoved" : false,
-    "yy" : 645.3202614111984,
-    "xx" : 607.8202614111984,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "itAffected" : true,
-    "itCollided" : true
-  }, {
-    "pocketID" : "rezaDozde",
-    "type" : "BIG_1",
-    "delay" : 1.5,
-    "firstPocketType" : "BIG_1",
-    "placeOfX" : 707.5,
-    "placeOfY" : 745.0,
-    "availableTime" : 23625.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 200.14057559625428,
-      "v" : 100.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : -3.956300014986239,
-      "latestLineDistanceY" : 3.6052363728047054,
-      "currentLineDistanceX" : 3.403002066496451,
-      "currentLineDistanceY" : 4.934270097603398,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : -0.07354991565981099,
-      "lineDistancePerMoveY" : -0.01441154339380216,
-      "rotate" : true,
-      "steps" : 100.0,
-      "angleNeeded" : 0.0,
-      "starterPort" : null
-    },
-    "hp" : 4.0,
-    "itMoved" : false,
-    "yy" : 649.9342700976034,
-    "xx" : 610.9030020664965,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "itAffected" : true,
-    "itCollided" : true
-  }, {
-    "pocketID" : "gorbe",
-    "type" : "SECRET_1",
-    "delay" : 1.5,
-    "firstPocketType" : "SECRET_1",
-    "placeOfX" : 701.3527841376844,
-    "placeOfY" : 581.0742436715823,
-    "availableTime" : 18585.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 36.09959946315008,
-      "v" : 9.6833866175373,
-      "a" : 0.0,
-      "latestLineDistanceX" : -1.5321771572520921,
-      "latestLineDistanceY" : -5.570841951062366,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : -0.015321771572520921,
-      "lineDistancePerMoveY" : -0.055708419510623663,
-      "rotate" : true,
-      "steps" : 100.0,
-      "angleNeeded" : 0.0,
-      "starterPort" : null
-    },
-    "hp" : 2.0,
-    "itMoved" : true,
-    "yy" : 284.0742436715823,
-    "xx" : 337.35278413768435,
-    "typeBeforeChange" : "SECRET_1",
-    "whichSystemViewThisPocketIsAffectedBy" : "Backup",
-    "itAffected" : true,
-    "itCollided" : true
-  }, {
-    "pocketID" : "lachaki",
-    "type" : "SECRET_2",
-    "delay" : 1.5,
-    "firstPocketType" : "SECRET_2",
-    "placeOfX" : 159.55636545195782,
-    "placeOfY" : 319.57895755653516,
-    "availableTime" : 23667.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 768.86352,
-      "v" : 200.0,
-      "a" : 0.0,
+      "s" : 3.0515577775887754,
+      "v" : 199.9236965,
+      "a" : -5.0,
       "latestLineDistanceX" : 0.0,
       "latestLineDistanceY" : 0.0,
       "currentLineDistanceX" : 0.0,
@@ -139,106 +25,30 @@
       "lineDistancePerMoveX" : 0.0,
       "lineDistancePerMoveY" : 0.0,
       "rotate" : true,
-      "steps" : 200.0,
+      "steps" : 10.0,
       "angleNeeded" : 0.0,
       "starterPort" : null
     },
-    "hp" : 5.0,
+    "hp" : 0.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itMoved" : true,
-    "yy" : 219.57895755653516,
-    "xx" : 59.55636545195782,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "whichSystemViewThisPocketIsAffectedBy" : null,
     "itAffected" : true,
-    "itCollided" : false
-  }, {
-    "pocketID" : "bagher",
-    "type" : "Messenger_1",
-    "delay" : 1.5,
-    "firstPocketType" : "Messenger_1",
-    "placeOfX" : 707.5,
-    "placeOfY" : 745.0,
-    "availableTime" : 27093.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 200.14057559625428,
-      "v" : 100.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : 7.3549915659810985,
-      "latestLineDistanceY" : 1.441154339380216,
-      "currentLineDistanceX" : 7.428541481640907,
-      "currentLineDistanceY" : 1.4555658827740166,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : 0.07354991565981099,
-      "lineDistancePerMoveY" : 0.01441154339380216,
-      "rotate" : true,
-      "steps" : 100.0,
-      "angleNeeded" : 0.0,
-      "starterPort" : null
-    },
-    "hp" : -1.5108646799002472,
-    "itMoved" : false,
-    "yy" : 490.455565882774,
-    "xx" : 458.92854148164093,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "itAffected" : true,
-    "itCollided" : true
+    "itCollided" : false,
+    "yy" : 900.0,
+    "xx" : 1500.0,
+    "typeBeforeChange" : "Messenger_3"
   }, {
     "pocketID" : "manig",
     "type" : "Messenger_2",
     "delay" : 1.5,
     "firstPocketType" : "Messenger_2",
-    "placeOfX" : 707.5,
-    "placeOfY" : 745.0,
-    "availableTime" : 28293.0,
+    "placeOfX" : 666.8752271184095,
+    "placeOfY" : 631.0505728527122,
+    "availableTime" : 27294.0,
     "pathMover" : {
       "multiplier" : 1.0,
-      "s" : 200.14057559625428,
-      "v" : 219.39663000000013,
-      "a" : 20.0,
-      "latestLineDistanceX" : -7.285096777962921,
-      "latestLineDistanceY" : 0.8714190976556381,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : -0.07285096777962921,
-      "lineDistancePerMoveY" : 0.008714190976556381,
-      "rotate" : true,
-      "steps" : 100.0,
-      "angleNeeded" : 0.0,
-      "starterPort" : null
-    },
-    "hp" : 2.0,
-    "itMoved" : false,
-    "yy" : 345.0,
-    "xx" : 307.5,
-    "typeBeforeChange" : "SECRET_MESSENGER",
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "itAffected" : true,
-    "itCollided" : false
-  }, {
-    "pocketID" : "pasta",
-    "type" : "Messenger_3",
-    "delay" : 1.5,
-    "firstPocketType" : "Messenger_3",
-    "placeOfX" : 0.0,
-    "placeOfY" : 0.0,
-    "availableTime" : 30000.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 0.0,
-      "v" : 0.0,
+      "s" : 401.40435999999994,
+      "v" : 200.0,
       "a" : 0.0,
       "latestLineDistanceX" : 0.0,
       "latestLineDistanceY" : 0.0,
@@ -252,25 +62,101 @@
       "lineDistancePerMoveYForWhole" : 0.0,
       "lineDistancePerMoveX" : 0.0,
       "lineDistancePerMoveY" : 0.0,
-      "rotate" : false,
-      "steps" : 200.0,
-      "angleNeeded" : 90.0,
+      "rotate" : true,
+      "steps" : 10.0,
+      "angleNeeded" : 0.0,
       "starterPort" : null
     },
-    "hp" : 0.0,
-    "itMoved" : false,
-    "yy" : -1000.0,
-    "xx" : -1000.0,
-    "typeBeforeChange" : "Messenger_3",
+    "hp" : 2.0,
     "whichSystemViewThisPocketIsAffectedBy" : null,
+    "itMoved" : true,
     "itAffected" : true,
-    "itCollided" : false
+    "itCollided" : false,
+    "yy" : 231.0505728527122,
+    "xx" : 266.8752271184095,
+    "typeBeforeChange" : "Messenger_2"
+  }, {
+    "pocketID" : "manig",
+    "type" : "Messenger_2",
+    "delay" : 1.5,
+    "firstPocketType" : "Messenger_2",
+    "placeOfX" : 672.5603620385884,
+    "placeOfY" : 694.8725122948493,
+    "availableTime" : 27303.0,
+    "pathMover" : {
+      "multiplier" : 1.0,
+      "s" : 394.55395999999985,
+      "v" : 200.0,
+      "a" : 0.0,
+      "latestLineDistanceX" : 0.0,
+      "latestLineDistanceY" : 0.0,
+      "currentLineDistanceX" : 0.0,
+      "currentLineDistanceY" : 0.0,
+      "latestLineDistanceForWholeMoveX" : 0.0,
+      "latestLineDistanceForWholeMoveY" : 0.0,
+      "currentLineDistanceForWholeMoveX" : 0.0,
+      "currentLineDistanceForWholeMoveY" : 0.0,
+      "lineDistancePerMoveXForWhole" : 0.0,
+      "lineDistancePerMoveYForWhole" : 0.0,
+      "lineDistancePerMoveX" : 0.0,
+      "lineDistancePerMoveY" : 0.0,
+      "rotate" : true,
+      "steps" : 10.0,
+      "angleNeeded" : 0.0,
+      "starterPort" : null
+    },
+    "hp" : 2.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null,
+    "itMoved" : true,
+    "itAffected" : true,
+    "itCollided" : false,
+    "yy" : 294.87251229484934,
+    "xx" : 272.56036203858844,
+    "typeBeforeChange" : "Messenger_2"
+  }, {
+    "pocketID" : "manig",
+    "type" : "Messenger_2",
+    "delay" : 1.5,
+    "firstPocketType" : "Messenger_2",
+    "placeOfX" : 870.7910353562004,
+    "placeOfY" : 650.1127554764674,
+    "availableTime" : 28380.0,
+    "pathMover" : {
+      "multiplier" : 1.0,
+      "s" : 401.40435999999994,
+      "v" : 200.0,
+      "a" : 0.0,
+      "latestLineDistanceX" : 0.0,
+      "latestLineDistanceY" : 0.0,
+      "currentLineDistanceX" : 0.0,
+      "currentLineDistanceY" : 0.0,
+      "latestLineDistanceForWholeMoveX" : 0.0,
+      "latestLineDistanceForWholeMoveY" : 0.0,
+      "currentLineDistanceForWholeMoveX" : 0.0,
+      "currentLineDistanceForWholeMoveY" : 0.0,
+      "lineDistancePerMoveXForWhole" : 0.0,
+      "lineDistancePerMoveYForWhole" : 0.0,
+      "lineDistancePerMoveX" : 0.0,
+      "lineDistancePerMoveY" : 0.0,
+      "rotate" : true,
+      "steps" : 10.0,
+      "angleNeeded" : 0.0,
+      "starterPort" : null
+    },
+    "hp" : 2.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null,
+    "itMoved" : true,
+    "itAffected" : true,
+    "itCollided" : false,
+    "yy" : 250.11275547646744,
+    "xx" : 470.7910353562004,
+    "typeBeforeChange" : "Messenger_2"
   } ],
   "systems" : [ {
     "systemType" : "DESTRUCTIVE",
-    "systemHeight" : 105.0,
+    "systemHeight" : 145.0,
     "systemWidth" : 100.0,
-    "lightBoolean" : false,
+    "lightBoolean" : true,
     "x" : 100.0,
     "y" : 200.0,
     "systemID" : "Main",
@@ -278,51 +164,63 @@
     "capacity" : [ null, null, null, null, null ],
     "itDown" : false
   }, {
-    "systemType" : "VPN",
-    "systemHeight" : 65.0,
+    "systemType" : "MERGER",
+    "systemHeight" : 145.0,
     "systemWidth" : 100.0,
-    "lightBoolean" : false,
-    "x" : 400.0,
-    "y" : 300.0,
+    "lightBoolean" : true,
+    "x" : 900.0,
+    "y" : 800.0,
     "systemID" : "Backup",
-    "numberOfSubSystems" : 1,
-    "capacity" : [ null, null, null, null, null ],
+    "numberOfSubSystems" : 2,
+    "capacity" : [ null, null, null, null, null, null, null, null, null, null ],
     "itDown" : false
   }, {
-    "systemType" : "DESTRUCTIVE",
-    "systemHeight" : 65.0,
+    "systemType" : "DISTRIBUTOR",
+    "systemHeight" : 145.0,
     "systemWidth" : 100.0,
-    "lightBoolean" : false,
+    "lightBoolean" : true,
     "x" : 700.0,
-    "y" : 700.0,
+    "y" : 200.0,
     "systemID" : "Backup2",
-    "numberOfSubSystems" : 1,
-    "capacity" : [ "rezaDozde", "bagher", "manig", "kashi", null ],
-    "itDown" : false
-  }, {
-    "systemType" : "SPY",
-    "systemHeight" : 65.0,
-    "systemWidth" : 100.0,
-    "lightBoolean" : false,
-    "x" : 600.0,
-    "y" : 500.0,
-    "systemID" : "Backup3",
-    "numberOfSubSystems" : 1,
-    "capacity" : [ null, null, null, null, null ],
+    "numberOfSubSystems" : 2,
+    "capacity" : [ null, null, null, null, null, null, null, null, null, null ],
     "itDown" : false
   } ],
   "connections" : [ {
     "fromPort" : {
       "systemID" : "Main",
+      "subIndex" : 0,
+      "type" : "SQUARE",
+      "beforeChange" : "SQUARE",
+      "exit" : false
+    },
+    "toPort" : {
+      "systemID" : "Backup2",
+      "subIndex" : 0,
+      "type" : "SQUARE",
+      "beforeChange" : "SQUARE",
+      "exit" : true
+    },
+    "curve" : {
+      "pocketMovingOnIt" : null,
+      "latestAcceptableLength" : 0.0,
+      "middlePoints" : [ ],
+      "followers" : [ ],
+      "hp" : 3,
+      "itUsed" : false
+    }
+  }, {
+    "fromPort" : {
+      "systemID" : "Main",
       "subIndex" : 1,
-      "type" : "TRIANGLE",
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : false
     },
     "toPort" : {
-      "systemID" : "Backup",
-      "subIndex" : 0,
-      "type" : "TRIANGLE",
+      "systemID" : "Backup2",
+      "subIndex" : 1,
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : true
     },
@@ -330,8 +228,55 @@
       "pocketMovingOnIt" : null,
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : false,
-      "hp" : -1
+      "followers" : [ ],
+      "hp" : 3,
+      "itUsed" : false
+    }
+  }, {
+    "fromPort" : {
+      "systemID" : "Backup2",
+      "subIndex" : 0,
+      "type" : "SQUARE",
+      "beforeChange" : "SQUARE",
+      "exit" : false
+    },
+    "toPort" : {
+      "systemID" : "Backup",
+      "subIndex" : 0,
+      "type" : "SQUARE",
+      "beforeChange" : "SQUARE",
+      "exit" : true
+    },
+    "curve" : {
+      "pocketMovingOnIt" : "manig",
+      "latestAcceptableLength" : 0.0,
+      "middlePoints" : [ ],
+      "followers" : [ ],
+      "hp" : 3,
+      "itUsed" : true
+    }
+  }, {
+    "fromPort" : {
+      "systemID" : "Backup2",
+      "subIndex" : 1,
+      "type" : "SQUARE",
+      "beforeChange" : "SQUARE",
+      "exit" : false
+    },
+    "toPort" : {
+      "systemID" : "Backup",
+      "subIndex" : 1,
+      "type" : "SQUARE",
+      "beforeChange" : "SQUARE",
+      "exit" : true
+    },
+    "curve" : {
+      "pocketMovingOnIt" : null,
+      "latestAcceptableLength" : 0.0,
+      "middlePoints" : [ ],
+      "followers" : [ ],
+      "hp" : 3,
+      "itUsed" : false
     }
   }, {
     "fromPort" : {
@@ -342,78 +287,66 @@
       "exit" : false
     },
     "toPort" : {
-      "systemID" : "Backup3",
+      "systemID" : "Main",
       "subIndex" : 0,
       "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : true
     },
     "curve" : {
-      "pocketMovingOnIt" : null,
+      "pocketMovingOnIt" : "manig",
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : false,
-      "hp" : 3
+      "followers" : [ ],
+      "hp" : 3,
+      "itUsed" : true
     }
   }, {
     "fromPort" : {
-      "systemID" : "Backup3",
-      "subIndex" : 0,
-      "type" : "TRIANGLE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Backup2",
-      "subIndex" : 0,
-      "type" : "TRIANGLE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : "gorbe",
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "itUsed" : true,
-      "hp" : 0
-    }
-  }, {
-    "fromPort" : {
-      "systemID" : "Backup2",
-      "subIndex" : 0,
-      "type" : "TRIANGLE",
+      "systemID" : "Backup",
+      "subIndex" : 1,
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : false
     },
     "toPort" : {
       "systemID" : "Main",
       "subIndex" : 1,
-      "type" : "TRIANGLE",
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : true
     },
     "curve" : {
-      "pocketMovingOnIt" : "lachaki",
+      "pocketMovingOnIt" : "manig",
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
-      "itUsed" : true,
-      "hp" : 1
+      "followers" : [ ],
+      "hp" : 3,
+      "itUsed" : true
     }
-  } ]
+  } ],
+  "currentDetails" : {
+    "aliveAbilities" : [ ],
+    "coinsHave" : 15
+  }
 }, {
   "pockets" : null,
   "systems" : null,
-  "connections" : null
+  "connections" : null,
+  "currentDetails" : null
 }, {
   "pockets" : null,
   "systems" : null,
-  "connections" : null
+  "connections" : null,
+  "currentDetails" : null
 }, {
   "pockets" : null,
   "systems" : null,
-  "connections" : null
+  "connections" : null,
+  "currentDetails" : null
 }, {
   "pockets" : null,
   "systems" : null,
-  "connections" : null
+  "connections" : null,
+  "currentDetails" : null
 } ]

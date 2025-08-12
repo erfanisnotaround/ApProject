@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBox;
 import org.example.phaze2.model.levelDetails.collisionNecessaries.HitBoxGenerator;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -28,11 +29,11 @@ public class PocketMain extends Pocket  implements InitData {
     private boolean lastRound = false;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
     private final double DistractionSteps = 30;
-    public PocketMain(PocketTypes type) {
-        super(type);
-        pathMover = new PathMover(0);
+    public PocketMain(PocketTypes type , GameState gameState) {
+        super(type , gameState);
+        pathMover = new PathMover(0 , gameState);
         pathMover.setNode(this);
-        behaviour = PocketMoveFactory.giveType(type);
+        behaviour = PocketMoveFactory.giveType(type , gameState);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),actionEvent -> {
             if (type == PocketTypes.SECRET_2) pathMover.moveForward();
@@ -123,7 +124,7 @@ public class PocketMain extends Pocket  implements InitData {
 
         behaviour.StopStrategy(behaviour , this );
 
-        this.behaviour = PocketMoveFactory.giveType(behaviourType);
+        this.behaviour = PocketMoveFactory.giveType(behaviourType , getGameState());
 
         setTypeBeforeChange(getType());
         PrepareNewBehavior(behaviour);

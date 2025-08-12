@@ -1,5 +1,6 @@
 package org.example.phaze2.model.constants;
 
+import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.hudModels.AbilityAliveManager;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.Port;
@@ -22,6 +23,7 @@ public final class Resources {
     private Map<String , PocketMain> pocketMainMap = new HashMap<>();
     private Map<String , SystemView> systemViewMap = new HashMap<>();
     private List<PocketMain> FirstOriginalPockets;
+    private WireManager wireManager ;
 
     public Map<String, SystemView> getSystemViewMap() {
         return systemViewMap;
@@ -73,5 +75,13 @@ public final class Resources {
 
     public void setFirstOriginalPockets(List<PocketMain> firstOriginalPockets) {
         FirstOriginalPockets = firstOriginalPockets;
+    }
+
+    public WireManager getWireManager() {
+        return wireManager;
+    }
+
+    public void setWireManager(WireManager wireManager) {
+        this.wireManager = wireManager;
     }
 }

@@ -16,18 +16,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AbilityManager {
-    AbilityAliveManager aliveAbilities;
-    GameContext gameContext;
-    WholeMovement wholeMovement;
-    CoinsManager coinManager;
+    private AbilityAliveManager aliveAbilities;
+    private GameContext gameContext;
+    private WholeMovement wholeMovement;
+    private CoinsManager coinManager;
 
-    Map<AbilityTypes , AbilityExecutable> executableMap = new HashMap<>();
+    private Map<AbilityTypes , AbilityExecutable> executableMap = new HashMap<>();
 
     public AbilityManager(WholeMovement wholeMovement , CoinsManager coinsManager , FollowerSpawner followerSpawner , GameState gameState) {
         this.aliveAbilities = gameState.getHudStuffDAta().getAbilityAliveManager();
         this.wholeMovement = wholeMovement;
         this.coinManager = coinsManager;
-        this.gameContext = new GameContext(wholeMovement , Constants.getInstance().getPockets(), Constants.getInstance().getSystemViews(),
+        this.gameContext = new GameContext(wholeMovement , gameState.getResources().getPockets(), gameState.getResources().getSystemViews(),
                 coinsManager , followerSpawner , aliveAbilities , gameState);
 
         followerSpawner.SetGameContext(gameContext);
@@ -42,19 +42,26 @@ public class AbilityManager {
         ExecuteAbility(executable);
 
     }
-    private void ExecuteAbility(AbilityExecutable executable){
+    public void ExecuteAbility(AbilityExecutable executable){
         if (!executable.isReady(gameContext)) {
-            executable.execute(gameContext);
+            executable.execute(gameContext  , 0);
         }
 
     }
-    private void RegisterAbility(AbilityTypes abilityType){
+    public void RegisterAbility(AbilityTypes abilityType){
         AbilityExecutable executable = AbilityFactory.createAbility(abilityType);
         executableMap.put(abilityType, executable );
     }
     public GameContext getGameContext() {
         return gameContext;
     }
+    public Map<AbilityTypes , AbilityExecutable> getExecutableMap() {
+        return executableMap;
+    }
+    public AbilityExecutable getAbilityExecutable(AbilityTypes abilityType) {
+        return executableMap.get(abilityType);
+    }
+
 
 
 }

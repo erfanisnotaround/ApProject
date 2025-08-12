@@ -45,8 +45,10 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     protected double angleNeeded;
     private double availableTime = 4000;
     private String pocketId;
-    public Pocket(PocketTypes type) {
+    private GameState gameState;
+    public Pocket(PocketTypes type , GameState gameState) {
         this.type = type;
+        this.gameState = gameState;
     }
 
     public int getCoinsPerEntry() {
@@ -263,6 +265,11 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     }
 
 
+    public GameState getGameState() {
+        return gameState;
+    }
 
-
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
 }

@@ -68,7 +68,7 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
 
     @Override
     public boolean checkArea(double radius) {
-        List<PocketMain> pockets = Constants.getInstance().getPockets();
+        List<PocketMain> pockets = getGameState().getResources().getPockets();
         for (PocketMain pocket : pockets) {
             if (distance(pocket.getLayoutX() , pocket.getLayoutY() , getLayoutX() , getLayoutY()) < RadiusOfCheckingArea && pocket.isIsItMoved()) {
                 if (pocket.getType() != PocketTypes.SECRET_MESSENGER) switchPocket(pocket, PocketTypeGroup.MESSENGER.getGroups().get(random.nextInt(PocketTypeGroup.MESSENGER.getGroups().size())));

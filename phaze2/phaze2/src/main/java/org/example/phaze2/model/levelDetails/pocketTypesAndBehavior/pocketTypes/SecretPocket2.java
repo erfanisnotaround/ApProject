@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -29,8 +30,8 @@ public class SecretPocket2 extends Pocket implements Movable {
 
 
     Image image = new Image(getClass().getResource("/org/example/phaze2/images/Mecha_Core.png").toExternalForm());
-    public SecretPocket2(PocketTypes type) {
-        super(type);
+    public SecretPocket2(PocketTypes type , GameState gameState) {
+        super(type , gameState);
         Initialize();
     }
 
@@ -82,7 +83,7 @@ public class SecretPocket2 extends Pocket implements Movable {
         AreaCheckerTimeLine.play();
     }
     public void SearchForPocketsInRange(PocketMain pocketMain) {
-        for (PocketMain pocketCheck : Constants.getInstance().getPockets()){
+        for (PocketMain pocketCheck : getGameState().getResources().getPockets()){
             if (!pocketMain.getType().equals(PocketTypes.SECRET_2)||pocketCheck.equals(pocketMain) || !pocketMain.isIsItMoved()) continue;
 
             double deltaX = pocketCheck.centre().getX() - pocketMain.centre().getX();

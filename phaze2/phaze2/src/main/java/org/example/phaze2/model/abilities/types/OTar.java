@@ -22,9 +22,11 @@ public class OTar implements AbilityExecutable {
     }
 
     @Override
-    public void execute(GameContext context) {
+    public void execute(GameContext context , double length) {
         context.getGameState().setCanWeSpreadWave(false);
+
         PauseTransition pause = new PauseTransition(Duration.seconds(LengthOfActivation));
+        if (length > 0) pause.setDuration(Duration.seconds(length));
         pause.setOnFinished(event -> {
             context.getGameState().setCanWeSpreadWave(true);
             context.getAliveManager().RemoveAbility(AbilityTypes.OTAR);
@@ -42,4 +44,6 @@ public class OTar implements AbilityExecutable {
     public long lastUsed() {
         return 0;
     }
+
+
 }

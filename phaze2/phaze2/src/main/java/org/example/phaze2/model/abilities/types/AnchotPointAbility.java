@@ -17,7 +17,7 @@ public class AnchotPointAbility implements AbilityExecutable {
     }
 
     @Override
-    public void execute(GameContext context) {
+    public void execute(GameContext context , double length) {
         context.getGameState().setAddingANchorAvailable(true);
     }
 

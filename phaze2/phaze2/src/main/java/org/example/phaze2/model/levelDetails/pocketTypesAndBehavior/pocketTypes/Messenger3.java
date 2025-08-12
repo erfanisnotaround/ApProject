@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
@@ -21,8 +22,8 @@ public class Messenger3 extends Pocket implements Movable {
 
     PauseTransition pause;
     ChangeListener<Boolean> Collide;
-    public Messenger3(PocketTypes type) {
-        super(type);
+    public Messenger3(PocketTypes type , GameState gameState) {
+        super(type , gameState);
         Initialize();
 
     }

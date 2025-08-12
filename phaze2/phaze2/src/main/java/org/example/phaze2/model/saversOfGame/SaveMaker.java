@@ -13,9 +13,9 @@ public class SaveMaker extends Thread {
     private int currentLevel;
     private List<LevelPojo> ReallevelPojoList;
 
-    public SaveMaker(int currentLevel , List<LevelPojo> RealLevelsLoaded) {
+    public SaveMaker(int currentLevel , List<LevelPojo> RealLevelsLoaded , LoadAndSaveCompleterNecessaries loadAndSaveCompleterNecessaries) {
         this.ReallevelPojoList = RealLevelsLoaded;
-        this.saveHandler = new SaveHandler();
+        this.saveHandler = new SaveHandler(loadAndSaveCompleterNecessaries);
         this.currentLevel = currentLevel;
         setDaemon(true);
         jsonManager = new JsonManager("D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze2\\phaze2\\src\\main\\resources\\org\\example\\phaze2\\jsonFiles\\levelSaves.json");
@@ -51,6 +51,8 @@ public class SaveMaker extends Thread {
     public void stopSaving() {
         running = false;
         this.interrupt();
+
+
     }
     public void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;

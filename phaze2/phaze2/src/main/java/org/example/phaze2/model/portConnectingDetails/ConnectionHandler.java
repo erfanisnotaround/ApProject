@@ -51,7 +51,7 @@ public class ConnectionHandler {
         this.connectionUI = connectionUI;
         this.Container = container;
         this.gameState = gameState;
-        exitConnections = Constants.getInstance().getExitConnections();
+        exitConnections = gameState.getResources().getExitConnections();
     }
     public void onPress(MouseEvent mouseEvent) {
         Port ExitNode = (Port) mouseEvent.getSource();
