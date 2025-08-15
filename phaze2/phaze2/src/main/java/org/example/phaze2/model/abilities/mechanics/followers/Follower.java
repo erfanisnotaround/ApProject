@@ -1,5 +1,6 @@
 package org.example.phaze2.model.abilities.mechanics.followers;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
@@ -10,6 +11,8 @@ public abstract class Follower extends Circle {
 
     public Follower(FollowerType FollowerType) {
         this.FollowerType = FollowerType;
+        setFill(Color.WHITE);
+        setRadius(5);
     }
 
     public abstract void execute(PocketMain pocket);

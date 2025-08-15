@@ -32,6 +32,7 @@ public class PocketReaper {
         for (PocketMain p : dead) {
             Platform.runLater(() -> {
                 p.getPathMover().stopAndDetachNow();
+                p.setLost(true);
             });
             placement.place(p);
         }

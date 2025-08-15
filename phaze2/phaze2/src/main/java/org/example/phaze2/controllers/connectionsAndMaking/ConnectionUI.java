@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.example.phaze2.model.WireManager;
+import org.example.phaze2.model.abilities.mechanics.followers.Follower;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
@@ -85,7 +86,21 @@ public class ConnectionUI {
         });
     }
     public void RegisterConnection(Connection connection){
+
+        RegisterCurve(connection.getCurve());
+
+        for (Anchor anchor : connection.getCurve().getAnchors()){
+            LayerManager.addNode(anchor);
+            anchor.setFill(Color.GREEN);
+            RegisterAnchor(anchor, connection.getCurve());
+        }
+
+//        System.out.println(connection.getCurve().getFollowers().size() + " followers");
+        for (Follower follower : connection.getCurve().getFollowers()){
+            LayerManager.addNode(follower);
+        }
         connectionHandler.RegisterACurve(connection);
+
     }
     public void removeConnection(){
         Connection connection = connectionHandler.getSelectedConnection();

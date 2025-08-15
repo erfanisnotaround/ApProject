@@ -16,9 +16,7 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.
 import org.example.phaze2.model.levelSavesAndTheirPojo.*;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LoadHandler {
 
@@ -60,40 +58,78 @@ public class LoadHandler {
 
     }
     private void SetPockets(List<PocketPojo> pocketPojoList) {
+        // 1) Index save by id
+        Map<String, PocketPojo> byId = new HashMap<>();
+        for (PocketPojo pj : pocketPojoList) byId.put(pj.getPocketID(), pj);
 
+        // 2) Collect current ids
+        Set<String> have = new HashSet<>(pocketMainMap.keySet());
+        Set<String> want = new HashSet<>(byId.keySet());
 
-        for (PocketPojo pocketPojo : pocketPojoList) {
-            SetAPocket(pocketPojo);
+        for (String id : diff(have, want)) {
+            PocketMain p = pocketMainMap.remove(id);
+            if (p == null) continue;
+            gameState.getVisualConstant().getView().remove(p);     // PocketViewPort
+            gameState.getVisualConstant().getRepo().remove(p);     // PocketRepository
+            gameState.getResources().getPockets().remove(p);
+;
+        }
+
+        for (String id : diff(want, have)) {
+            PocketPojo pj = byId.get(id);
+            PocketMain p = new PocketMain(pj.getType(), gameState);
+            p.setPocketId(pj.getPocketID());
+            p.setGroupId(pj.getGroupId());
+
+            gameState.getVisualConstant().getView().add(p);
+            gameState.getVisualConstant().getRepo().add(p);
+            gameState.getResources().getPockets().add(p);
+            gameState.getVisualConstant().getEffect().apply(p , pj.getGroupId());
+            pocketMainMap.put(id, p);
+
+            if (pj.getGroupId() != null) {
+                gameState.getVisualConstant().getEffect().apply(p, pj.getGroupId());
+            }
+        }
+
+        for (PocketPojo pj : pocketPojoList) {
+            PocketMain target = pocketMainMap.get(pj.getPocketID());
+            applyPocketPojo(target, pj); // below
         }
     }
-    private void SetAPocket(PocketPojo pocketPojo){
-        PocketMain targetPocket = pocketMainMap.get(pocketPojo.getPocketID());
 
-
+    private static Set<String> diff(Set<String> a, Set<String> b) {
+        Set<String> out = new HashSet<>(a); out.removeAll(b); return out;
+    }
+    private void applyPocketPojo(PocketMain targetPocket, PocketPojo pocketPojo){
+        // If type differs, switch behaviour cleanly
+        if (targetPocket.getType() != pocketPojo.getType()) {
+            targetPocket.setBehaviour(pocketPojo.getType()); // your code already switches types here
+        }
+        targetPocket.setGroupId(pocketPojo.getGroupId());
         targetPocket.setAvailableTime(pocketPojo.getAvailableTime());
         targetPocket.setItAffected(pocketPojo.isItAffected());
         targetPocket.setHP(pocketPojo.getHP());
         targetPocket.setIsItCollided(pocketPojo.isItCollided());
         targetPocket.setIsItMoved(pocketPojo.isItMoved());
-        System.out.println(pocketPojo.isItMoved());
-
         targetPocket.setDelay(pocketPojo.getDelay());
         targetPocket.setFirstPocketType(pocketPojo.getFirstPocketType());
         targetPocket.setTypeBeforeChange(pocketPojo.getTypeBeforeChange());
 
         if (pocketPojo.getWhichSystemViewThisPocketIsAffectedBy() != null) {
-            targetPocket.setWhichSystemViewThisPocketIsAffectedBy(systemViewMap.get(pocketPojo.getWhichSystemViewThisPocketIsAffectedBy()));
+            targetPocket.setWhichSystemViewThisPocketIsAffectedBy(
+                    systemViewMap.get(pocketPojo.getWhichSystemViewThisPocketIsAffectedBy()));
+        } else {
+            targetPocket.setWhichSystemViewThisPocketIsAffectedBy(null);
         }
-        else targetPocket.setWhichSystemViewThisPocketIsAffectedBy(null);
 
         targetPocket.setPlaceOfX(pocketPojo.getPlaceOfX());
         targetPocket.setPlaceOfY(pocketPojo.getPlaceOfY());
         targetPocket.setLayoutX(pocketPojo.getXX());
         targetPocket.setLayoutY(pocketPojo.getYY());
 
-        SetPathMover(targetPocket , pocketPojo);
+        SetPathMover(targetPocket, pocketPojo); // your existing method
     }
-
     private void SetPathMover(PocketMain targetPocket , PocketPojo pocketPojo){
         PathMoverPojo pathMoverPojo = pocketPojo.getPathMover();
 
@@ -168,6 +204,7 @@ public class LoadHandler {
 
         Connection connection = new Connection(curve, fromPort, toPort);
 
+
         curve.setConnection(connection);
         connectionUI.RegisterConnection(connection);
     }
@@ -191,7 +228,7 @@ public class LoadHandler {
         for (AnchorPojo anchorPojo : curvePojo.getMiddlePoints()) {
             setMiddlePoints(curve , anchorPojo);
         }
-        setFollowers(curvePojo);
+        setFollowers(curvePojo , curve);
 
         return curve;
 
@@ -201,10 +238,12 @@ public class LoadHandler {
         anchor.setLatestCord(new Point2D(anchorPojo.getLatestCordX() , anchorPojo.getLatestCordY()));
         curve.getAnchors().add(anchor);
     }
-    private void setFollowers(CurvePojo curvePojo) {
+    private void setFollowers(CurvePojo curvePojo , Curve curve) {
         for (FollowerPojo followerPojo : curvePojo.getFollowers()) {
             Follower follower  = FollowerFactory.createFollower(followerPojo.getFollowerType());
             follower.setRatio(followerPojo.getRatio());
+            curve.getFollowers().add(follower);
+
         }
     }
 

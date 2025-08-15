@@ -178,7 +178,7 @@ public class PathMover extends AnimationTimer {
         lastNs = -1;
         currentLineDistance = currentLineDistance.multiply(0);
         latestLineDistance = latestLineDistance.multiply(0);
-        start();
+//        start();
     }
     public void enqueueImpulse(double dx, double dy) {
         pendingKick.updateAndGet(prev -> new Point2D(prev.getX() + dx, prev.getY() + dy));

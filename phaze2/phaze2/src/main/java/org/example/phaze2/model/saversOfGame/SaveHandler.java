@@ -42,13 +42,16 @@ public class SaveHandler {
         List<SystemView> systemViews = gameState.getResources().getSystemViews();
          systemViewCopy = new ArrayList<>(systemViews);
 
-
         List<PocketMain> pocketMains = gameState.getResources().getPockets();
          pocketMainCopy = new ArrayList<>(pocketMains);
 
 
         List<Connection> connections = gameState.getResources().getConnections();
         connectionsCopy = new ArrayList<>(connections);
+
+
+
+        System.out.println(connectionsCopy.size());
         int Coins = loadAndSaveCompleterNecessaries.getCoinsManager().getNumberOfCoins();
 
         Map<AbilityTypes , AbilityExecutable> aliveAbilities = new HashMap<>(loadAndSaveCompleterNecessaries.getAbilityManager().getExecutableMap());
@@ -138,6 +141,8 @@ public class SaveHandler {
         pocketPojo.setItAffected(pocketMain.isItAffected());
         pocketPojo.setHP(pocketMain.getHP());
         pocketPojo.setItCollided(pocketMain.isIsItCollided());
+        pocketPojo.setGroupId(pocketMain.getGroupId());
+
         pocketPojo.setItMoved(pocketMain.isIsItMoved());
         pocketPojo.setType(pocketMain.getType());
         pocketPojo.setDelay(pocketMain.getDelay());
@@ -148,6 +153,8 @@ public class SaveHandler {
 
         pocketPojo.setXX(pocketMain.getLayoutX());
         pocketPojo.setYY(pocketMain.getLayoutY());
+
+
 
 
         SystemView systemView = pocketMain.getWhichSystemViewThisPocketIsAffectedBy();

@@ -11,7 +11,7 @@ public class Scroll_Of_SisyPhus implements AbilityExecutable {
 
     @Override
     public AbilityTypes AbilityType() {
-        return null;
+        return AbilityTypes.Scroll_of_Sisyphus;
     }
 
     @Override
@@ -22,9 +22,14 @@ public class Scroll_Of_SisyPhus implements AbilityExecutable {
     @Override
     public void execute(GameContext context , double length) {
         context.getGameState().setWeAreAddingAbility(true);
+
         lastUsed = context.now();
+
         context.coins.Decrement(coinsCost);
+
         context.getGameState().setMovingSystemsAvailable(true);
+
+        context.getGameState().setWeAreAddingAbility(false);
     }
 
     @Override

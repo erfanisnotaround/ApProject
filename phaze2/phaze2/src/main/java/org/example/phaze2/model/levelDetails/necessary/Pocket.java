@@ -46,6 +46,7 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
     private double availableTime = 4000;
     private String pocketId;
     private GameState gameState;
+    private boolean isLost = false;
     public Pocket(PocketTypes type , GameState gameState) {
         this.type = type;
         this.gameState = gameState;
@@ -271,5 +272,13 @@ public abstract class Pocket extends ImageView implements Movable , Releasable ,
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public boolean isLost() {
+        return isLost;
+    }
+
+    public void setLost(boolean lost) {
+        isLost = lost;
     }
 }

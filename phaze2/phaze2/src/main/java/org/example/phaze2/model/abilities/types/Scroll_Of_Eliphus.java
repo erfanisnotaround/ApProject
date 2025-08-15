@@ -18,12 +18,12 @@ public class Scroll_Of_Eliphus implements AbilityExecutable {
 
     @Override
     public AbilityTypes AbilityType() {
-        return null;
+        return AbilityTypes.Scroll_of_Eliphas;
     }
 
     @Override
     public boolean isReady(GameContext context) {
-        return false;
+        return context.coins.getNumberOfCoins() >= coinsCost && !context.getGameState().isWeAreAddingAbility();
     }
 
     @Override
@@ -34,6 +34,8 @@ public class Scroll_Of_Eliphus implements AbilityExecutable {
 
         lastUsed = context.now();
         context.getFollowerSpawner().spawn(FollowerType.LineDistance_Zero_Maker);
+
+
 
     }
 

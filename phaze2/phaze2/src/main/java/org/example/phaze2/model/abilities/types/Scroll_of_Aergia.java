@@ -22,13 +22,15 @@ public class Scroll_of_Aergia implements AbilityExecutable {
 
     @Override
     public boolean isReady(GameContext context) {
-        return context.coins.getNumberOfCoins() >= coinsCost;
+        return context.coins.getNumberOfCoins() >= coinsCost && !context.getGameState().isWeAreAddingAbility();
     }
 
     @Override
     public void execute(GameContext context , double length) {
+        context.getGameState().setWeAreAddingAbility(true);
         lastUsed = context.now();
         context.getFollowerSpawner().spawn(FollowerType.Acceleration_zero_Maker);
+        context.getAliveManager().RemoveAbility(AbilityType());
     }
 
     @Override

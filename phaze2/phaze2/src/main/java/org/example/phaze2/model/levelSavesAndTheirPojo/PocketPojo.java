@@ -19,6 +19,7 @@ public class PocketPojo {
     private PathMoverPojo pathMover;
     private double XX;
     private double YY;
+    private String groupId;
 
 
 
@@ -150,4 +151,11 @@ public class PocketPojo {
         this.YY = YY;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 }

@@ -28,7 +28,7 @@ public class WholeMovement {
     private volatile List<SystemView> systemViews;
     private double speedMultiplier = 1;
     private GameState gameState;
-
+    private final List<PocketMain> originalSeeds = new ArrayList<>();
     //checkers and workers har har
 
     StartAvailableChecker startAvailableChecker;
@@ -51,6 +51,7 @@ public class WholeMovement {
         startAvailableChecker = new StartAvailableChecker(systemViews , gameState.getResources().getConnections());
         this.coinsManager = coinsManager;
         this.gameState = gameState;
+        getStartSystemView();
 
     }
     public void StartSending(double speedMultiplier , double AvailableTime){
@@ -60,9 +61,6 @@ public class WholeMovement {
         Reset();
 
         getStartSystemView();
-
-
-
 
         for (PocketMain pocket : pockets) {
             pocket.setAvailableTime(AvailableTime);
@@ -94,7 +92,7 @@ public class WholeMovement {
             return;
         }
 
-//        System.out.println(pocket.getType());
+
 
 
         AddToWaitingSystemCapacity(systemView , pocket);
@@ -107,7 +105,7 @@ public class WholeMovement {
             if (subSystemView.DoesItHavaExitGate()){
                 Connection exitConnection = exitConnections.get(subSystemView.getExitPort());
 
-
+                if (exitConnection == null) {continue;}
                 ChangeListener<Boolean> listener = (observable, oldValue, newValue) -> {
                     if (!CanWeSendPocketOnThisConnection(exitConnection)) {
                         AddToWaitingSend(systemView, exitConnection);
@@ -238,6 +236,7 @@ public class WholeMovement {
         for (Connection connection : connections) {
             connection.getCurve().setIsItUsed(false);
             connection.resetIt();
+            connection.getCurve().setPocketMovingOnIt(null);
             connection.getCurve().setHP(connection.getCurve().getFullHP());
         }
         for (SystemView systemView : systemViews) {
@@ -245,25 +244,53 @@ public class WholeMovement {
             Arrays.fill(systemView.getCapacity(), null);
             systemView.reset();
         }
-        for (PocketMain pocket : pockets) {
-
-            pocket.getPathMover().reset();
-            pocket.setAvailableTime(2000);
-            pocket.getPathMover().stop();
-            pocket.setIsItMoved(false);
-            pocket.setIsItCollided(false);
-            pocket.setHP(pocket.getMaxHp());
-
-            pocket.setLayoutX(-1000);
-            pocket.setLayoutY(-1000);
-            pocket.setItAffected(false);
-            pocket.setLastRound(false);
 
 
-            pocket.setBehaviour(pocket.getFirstPocketType());
-            pocket.setWhichSystemViewThisPocketIsAffectedBy(null);
+        rebuildPocketsFromSeedsInPlace();
+
+    }
+    public void captureOriginalSnapshotFromSeeds(List<PocketMain> seeds) {
+        originalSeeds.clear();
+        originalSeeds.addAll(seeds);
+    }
+    private void rebuildPocketsFromSeedsInPlace() {
+        var container = gameState.getVisualConstant().getContainerPane();
+        var view = gameState.getVisualConstant().getView();
+        var repo = gameState.getVisualConstant().getRepo();
+
+        List<PocketMain> weHavePockets = new ArrayList<>();
+        for (PocketMain pocketMain : pockets) {
+            if (originalSeeds.contains(pocketMain)) {
+                reset(pocketMain);
+                weHavePockets.add(pocketMain);
+            }
+            else {
+                view.remove(pocketMain);
+                repo.remove(pocketMain);
+            }
         }
+        for (PocketMain pocketMain : originalSeeds) {
+            if (weHavePockets.contains(pocketMain)) continue;
 
+            reset(pocketMain);
+        }
+    }
+    private void reset(PocketMain pocket){
+        pocket.getPathMover().reset();
+        pocket.setAvailableTime(2000);
+        pocket.getPathMover().stop();
+        pocket.setIsItMoved(false);
+        pocket.setIsItCollided(false);
+        pocket.setHP(pocket.getMaxHp());
+
+        pocket.setLayoutX(-1000);
+        pocket.setLayoutY(-1000);
+        pocket.setItAffected(false);
+        pocket.setLastRound(false);
+
+
+        pocket.setBehaviour(pocket.getFirstPocketType());
+        pocket.setWhichSystemViewThisPocketIsAffectedBy(null);
     }
 
 }

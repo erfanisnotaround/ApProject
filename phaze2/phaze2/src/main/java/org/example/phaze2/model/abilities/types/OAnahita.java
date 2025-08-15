@@ -23,6 +23,7 @@ public class OAnahita implements AbilityExecutable {
         for (PocketMain pocketMain : context.getGameState().getResources().getPockets()){
             pocketMain.setHP(pocketMain.getMaxHp());
         }
+        context.getAliveManager().RemoveAbility(AbilityType());
     }
 
     @Override

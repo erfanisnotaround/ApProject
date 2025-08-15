@@ -49,9 +49,7 @@ public class ConnectionRegistry {
     }
 
     public void addConnection(Connection connection) {
-        connections.add(connection);
-        exitConnections.put(connection.getFromPort(), connection);
-        exitConnections.put(connection.getToPort(), connection);
+
 
         gameState.getResources().getConnections().add(connection);
         gameState.getResources().getExitConnections().put(connection.getFromPort(), connection);
@@ -61,9 +59,7 @@ public class ConnectionRegistry {
 
     public void removeConnection(Connection conn) {
         if (conn == null) return;
-        connections.remove(conn);
-        exitConnections.remove(conn.getFromPort());
-        exitConnections.remove(conn.getToPort());
+
         exitGates.add(conn.getFromPort());
         enterGates.add(conn.getToPort());
 

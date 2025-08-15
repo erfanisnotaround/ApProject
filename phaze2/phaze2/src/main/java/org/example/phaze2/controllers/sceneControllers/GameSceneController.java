@@ -125,7 +125,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         followerAdder = new FollowerAdder(ContainerPane);
         abilityManager = new AbilityManager(movementMaker , coinsManager , followerAdder ,gameState);
         ShopController = new ShopController(sceneManager.getStage() , main , abilityManager);
-        afterPreShow = new AfterPreShow(abilityManager);
+        afterPreShow = new AfterPreShow(abilityManager , movementMaker);
 
 
 
@@ -158,8 +158,10 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         pockets = systemVisualizer.getPockets();
         List<SystemView> systemViews = systemVisualizer.getSystemViews();
 
-        List<PocketMain> pocketMains =  new ArrayList<>(pockets);
-        gameState.getResources().setFirstOriginalPockets(pocketMains);
+        List<PocketMain> seeds = new ArrayList<>(pockets);
+        gameState.getResources().setBaselinePocketSeeds(new ArrayList<>(seeds));
+
+        movementMaker.captureOriginalSnapshotFromSeeds(pockets);
 
 
 
@@ -266,8 +268,9 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
 
 //        saveAndLoadController.startAutoSave();
         saveAndLoadController.loadTheSave();
-        afterPreShow.setPocketMains(gameState.getResources().getPockets());
 
+        afterPreShow.setSystemViews(gameState.getResources().getSystemViews());
+        afterPreShow.setPocketMains(gameState.getResources().getPockets());
         afterPreShow.preShow();
 
 

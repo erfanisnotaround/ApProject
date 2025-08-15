@@ -28,13 +28,12 @@ public class FollowerAdder implements FollowerSpawner{
     @Override
     public void spawn(FollowerType followerType) {
 
-        if (gameContext.getGameState().isWeAreAddingAbility()) return;
+
         Follower follower = FollowerFactory.createFollower(followerType);
         SelectedFollower = follower;
 
 
-        follower.setFill(Color.WHITE);
-        follower.setRadius(5);
+
 
         ContainerPane.getChildren().add(SelectedFollower);
 
