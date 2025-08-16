@@ -12,6 +12,7 @@ public class PocketViewManager implements PocketViewPort {
 
     @Override
     public void add(Node node) {
+        if (ContainerPane.getChildren().contains(node)) return;
         ContainerPane.getChildren().add(node);
     }
 

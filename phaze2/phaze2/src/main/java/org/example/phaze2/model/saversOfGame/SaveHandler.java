@@ -1,22 +1,20 @@
 package org.example.phaze2.model.saversOfGame;
 
 import javafx.geometry.Point2D;
-import org.example.phaze2.controllers.abilityManagers.following.FollowerAbilityController;
-import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.abilities.AbilityTypes;
 import org.example.phaze2.model.abilities.mechanics.AbilityExecutable;
 import org.example.phaze2.model.abilities.mechanics.followers.Follower;
-import org.example.phaze2.model.agentsAndManagers.JsonManager;
-import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
-import org.example.phaze2.model.hudModels.AbilityAliveManager;
-import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.Anchor;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.PortInfo;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.GroupStash;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.Palette;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.PocketVisualEffect;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types.MergerBehavior;
 import org.example.phaze2.model.levelSavesAndTheirPojo.*;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -34,6 +32,7 @@ public class SaveHandler {
     LoadAndSaveCompleterNecessaries loadAndSaveCompleterNecessaries;
     public SaveHandler(LoadAndSaveCompleterNecessaries loadAndSaveCompleterNecessaries) {
         this.loadAndSaveCompleterNecessaries = loadAndSaveCompleterNecessaries;
+
     }
     public LevelPojo StartSave(){
 
@@ -294,11 +293,23 @@ public class SaveHandler {
     }
     private LevelCurrentDetailsPojo setLevelsRequired(Map<AbilityTypes , AbilityExecutable> abilities , int Coins){
         LevelCurrentDetailsPojo pojo = new LevelCurrentDetailsPojo();
+        setEffects(pojo);
         pojo.setCoinsHave(Coins);
-
         setAbilitiesWeHad(abilities , pojo);
+        setMergerSystemsCapacity(pojo);
 
         return pojo;
+    }
+    private void setEffects(LevelCurrentDetailsPojo pojo){
+        PocketVisualEffect effect  = loadAndSaveCompleterNecessaries.getGameState().getVisualConstant().getEffect();
+
+        Palette palette = effect.snapshot();
+        HuePalettePojo huePalettePojo = new HuePalettePojo();
+        huePalettePojo.setNextHue(palette.nextHue);
+        huePalettePojo.setHues(palette.hues);
+
+        pojo.setHuePalettePojo(huePalettePojo);
+
     }
     private void setAbilitiesWeHad(Map<AbilityTypes , AbilityExecutable> abilities , LevelCurrentDetailsPojo pojo){
 
@@ -322,5 +333,29 @@ public class SaveHandler {
         pojo.setTimeBetweenUsedANdNow(loadAndSaveCompleterNecessaries.getAbilityManager().getGameContext().now() - executable.lastUsed());
 
         return pojo;
+    }
+    private void setMergerSystemsCapacity(LevelCurrentDetailsPojo pojo){
+        Map<String , String[]> HiddenCapacity = new HashMap<>();
+        for (SystemView systemView : systemViewCopy){
+            if (systemView instanceof MergerBehavior){
+                setMerger((MergerBehavior) systemView , HiddenCapacity);
+            }
+        }
+        pojo.setMergerSlots(HiddenCapacity);
+    }
+    private void setMerger(MergerBehavior merger , Map<String , String[]> HiddenCapacity ){
+        GroupStash stash = merger.getStash();
+        PocketMain[] pocketMains = stash.getSlot();
+        String[] slots = new String[pocketMains.length];
+        for (int i = 0; i < pocketMains.length; i++){
+            PocketMain p  = pocketMains[i];
+            if (p == null){
+                slots[i] = null;
+            }
+            else {
+                slots[i] = p.getPocketId();
+            }
+        }
+        HiddenCapacity.put(merger.getSystemID(), slots);
     }
 }

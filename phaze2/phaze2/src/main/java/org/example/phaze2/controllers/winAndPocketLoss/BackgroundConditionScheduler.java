@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.util.Duration;
+import org.example.phaze2.model.constants.GameState;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,13 +15,16 @@ public class BackgroundConditionScheduler {
     private final PocketReaper reaper;
     private final GameOverEvaluator evaluator;
     private final GameOverHandler handler;
-
+    private final PocketLossInWin WinAnfLoss;
+    private final GameState gameState;
     public BackgroundConditionScheduler(PocketReaper reaper,
                                         GameOverEvaluator evaluator,
-                                        GameOverHandler handler) {
+                                        GameOverHandler handler , GameState gameState ) {
         this.reaper = reaper;
         this.evaluator = evaluator;
         this.handler = handler;
+        this.gameState = gameState;
+        WinAnfLoss = new PocketLossInWin(gameState);
         this.ses = Executors.newSingleThreadScheduledExecutor(r -> {
             Thread t = new Thread(r, "ConditionScheduler");
             t.setDaemon(true);
@@ -33,6 +37,7 @@ public class BackgroundConditionScheduler {
         ses.scheduleAtFixedRate(() -> {
 
             var dead = reaper.detectDead();
+
             if (!dead.isEmpty()) {
                 reaper.applyOnFx(dead);
             }

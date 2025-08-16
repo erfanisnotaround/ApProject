@@ -27,16 +27,26 @@ public class DefaultMerger implements PocketMerger {
     public PocketMain merge(List<PocketMain> parts, PocketTypes type, String groupId, SystemView system) {
         if (parts.isEmpty()) return null;
 
-        PocketMain seed = parts.get(0);
+        PocketMain seed = parts.getFirst();
 
+        int i = 0;
         for (PocketMain part : parts) {
             part.setCapturedByMerger(true);
             view.remove(part);
             repo.remove(part);
+            gameState.getResources().removePocketGroupIdGroup(groupId, part);
+            i++;
         }
 
+
+
         PocketMain merged = new PocketMain(type , gameState);
+        gameState.getResources().putPocketGroupIdGroup(groupId, merged);
+        merged.setHP(i);
+        merged.setMaxHp(i);
+        System.out.println(merged +  " " + merged.getMaxHp());
         merged.setGroupId(groupId);
+        merged.setPocketId(seed.getGroupId());
         merged.setLayoutX(seed.getLayoutX());
         merged.setLayoutY(seed.getLayoutY());
         merged.setAvailableTime(seed.getAvailableTime());

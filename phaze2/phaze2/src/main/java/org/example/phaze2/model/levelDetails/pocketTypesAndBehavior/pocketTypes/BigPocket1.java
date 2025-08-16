@@ -63,5 +63,16 @@ public class BigPocket1 extends Pocket implements Movable , Releasable {
         return exitConnection;
     }
 
+    @Override
+    public void EnterAct(SystemView systemView) {
+
+        for (int i = 0 ; i < systemView.getCapacity().length ; i++){
+            if (systemView.getCapacity()[i] == null) continue;
+            PocketMain p = systemView.getCapacity()[i];
+            p.setHP(0);
+            systemView.getCapacity()[i] = null;
+        }
+    }
+
 
 }

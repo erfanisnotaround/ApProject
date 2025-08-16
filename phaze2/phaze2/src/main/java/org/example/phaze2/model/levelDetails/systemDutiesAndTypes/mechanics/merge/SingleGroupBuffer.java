@@ -3,6 +3,7 @@ package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.mer
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SingleGroupBuffer implements GroupStash {
@@ -17,6 +18,11 @@ public class SingleGroupBuffer implements GroupStash {
     public boolean isEmpty() {
         for (PocketMain s : slots) if (s != null) return false;
         return true;
+    }
+
+    @Override
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     @Override
@@ -39,7 +45,19 @@ public class SingleGroupBuffer implements GroupStash {
     }
 
     @Override
+    public PocketMain[] getSlot() {
+        return slots;
+    }
+
+    @Override
+    public void reset() {
+        groupId = null;
+        Arrays.fill(slots, null);
+    }
+
+    @Override
     public boolean accept(PocketMain pocket) {
+
         String gid = pocket.getGroupId();
         if (gid == null) return false;
         if (isEmpty()) groupId = gid;

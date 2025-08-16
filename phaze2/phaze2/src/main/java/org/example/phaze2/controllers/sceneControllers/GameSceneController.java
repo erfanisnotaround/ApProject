@@ -249,7 +249,7 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
                 .add(new WinCondition(dataProvider),        GameOverType.WIN);
 
         BackgroundConditionScheduler bgScheduler =
-                new BackgroundConditionScheduler(reaper, evaluator, new FxSceneGameOverHandler(sceneManager));
+                new BackgroundConditionScheduler(reaper, evaluator, new FxSceneGameOverHandler(sceneManager) , gameState);
 
         bgScheduler.start();
 
@@ -266,12 +266,12 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         hudListener.Start();
 
 
-//        saveAndLoadController.startAutoSave();
-        saveAndLoadController.loadTheSave();
+        saveAndLoadController.startAutoSave();
+//        saveAndLoadController.loadTheSave();
 
         afterPreShow.setSystemViews(gameState.getResources().getSystemViews());
         afterPreShow.setPocketMains(gameState.getResources().getPockets());
-        afterPreShow.preShow();
+//        afterPreShow.preShow();
 
 
     }

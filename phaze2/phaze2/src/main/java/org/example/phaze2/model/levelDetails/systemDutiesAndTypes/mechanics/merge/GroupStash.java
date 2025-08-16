@@ -9,6 +9,9 @@ public interface GroupStash {
     List<PocketMain> take(int count);
     int size();
     boolean isEmpty();
+    void setGroupId(String groupId);
     String getGroupId();
     boolean isThere(PocketMain pocket);
+    PocketMain[] getSlot();
+    void reset();
 }

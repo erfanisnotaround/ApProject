@@ -76,19 +76,20 @@
       }
     ],
     "pockets": [
-      {
-        "pocketName": "mio",
-        "type": " Messenger_3",
-        "delay": 1.5
-      },
+
       {
         "pocketName": "ma",
-        "type": " Messenger_2",
+        "type": " Messenger_1",
         "delay": 1.5
       },
       {
         "pocketName": "man",
         "type": " Messenger_2",
+        "delay": 1.5
+      },
+      {
+        "pocketName": "mio",
+        "type": " BIG_1",
         "delay": 1.5
       },
       {

@@ -83,6 +83,7 @@ public class WholeMovement {
 
     public void SendingPockets(SystemView systemView , PocketMain pocket , int  fromSystem ){
         Connection exitConnection = pocket.ReleaseAct(pocket, systemView, exitConnections , speedMultiplier, null);
+
         if (exitConnection != null) {
             if (fromSystem != -1) {
                 systemView.getCapacity()[fromSystem] = null;
@@ -167,16 +168,23 @@ public class WholeMovement {
                                 Boolean oldVal, Boolean newVal) {
 
 
+                pocket.EnterAct(targetSystem);
 
 
                 obs.removeListener(this);
                 int coins = pocket.getCoinsPerEntry();
                 coinsManager.Increment(coins);
-                if (pocket.isLastRound()) return;
+                if (pocket.isLastRound()) {
+                    pocket.setDone(true);
+                    return;
+                }
                 targetSystem.EnterBehave(pocket, speedMultiplier);
                 if (pocket.isPocketIsLostByDisterbute() || pocket.isCapturedByMerger()){
                     AddToWaitingSend(targetSystem , connection);
+
+
                 } else {
+
                     SendingPockets(targetSystem, pocket , -1);
                 }
 
@@ -192,10 +200,12 @@ public class WholeMovement {
         for (int i = 0 ; i < systemView.getCapacity().length ; i++){
             if (systemView.getCapacity()[i] == null){
                 systemView.getCapacity()[i] = pocket;
-                systemView.EnterSystem();
-                break;
+
+                return;
             }
         }
+        pocket.setHP(0);
+
     }
     private boolean IsItBig(PocketMain pocket){
         if (pocket.getType() == PocketTypes.BIG_1) return true;
@@ -241,7 +251,7 @@ public class WholeMovement {
         }
         for (SystemView systemView : systemViews) {
             systemView.setIsItDown(false);
-            Arrays.fill(systemView.getCapacity(), null);
+
             systemView.reset();
         }
 
@@ -267,15 +277,21 @@ public class WholeMovement {
             else {
                 view.remove(pocketMain);
                 repo.remove(pocketMain);
+                pockets.remove(pocketMain);
+                gameState.getResources().getPockets().remove(pocketMain);
             }
         }
         for (PocketMain pocketMain : originalSeeds) {
             if (weHavePockets.contains(pocketMain)) continue;
 
+            pockets.add(pocketMain);
+            gameState.getResources().getPockets().add(pocketMain);
+            view.add(pocketMain);
             reset(pocketMain);
         }
     }
     private void reset(PocketMain pocket){
+        pocket.setMovementManager(this);
         pocket.getPathMover().reset();
         pocket.setAvailableTime(2000);
         pocket.getPathMover().stop();
@@ -291,6 +307,7 @@ public class WholeMovement {
 
         pocket.setBehaviour(pocket.getFirstPocketType());
         pocket.setWhichSystemViewThisPocketIsAffectedBy(null);
+
     }
 
 }

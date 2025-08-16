@@ -49,6 +49,8 @@ public class BigPocketSplitter implements PocketSplitter {
         view.remove(bigPocket);
         repo.remove(bigPocket);
 
+        gameState.getResources().removePocketGroupIdGroup(group , bigPocket);
+
         gameState.getResources().getPockets().remove(bigPocket);
 
         WholeMovement wholeMovement = bigPocket.getMovementManager();
@@ -66,6 +68,7 @@ public class BigPocketSplitter implements PocketSplitter {
 
             view.add(m3);
             repo.add(m3);
+            gameState.getResources().putPocketGroupIdGroup(group , m3);
             gameState.getResources().getPockets().add(m3);
 
             wholeMovement.SendingPockets(systemView , m3 , -1);

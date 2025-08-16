@@ -5,4 +5,7 @@ import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.
 
 public interface PocketVisualEffect {
     void apply(PocketMain pocket, String groupId);
+    Palette snapshot();
+    void restore(Palette p);
+    void ApplyIfThere(PocketMain pocketMain);
 }

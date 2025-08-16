@@ -89,4 +89,9 @@ public class Messenger3 extends Pocket implements Movable {
 
         return exitConnection;
     }
+
+    @Override
+    public void EnterAct(SystemView systemView) {
+
+    }
 }

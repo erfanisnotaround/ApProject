@@ -98,6 +98,11 @@ public class SecretPocket1 extends Pocket implements Movable {
         return exitConnection;
     }
 
+    @Override
+    public void EnterAct(SystemView systemView) {
+
+    }
+
     private AnimationTimer buildRegulator() {
         return new AnimationTimer() {
             private long lastCheck = 0;

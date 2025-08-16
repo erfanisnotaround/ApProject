@@ -107,4 +107,9 @@ public class SecretPocket2 extends Pocket implements Movable {
 
         return exitConnection;
     }
+
+    @Override
+    public void EnterAct(SystemView systemView) {
+
+    }
 }

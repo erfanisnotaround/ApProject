@@ -62,4 +62,9 @@ public class SecretMessenger extends Pocket implements Movable {
         chooseTheMoveBehavior();
         return behavior.ReleaseAct(pocket, systemView, exitConnections, multiplier, exitConnection );
     }
+
+    @Override
+    public void EnterAct(SystemView systemView) {
+        behavior.EnterAct(systemView);
+    }
 }

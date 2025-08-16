@@ -6,10 +6,7 @@ import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class Resources {
@@ -21,6 +18,7 @@ public final class Resources {
     private final Map<String , PocketMain> pocketMainMap = new HashMap<>();
     private final Map<String , SystemView> systemViewMap = new HashMap<>();
     private List<PocketMain> baselinePocketSeeds = new ArrayList<>();
+    private final Map<String , Set<PocketMain>> pocketGroupIdGroups = new HashMap<>();
 
     private WireManager wireManager ;
 
@@ -62,5 +60,20 @@ public final class Resources {
 
     public void setWireManager(WireManager wireManager) {
         this.wireManager = wireManager;
+    }
+
+    public Map<String, Set<PocketMain>> getPocketGroupIdGroups() {
+        return pocketGroupIdGroups;
+    }
+    public void putPocketGroupIdGroup(String pocketGroupId , PocketMain pocketMain) {
+        if (pocketGroupIdGroups.containsKey(pocketGroupId)) pocketGroupIdGroups.get(pocketGroupId).add(pocketMain);
+        else {
+            Set<PocketMain> pocketMainSet = new HashSet<>();
+            pocketMainSet.add(pocketMain);
+            pocketGroupIdGroups.put(pocketGroupId , pocketMainSet);
+        }
+    }
+    public void removePocketGroupIdGroup(String pocketGroupId , PocketMain pocketMain) {
+        pocketGroupIdGroups.get(pocketGroupId).remove(pocketMain);
     }
 }

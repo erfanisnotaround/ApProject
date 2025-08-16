@@ -34,8 +34,10 @@ public class PocketProcessor implements Runnable {
         pocket.setPocketId(pocketLoading.getPocketName());
         pocket.setFirstPocketType(pocket.getType());
         pocket.setTypeBeforeChange(pocketLoading.getType());
-
+        pocket.setGroupId(pocketLoading.getPocketName());
         pocketMainMap.put(pocketLoading.getPocketName(), pocket);
+
+        gameState.getResources().putPocketGroupIdGroup(pocketLoading.getPocketName(), pocket);
         return pocket;
     }
 

@@ -42,11 +42,13 @@ public class FlexibleMergePolicy implements PocketMergePolicy {
 
         for (PocketMain pocket : pockets) {
             if (!pocket.getGroupId().equals(groupId)) continue;
+
             if (slots.isThere(pocket)) continue;
             double distance = systemLayout.distance(pocket.centre());
 
             if (distance < RadiusOfChecking  && !pocket.isLastRound()) return false;
         }
+
         return true;
     }
 }

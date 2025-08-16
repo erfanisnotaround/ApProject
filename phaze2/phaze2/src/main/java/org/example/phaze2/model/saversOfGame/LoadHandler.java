@@ -13,6 +13,10 @@ import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.*;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.GroupStash;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.merge.SingleGroupBuffer;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.mechanics.splitting.Palette;
+import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types.MergerBehavior;
 import org.example.phaze2.model.levelSavesAndTheirPojo.*;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
@@ -51,10 +55,12 @@ public class LoadHandler {
         List<ConnectionPojo> connectionPojo = InfoOfLevel.getConnections();
 
 
-        loadLevelThings(InfoOfLevel.getCurrentDetails());
+
         SetPockets(pocketPojo);
         SetSystemViews(systemsPojo);
         SetConnections(connectionPojo);
+
+        loadLevelThings(InfoOfLevel.getCurrentDetails());
 
     }
     private void SetPockets(List<PocketPojo> pocketPojoList) {
@@ -250,8 +256,61 @@ public class LoadHandler {
     private void loadLevelThings(LevelCurrentDetailsPojo levelCurrentDetailsPojo) {
         CoinsManager coinsManager = loadCompleterNecessaries.getCoinsManager();
         coinsManager.setNumberOfCoins(levelCurrentDetailsPojo.getCoinsHave());
+        restoreMergerSlots(levelCurrentDetailsPojo.getMergerSlots());
+        loadAbilities(levelCurrentDetailsPojo);
         setAbilities(levelCurrentDetailsPojo.getAliveAbilities());
 
+    }
+    private void loadAbilities(LevelCurrentDetailsPojo levelCurrentDetailsPojo) {
+        var effect = gameState.getVisualConstant().getEffect();
+        var hp = levelCurrentDetailsPojo.getHuePalettePojo();
+
+        Palette pal = new Palette();
+        pal.nextHue = hp.getNextHue();
+        pal.hues.putAll(hp.getHues());
+
+        effect.restore(pal);
+
+        for (PocketMain pocketMain : gameState.getResources().getPockets()){
+            effect.ApplyIfThere(pocketMain);
+        }
+    }
+    private void restoreMergerSlots(Map<String, String[]> saved) {
+        if (saved == null) return;
+        for (Map.Entry<String, String[]> e : saved.entrySet()) {
+            String systemId = e.getKey();
+            String[] slotIds = e.getValue();
+
+            SystemView sv = systemViewMap.get(systemId);
+            if (!(sv instanceof MergerBehavior mb)) continue;
+
+            GroupStash stash = mb.getStash();
+            PocketMain[] slots = stash.getSlot();
+
+            Arrays.fill(slots, null);
+
+            String groupId = null;
+            int n = slotIds.length;
+            for (int i = 0; i < n; i++) {
+                String pid = slotIds[i];
+                if (pid == null) continue;
+                PocketMain p = pocketMainMap.get(pid);
+
+                if (p == null) continue;
+
+
+                // ensure pocket is not simultaneously in system capacity
+                // (defensive: if your systems kept references, clean them)
+                // Optional: remove from any capacity arrays that still hold it.
+
+                slots[i] = p;
+                if (groupId == null && p.getGroupId() != null) groupId = p.getGroupId();
+            }
+
+            if (stash instanceof SingleGroupBuffer sb) {
+                sb.setGroupId(groupId);
+            }
+        }
     }
     private void setAbilities(Set<AbilityExecutorPojo> abilities) {
         loadCompleterNecessaries.getAfterPreShow().getAbilityInfo().clear();

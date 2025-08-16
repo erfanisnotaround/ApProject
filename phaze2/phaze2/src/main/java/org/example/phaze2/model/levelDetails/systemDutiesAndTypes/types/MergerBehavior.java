@@ -54,34 +54,40 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
     @Override
     public void EnterBehave(PocketMain EntryPocket, double multiplier) {
         if (EntryPocket.getType() == null || EntryPocket.getGroupId() == null) return;
+        if (EntryPocket.getType() != PocketTypes.Messenger_3) return;
 
         boolean accepted = stash.accept(EntryPocket);
         if (accepted) {
             EntryPocket.setCapturedByMerger(true);
             getGameState().getVisualConstant().getView().remove(EntryPocket);
             getGameState().getResources().getPockets().remove(EntryPocket);
+            tryMergeNow();
         }
 
-        tryMergeNow();
+
     }
 
     private void tryMergeNow() {
         if (stash.isEmpty()) return;
-
         String groupId = stash.getGroupId();
         int needed = mergePolicy.requiredCount(groupId, this);
         if (stash.size() < needed) return;
+
+
         if (!mergePolicy.canWeMerge(groupId , this , stash ,gameState.getResources().getPockets())) return;
-        List<PocketMain> inputs = stash.take(needed);
+
+        List<PocketMain> inputs = stash.take(stash.size());
 
         PocketMain merged = merger.merge(inputs, mergePolicy.resultType(groupId, inputs), groupId, this);
 
         if (merged == null) return;
 
-        for (PocketMain m : capacity) {
-            if (m == null) {
-                merged.getMovementManager().SendingPockets(this , merged , -1);
-                return;
+        for (int i  = 0 ; i < capacity.length ; i++) {
+            PocketMain m = capacity[i];
+            if (m != null) {
+
+                merged.getMovementManager().SendingPockets(this , merged , i);
+
             }
         }
         capacity[capacity.length - 1] = null;
@@ -103,5 +109,13 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
         else return null;
     }
 
+    public GroupStash getStash() {
+        return stash;
+    }
 
+    @Override
+    public void reset() {
+        super.reset();
+        stash.reset();
+    }
 }

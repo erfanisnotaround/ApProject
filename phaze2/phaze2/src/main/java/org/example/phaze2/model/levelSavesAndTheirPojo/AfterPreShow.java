@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AfterPreShow {
-    private double wait = 10;
+    private double wait = 4;
     PauseTransition pauseTransition = new PauseTransition(Duration.seconds(wait));
     private List<PocketMain> pocketMains;
     private List<SystemView> systemViews;
@@ -42,8 +42,8 @@ public class AfterPreShow {
         wholeMovement.PutListenersForSystems();
         wholeMovement.getStartSystemView();
         for (PocketMain pocket : pocketMains) {
-//            pocket.setLayoutX(500);
-//            pocket.setLayoutY(500);
+
+            pocket.setMovementManager(wholeMovement);
             if (pocket.isIsItMoved() && !pocket.isLost()){
                 PathMover pathMover = pocket.getPathMover();
                 pocket.getPathMover().move(pathMover.getCurve() , pocket.getSpeed() , pocket.getAcceleration() , true , 1);

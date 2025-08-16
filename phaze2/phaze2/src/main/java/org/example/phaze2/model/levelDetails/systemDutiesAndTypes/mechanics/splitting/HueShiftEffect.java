@@ -23,5 +23,32 @@ public class HueShiftEffect implements PocketVisualEffect {
         });
 
         p.setEffect(effect);
+
+    }
+    @Override
+    public Palette snapshot() {
+        Palette p = new Palette();
+        p.nextHue = nextHue;
+        for (var e : groupEffects.entrySet()) {
+            p.hues.put(e.getKey(), e.getValue().getHue());
+        }
+        return p;
+    }
+    @Override
+    public void restore(Palette p) {
+        groupEffects.clear();
+        for (var e : p.hues.entrySet()) {
+            ColorAdjust fx = new ColorAdjust();
+            fx.setHue(e.getValue());
+            groupEffects.put(e.getKey(), fx);
+        }
+        nextHue = p.nextHue;
+    }
+
+    @Override
+    public void ApplyIfThere(PocketMain pocketMain) {
+        if (groupEffects.containsKey(pocketMain.getGroupId())) {
+            pocketMain.setEffect(groupEffects.get(pocketMain.getGroupId()));
+        }
     }
 }

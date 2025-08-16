@@ -115,6 +115,11 @@ public class PocketMain extends Pocket  implements InitData {
         return behaviour.ReleaseAct(this , systemView, exitConnections, multiplier , exitConnection );
     }
 
+    @Override
+    public void EnterAct(SystemView systemView) {
+        behaviour.EnterAct(systemView);
+    }
+
     public void distract(double x , double y) {
         getPathMover().enqueueImpulse(x, y);
     }
@@ -179,4 +184,5 @@ public class PocketMain extends Pocket  implements InitData {
     public void setLastRound(boolean lastRound) {
         this.lastRound = lastRound;
     }
+
 }
