@@ -241,10 +241,10 @@ public class GameSceneController implements Maker, ControlledScreen , DataReceiv
         DeadPocketPlacementStrategy lossBin =
                 new SimpleCornerLossBin(ContainerPane, 1500, 900, 32, 8);
 
-        PocketReaper reaper = new PocketReaper(pockets, lossBin);
+        PocketReaper reaper = new PocketReaper(pockets, lossBin , gameState);
 
         DefaultGameDataProvider dataProvider = new DefaultGameDataProvider(gameState);
-        GameOverEvaluator evaluator = new GameOverEvaluator(new FxSceneGameOverHandler(sceneManager))
+        GameOverEvaluator evaluator = new GameOverEvaluator(new FxSceneGameOverHandler(sceneManager) , gameState)
                 .add(new PocketLossCondition(dataProvider), GameOverType.POCKET_LOSS)
                 .add(new WinCondition(dataProvider),        GameOverType.WIN);
 

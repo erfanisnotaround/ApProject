@@ -9,4 +9,6 @@ public interface GameDataProvider {
     int getStartedCount();
     int getDeliveredCount();
     void reset();
+    void incStarted(int Increment);
+    void incDelivered(int Increment);
 }

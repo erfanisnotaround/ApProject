@@ -70,8 +70,8 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
     private void tryMergeNow() {
         if (stash.isEmpty()) return;
         String groupId = stash.getGroupId();
-        int needed = mergePolicy.requiredCount(groupId, this);
-        if (stash.size() < needed) return;
+//        int needed = mergePolicy.requiredCount(groupId, this);
+//        if (stash.size() < needed) return;
 
 
         if (!mergePolicy.canWeMerge(groupId , this , stash ,gameState.getResources().getPockets())) return;

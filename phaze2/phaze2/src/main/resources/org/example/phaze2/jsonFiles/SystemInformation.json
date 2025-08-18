@@ -77,24 +77,10 @@
     ],
     "pockets": [
 
-      {
-        "pocketName": "ma",
-        "type": " Messenger_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "man",
-        "type": " Messenger_2",
-        "delay": 1.5
-      },
+
       {
         "pocketName": "mio",
         "type": " BIG_1",
-        "delay": 1.5
-      },
-      {
-        "pocketName": "xfefef",
-        "type": " Messenger_2",
         "delay": 1.5
       }
     ]

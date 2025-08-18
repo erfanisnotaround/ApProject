@@ -28,6 +28,14 @@ public class DefaultGameDataProvider implements GameDataProvider {
     }
 
 
-    public void incStarted()   { started.incrementAndGet(); }
-    public void incDelivered() { delivered.incrementAndGet(); }
+    @Override
+    public void incStarted(int Increment)   {
+        started.set(started.get() + Increment);
+    }
+    @Override
+    public void incDelivered(int Increment) {
+        delivered.set(delivered.get() + Increment);
+        System.out.println(delivered.get() + "   dhd   " + started.get());
+
+    }
 }

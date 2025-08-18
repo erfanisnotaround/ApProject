@@ -2,6 +2,7 @@
 package org.example.phaze2.controllers.winAndPocketLoss;
 
 import javafx.application.Platform;
+import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
 import java.util.*;
@@ -11,10 +12,12 @@ public class PocketReaper {
     private final List<PocketMain> pockets;
     private final DeadPocketPlacementStrategy placement;
     private final Set<PocketMain> reaped = Collections.newSetFromMap(new IdentityHashMap<>());
+    GameState gameState;
 
-    public PocketReaper(List<PocketMain> pockets, DeadPocketPlacementStrategy placement) {
+    public PocketReaper(List<PocketMain> pockets, DeadPocketPlacementStrategy placement , GameState gameState) {
         this.pockets = pockets;
         this.placement = placement;
+        this.gameState = gameState;
     }
 
     public List<PocketMain> detectDead() {
@@ -23,6 +26,7 @@ public class PocketReaper {
             if (p.getHP() <= 0 && !reaped.contains(p)) {
                 reaped.add(p);
                 dead.add(p);
+
             }
         }
         return dead;
@@ -35,6 +39,7 @@ public class PocketReaper {
                 p.setLost(true);
             });
             placement.place(p);
+            gameState.getResources().getPocketGroupIdGroups().get(p.getGroupId()).remove(p);
         }
     }
     public void reset(){

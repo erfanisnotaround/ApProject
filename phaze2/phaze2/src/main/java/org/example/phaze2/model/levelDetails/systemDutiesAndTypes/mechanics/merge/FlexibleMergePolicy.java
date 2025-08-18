@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FlexibleMergePolicy implements PocketMergePolicy {
     private final int threshold;
-    private final double RadiusOfChecking = 1000;
+    private final double RadiusOfChecking = 500;
 
     public FlexibleMergePolicy(int threshold) {
         this.threshold = threshold;
@@ -27,7 +27,7 @@ public class FlexibleMergePolicy implements PocketMergePolicy {
 
 
 
-        PocketTypes inputType = inputs.get(0).getType();
+        PocketTypes inputType = inputs.getFirst().getType();
 
         return switch (inputType) {
             case Messenger_3 -> PocketTypes.BIG_1;

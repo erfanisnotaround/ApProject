@@ -15,7 +15,7 @@ public class BackgroundConditionScheduler {
     private final PocketReaper reaper;
     private final GameOverEvaluator evaluator;
     private final GameOverHandler handler;
-    private final PocketLossInWin WinAnfLoss;
+
     private final GameState gameState;
     public BackgroundConditionScheduler(PocketReaper reaper,
                                         GameOverEvaluator evaluator,
@@ -24,7 +24,7 @@ public class BackgroundConditionScheduler {
         this.evaluator = evaluator;
         this.handler = handler;
         this.gameState = gameState;
-        WinAnfLoss = new PocketLossInWin(gameState);
+
         this.ses = Executors.newSingleThreadScheduledExecutor(r -> {
             Thread t = new Thread(r, "ConditionScheduler");
             t.setDaemon(true);

@@ -243,6 +243,8 @@ public class WholeMovement {
         }
         SystemListeners.clear();
 
+
+
         for (Connection connection : connections) {
             connection.getCurve().setIsItUsed(false);
             connection.resetIt();
@@ -269,10 +271,13 @@ public class WholeMovement {
         var repo = gameState.getVisualConstant().getRepo();
 
         List<PocketMain> weHavePockets = new ArrayList<>();
+
         for (PocketMain pocketMain : pockets) {
             if (originalSeeds.contains(pocketMain)) {
+                gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).clear();
                 reset(pocketMain);
                 weHavePockets.add(pocketMain);
+                gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).add(pocketMain);
             }
             else {
                 view.remove(pocketMain);
@@ -284,10 +289,15 @@ public class WholeMovement {
         for (PocketMain pocketMain : originalSeeds) {
             if (weHavePockets.contains(pocketMain)) continue;
 
+
             pockets.add(pocketMain);
             gameState.getResources().getPockets().add(pocketMain);
             view.add(pocketMain);
             reset(pocketMain);
+
+            gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).clear();
+            gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).add(pocketMain);
+
         }
     }
     private void reset(PocketMain pocket){
@@ -303,6 +313,7 @@ public class WholeMovement {
         pocket.setLayoutY(-1000);
         pocket.setItAffected(false);
         pocket.setLastRound(false);
+        pocket.setDone(false);
 
 
         pocket.setBehaviour(pocket.getFirstPocketType());

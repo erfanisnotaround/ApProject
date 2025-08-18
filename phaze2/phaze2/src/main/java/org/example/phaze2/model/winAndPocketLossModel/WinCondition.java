@@ -1,10 +1,22 @@
 package org.example.phaze2.model.winAndPocketLossModel;
 
-import javafx.geometry.Point2D;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+
+import java.util.List;
 
 public class WinCondition implements GameCondition {
     private final GameDataProvider data;
-    public WinCondition(GameDataProvider data) { this.data = data; }
+    public WinCondition(GameDataProvider data) {
+        this.data = data;
+        data.incStarted(WholeHp(data.getAllPockets()));
+    }
+    private int WholeHp(List<PocketMain> pocketMains){
+        int n = 0;
+        for (PocketMain p : pocketMains){
+            n += p.getMaxHp();
+        }
+        return n;
+    }
 
     @Override public boolean check() {
         int started   = data.getStartedCount();
@@ -26,7 +38,12 @@ public class WinCondition implements GameCondition {
     }
 
     @Override
-    public void reset() {
+    public void inject(int injection) {
+        data.incDelivered(injection);
+    }
 
+    @Override
+    public void reset() {
+        data.reset();
     }
 }

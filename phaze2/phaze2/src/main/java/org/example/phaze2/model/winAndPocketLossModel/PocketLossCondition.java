@@ -1,18 +1,16 @@
 // src/main/java/org/example/phaze2/model/winAndPocketLossModel/PocketLossCondition.java
 package org.example.phaze2.model.winAndPocketLossModel;
 
-import javafx.geometry.Point2D;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
-import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PocketLossCondition implements GameCondition {
     private final GameDataProvider data;
     private int totalMaxHp = -1;                 // computed once
-    private int lostSum = 0;                     // sum of MaxHp of pockets counted as dead
+    private int lostSum = 0;// sum of MaxHp of pockets counted as dead
 
+    private int injected = 0;
     public PocketLossCondition(GameDataProvider data) { this.data = data;}
 
     @Override public boolean check() {
@@ -29,6 +27,7 @@ public class PocketLossCondition implements GameCondition {
 
             }
         }
+        lostSum += injected;
         return totalMaxHp > 0 && lostSum * 2 >= totalMaxHp;
     }
 
@@ -45,8 +44,14 @@ public class PocketLossCondition implements GameCondition {
     }
 
     @Override
+    public void inject(int injection) {
+        injected += injection;
+    }
+
+    @Override
     public void reset() {
         lostSum = 0;
         totalMaxHp = -1;
+        injected = 0;
     }
 }
