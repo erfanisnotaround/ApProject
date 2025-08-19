@@ -13,7 +13,6 @@ public class FxSceneGameOverHandler implements GameOverHandler {
     }
 
     @Override public void onGameOver(GameOverType type, String reason) {
-        System.out.println("GameOver: " + type + " — " + reason);
 //        Platform.runLater(() -> sceneManager.switchScreen(PositionStatus.AFTER_GAME));
     }
 }

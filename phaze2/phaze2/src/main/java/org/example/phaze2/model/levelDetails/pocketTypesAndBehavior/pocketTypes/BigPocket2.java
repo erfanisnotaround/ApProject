@@ -58,7 +58,6 @@ public class BigPocket2 extends Pocket implements Movable {
 
     @Override
     public void movingStrategy(PocketMain pocketMain, Curve curve) {
-        System.out.println("we make it ");
         double curveLength = curve.ApproximateLength();
         double units = curveLength/UnitCounter;
 

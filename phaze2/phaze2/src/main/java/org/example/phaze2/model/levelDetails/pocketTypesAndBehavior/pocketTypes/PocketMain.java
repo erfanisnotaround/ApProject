@@ -29,6 +29,7 @@ public class PocketMain extends Pocket  implements InitData {
     private boolean lastRound = false;
     MakingGoBehindOrForward makingGoBehindOrForward = new MakingGoBehindOrForward(this);
     private final double DistractionSteps = 30;
+
     public PocketMain(PocketTypes type , GameState gameState) {
         super(type , gameState);
         pathMover = new PathMover(0 , gameState);
@@ -80,6 +81,7 @@ public class PocketMain extends Pocket  implements InitData {
 
         hitBox.setStrokeWidth(2);
         hitBox.setMouseTransparent(false);
+        getGameState().getVisualConstant().getView().add(hitBox);
 
         coinsPerEntry = pocket.getCoinsPerEntry();
 

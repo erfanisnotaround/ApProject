@@ -17,7 +17,6 @@ public class AbilityAliveManager {
 
     public void AddAliveAbility(AbilityTypes abilityType) {
         aliveAbilities.add(abilityType);
-        System.out.println(" we added ");
     }
     public void RemoveAbility(AbilityTypes abilityType) {
         aliveAbilities.remove(abilityType);

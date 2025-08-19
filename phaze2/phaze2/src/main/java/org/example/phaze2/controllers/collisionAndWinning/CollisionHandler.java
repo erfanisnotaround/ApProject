@@ -72,7 +72,6 @@ public class CollisionHandler {
 
     private void ApplyImpactVector(PocketMain pocket , Point2D impactVector) {
 
-            System.out.println("Applying Impact Vector " + impactVector);
             pocket.distract(impactVector.getX(), impactVector.getY());
 
     }

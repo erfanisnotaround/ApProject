@@ -44,7 +44,6 @@ public class DefaultMerger implements PocketMerger {
         gameState.getResources().putPocketGroupIdGroup(groupId, merged);
         merged.setHP(i);
         merged.setMaxHp(i);
-        System.out.println(merged +  " " + merged.getMaxHp());
         merged.setGroupId(groupId);
         merged.setPocketId(seed.getGroupId());
         merged.setLayoutX(seed.getLayoutX());

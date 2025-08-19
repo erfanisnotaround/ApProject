@@ -64,6 +64,7 @@ public class HudListener extends AnimationTimer {
         normalLabelsMap.get(HUDLabelsIndex.WireLeft.getNumberToAccessLabel()).setText("Wire Left : " + wireManager.remaining());
         int pocektLoss = basicTransfer.FirstFactor(GameOverType.POCKET_LOSS);
         int total = basicTransfer.SecondFactor(GameOverType.POCKET_LOSS);
+
         normalLabelsMap.get(HUDLabelsIndex.PocketLoss.getNumberToAccessLabel()).setText("Loss relation : " + pocektLoss + " / " + total);
 
 

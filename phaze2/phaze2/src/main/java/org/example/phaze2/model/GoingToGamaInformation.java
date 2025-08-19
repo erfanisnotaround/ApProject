@@ -14,6 +14,7 @@ public class GoingToGamaInformation {
     private int ChosenLevel;
     private List<Level> levels;
     private Level level;
+    private double availableTime;
     public GoingToGamaInformation(int ChosenLevel) {
         this.ChosenLevel = ChosenLevel;
 
@@ -39,6 +40,7 @@ public class GoingToGamaInformation {
                 level = getFirstUnAvaialbleLevel();
             }
             this.wireManager = new WireManager(level.getMaxWire());
+            availableTime = level.getAvailableTime();
 
 
         }
@@ -69,5 +71,8 @@ public class GoingToGamaInformation {
     }
     public int getChosenLevel() {
         return levels.indexOf(level);
+    }
+    public double getAvailableTime() {
+        return availableTime;
     }
 }

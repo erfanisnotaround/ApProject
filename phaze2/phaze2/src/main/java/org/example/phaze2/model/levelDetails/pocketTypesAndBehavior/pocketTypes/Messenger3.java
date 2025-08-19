@@ -61,7 +61,6 @@ public class Messenger3 extends Pocket implements Movable {
         if (pocketMain.getType() != PocketTypes.Messenger_3 && pocketMain.getType() != PocketTypes.SECRET_MESSENGER) return;
         Collide = (observableValue, aBoolean, t1) -> {
             if (t1) {
-                System.out.println("pp");
                 pocketMain.getPathMover().moveBackward();
 
             }

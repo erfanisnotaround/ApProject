@@ -59,10 +59,11 @@ public class CollisionController {
                         pair.getSecondPocket().setIsItCollided(true);
                     });
                     collisionHandler.SpreadImpact(pair);
+
+
                 }
             }
             for (CollisionPair pair : previousCollisionPairs) {
-//            System.out.println(" Collision detected ");
             }
         }
 

@@ -50,7 +50,6 @@ public class SaveHandler {
 
 
 
-        System.out.println(connectionsCopy.size());
         int Coins = loadAndSaveCompleterNecessaries.getCoinsManager().getNumberOfCoins();
 
         Map<AbilityTypes , AbilityExecutable> aliveAbilities = new HashMap<>(loadAndSaveCompleterNecessaries.getAbilityManager().getExecutableMap());

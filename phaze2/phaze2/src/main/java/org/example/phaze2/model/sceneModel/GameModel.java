@@ -12,6 +12,7 @@ public class GameModel {
     private final double basicMoveMultiplier = 1;
     private final double basicTempoMultiplier = 10;
     private final double moveUnitOfSlider = 100;
+    private double wholeAvailableTIme = 0;
 
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
@@ -30,7 +31,8 @@ public class GameModel {
 
     public void setLevelInformation(GoingToGamaInformation levelInformation) {
         this.levelInformation = levelInformation;
-        this.AvailableNeededTime = levelInformation.getLevel().getAvailableTime();
+        this.wholeAvailableTIme = levelInformation.getAvailableTime();
+        this.AvailableNeededTime = levelInformation.getAvailableTime();
     }
     public void SetAvailableNeededTime(double availableNeededTime) {
         this.AvailableNeededTime = availableNeededTime;
@@ -51,5 +53,9 @@ public class GameModel {
     }
     public int getChosenLevel() {
         return levelInformation.getChosenLevel();
+    }
+
+    public double getWholeAvailableTIme() {
+        return wholeAvailableTIme;
     }
 }

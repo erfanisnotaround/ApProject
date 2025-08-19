@@ -2,14 +2,14 @@
   "pockets" : [ {
     "pocketID" : "mio",
     "type" : "BIG_1",
-    "delay" : 0.0,
+    "delay" : 1.5,
     "firstPocketType" : "BIG_1",
-    "placeOfX" : 107.5,
+    "placeOfX" : 347.64008,
     "placeOfY" : 255.0,
-    "availableTime" : 24207.0,
+    "availableTime" : 29619.0,
     "pathMover" : {
       "multiplier" : 1.0,
-      "s" : 1075.4330523096264,
+      "s" : 147.64007999999998,
       "v" : 200.0,
       "a" : 0.0,
       "latestLineDistanceX" : 0.0,
@@ -30,170 +30,14 @@
       "angleNeeded" : 0.0
     },
     "groupId" : "mio",
-    "typeBeforeChange" : null,
-    "itMoved" : false,
-    "hp" : 2.0,
-    "itAffected" : false,
-    "itCollided" : false,
-    "whichSystemViewThisPocketIsAffectedBy" : null,
+    "itMoved" : true,
+    "hp" : 7.0,
     "yy" : 155.0,
-    "xx" : 7.5
-  }, {
-    "pocketID" : "mio",
-    "type" : "BIG_1",
-    "delay" : 0.0,
-    "firstPocketType" : "BIG_1",
-    "placeOfX" : 107.5,
-    "placeOfY" : 315.0,
-    "availableTime" : 24171.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 1075.4330523096264,
-      "v" : 200.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : 0.0,
-      "latestLineDistanceY" : 0.0,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : 0.0,
-      "lineDistancePerMoveY" : 0.0,
-      "rotate" : true,
-      "steps" : 10.0,
-      "starterPort" : null,
-      "angleNeeded" : 0.0
-    },
-    "groupId" : "mio",
-    "typeBeforeChange" : null,
-    "itMoved" : false,
-    "hp" : 1.0,
-    "itAffected" : false,
-    "itCollided" : false,
+    "xx" : 247.64008,
     "whichSystemViewThisPocketIsAffectedBy" : null,
-    "yy" : 215.0,
-    "xx" : 7.5
-  }, {
-    "pocketID" : "mio",
-    "type" : "BIG_1",
-    "delay" : 0.0,
-    "firstPocketType" : "BIG_1",
-    "placeOfX" : 107.5,
-    "placeOfY" : 315.0,
-    "availableTime" : 24162.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 1075.4330523096264,
-      "v" : 200.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : 0.0,
-      "latestLineDistanceY" : 0.0,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : 0.0,
-      "lineDistancePerMoveY" : 0.0,
-      "rotate" : true,
-      "steps" : 10.0,
-      "starterPort" : null,
-      "angleNeeded" : 0.0
-    },
-    "groupId" : "mio",
-    "typeBeforeChange" : null,
-    "itMoved" : false,
-    "hp" : 3.0,
-    "itAffected" : false,
     "itCollided" : false,
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "yy" : 215.0,
-    "xx" : 7.5
-  }, {
-    "pocketID" : "mio",
-    "type" : "BIG_1",
-    "delay" : 0.0,
-    "firstPocketType" : "BIG_1",
-    "placeOfX" : 107.5,
-    "placeOfY" : 255.0,
-    "availableTime" : 24234.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 1075.4330523096264,
-      "v" : 200.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : 0.0,
-      "latestLineDistanceY" : 0.0,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : 0.0,
-      "lineDistancePerMoveY" : 0.0,
-      "rotate" : true,
-      "steps" : 10.0,
-      "starterPort" : null,
-      "angleNeeded" : 0.0
-    },
-    "groupId" : "mio",
-    "typeBeforeChange" : null,
-    "itMoved" : false,
-    "hp" : 1.0,
-    "itAffected" : false,
-    "itCollided" : false,
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "yy" : 155.0,
-    "xx" : 7.5
-  }, {
-    "pocketID" : "mio",
-    "type" : "BIG_1",
-    "delay" : 0.0,
-    "firstPocketType" : "BIG_1",
-    "placeOfX" : 107.5,
-    "placeOfY" : 315.0,
-    "availableTime" : 21876.0,
-    "pathMover" : {
-      "multiplier" : 1.0,
-      "s" : 1075.4330523096264,
-      "v" : 200.0,
-      "a" : 0.0,
-      "latestLineDistanceX" : 0.0,
-      "latestLineDistanceY" : 0.0,
-      "currentLineDistanceX" : 0.0,
-      "currentLineDistanceY" : 0.0,
-      "latestLineDistanceForWholeMoveX" : 0.0,
-      "latestLineDistanceForWholeMoveY" : 0.0,
-      "currentLineDistanceForWholeMoveX" : 0.0,
-      "currentLineDistanceForWholeMoveY" : 0.0,
-      "lineDistancePerMoveXForWhole" : 0.0,
-      "lineDistancePerMoveYForWhole" : 0.0,
-      "lineDistancePerMoveX" : 0.0,
-      "lineDistancePerMoveY" : 0.0,
-      "rotate" : true,
-      "steps" : 10.0,
-      "starterPort" : null,
-      "angleNeeded" : 0.0
-    },
-    "groupId" : "mio",
-    "typeBeforeChange" : null,
-    "itMoved" : false,
-    "hp" : 1.0,
-    "itAffected" : false,
-    "itCollided" : false,
-    "whichSystemViewThisPocketIsAffectedBy" : null,
-    "yy" : 215.0,
-    "xx" : 7.5
+    "itAffected" : true,
+    "typeBeforeChange" : "BIG_1"
   } ],
   "systems" : [ {
     "systemType" : "DESTRUCTIVE",
@@ -245,12 +89,12 @@
       "exit" : true
     },
     "curve" : {
-      "pocketMovingOnIt" : null,
+      "pocketMovingOnIt" : "mio",
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
       "followers" : [ ],
       "hp" : 2,
-      "itUsed" : false
+      "itUsed" : true
     }
   }, {
     "fromPort" : {
@@ -292,13 +136,8 @@
     },
     "curve" : {
       "pocketMovingOnIt" : null,
-      "latestAcceptableLength" : 1409.2042753212588,
-      "middlePoints" : [ {
-        "centerX" : 412.6666666666667,
-        "centerY" : 55.333333333333336,
-        "latestCordX" : 412.6666666666667,
-        "latestCordY" : 55.333333333333336
-      } ],
+      "latestAcceptableLength" : 0.0,
+      "middlePoints" : [ ],
       "followers" : [ ],
       "hp" : 3,
       "itUsed" : false
@@ -330,14 +169,14 @@
     "fromPort" : {
       "systemID" : "Backup",
       "subIndex" : 0,
-      "type" : "TRIANGLE",
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : false
     },
     "toPort" : {
       "systemID" : "Main",
       "subIndex" : 0,
-      "type" : "TRIANGLE",
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : true
     },
@@ -346,21 +185,21 @@
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
       "followers" : [ ],
-      "hp" : 1,
+      "hp" : 3,
       "itUsed" : false
     }
   }, {
     "fromPort" : {
       "systemID" : "Backup",
       "subIndex" : 1,
-      "type" : "TRIANGLE",
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : false
     },
     "toPort" : {
       "systemID" : "Main",
       "subIndex" : 1,
-      "type" : "TRIANGLE",
+      "type" : "SQUARE",
       "beforeChange" : "SQUARE",
       "exit" : true
     },
@@ -369,22 +208,22 @@
       "latestAcceptableLength" : 0.0,
       "middlePoints" : [ ],
       "followers" : [ ],
-      "hp" : 0,
+      "hp" : 3,
       "itUsed" : false
     }
   } ],
   "currentDetails" : {
     "aliveAbilities" : [ ],
     "huePalettePojo" : {
-      "nextHue" : 0.3056526140477727,
+      "nextHue" : 0.36785263370671833,
       "hues" : {
-        "mio" : -0.7486947719044545
+        "mio" : -0.6242947325865633
       }
     },
-    "coinsHave" : 56,
     "mergerSlots" : {
       "Backup" : [ null, null, null, null, null, null, null, null, null, null ]
-    }
+    },
+    "coinsHave" : 48
   }
 }, {
   "pockets" : null,

@@ -44,13 +44,13 @@ public class BigPocketSplitter implements PocketSplitter {
                 .orElseGet(() -> UUID.randomUUID().toString());
 
         int pieces = bigPocket.getMaxHp();
+
         System.out.println("number of pieces: " + pieces);
 
         view.remove(bigPocket);
         repo.remove(bigPocket);
 
         gameState.getResources().removePocketGroupIdGroup(group , bigPocket);
-
         gameState.getResources().getPockets().remove(bigPocket);
 
         WholeMovement wholeMovement = bigPocket.getMovementManager();
@@ -68,8 +68,9 @@ public class BigPocketSplitter implements PocketSplitter {
 
             view.add(m3);
             repo.add(m3);
+            m3.setIsItMoved(false);
             gameState.getResources().putPocketGroupIdGroup(group , m3);
-            gameState.getResources().getPockets().add(m3);
+
 
             wholeMovement.SendingPockets(systemView , m3 , -1);
 

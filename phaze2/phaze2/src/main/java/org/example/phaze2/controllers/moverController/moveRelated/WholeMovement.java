@@ -55,7 +55,7 @@ public class WholeMovement {
 
     }
     public void StartSending(double speedMultiplier , double AvailableTime){
-        if (!startAvailableChecker.canWeStartConnections()) return;
+//        if (!startAvailableChecker.canWeStartConnections()) return;
         this.speedMultiplier = speedMultiplier;
         System.out.println("StartSending");
         Reset();
@@ -254,71 +254,19 @@ public class WholeMovement {
         for (SystemView systemView : systemViews) {
             systemView.setIsItDown(false);
 
+            Arrays.fill(systemView.getCapacity(), null);
+
             systemView.reset();
         }
 
 
-        rebuildPocketsFromSeedsInPlace();
 
     }
     public void captureOriginalSnapshotFromSeeds(List<PocketMain> seeds) {
+        List<PocketMain> newSeeds = new ArrayList<>(seeds);
         originalSeeds.clear();
-        originalSeeds.addAll(seeds);
+        originalSeeds.addAll(newSeeds);
     }
-    private void rebuildPocketsFromSeedsInPlace() {
-        var container = gameState.getVisualConstant().getContainerPane();
-        var view = gameState.getVisualConstant().getView();
-        var repo = gameState.getVisualConstant().getRepo();
 
-        List<PocketMain> weHavePockets = new ArrayList<>();
-
-        for (PocketMain pocketMain : pockets) {
-            if (originalSeeds.contains(pocketMain)) {
-                gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).clear();
-                reset(pocketMain);
-                weHavePockets.add(pocketMain);
-                gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).add(pocketMain);
-            }
-            else {
-                view.remove(pocketMain);
-                repo.remove(pocketMain);
-                pockets.remove(pocketMain);
-                gameState.getResources().getPockets().remove(pocketMain);
-            }
-        }
-        for (PocketMain pocketMain : originalSeeds) {
-            if (weHavePockets.contains(pocketMain)) continue;
-
-
-            pockets.add(pocketMain);
-            gameState.getResources().getPockets().add(pocketMain);
-            view.add(pocketMain);
-            reset(pocketMain);
-
-            gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).clear();
-            gameState.getResources().getPocketGroupIdGroups().get(pocketMain.getGroupId()).add(pocketMain);
-
-        }
-    }
-    private void reset(PocketMain pocket){
-        pocket.setMovementManager(this);
-        pocket.getPathMover().reset();
-        pocket.setAvailableTime(2000);
-        pocket.getPathMover().stop();
-        pocket.setIsItMoved(false);
-        pocket.setIsItCollided(false);
-        pocket.setHP(pocket.getMaxHp());
-
-        pocket.setLayoutX(-1000);
-        pocket.setLayoutY(-1000);
-        pocket.setItAffected(false);
-        pocket.setLastRound(false);
-        pocket.setDone(false);
-
-
-        pocket.setBehaviour(pocket.getFirstPocketType());
-        pocket.setWhichSystemViewThisPocketIsAffectedBy(null);
-
-    }
 
 }

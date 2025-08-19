@@ -40,7 +40,6 @@ public class SecretMessenger extends Pocket implements Movable {
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
         behavior.StopStrategy(LastPocket, pocketMain);
-        System.out.println();
     }
 
     @Override

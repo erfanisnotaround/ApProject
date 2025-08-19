@@ -1,8 +1,10 @@
 package org.example.phaze2.controllers.moverController.moveRelated;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
@@ -43,6 +45,7 @@ public class PathMover extends AnimationTimer {
     private double AngleNeeded;
     private boolean rotate;
     private GameState gameState;
+    PauseTransition pauseTransition = new PauseTransition(Duration.millis(50));
     public PathMover(double angle , GameState gameState) {
         AngleNeeded = angle;
         this.gameState = gameState;
@@ -61,6 +64,10 @@ public class PathMover extends AnimationTimer {
         this.v = initialSpeed * multiplier;
         this.a = acceleration * multiplier;
 
+        Point2D p = path.pointAt(1);
+        node.setLayoutX(p.getX());
+        node.setLayoutY(p.getY());
+
         this.commitedAcceleration = acceleration * multiplier;
 
         this.rotate = rotateAlongTangent;
@@ -72,7 +79,10 @@ public class PathMover extends AnimationTimer {
         curve.setIsItUsed(true);
 
 
+
+
         start();
+
 
 
     }
@@ -155,6 +165,8 @@ public class PathMover extends AnimationTimer {
             stop();
             node.setLayoutX(cx);
             node.setLayoutY(cy);
+
+
 
 
 

@@ -72,7 +72,6 @@ public class SecretPocket2 extends Pocket implements Movable {
 
     @Override
     public void StopStrategy(Pocket LastPocket, PocketMain pocketMain) {
-        System.out.println("StopStrategy of Secret2");
         if (AreaCheckerTimeLine!=null) AreaCheckerTimeLine.stop();
     }
     private void CheckArea(PocketMain pocketMain) {

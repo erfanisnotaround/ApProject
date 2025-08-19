@@ -3,6 +3,7 @@ package org.example.phaze2.model.winAndPocketLossModel;
 
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PocketLossCondition implements GameCondition {
@@ -11,14 +12,17 @@ public class PocketLossCondition implements GameCondition {
     private int lostSum = 0;// sum of MaxHp of pockets counted as dead
 
     private int injected = 0;
-    public PocketLossCondition(GameDataProvider data) { this.data = data;}
+    public PocketLossCondition(GameDataProvider data) {
+        this.data = data;
+
+        List<PocketMain> seeds = data.getAllPockets();
+        totalMaxHp = seeds.stream().mapToInt(PocketMain::getMaxHp).sum();
+
+    }
 
     @Override public boolean check() {
         List<PocketMain> pockets = data.getAllPockets();
         lostSum = 0;
-        if (totalMaxHp < 0) {
-            totalMaxHp = pockets.stream().mapToInt(PocketMain::getMaxHp).sum();
-        }
 
         for (PocketMain p : pockets) {
             if (p.getHP() <= 0) {
@@ -51,7 +55,7 @@ public class PocketLossCondition implements GameCondition {
     @Override
     public void reset() {
         lostSum = 0;
-        totalMaxHp = -1;
+
         injected = 0;
     }
 }

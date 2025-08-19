@@ -61,7 +61,7 @@ public class ConnectionUI {
             }
             else if (evt.getClickCount() == 1) {
                 connectionHandler.selectCurve(curve);
-                System.out.println(curve.isIsItUsed());
+
             }
             evt.consume();
             RegisterCurve(curve);

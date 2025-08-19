@@ -30,7 +30,6 @@ public class GameOverEvaluator {
 
         int[] chackLoss = lossInWin.detectOutLeftOvers();
 
-//        if (fired) return null;
         int i = 1;
         for (var e : conditions.entrySet()) {
             if (e.getKey().check()) {
@@ -49,6 +48,8 @@ public class GameOverEvaluator {
     }
     public String lastReason() { return lastReason; }
     public void reset(){
+
+//        lossInWin.reset();
         for (var e : conditions.entrySet()) {
             e.getKey().reset();
         }
