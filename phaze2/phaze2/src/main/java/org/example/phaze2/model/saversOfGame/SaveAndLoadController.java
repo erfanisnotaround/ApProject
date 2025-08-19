@@ -44,7 +44,7 @@ public class SaveAndLoadController {
     public void startAutoSave() {
 
 
-        this.saveMaker = new SaveMaker(ChosenLevel, realLevelList , loadCompleterNecessaries);
+        this.saveMaker = new SaveMaker(ChosenLevel, realLevelList , loadCompleterNecessaries , jsonManager);
         this.saveMaker.start();
 
     }
@@ -77,5 +77,14 @@ public class SaveAndLoadController {
         return realLevelList != null && index < realLevelList.size()
                 ? realLevelList.get(index)
                 : null;
+    }
+    public boolean hasUsableSave() {
+        LevelPojo lp = getLevel(ChosenLevel);
+        if (lp == null) return false;
+        boolean hasPockets     = lp.getPockets()     != null && !lp.getPockets().isEmpty();
+        boolean hasSystems     = lp.getSystems()     != null && !lp.getSystems().isEmpty();
+        boolean hasConnections = lp.getConnections() != null && !lp.getConnections().isEmpty();
+        boolean hasCurrent     = lp.getCurrentDetails() != null;
+        return hasPockets || hasSystems || hasConnections || hasCurrent;
     }
 }

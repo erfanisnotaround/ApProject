@@ -9,6 +9,8 @@ import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.hudChangeListeneres.HudListener;
 import org.example.phaze2.controllers.moverController.checkings.AllMovingAndReadyCheckers;
 import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
+import org.example.phaze2.controllers.sceneControllers.gameSceneController.ResetServiceImpl;
+import org.example.phaze2.controllers.sceneControllers.gameSceneController.interfaces.ResetService;
 import org.example.phaze2.controllers.shopController.ShopController;
 import org.example.phaze2.controllers.winAndPocketLoss.*;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
@@ -43,10 +45,11 @@ public final class GameWiring {
             ShopController shopController,
             SaveAndLoadController saveAndLoad,
             HudListener hudListener,
-            CollisionMaker engine
+            CollisionMaker engine,
+            ResetService resetService,
+            AfterPreShow afterPreShow
     ) {}
 
-    /** Builds visuals, resources, HUD, ability, collisions, reaper/evaluator/scheduler, autosave—everything you had. */
     public static Result bootstrap(GameModel model, GameState gs,
                                    Pane container, Pane main, Pane hud,
                                    SceneManager sceneManager,
@@ -54,6 +57,7 @@ public final class GameWiring {
 
         // 0) Visual shells (view/repo/effect/splitter/merger/policy)
         VisualShellConfigurator.configure(gs, container);
+        ResetService resetService = new ResetServiceImpl(gs);
 
         // 1) HUD + Constants
         MakeHUD makeHUD = new MakeHUD(hud, 3, 6);
@@ -87,6 +91,7 @@ public final class GameWiring {
 
         // 4) Movement + Ability + AfterPreShow
         WholeMovement movement = new WholeMovement(coins, gs);
+        movement.setResetter(resetService);
         movement.captureOriginalSnapshotFromSeeds(gs.getResources().getPockets());
 
         FollowerAdder followerAdder = new FollowerAdder(container);
@@ -131,11 +136,11 @@ public final class GameWiring {
                         gs.getHudStuffDAta().getAbilityAliveManager(),
                         coins, abilityManager, afterPreShow, gs)
         );
-        saveAndLoad.startAutoSave();
+
         CollisionMaker engine = new CollisionMaker(pockets, gs);
         engine.start();
 
         return new Result(movement, scheduler, evaluator, visualizer, connectionUI,
-                followerAdder, shopController, saveAndLoad, hudListener, engine);
+                followerAdder, shopController, saveAndLoad, hudListener, engine , resetService , afterPreShow);
     }
 }

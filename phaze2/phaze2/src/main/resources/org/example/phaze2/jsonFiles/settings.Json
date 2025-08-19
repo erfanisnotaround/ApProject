@@ -1,0 +1,13 @@
+{
+  "musicVolume" : 0.6,
+  "keymap" : {
+    "CloseShop" : "C",
+    "StartTempo" : "ENTER",
+    "DELETE_SELECTION" : "DELETE",
+    "OpenShop" : "O",
+    "MoveSliderToLeft" : "LEFT",
+    "Release_Follower" : "R",
+    "MoveSliderToRight" : "RIGHT",
+    "Open_Close_HUD" : "TAB"
+  }
+}

@@ -2,6 +2,7 @@ package org.example.phaze2.controllers.sceneControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import org.example.phaze2.model.AppContext;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.Maker;
@@ -26,6 +27,12 @@ public class LevelController implements Maker, ControlledScreen {
             BackButtonOnAction();
         });
     }
+
+    @Override
+    public void PassContext(AppContext appContext) {
+
+    }
+
     void BackButtonOnAction() {
         levelsModel.BackButtonOnAction();
     }

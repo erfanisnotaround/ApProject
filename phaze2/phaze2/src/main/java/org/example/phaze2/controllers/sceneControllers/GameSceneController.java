@@ -9,11 +9,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
+import org.example.phaze2.controllers.loadingSave.FxLoadPrompt;
+import org.example.phaze2.controllers.loadingSave.LoadPrompt;
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.*;
 import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.interfaces.GameSession;
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.interfaces.MovementService;
+import org.example.phaze2.model.AppContext;
 import org.example.phaze2.model.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.constants.GameState;
@@ -22,6 +25,7 @@ import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
 import org.example.phaze2.model.controllersInterfaces.Maker;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
+import org.example.phaze2.model.loadingSaves.LoadGameStartup;
 import org.example.phaze2.model.sceneModel.GameModel;
 
 public class GameSceneController implements Maker, ControlledScreen, DataReceivingController<GoingToGamaInformation> {
@@ -32,8 +36,7 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
     private SceneManager sceneManager;
     private final GameModel gameModel = new GameModel();
     private final GameState gameState = new GameState();
-
-    // wiring results
+    private AppContext appContext;
     private GameSession session;
     private GameWiring.Result wiring;
 
@@ -52,25 +55,28 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
 
     @Override
     public void MakeFirst() {
-        // Build everything like before (but outside controller)
+        this.appContext.keyMgr().syncSceneActionsFromSettings();
         wiring = GameWiring.bootstrap(
                 gameModel, gameState, ContainerPane, main, HUD, sceneManager,
                 new NumberOfPocketLossManager()
         );
 
-        // session w/ both start modes (fresh vs tempo)
         MovementService movementSvc = new WholeMovementService(wiring.movement());
-        session = new GameSessionImpl(movementSvc, new ResetServiceImpl(gameState),
-                wiring.scheduler(), wiring.evaluator());
 
-        // UI: slider, buttons, keys, mouse
+        session = new GameSessionImpl(movementSvc, wiring.resetService(),
+                wiring.scheduler(), wiring.evaluator() , wiring.movement().getMovementListeners());
+
+        LoadPrompt loadPrompt  = new FxLoadPrompt(sceneManager.getStage());
+        LoadGameStartup loadStartup = new LoadGameStartup(loadPrompt);
+        loadStartup.maybeOfferLoadOrFresh(wiring.saveAndLoad() , wiring.afterPreShow());
+
         SliderOfTemporalProgress.setMax(gameModel.getWholeAvailableTIme());
         SliderOfTemporalProgress.valueProperty().addListener((obs, o, v) ->
                 gameModel.SetAvailableNeededTime(v.doubleValue()));
 
         MenuButton.setOnAction(e -> {
             gameModel.MenuButtonClicked();
-            wiring.saveAndLoad().writeLevelsToDisk();
+
         });
 
         StartButton.setOnAction(e -> {
@@ -81,7 +87,6 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
         main.setFocusTraversable(true);
         main.requestFocus();
 
-        // Key handling identical in spirit to your original
         Scene scene = sceneManager.getScene();
         scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             KeyCode key = e.getCode();
@@ -104,22 +109,25 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
             }
         });
 
-        // mouse follower (unchanged)
         sceneManager.getScene().setOnMouseMoved(wiring.followerAdder()::FollowTheMouse);
+    }
+
+    @Override
+    public void PassContext(AppContext appContext) {
+        this.appContext = appContext;
     }
 
     private void handleActionPressed(SceneActions action) {
         main.requestFocus();
         switch (action) {
             case StartTempo -> {
-                // same semantics: reset evaluator/scheduler BUT DO NOT rebuild to seeds
                 session.startFromCurrent(gameModel.getBasicTempoMultiplier(), gameModel.getAvailableNeededTime());
             }
             case OpenShop -> wiring.shopController().OpenShop();
             case CloseShop -> wiring.shopController().CloseShop();
             case MoveSliderToRight -> moveTempo(1);
             case MoveSliderToLeft -> moveTempo(-1);
-            case Open_Close_HUD -> HUD.setVisible(true);          // you did this on press
+            case Open_Close_HUD -> HUD.setVisible(true);
             case Release_Follower -> wiring.followerAdder().ReleaseFollower();
             case DELETE_SELECTION -> wiring.connectionUI().removeConnection();
         }

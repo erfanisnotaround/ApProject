@@ -23,4 +23,11 @@ public class JsonManager {
         return objectMapper.readValue(file, typeReference);
     }
 
+    public void writeObject(Object obj) throws IOException {
+        objectMapper.writeValue(file, obj);
+    }
+
+    public <T> T readObject(Class<T> clazz) throws IOException {
+        return objectMapper.readValue(file,clazz);
+    }
 }

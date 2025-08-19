@@ -10,6 +10,7 @@ module org.example.phaze2 {
     exports org.example.phaze2;
     exports org.example.phaze2.controllers.sceneControllers;
     exports org.example.phaze2.model.constants;
+    exports org.example.phaze2.model to javafx.fxml;
     opens org.example.phaze2.model.constants to javafx.fxml;
     opens org.example.phaze2.controllers.sceneControllers to javafx.fxml;
     exports org.example.phaze2.model.agentsAndManagers;
@@ -30,6 +31,9 @@ module org.example.phaze2 {
     exports org.example.phaze2.model.abilities.mechanics.followers to com.fasterxml.jackson.databind;
     exports org.example.phaze2.model.winAndPocketLossModel to com.fasterxml.jackson.databind;
     exports org.example.phaze2.model.abilities to com.fasterxml.jackson.databind;
+    opens org.example.phaze2.model.settingModel           to com.fasterxml.jackson.databind;
+    // If you also (de)serialize these with Jackson, open them too:
+    opens org.example.phaze2.model.levelSavesAndTheirPojo to com.fasterxml.jackson.databind;
     opens org.example.phaze2.model.abilities.mechanics.followers to com.fasterxml.jackson.databind;
 
 }

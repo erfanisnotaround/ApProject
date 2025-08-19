@@ -2,6 +2,7 @@ package org.example.phaze2.controllers.sceneControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import org.example.phaze2.model.AppContext;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.constants.Constants;
@@ -43,6 +44,12 @@ public class MenuSceneController implements Maker, ControlledScreen {
             exitButtonClicked();
         });
     }
+
+    @Override
+    public void PassContext(AppContext appContext) {
+
+    }
+
     void startButtonClicked() {
         menuModel.startButtonClicked();
     }

@@ -3,6 +3,7 @@ package org.example.phaze2.model.saversOfGame;
 import org.example.phaze2.model.agentsAndManagers.JsonManager;
 import org.example.phaze2.model.levelSavesAndTheirPojo.LevelPojo;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SaveMaker extends Thread {
@@ -13,12 +14,12 @@ public class SaveMaker extends Thread {
     private int currentLevel;
     private List<LevelPojo> ReallevelPojoList;
 
-    public SaveMaker(int currentLevel , List<LevelPojo> RealLevelsLoaded , LoadAndSaveCompleterNecessaries loadAndSaveCompleterNecessaries) {
+    public SaveMaker(int currentLevel , List<LevelPojo> RealLevelsLoaded , LoadAndSaveCompleterNecessaries loadAndSaveCompleterNecessaries , JsonManager jsonManager) {
         this.ReallevelPojoList = RealLevelsLoaded;
         this.saveHandler = new SaveHandler(loadAndSaveCompleterNecessaries);
         this.currentLevel = currentLevel;
         setDaemon(true);
-        jsonManager = new JsonManager("D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze2\\phaze2\\src\\main\\resources\\org\\example\\phaze2\\jsonFiles\\levelSaves.json");
+        this.jsonManager = jsonManager;
     }
 
     @Override
@@ -40,13 +41,18 @@ public class SaveMaker extends Thread {
     }
     private void SaveMaking(){
         LevelPojo SavedLevelPojo = saveHandler.StartSave();
-
-
         ReallevelPojoList.set(currentLevel, SavedLevelPojo);
+        writeLevelsToDisk(ReallevelPojoList);
 
     }
 
-
+    public void writeLevelsToDisk(List<LevelPojo> LevelPojoList) {
+        try {
+            jsonManager.writeArray(LevelPojoList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void stopSaving() {
         running = false;

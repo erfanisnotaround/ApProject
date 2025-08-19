@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.phaze2.model.AppContext;
 import org.example.phaze2.model.constants.PositionStatus;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
 import org.example.phaze2.model.controllersInterfaces.DataReceivingController;
@@ -18,15 +19,17 @@ import java.util.Map;
 public class SceneManager {
 
     private final Stage stage;
+    private final AppContext appContext;
     private  Scene scene;
     private final Map<PositionStatus, ScreenBundle> cache = new HashMap<>();
 
 
 
-    public SceneManager(Stage stage) {
+    public SceneManager(Stage stage , AppContext appContext) {
         this.stage = stage;
         this.scene = new Scene(new Parent() {});
         this.stage.setScene(scene);
+        this.appContext = appContext;
     }
 
     public void switchScreen(PositionStatus screen) {
@@ -43,6 +46,8 @@ public class SceneManager {
             if (data != null && bundle.getController() instanceof DataReceivingController) {
                 ((DataReceivingController<T>) bundle.getController()).initData(data);
             }
+
+            ((Maker) bundle.getController()).PassContext(appContext);
             ((Maker) bundle.getController()).MakeFirst();
             animateAndSetScreen(bundle.getRoot());
         }

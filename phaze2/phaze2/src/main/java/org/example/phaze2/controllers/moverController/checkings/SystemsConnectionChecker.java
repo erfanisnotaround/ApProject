@@ -54,9 +54,6 @@ public class SystemsConnectionChecker extends AnimationTimer {
                 if (theyHit) {
                     c.setCanWeUse(false);
 
-
-
-
                 }else {
                     c.setCanWeUse(true);
                 }

@@ -4,13 +4,13 @@
     "type" : "BIG_1",
     "delay" : 1.5,
     "firstPocketType" : "BIG_1",
-    "placeOfX" : 347.64008,
-    "placeOfY" : 255.0,
-    "availableTime" : 29619.0,
+    "placeOfX" : 0.0,
+    "placeOfY" : 0.0,
+    "availableTime" : 4000.0,
     "pathMover" : {
       "multiplier" : 1.0,
-      "s" : 147.64007999999998,
-      "v" : 200.0,
+      "s" : 0.0,
+      "v" : 0.0,
       "a" : 0.0,
       "latestLineDistanceX" : 0.0,
       "latestLineDistanceY" : 0.0,
@@ -24,26 +24,26 @@
       "lineDistancePerMoveYForWhole" : 0.0,
       "lineDistancePerMoveX" : 0.0,
       "lineDistancePerMoveY" : 0.0,
-      "rotate" : true,
+      "rotate" : false,
+      "angleNeeded" : 0.0,
       "steps" : 10.0,
-      "starterPort" : null,
-      "angleNeeded" : 0.0
+      "starterPort" : null
     },
     "groupId" : "mio",
-    "itMoved" : true,
-    "hp" : 7.0,
-    "yy" : 155.0,
-    "xx" : 247.64008,
-    "whichSystemViewThisPocketIsAffectedBy" : null,
+    "typeBeforeChange" : "BIG_1",
+    "hp" : 8.0,
+    "itMoved" : false,
+    "itAffected" : false,
     "itCollided" : false,
-    "itAffected" : true,
-    "typeBeforeChange" : "BIG_1"
+    "xx" : -1000.0,
+    "yy" : -1000.0,
+    "whichSystemViewThisPocketIsAffectedBy" : null
   } ],
   "systems" : [ {
     "systemType" : "DESTRUCTIVE",
     "systemHeight" : 145.0,
     "systemWidth" : 100.0,
-    "lightBoolean" : true,
+    "lightBoolean" : false,
     "x" : 100.0,
     "y" : 200.0,
     "systemID" : "Main",
@@ -54,7 +54,7 @@
     "systemType" : "MERGER",
     "systemHeight" : 145.0,
     "systemWidth" : 100.0,
-    "lightBoolean" : true,
+    "lightBoolean" : false,
     "x" : 900.0,
     "y" : 800.0,
     "systemID" : "Backup",
@@ -65,7 +65,7 @@
     "systemType" : "DISTRIBUTOR",
     "systemHeight" : 145.0,
     "systemWidth" : 100.0,
-    "lightBoolean" : true,
+    "lightBoolean" : false,
     "x" : 700.0,
     "y" : 200.0,
     "systemID" : "Backup2",
@@ -73,157 +73,17 @@
     "capacity" : [ null, null, null, null, null, null, null, null, null, null ],
     "itDown" : false
   } ],
-  "connections" : [ {
-    "fromPort" : {
-      "systemID" : "Main",
-      "subIndex" : 0,
-      "type" : "TRIANGLE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Backup2",
-      "subIndex" : 0,
-      "type" : "TRIANGLE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : "mio",
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "followers" : [ ],
-      "hp" : 2,
-      "itUsed" : true
-    }
-  }, {
-    "fromPort" : {
-      "systemID" : "Main",
-      "subIndex" : 1,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Backup2",
-      "subIndex" : 1,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : null,
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "followers" : [ ],
-      "hp" : 3,
-      "itUsed" : false
-    }
-  }, {
-    "fromPort" : {
-      "systemID" : "Backup2",
-      "subIndex" : 0,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Backup",
-      "subIndex" : 0,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : null,
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "followers" : [ ],
-      "hp" : 3,
-      "itUsed" : false
-    }
-  }, {
-    "fromPort" : {
-      "systemID" : "Backup2",
-      "subIndex" : 1,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Backup",
-      "subIndex" : 1,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : null,
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "followers" : [ ],
-      "hp" : 3,
-      "itUsed" : false
-    }
-  }, {
-    "fromPort" : {
-      "systemID" : "Backup",
-      "subIndex" : 0,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Main",
-      "subIndex" : 0,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : null,
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "followers" : [ ],
-      "hp" : 3,
-      "itUsed" : false
-    }
-  }, {
-    "fromPort" : {
-      "systemID" : "Backup",
-      "subIndex" : 1,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : false
-    },
-    "toPort" : {
-      "systemID" : "Main",
-      "subIndex" : 1,
-      "type" : "SQUARE",
-      "beforeChange" : "SQUARE",
-      "exit" : true
-    },
-    "curve" : {
-      "pocketMovingOnIt" : null,
-      "latestAcceptableLength" : 0.0,
-      "middlePoints" : [ ],
-      "followers" : [ ],
-      "hp" : 3,
-      "itUsed" : false
-    }
-  } ],
+  "connections" : [ ],
   "currentDetails" : {
     "aliveAbilities" : [ ],
     "huePalettePojo" : {
-      "nextHue" : 0.36785263370671833,
-      "hues" : {
-        "mio" : -0.6242947325865633
-      }
+      "nextHue" : 0.9482313416052498,
+      "hues" : { }
     },
     "mergerSlots" : {
       "Backup" : [ null, null, null, null, null, null, null, null, null, null ]
     },
-    "coinsHave" : 48
+    "coinsHave" : 0
   }
 }, {
   "pockets" : null,
