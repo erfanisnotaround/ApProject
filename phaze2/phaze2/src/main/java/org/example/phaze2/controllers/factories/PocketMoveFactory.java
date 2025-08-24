@@ -1,9 +1,8 @@
-package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics;
+package org.example.phaze2.controllers.factories;
 
-import org.example.phaze2.controllers.moverController.moveRelated.Movable;
-import org.example.phaze2.controllers.moverController.moveRelated.Releasable;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.*;
 
 public class PocketMoveFactory {

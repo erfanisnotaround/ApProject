@@ -16,6 +16,11 @@ public final class MovementListenerRegistry {
     public void registerWaiting(Connection c, ChangeListener<Boolean> l) { waitingSendListeners.put(c, l); }
     public void registerPocket(PocketMain p, ChangeListener<Boolean> l)  { pocketListeners.put(p, l); }
     public void registerSystem(SystemView s, ChangeListener<Boolean> l)  { systemListeners.put(s, l); }
+    public void removePocketListener(PocketMain p, ChangeListener<Boolean> l) { pocketListeners.remove(p); }
+    public boolean PocketListenerContains(PocketMain p) {
+
+        return pocketListeners.containsKey(p);
+    }
 
     public boolean isSystemRegistered(SystemView s) { return systemListeners.containsKey(s); }
 

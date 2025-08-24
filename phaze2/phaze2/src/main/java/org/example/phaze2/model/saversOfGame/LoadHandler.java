@@ -1,14 +1,11 @@
 package org.example.phaze2.model.saversOfGame;
 
 import javafx.geometry.Point2D;
-import org.example.phaze2.controllers.abilityManagers.AbilityManager;
 import org.example.phaze2.controllers.abilityManagers.following.FollowerAbilityController;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
-import org.example.phaze2.model.abilities.AbilityTypes;
 import org.example.phaze2.model.abilities.mechanics.followers.Follower;
-import org.example.phaze2.model.abilities.mechanics.followers.FollowerFactory;
-import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.controllers.factories.FollowerFactory;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.hudModels.CoinsManager;
 import org.example.phaze2.model.levelDetails.necessary.*;
@@ -77,7 +74,7 @@ public class LoadHandler {
             if (p == null) continue;
             gameState.getVisualConstant().getView().remove(p);     // PocketViewPort
             gameState.getVisualConstant().getRepo().remove(p);     // PocketRepository
-            gameState.getResources().getPockets().remove(p);
+
 ;
         }
 
@@ -89,7 +86,7 @@ public class LoadHandler {
 
             gameState.getVisualConstant().getView().add(p);
             gameState.getVisualConstant().getRepo().add(p);
-            gameState.getResources().getPockets().add(p);
+
             gameState.getVisualConstant().getEffect().apply(p , pj.getGroupId());
             pocketMainMap.put(id, p);
 
@@ -255,6 +252,7 @@ public class LoadHandler {
 
     private void loadLevelThings(LevelCurrentDetailsPojo levelCurrentDetailsPojo) {
         CoinsManager coinsManager = loadCompleterNecessaries.getCoinsManager();
+        coinsManager.setCoinsBeforeStart(levelCurrentDetailsPojo.getCoinsHave());
         coinsManager.setNumberOfCoins(levelCurrentDetailsPojo.getCoinsHave());
         restoreMergerSlots(levelCurrentDetailsPojo.getMergerSlots());
         loadAbilities(levelCurrentDetailsPojo);

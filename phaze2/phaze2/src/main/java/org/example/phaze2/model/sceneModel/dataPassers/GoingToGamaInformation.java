@@ -1,6 +1,6 @@
-package org.example.phaze2.model;
+package org.example.phaze2.model.sceneModel.dataPassers;
 
-import org.example.phaze2.model.constants.Constants;
+import org.example.phaze2.model.WireManager;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.LevelManager;
 
@@ -10,25 +10,19 @@ import java.util.List;
 
 public class GoingToGamaInformation {
     private WireManager wireManager;
-    private LevelManager levelManager;
+
     private int ChosenLevel;
     private List<Level> levels;
     private Level level;
     private double availableTime;
-    public GoingToGamaInformation(int ChosenLevel) {
+    public GoingToGamaInformation(int ChosenLevel , List<Level> levels) {
         this.ChosenLevel = ChosenLevel;
+        this.levels = levels;
 
 
-        try {
-            levelManager = new LevelManager();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
 
-        if (levelManager != null) {
-            levels = levelManager.getLevels();
-        }
+
 
 
 
@@ -55,6 +49,11 @@ public class GoingToGamaInformation {
         }
         return levels.getLast();
     }
+    public void makeCurrentLevelPassed() {
+        int index = levels.indexOf(level);
+        levels.get(index).setLevelPassed(true);
+    }
+
 
     public WireManager getWireManager() {
         return wireManager;

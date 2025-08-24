@@ -9,9 +9,13 @@ import java.util.List;
 
 public class LevelManager {
     private List<Level> levels;
+    private JsonManager jsonManager;
     public LevelManager() throws IOException {
-        JsonManager jsonManager = new JsonManager("D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze2\\phaze2\\src\\main\\resources\\org\\example\\phaze2\\jsonFiles\\SystemInformation.json");
+        jsonManager = new JsonManager("D:\\programming\\project of Ap\\faz 1\\Phazes\\phaze2\\phaze2\\src\\main\\resources\\org\\example\\phaze2\\jsonFiles\\SystemInformation.json");
         levels = jsonManager.readArray(new TypeReference<List<Level>>() {});
+    }
+    public void WriteLevelsAgain(List<Level> levels) throws IOException {
+        jsonManager.writeArray(levels);
     }
     public List<Level> getLevels() {
         return levels;

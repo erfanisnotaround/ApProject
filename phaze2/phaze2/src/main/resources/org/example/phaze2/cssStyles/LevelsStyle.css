@@ -88,3 +88,48 @@
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
+
+/* ScrollPane skinning */
+.levels-scroll {
+    -fx-background-color: transparent;         /* outer */
+}
+.levels-scroll > .viewport {
+    -fx-background-color: transparent;         /* content area */
+}
+.levels-scroll .corner {
+    -fx-background-color: transparent;
+}
+
+/* Vertical scrollbar */
+.levels-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+.levels-scroll .scroll-bar:vertical .track {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-background-insets: 0;
+    -fx-background-radius: 9999;
+}
+.levels-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #d32f2f;             /* red thumb */
+    -fx-background-radius: 9999;
+}
+.levels-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: derive(#d32f2f, 20%);
+}
+
+/* Hide horizontal bar (you already set hbarPolicy=NEVER, this is extra) */
+.levels-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-max-height: 0;
+}
+
+/* Optional: only show vertical bar on hover (no smooth fade; JavaFX CSS has no transitions) */
+.levels-scroll .scroll-bar:vertical { -fx-opacity: 0; }
+.levels-scroll:hover .scroll-bar:vertical { -fx-opacity: 1; }
+
+/* TilePane background/padding if you want a panel feel */
+.levels-grid {
+    -fx-padding: 12;
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-background-radius: 12;
+}

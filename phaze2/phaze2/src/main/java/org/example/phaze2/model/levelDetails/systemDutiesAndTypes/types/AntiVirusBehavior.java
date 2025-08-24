@@ -8,6 +8,8 @@ import javafx.util.Duration;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypeGroup;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
@@ -24,8 +26,8 @@ public class AntiVirusBehavior extends SystemView implements SystemBehavior , Ar
     private final double RadiusOfCheckingArea = 2000;
     Timeline timeline;
     PauseTransition cooldown = new PauseTransition(Duration.seconds(coolDownTime));
-    public AntiVirusBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
-        super(systemType, numberOfSubSystems , gameState);
+    public AntiVirusBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState , System level) {
+        super(systemType, numberOfSubSystems , gameState , level);
 
 
 

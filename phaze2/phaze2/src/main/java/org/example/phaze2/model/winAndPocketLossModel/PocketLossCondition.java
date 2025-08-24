@@ -24,6 +24,7 @@ public class PocketLossCondition implements GameCondition {
         List<PocketMain> pockets = data.getAllPockets();
         lostSum = 0;
 
+
         for (PocketMain p : pockets) {
             if (p.getHP() <= 0) {
 

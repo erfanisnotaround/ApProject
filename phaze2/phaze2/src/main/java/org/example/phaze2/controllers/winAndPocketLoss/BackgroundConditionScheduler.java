@@ -46,6 +46,7 @@ public class BackgroundConditionScheduler {
             if (type != null) {
                 String reason = evaluator.lastReason();
                 Platform.runLater(() -> handler.onGameOver(type, reason));
+                stop();
             }
         }, 0, 100, TimeUnit.MILLISECONDS);
     }

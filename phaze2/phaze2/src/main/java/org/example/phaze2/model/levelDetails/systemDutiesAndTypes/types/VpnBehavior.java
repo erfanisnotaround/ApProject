@@ -6,6 +6,8 @@ import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.PortTypes;
 import org.example.phaze2.model.constants.SystemTypes;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
@@ -22,8 +24,8 @@ public class VpnBehavior extends SystemView implements SystemBehavior, Switching
     double coolDown = 1;
     private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(coolDown));
 
-    public VpnBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
-        super(systemType, numberOfSubSystems , gameState);
+    public VpnBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState , System level) {
+        super(systemType, numberOfSubSystems , gameState , level);
         AddListener();
     }
 

@@ -56,6 +56,7 @@ public final class ResetServiceImpl implements ResetService {
     @Override
     public void resetConnectionsAndSystems() {
 
+        gs.getHudStuffDAta().getCoinsManager().Commit();
         for (Connection c : gs.getResources().getConnections()) {
             c.getCurve().setIsItUsed(false);
             c.resetIt();

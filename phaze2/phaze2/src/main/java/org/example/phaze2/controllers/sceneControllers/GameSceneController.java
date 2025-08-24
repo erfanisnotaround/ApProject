@@ -1,6 +1,8 @@
 // GameSceneController.java  (drop-in replacement)
 package org.example.phaze2.controllers.sceneControllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,16 +11,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
+import javafx.util.Duration;
 import org.example.phaze2.controllers.loadingSave.FxLoadPrompt;
 import org.example.phaze2.controllers.loadingSave.LoadPrompt;
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.*;
-import org.example.phaze2.controllers.abilityManagers.following.FollowerAdder;
-import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.interfaces.GameSession;
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.interfaces.MovementService;
 import org.example.phaze2.model.AppContext;
-import org.example.phaze2.model.GoingToGamaInformation;
+import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
+import org.example.phaze2.model.portConnectingDetails.Connection;
+import org.example.phaze2.model.sceneModel.dataPassers.GoingToGamaInformation;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.audio.Musics;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SceneActions;
 import org.example.phaze2.model.controllersInterfaces.ControlledScreen;
@@ -27,6 +31,7 @@ import org.example.phaze2.model.controllersInterfaces.Maker;
 import org.example.phaze2.model.hudModels.NumberOfPocketLossManager;
 import org.example.phaze2.model.loadingSaves.LoadGameStartup;
 import org.example.phaze2.model.sceneModel.GameModel;
+import org.example.phaze2.model.settingModel.KeyBindingManager;
 
 public class GameSceneController implements Maker, ControlledScreen, DataReceivingController<GoingToGamaInformation> {
     @FXML private Slider SliderOfTemporalProgress;
@@ -37,6 +42,7 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
     private final GameModel gameModel = new GameModel();
     private final GameState gameState = new GameState();
     private AppContext appContext;
+    private KeyBindingManager keyBindingManager;
     private GameSession session;
     private GameWiring.Result wiring;
 
@@ -58,8 +64,9 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
         this.appContext.keyMgr().syncSceneActionsFromSettings();
         wiring = GameWiring.bootstrap(
                 gameModel, gameState, ContainerPane, main, HUD, sceneManager,
-                new NumberOfPocketLossManager()
+                new NumberOfPocketLossManager() , appContext , gameModel.getLevelInformation()
         );
+
 
         MovementService movementSvc = new WholeMovementService(wiring.movement());
 
@@ -74,7 +81,9 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
         SliderOfTemporalProgress.valueProperty().addListener((obs, o, v) ->
                 gameModel.SetAvailableNeededTime(v.doubleValue()));
 
+
         MenuButton.setOnAction(e -> {
+            appContext.getMusic().stop();
             gameModel.MenuButtonClicked();
 
         });
@@ -90,31 +99,34 @@ public class GameSceneController implements Maker, ControlledScreen, DataReceivi
         Scene scene = sceneManager.getScene();
         scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             KeyCode key = e.getCode();
-            for (SceneActions action : SceneActions.values()) {
-                if (action.getKeyCode() == key) {
-                    e.consume();
-                    handleActionPressed(action);
-                    break;
-                }
+            SceneActions sceneAction = keyBindingManager.find(key);
+            if (sceneAction != null) {
+
+                e.consume();
+                handleActionPressed(sceneAction);
             }
+
         });
         scene.addEventHandler(KeyEvent.KEY_RELEASED, e -> {
             KeyCode key = e.getCode();
-            for (SceneActions action : SceneActions.values()) {
-                if (action.getKeyCode() == key) {
-                    e.consume();
-                    handleActionReleased(action);
-                    break;
-                }
+            SceneActions sceneAction = keyBindingManager.find(key);
+            if (sceneAction != null) {
+
+                e.consume();
+                handleActionReleased(sceneAction);
             }
         });
 
         sceneManager.getScene().setOnMouseMoved(wiring.followerAdder()::FollowTheMouse);
+        appContext.getMusic().playLoopResource(Musics.GAMESCENE_MUSIC.getMusicPath());
+
+
     }
 
     @Override
     public void PassContext(AppContext appContext) {
         this.appContext = appContext;
+        this.keyBindingManager = appContext.keyMgr();
     }
 
     private void handleActionPressed(SceneActions action) {

@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import org.example.phaze2.controllers.connectionsAndMaking.ConnectionUI;
-import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.jsonRefrencesAndLOadings.SubSystem;
@@ -14,8 +13,7 @@ import org.example.phaze2.model.levelDetails.necessary.Light;
 import org.example.phaze2.model.levelDetails.necessary.SubSystemView;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.necessary.Port;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
-import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehaviorFactory;
+import org.example.phaze2.controllers.factories.SystemBehaviorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,7 @@ public class SystemProcessor implements Runnable{
         }
     }
     public SystemView processSystem(System system) {
-        SystemView systemView = SystemBehaviorFactory.create(system , gameState);
+        SystemView systemView = SystemBehaviorFactory.create(system , gameState , system);
         connectionUI.RegisterSystem(systemView);
         MakeOnlySystem(systemView , system);
 

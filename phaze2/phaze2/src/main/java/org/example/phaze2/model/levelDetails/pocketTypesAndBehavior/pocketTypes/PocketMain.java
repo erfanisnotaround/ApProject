@@ -13,7 +13,7 @@ import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.InitData;
 import org.example.phaze2.controllers.moverController.moveRelated.MakingGoBehindOrForward;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketMoveFactory;
+import org.example.phaze2.controllers.factories.PocketMoveFactory;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.necessary.Port;
 import org.example.phaze2.model.portConnectingDetails.Connection;

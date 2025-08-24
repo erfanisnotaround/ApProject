@@ -10,6 +10,7 @@ import java.util.List;
 public record PathData(List<Point2D> pts, double[] cumLen, double total) {
 
     public static PathData fromPolyline(Polyline pl) {
+
         List<Double> raw = pl.getPoints();
         int n = raw.size() / 2;
         List<Point2D> pts = new ArrayList<>(n);

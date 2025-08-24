@@ -1,13 +1,12 @@
 package org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes;
 
 import javafx.scene.image.Image;
-import org.example.phaze2.controllers.moverController.moveRelated.PathMover;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.levelDetails.necessary.Curve;
 import org.example.phaze2.model.levelDetails.necessary.Pocket;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.controllers.moverController.moveRelated.Movable;
-import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketMoveFactory;
+import org.example.phaze2.controllers.factories.PocketMoveFactory;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypeGroup;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.necessary.Port;

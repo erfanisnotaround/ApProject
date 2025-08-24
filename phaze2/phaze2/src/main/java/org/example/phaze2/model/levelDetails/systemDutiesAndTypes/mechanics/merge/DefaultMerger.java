@@ -30,6 +30,7 @@ public class DefaultMerger implements PocketMerger {
         PocketMain seed = parts.getFirst();
 
         int i = 0;
+
         for (PocketMain part : parts) {
             part.setCapturedByMerger(true);
             view.remove(part);

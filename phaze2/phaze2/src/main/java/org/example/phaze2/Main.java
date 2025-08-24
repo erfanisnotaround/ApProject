@@ -3,15 +3,20 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.phaze2.model.AppContext;
+import org.example.phaze2.model.LevelOfGameLoader;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
+import org.example.phaze2.model.audio.JavaSoundMusicPlayer;
+import org.example.phaze2.model.audio.MusicService;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.PositionStatus;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
 import org.example.phaze2.model.settingModel.FileSettingsRepository;
 import org.example.phaze2.model.settingModel.KeyBindingManager;
 import org.example.phaze2.model.settingModel.SettingsService;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -30,7 +35,11 @@ public class Main extends Application {
         var keyMgr   = new KeyBindingManager(settings);
         keyMgr.syncSceneActionsFromSettings();   // seed enum at app start
 
-        var ctx = new AppContext(settings, keyMgr);
+        var music = new MusicService(settings , new JavaSoundMusicPlayer());
+
+        var levelLoader = new LevelOfGameLoader();
+        List<Level> levels = levelLoader.getLevels();
+        var ctx = new AppContext(settings, keyMgr , music , levelLoader , levels );
         SceneManager sceneManager = new SceneManager(primaryStage , ctx);
         sceneManager.switchScreen(PositionStatus.MENU);
 

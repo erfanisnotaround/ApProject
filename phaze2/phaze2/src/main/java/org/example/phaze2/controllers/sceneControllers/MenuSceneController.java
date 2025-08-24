@@ -47,7 +47,7 @@ public class MenuSceneController implements Maker, ControlledScreen {
 
     @Override
     public void PassContext(AppContext appContext) {
-
+        menuModel.setAppContext(appContext);
     }
 
     void startButtonClicked() {

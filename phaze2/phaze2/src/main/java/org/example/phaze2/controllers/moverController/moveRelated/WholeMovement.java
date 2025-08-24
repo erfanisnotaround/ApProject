@@ -142,15 +142,18 @@ public class WholeMovement {
             connection.getCurve().setHP(connection.getCurve().getHP() - 1);
         }
 
+
         SystemView targetSystem = connection.getToPort().getPortInfo().getSystem();
         if (targetSystem.equals(startingSystemView)) pocket.setLastRound(true);
 
         ChangeListener<Boolean> l = new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean oldVal, Boolean newVal) {
-                pocket.EnterAct(targetSystem);
-                obs.removeListener(this);
 
+                obs.removeListener(this);
+                listeners.removePocketListener(pocket , this);
+
+                pocket.EnterAct(targetSystem);
                 coinsManager.Increment(pocket.getCoinsPerEntry());
                 if (pocket.isLastRound()) {
                     pocket.setDone(true);
@@ -166,8 +169,12 @@ public class WholeMovement {
                 }
             }
         };
-        listeners.registerPocket(pocket, l);
-        pocket.isItMovedProperty().addListener(l);
+
+        if (!listeners.PocketListenerContains(pocket)) {
+            listeners.registerPocket(pocket, l);
+            pocket.isItMovedProperty().addListener(l);
+        }
+
     }
 
     public void AddToWaitingSystemCapacity(SystemView systemView, PocketMain pocket) {

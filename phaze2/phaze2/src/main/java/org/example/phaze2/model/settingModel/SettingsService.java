@@ -11,6 +11,19 @@ public class SettingsService {
     private final SettingsRepository repo;
     private volatile SettingsData data;
 
+    private final java.util.concurrent.CopyOnWriteArrayList<SettingObserver> observers = new java.util.concurrent.CopyOnWriteArrayList<>();
+
+    public void addObserver(SettingObserver o)   { observers.add(o); }
+    public void removeObserver(SettingObserver o){ observers.remove(o); }
+
+    private void notifyKeymapChanged() {
+        for (var o : observers) o.onKeymapChanged();
+    }
+    private void notifyVolumeChanged() {
+        double v = getVolume();
+        for (var o : observers) o.onVolumeChanged(v);
+    }
+
     // simple debounce so we don't spam disk on every slider tick
     private final ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread t = new Thread(r, "SettingsAutoSave"); t.setDaemon(true); return t;

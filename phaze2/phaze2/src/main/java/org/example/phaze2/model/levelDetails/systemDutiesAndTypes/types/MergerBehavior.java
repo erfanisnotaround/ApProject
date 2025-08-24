@@ -2,6 +2,8 @@ package org.example.phaze2.model.levelDetails.systemDutiesAndTypes.types;
 
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.Level;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.necessary.SystemView;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.mechanics.PocketTypes;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.Messenger3;
@@ -24,8 +26,8 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
     private final PocketMergePolicy mergePolicy;
     private final GameState gameState;
 
-    public MergerBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState) {
-        super(systemType, numberOfSubSystems , gameState);
+    public MergerBehavior(SystemTypes systemType, int numberOfSubSystems , GameState gameState , System level) {
+        super(systemType, numberOfSubSystems , gameState , level);
         capacity = new PocketMain[CapacityCells];
         merger = gameState.getMergerConfig().getMerger();
         mergePolicy = gameState.getMergerConfig().getPolicy();
@@ -72,6 +74,7 @@ public class MergerBehavior extends SystemView implements SystemBehavior{
         String groupId = stash.getGroupId();
 //        int needed = mergePolicy.requiredCount(groupId, this);
 //        if (stash.size() < needed) return;
+
 
 
         if (!mergePolicy.canWeMerge(groupId , this , stash ,gameState.getResources().getPockets())) return;

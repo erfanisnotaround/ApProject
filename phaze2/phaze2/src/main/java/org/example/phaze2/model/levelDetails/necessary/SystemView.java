@@ -8,6 +8,7 @@ import org.example.phaze2.controllers.moverController.moveRelated.PathPrioritizi
 import org.example.phaze2.model.constants.CurrentLevelConstants;
 import org.example.phaze2.model.constants.GameState;
 import org.example.phaze2.model.constants.SystemTypes;
+import org.example.phaze2.model.jsonRefrencesAndLOadings.System;
 import org.example.phaze2.model.levelDetails.pocketTypesAndBehavior.pocketTypes.PocketMain;
 import org.example.phaze2.model.levelDetails.systemDutiesAndTypes.SystemBehavior;
 import org.example.phaze2.model.portConnectingDetails.Connection;
@@ -22,7 +23,7 @@ public class SystemView extends Pane implements SystemBehavior  {
 
 
     protected SystemBehavior behavior;
-
+    private final System levelSystem;
     protected final double systemHeight;
     protected final double systemWidth = CurrentLevelConstants.getInstance().getWidth();
     protected BooleanProperty lightBoolean = new SimpleBooleanProperty(false);
@@ -41,9 +42,10 @@ public class SystemView extends Pane implements SystemBehavior  {
     private Point2D lastGoodCord;
     private final GameState gameState;
 
-    public SystemView(SystemTypes systemType , int numberOfSubSystems , GameState gameState) {
+    public SystemView(SystemTypes systemType , int numberOfSubSystems , GameState gameState , System level) {
         this.numberOfSubSystems = numberOfSubSystems;
         this.gameState = gameState;
+        this.levelSystem = level;
         pathPrioritizing = new PathPrioritizing(gameState);
         systemHeight = numberOfSubSystems* CurrentLevelConstants.getInstance().getHeightOfSubSystems() + CurrentLevelConstants.getInstance().getUpperHeight() + CurrentLevelConstants.getInstance().getGapOFBottom();
         setPrefSize(systemWidth, systemHeight);
@@ -225,4 +227,7 @@ public class SystemView extends Pane implements SystemBehavior  {
         return gameState;
     }
 
+    public System getLevelSystem() {
+        return levelSystem;
+    }
 }

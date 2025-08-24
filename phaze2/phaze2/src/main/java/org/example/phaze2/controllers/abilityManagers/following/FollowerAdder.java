@@ -3,12 +3,10 @@ package org.example.phaze2.controllers.abilityManagers.following;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import org.example.phaze2.model.abilities.mechanics.followers.Follower;
-import org.example.phaze2.model.abilities.mechanics.followers.FollowerFactory;
+import org.example.phaze2.controllers.factories.FollowerFactory;
 import org.example.phaze2.model.abilities.mechanics.followers.FollowerType;
 import org.example.phaze2.model.abilities.modelingAbilities.GameContext;
-import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.portConnectingDetails.Connection;
 
 import java.util.List;

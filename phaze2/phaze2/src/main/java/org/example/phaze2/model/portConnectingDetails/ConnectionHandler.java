@@ -319,6 +319,8 @@ public class ConnectionHandler {
             wireManager.removeWire(oldLen);
             wireManager.addWire(newLen);
             curves.forEach(c -> c.setLatestAcceptableLength(c.ApproximateLength()));
+            system.getLevelSystem().setX(system.getLayoutX());
+            system.getLevelSystem().setY(system.getLayoutY());
 
             gameState.setMovingSystemsAvailable(false);
 

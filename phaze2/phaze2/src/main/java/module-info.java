@@ -33,7 +33,13 @@ module org.example.phaze2 {
     exports org.example.phaze2.model.abilities to com.fasterxml.jackson.databind;
     opens org.example.phaze2.model.settingModel           to com.fasterxml.jackson.databind;
     // If you also (de)serialize these with Jackson, open them too:
+    exports org.example.phaze2.model.settingModel to com.fasterxml.jackson.databind;
+    exports org.example.phaze2.model.audio to com.fasterxml.jackson.databind;
     opens org.example.phaze2.model.levelSavesAndTheirPojo to com.fasterxml.jackson.databind;
     opens org.example.phaze2.model.abilities.mechanics.followers to com.fasterxml.jackson.databind;
+    opens org.example.phaze2.model.audio to com.fasterxml.jackson.databind;
+    exports org.example.phaze2.model.sceneModel.dataPassers to javafx.fxml;
+    exports org.example.phaze2.controllers.factories to com.fasterxml.jackson.databind;
+    opens org.example.phaze2.controllers.factories to com.fasterxml.jackson.databind;
 
 }

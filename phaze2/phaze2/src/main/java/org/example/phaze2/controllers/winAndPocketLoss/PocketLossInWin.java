@@ -26,9 +26,11 @@ public class PocketLossInWin {
     public synchronized int[] detectOutLeftOvers() {
         int lossSum = 0, winSum = 0;
 
+
         for (var e : pocketGroups.entrySet()) {
             String id = e.getKey();
             Set<PocketMain> group = e.getValue();
+
 
             if (!detectAccess(group)) continue;             // not finished yet
 
@@ -47,7 +49,8 @@ public class PocketLossInWin {
                 lossCredited.put(id, prevL + dL);
             }
         }
-        return new int[]{lossSum, winSum};
+//        System.out.println(winSum);
+        return new int[]{lossSum , winSum};
     }
 
     public synchronized void reset() {
@@ -66,6 +69,7 @@ public class PocketLossInWin {
 
         for (PocketMain p : group) {
             int v = Math.max(0, p.getMaxHp());
+//            System.out.println(v + " jdjdjdjdjww");
             sum += v;
 
         }

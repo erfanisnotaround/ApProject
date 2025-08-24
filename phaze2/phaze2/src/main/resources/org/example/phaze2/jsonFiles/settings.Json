@@ -1,8 +1,8 @@
 {
-  "musicVolume" : 0.6,
+  "musicVolume" : 0.8026086757494055,
   "keymap" : {
     "CloseShop" : "C",
-    "StartTempo" : "ENTER",
+    "StartTempo" : "ADD",
     "DELETE_SELECTION" : "DELETE",
     "OpenShop" : "O",
     "MoveSliderToLeft" : "LEFT",

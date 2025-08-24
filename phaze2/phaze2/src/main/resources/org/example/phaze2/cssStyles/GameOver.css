@@ -1,0 +1,48 @@
+/* Root background */
+.anchor-pane {
+    -fx-background-color: #000000;   /* solid black */
+}
+
+/* Title */
+.go-title {
+    -fx-text-fill: #e60000;          /* strong red */
+    -fx-font-size: 72px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 60 0 20 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.9), 6, 0.4, 0, 2); /* subtle shadow only */
+}
+
+/* Subtitle */
+.go-subtitle {
+    -fx-text-fill: #b30000;          /* darker red */
+    -fx-font-size: 36px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 4, 0.3, 0, 1);
+}
+
+/* Button */
+.go-button {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 32 10 32;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color:
+            linear-gradient(to bottom, #660000, #330000);
+    -fx-border-color: #b30000;
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+}
+
+.go-button:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, #990000, #440000);
+    -fx-border-color: #e60000;
+}
+
+.go-button:pressed {
+    -fx-background-color: #1a0000;   /* very dark red when pressed */
+    -fx-text-fill: #ff4d4d;
+}

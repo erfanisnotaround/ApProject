@@ -37,7 +37,7 @@ public class GameOverEvaluator {
                 lastReason = e.getKey().reason();
                 return e.getValue();
             }
-//            System.out.println(chackLoss[i] + "  " + e.getValue()   );
+
             e.getKey().inject(chackLoss[i]);
             i--;
         }

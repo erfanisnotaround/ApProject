@@ -2,6 +2,7 @@ package org.example.phaze2.model.hudModels;
 
 public class CoinsManager {
     private int numberOfCoins = 0;
+    private int CoinsBeforeStart = 0;
 
 
 
@@ -18,4 +19,14 @@ public class CoinsManager {
         this.numberOfCoins = numberOfCoins;
     }
 
+    public int getCoinsBeforeStart() {
+        return CoinsBeforeStart;
+    }
+
+    public void setCoinsBeforeStart(int coinsBeforeStart) {
+        CoinsBeforeStart = coinsBeforeStart;
+    }
+    public void Commit(){
+        numberOfCoins = CoinsBeforeStart;
+    }
 }

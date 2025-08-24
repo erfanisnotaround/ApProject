@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AfterPreShow {
-    private double wait = 4;
+    private double wait = 15    ;
     PauseTransition pauseTransition = new PauseTransition(Duration.seconds(wait));
     private List<PocketMain> pocketMains;
     private List<SystemView> systemViews;
@@ -41,6 +41,7 @@ public class AfterPreShow {
     private void SetPockets(){
         wholeMovement.PutListenersForSystems();
         wholeMovement.getStartSystemView();
+
         for (PocketMain pocket : pocketMains) {
 
             pocket.setMovementManager(wholeMovement);

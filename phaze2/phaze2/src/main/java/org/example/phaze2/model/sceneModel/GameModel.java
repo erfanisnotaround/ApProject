@@ -1,7 +1,6 @@
 package org.example.phaze2.model.sceneModel;
 
-import org.example.phaze2.controllers.moverController.moveRelated.WholeMovement;
-import org.example.phaze2.model.GoingToGamaInformation;
+import org.example.phaze2.model.sceneModel.dataPassers.GoingToGamaInformation;
 import org.example.phaze2.model.constants.PositionStatus;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 

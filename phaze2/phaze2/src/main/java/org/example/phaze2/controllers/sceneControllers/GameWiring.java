@@ -13,6 +13,7 @@ import org.example.phaze2.controllers.sceneControllers.gameSceneController.Reset
 import org.example.phaze2.controllers.sceneControllers.gameSceneController.interfaces.ResetService;
 import org.example.phaze2.controllers.shopController.ShopController;
 import org.example.phaze2.controllers.winAndPocketLoss.*;
+import org.example.phaze2.model.AppContext;
 import org.example.phaze2.model.agentsAndManagers.SceneManager;
 import org.example.phaze2.model.constants.Constants;
 import org.example.phaze2.model.constants.GameState;
@@ -24,6 +25,7 @@ import org.example.phaze2.model.levelSavesAndTheirPojo.AfterPreShow;
 import org.example.phaze2.model.sceneModel.GameModel;
 import org.example.phaze2.model.saversOfGame.LoadAndSaveCompleterNecessaries;
 import org.example.phaze2.model.saversOfGame.SaveAndLoadController;
+import org.example.phaze2.model.sceneModel.dataPassers.GoingToGamaInformation;
 import org.example.phaze2.model.winAndPocketLossModel.DefaultGameDataProvider;
 import org.example.phaze2.model.winAndPocketLossModel.GameOverType;
 import org.example.phaze2.model.winAndPocketLossModel.PocketLossCondition;
@@ -53,7 +55,8 @@ public final class GameWiring {
     public static Result bootstrap(GameModel model, GameState gs,
                                    Pane container, Pane main, Pane hud,
                                    SceneManager sceneManager,
-                                   NumberOfPocketLossManager lossMgr) {
+                                   NumberOfPocketLossManager lossMgr,
+                                   AppContext appContext , GoingToGamaInformation goingToGama) {
 
         // 0) Visual shells (view/repo/effect/splitter/merger/policy)
         VisualShellConfigurator.configure(gs, container);
@@ -113,12 +116,13 @@ public final class GameWiring {
         PocketReaper reaper = new PocketReaper(pockets, lossBin, gs);
 
         DefaultGameDataProvider dataProvider = new DefaultGameDataProvider(gs);
-        GameOverEvaluator evaluator = new GameOverEvaluator(new FxSceneGameOverHandler(sceneManager), gs)
+        FxSceneGameOverHandler fxSceneGameOverHandler = new FxSceneGameOverHandler(sceneManager , gs , appContext , goingToGama );
+        GameOverEvaluator evaluator = new GameOverEvaluator(fxSceneGameOverHandler , gs)
                 .add(new PocketLossCondition(dataProvider), GameOverType.POCKET_LOSS)
                 .add(new WinCondition(dataProvider),        GameOverType.WIN);
 
         BackgroundConditionScheduler scheduler =
-                new BackgroundConditionScheduler(reaper, evaluator, new FxSceneGameOverHandler(sceneManager), gs);
+                new BackgroundConditionScheduler(reaper, evaluator, fxSceneGameOverHandler , gs);
         scheduler.start();
 
         gs.getPocketWinAndLoss().setLossBin(lossBin);
